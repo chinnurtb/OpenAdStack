@@ -1,0 +1,24 @@
+﻿<MailTemplate xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/Utilities.Net.Mail">
+  <BodyFormat>
+    <![CDATA[
+<html>
+<body>
+<h1>AppNexus App User Registration Request</h1>
+<table>
+<tr><th>Name</th><td>{0}</td></tr>
+<tr><th>Email</th><td>{1}</td></tr>
+<tr><th>AppNexus User Id</th><td>{2}</td></tr>
+<tr><th>AppNexus Member Id</th><td>{3}</td></tr>
+<tr><th>AppNexus Member Name</th><td>{4}</td></tr>
+<tr><th>Rare Crowds Agency Id</th><td>{5}</td></tr>
+<tr><th>Rare Crowds Agency Name</th><td>{6}</td></tr>
+</table>
+<p>Click <a href="{7}">here</a> to create this user.</p>
+</body>
+</html>
+]]>
+  </BodyFormat>
+  <IsBodyHtml>true</IsBodyHtml>
+  <Sender>registration@rarecrowds.com</Sender>
+  <SubjectFormat>AppNexus App User Registration Request - {0}</SubjectFormat>
+</MailTemplate>

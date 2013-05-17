@@ -1,0 +1,187 @@
+<html>
+    <head>
+        <title>Campaign Page</title>
+        <link rel="stylesheet" type="text/css" href="./dhtml/codebase/dhtmlx.css" /> 
+        <link rel="stylesheet" type="text/css" href="./dhtml/codebase/dhtmlx_custom.css" /> 
+        <link rel="stylesheet" type="text/css" href="./css/basestyle.css" /> 
+
+        <style type="text/css">
+            .BudgetTable {border:1px #000000;width:800;font:Tahoma Bold 16px;color:Yellow;}
+            .Header {width:100%;font:Tahoma Bold 16px;color:Black;}
+            .inputCol {width:65;font:Tahoma 16px;}
+            .HVA {width:470;background:#0000BB;font:Tahoma 16px;color:Yellow;padding:5px;}
+            .Exceptional {width:580;background:#000088;font:Tahoma 16px;color:Yellow;padding:5px;}
+            .Rare {width:690;background:#000033;font:Tahoma 16px;color:Yellow;padding:5px;}
+            .Display {width:800;background:#000000;font:Tahoma 16px;color:Yellow;padding:5px;border-top:4px solid Yellow}
+            .Summary {font:Tahoma 16px;font-weight:bold;color:Black;padding:5px;}
+            .formInput {width:35;margin-left:auto;margin-right:auto;}
+        </style>
+
+        <script type="text/javascript" src="./scripts/GlobalObjects.js"></script>
+        <script type="text/javascript" src="./scripts/wizardlayout.js"></script>
+        <script type="text/javascript" src="./scripts/CampaignUtils.js"></script>
+
+ <!-- Page Specific Scripts -->
+        <script type="text/javascript">
+            helpTopic = "InventoryDefinition";
+
+            var panes;
+            var nodes;
+            var calculatedValuationList = getCalculatedValuationList(getQueryString()['advertiser'], getQueryString()['campaign']).Valuations;
+            var measureList = getMeasureInfoSet().Measures;
+            var campaign = getCachedCampaign(getQueryString()['advertiser'], getQueryString()['campaign']);
+
+            //Define Tiers
+            var HVADef = { Name: "Highest Value Inventory", Min: 8, Max: 100, Count: 0 };
+            HVADef.Count = getCountForTier(HVADef.Min, HVADef.Max, calculatedValuationList);
+
+            var ExceptionalDef = { Name: "Exceptional Inventory", Min: 6, Max: 7, Count: 0 };
+            ExceptionalDef.Count = getCountForTier(ExceptionalDef.Min, ExceptionalDef.Max, calculatedValuationList);
+
+            var RareDef = { Name: "Rare Inventory", Min: 4, Max: 5, Count: 0 };
+            RareDef.Count = getCountForTier(RareDef.Min, RareDef.Max, calculatedValuationList);
+
+            var DisplayDef = { Name: "Standard Inventory", Min: 0, Max: 3, Count: 0 };
+            DisplayDef.Count = getCountForTier(DisplayDef.Min, DisplayDef.Max, calculatedValuationList);
+
+            function ecpmChange() {
+                CalcHVAECPM();
+            }
+
+            function CalcHVAECPM() {
+                var volDist = { Rare: 100, Exceptional: 10, HVA: .8 };
+                if (rMax.value == 0 || eMax.value == 0 || rMin.value == 0 || eMin.value == 0 ) { return; } // bail on zeroes
+                var rEcpm = (parseFloat(rMax.value) + parseFloat(rMin.value)) / 2;
+                var eEcpm = (parseFloat(eMax.value) + parseFloat(eMin.value)) / 2;
+                var campECPM = campaign.Campaign.Properties.CPM;
+                var campBudget = campaign.Campaign.Properties.Budget;
+                var rVol = rPer.value / 100 * campBudget / rEcpm * 1000;
+                var eVol = ePer.value / 100 * campBudget / eEcpm * 1000;
+                var hVol = Math.min(volDist.HVA / volDist.Rare * rVol, volDist.HVA / volDist.Exceptional * eVol); // take the value that gives us the lowest volume, thus highest ecpm
+                var hBudget = campBudget * parseFloat(hPer.value) / 100;
+                var hEcpm = hBudget / hVol * 1000;
+                hMaxLabel.innerHTML = '$' + Math.round(hEcpm * 100) / 100;
+
+                var minCPM = Math.round(campBudget / (rVol + eVol + hVol) * 1000 *100) / 100;
+                var maxCPM = 0.00;
+
+                setSummary(minCPM, maxCPM);
+            }
+
+            function setupForm() {
+                setLabel('HVALabel', HVADef);
+                setLabel('ExceptionalLabel', ExceptionalDef);
+                setLabel('RareLabel', RareDef);
+                setLabel('DisplayLabel', DisplayDef);
+                setSummary('?','?');
+            }
+
+            function getCountForTier(min, max, valuationSet){
+                return jsonPath(valuationSet, '$.NodeValuationSet[?(@.MeasureSet.length >= ' + min + ' && @.MeasureSet.length <= ' + max + ')]').length;
+            }
+
+            function setLabel(tier, tierDef) {
+                var campaignCountLabel = '<b>{0}</b><br />({1} to {2} measures)<br />Up to {3} campaigns';
+                document.getElementById(tier).innerHTML = campaignCountLabel.format(tierDef.Name, tierDef.Min, tierDef.Max, tierDef.Count);
+            }
+
+            function setSummary(minCPM, maxCPM) {
+                var label = 'Budget: ${0} - eCPM: ${1} - up to {3}% with {4} or fewer measures';
+                document.getElementById("allocationSummary").innerHTML = label.format(campaign.Campaign.Properties.Budget, minCPM, maxCPM, dPer.value, DisplayDef.Max);
+            }
+
+            function pageExit() {
+                return true;
+            }
+
+            function thisPageRender() {
+                workarea.progressOn();
+                workarea.attachObject(document.getElementById("BudgetForm"));
+                setupForm();
+                workarea.progressOff()
+            }
+
+            function getMinMaxEcpm(valuationList) {
+                var min = 10000;
+                var max = 0;
+
+                for (var valuation in valuationList) {
+                    if (valuationList[valuation].MaxValuation > max) {
+                        max = valuationList[valuation].MaxValuation;
+                    }
+
+                    if (valuationList[valuation].MaxValuation < min) {
+                        min = valuationList[valuation].MaxValuation;
+                    }
+                }
+                return { MinECPM: min, MaxECPM: max }
+            }
+        </script>
+    </head>
+    <body onload="pageRender(thisPageRender);">
+
+    <div id="BudgetForm" style="display:none">
+    <table class="BudgetTable" cellpadding="0" cellspacing="0">
+    <tr><td align="right">
+        <table class="Header">
+        <tr>
+            <td></td>
+            <td class="inputCol">% of Budget</td>
+            <td class="inputCol">Floor eCPM</td>
+            <td class="inputCol">Ave eCPM</td>
+        </tr>
+        </table>
+        </td>
+    </tr>
+    <tr><td align="right">
+        <table class="HVA">
+        <tr>
+            <td id="HVALabel"></td>
+            <td class="inputCol"><input id="hPer" type="text" class="formInput" onchange="ecpmChange()" value="1"/>%</td>
+            <td class="inputCol"></td>
+            <td class="inputCol" id="hMaxLabel"></td>
+        </tr>
+        </table>
+        </td>
+    </tr>
+    <tr><td align="right">
+        <table class="Exceptional">
+        <tr>
+            <td id="ExceptionalLabel"></td>
+            <td class="inputCol"><input id="ePer" type="text" class="formInput" onchange="ecpmChange()" value="10"/>%</td>
+            <td class="inputCol">$<input id="eMin" type="text" class="formInput" onchange="ecpmChange()" value="7.15"/></td>
+            <td class="inputCol">$<input id="eMax" type="text" class="formInput" onchange="ecpmChange()" value="9.98"/></td>
+        </tr>
+        </table>
+        </td>
+    </tr>
+    <tr><td align="right">
+        <table class="Rare">
+        <tr>
+            <td id="RareLabel"></td>
+            <td class="inputCol"><input id="rPer" type="text" class="formInput" onchange="ecpmChange()" value="89"/>%</td>
+            <td class="inputCol">$<input id="rMin" type="text" class="formInput" onchange="ecpmChange()" value="4.25"/></td>
+            <td class="inputCol">$<input id="rMax" type="text" class="formInput" onchange="ecpmChange()" value="6.89"/></td>
+        </tr>
+        </table>
+        </td>
+    </tr>
+    <tr><td align="right">
+        <table class="Display">
+        <tr>
+            <td id="DisplayLabel"></td>
+            <td class="inputCol"><input id="dPer" type="text" class="formInput" onchange="ecpmChange()" value="10"/>%</td>
+            <td class="inputCol">$<input id="dMin" type="text" class="formInput" onchange="ecpmChange()" value="0.75"/></td>
+            <td class="inputCol">$<input id="dMax" type="text" class="formInput" onchange="ecpmChange()" value="1.25"/></td>
+        </tr>
+        </table>
+        </td>
+    </tr>
+    <tr><td class="Summary" id="allocationSummary"></td>
+    </tr>
+    <tr><td align="right"><input type="button" value="Approve"/></td>
+    </tr>
+    </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Company Page</title>
+    <link rel="stylesheet" type="text/css" href="./dhtml/codebase/dhtmlx.css" />
+    <link rel="stylesheet" type="text/css" href="./dhtml/codebase/dhtmlx_custom.css" /> 
+    <link rel="stylesheet" type="text/css" href="./css/basestyle.css" /> 
+
+    <!--script type="text/javascript" src="https://js.stripe.com/v1/stripe-debug.js"></script-->
+    <script type="text/javascript" src="https://js.stripe.com/v1/"></script>
+
+    <script type="text/javascript" src="./scripts/GlobalObjects.js"></script>
+    <script type="text/javascript" src="./scripts/baselayout.js"></script>
+    
+    <!-- Page Scoped Functions --> 
+    <script type="text/javascript">
+    //page globals
+    var stripeKey = 'pk_live_9NvWvLsGtDzElv0Dwa00K8iL';
+    //var stripeKey = 'pk_test_jATyIxjgV5UEkOtTNFj4Xcrt';
+    var companyLayout, gridCell, listGrid, workarea;
+    var companyEditForm, companyBillingForm;
+    var formData = [
+            { type: "settings", position: "label-left", labelWidth: 165 },
+            { type: "input", name: 'inputName', label: 'Name' },
+            { type: "input", name: 'inputAddress', label: 'Address 1' },
+            { type: "input", name: 'inputAddress2', label: 'Address 2' },
+            { type: "input", name: 'inputCity', label: 'City' },
+            { type: "input", name: 'inputState', label: 'State' },
+            { type: "input", name: 'inputCountry', label: 'Country' },
+            { type: "input", name: 'inputZip', label: 'Postal Code' },
+            { type: "newcolumn", offset: 20 },
+            { type: "input", name: 'inputPhone', label: 'Phone Number' },
+            { type: "input", name: 'inputContact', label: 'Contact' },
+            { type: "input", name: 'inputWebsite', label: 'Website' },
+            {
+                type: "select",
+                name: 'deliveryNetwork',
+                label: 'Inventory Source',
+                options: [
+                    { text: "AppNexus", value: "AppNexus", selected: false },
+                    { text: "DFP", value: "GoogleDFP", selected: false }
+                ]
+            },
+            { type: "hidden", name: 'inputType', value: '' },
+            { type: "hidden", name: 'localVersion', value: '' },
+            { type: "button", name: "saveButton", value: 'Save' },
+            { type: "button", name: "cancelButton", value: 'Cancel' },
+            { type: "button", name: "billingButton", value: 'Billing Info' }
+        ];
+    var billingFormData = [
+            { type: "settings", position: "label-left", labelWidth: 165 },
+            { type: "input", name: 'number', label: 'Card Number' },
+            { type: "input", name: 'cvc', label: 'CVC' },
+            { type: "input", name: 'exp_month', size: '2', label: 'Expiration Month' },
+            { type: "input", name: 'exp_year', size: '4', label: 'Expiration Year' },
+            { type: "hidden", name: 'inputType', value: '' },
+            { type: "button", name: "submitButton", value: 'Submit' }
+        ];
+
+    //utilities
+    function getCompanyDetails(companyId) {
+        workarea.progressOn();
+        var returnJSON = new $RCAjax($RCAPI.URI.CompanyGet.format(companyId), '', 'GET', null, null, false, null, routeErrors)
+        return returnJSON;
+    }
+
+    function companySave(editCell, companyForm) {
+        editCell.progressOn();
+        var companyJSON = createCompanyJSON(companyForm);
+        
+        // Agencies are POSTed to the company namespace, Advertisers to the sub-namespace
+        var companyCreateUri =
+            companyJSON.ExternalType.toLowerCase() == "agency" ?
+            $RCAPI.URI.AgencyCreate : $RCAPI.URI.AdvertiserCreate.format($RCUI.querystring["agency"]);
+        
+        var companyOutputJSON = companyJSONCall("POST", false, companyCreateUri, JSON.stringify(companyJSON));
+        if (companyOutputJSON.Company.ExternalType.toLowerCase() == "advertiser") {
+            var companyJSON = {
+                ParentEntity: $RCUI.querystring["agency"],
+                ChildEntity: companyOutputJSON.Company.ExternalEntityId,
+                AssociationName: "AgencyAdvertiser",
+                AssociationType: "Child"
+            };
+            companyJSONCall("POST", false, $RCAPI.URI.CompanyAssociate.format($RCUI.querystring["agency"]), JSON.stringify(companyJSON));
+        }
+        windowClose(gridCell);
+    }
+    
+    function companyUpdate(editCell, companyForm) {
+        editCell.progressOn();
+        var companyOutputJSON = companyJSONCall("PUT", false, $RCAPI.URI.CompanyUpdate.format(listGrid.cells(getSelectRowIdFromGrid(), 6).getValue()), JSON.stringify(createUpdateCompanyJSON(companyForm)));
+        editCell.progressOff();
+        windowClose(gridCell);
+    }
+    
+    //TODO merge with companySave function.
+    function companyJSONCall(messageType, async, url, data) {
+        var companyAjax = new $RCAjax(url, data, messageType, null, null, async, null, routePostErrors);
+        return companyAjax.responseData;
+    }
+
+    function getCompanyList(companyId) {
+        var companyAjax = new $RCAjax($RCAPI.URI.CompanyGetByUser, '', 'GET', null, null, false, null, routeGetErrors);
+        return companyAjax.responseData;
+    }
+
+    function submitBillingInfo(editCell, billingInfoForm) {
+        editCell.progressOn();
+        var billingInfo = {
+            number : parseInt(billingInfoForm.getItemValue("number")),
+            cvc: billingInfoForm.getItemValue("cvc"),
+            exp_month:  parseInt(billingInfoForm.getItemValue("exp_month")),
+            exp_year:  parseInt(billingInfoForm.getItemValue("exp_year"))
+        };
+
+        function responseHandler(status, response) {
+            processBillingResponse(status, response);
+            windowClose(editCell);
+        }
+
+        Stripe.setPublishableKey(stripeKey);
+        Stripe.createToken(billingInfo, responseHandler);
+    }
+
+    function processBillingResponse(status, response) {
+        if (response.error) {
+            alert("Failed to submit billing info. " + response.error.message);
+        } else {
+            var token = response['id'];
+            var url = $RCAPI.URI.BillingInfoUpdate.format(listGrid.cells(getSelectRowIdFromGrid(), 6).getValue());
+            var message = { BillingInfoToken: token };
+            var companyAjax = new $RCAjax(url, JSON.stringify(message), "POST", null, null, false, null, routePostErrors);
+            var responseData = companyAjax.responseData;
+        }
+    }
+
+    function routePostErrors(data, errorType, errorText) {
+        switch (data.status) {
+            case 401:
+                authExpiration();
+                break;
+            default:
+                getCompanyListFailure(data, errorType, errorText);
+                break;
+        };
+    }
+
+    function routeGetErrors(data, errorType, errorText, resource) {
+        switch (data.status) {
+            case 202:
+                getCompanyListPending(data, errorType, errorText);
+                break;
+            case 401:
+                authExpiration();
+                break;
+            default:
+                getCompanyListFailure(data, errorType, errorText);
+                break;
+        };
+    }
+
+    function getCompanyListFailure(data, errorType, errorText) {
+        alert(errorType + ' - ' + errorText + ' - ' + JSON.stringify(data));
+    }
+
+    function authExpiration(data, errorType, errorText) {
+        alert('Auth Expiration - ' + errorType + ' - ' + errorText + ' - ' + JSON.stringify(data));
+    }
+
+    function getCompanyListPending(data, errorType, errorText) {
+        alert('202 - ' + errorType + ' - ' + errorText + ' - ' + JSON.stringify(data));
+    }
+
+    function createUpdateCompanyJSON(companyForm) {
+        var updateJSON = createCompanyJSON(companyForm);
+        updateJSON.LocalVersion = companyEditForm.getItemValue('localVersion');
+        return updateJSON;
+    }
+
+    function createCompanyJSON(companyForm) {
+        return {
+            'ExternalName': companyForm.getItemValue("inputName"),
+            'ExternalType': companyForm.getItemValue("inputType"),
+            'Properties': {
+                'Address': companyForm.getItemValue("inputAddress"),
+                'Address2': companyForm.getItemValue("inputAddress2"),
+                'City': companyForm.getItemValue("inputCity"),
+                'State': companyForm.getItemValue("inputState"),
+                'Country': companyForm.getItemValue("inputCountry"),
+                'PostalCode': companyForm.getItemValue("inputZip"),
+                'Phone': companyForm.getItemValue("inputPhone"),
+                'Contact': companyForm.getItemValue("inputContact"),
+                'Website': companyForm.getItemValue("inputWebsite"),
+                'DeliveryNetwork': companyForm.getItemValue("deliveryNetwork")
+            }
+        };
+    }
+
+    function CompanyJsonToGridArray(companyJson) {
+        var gridArray = new Array();
+        // Filter to only agencies on the first view, then advertisers on the second. This may need to change when there is more than agency to advertiser relationships.
+        var companyDisplayType = $RCUI.querystring['agency'] == undefined ? 'Agency' : 'Advertiser';
+        for (var item in companyJson) {
+            if (companyJson[item].ExternalType == companyDisplayType) {
+                var tmpArr = []
+                tmpArr.push(false);
+                tmpArr.push(companyJson[item].ExternalName);
+                tmpArr.push(companyJson[item].Properties.City);
+                tmpArr.push(companyJson[item].Properties.State);
+                tmpArr.push(companyJson[item].Properties.Contact);
+                tmpArr.push(companyJson[item].Properties.Phone);
+                tmpArr.push(companyJson[item].ExternalEntityId);
+                tmpArr.push(companyJson[item].ExternalType); 
+                gridArray.push(tmpArr);
+            }
+        }
+        return gridArray;
+    }
+//navigation routines
+    function navToCompany(rowId) {
+        var companyType = listGrid.cells(rowId, 7).getValue().toLowerCase();
+        $RCUI.breadCrumbs.add(listGrid.cells(rowId, 1).getValue(), companyType, listGrid.cells(rowId, 6).getValue());
+        if (companyType == 'agency') {
+            location.href = 'company.html?agency=' + listGrid.cells(rowId, 6).getValue();
+        }
+        else {
+            location.href = 'campaign.html?agency=' + $RCUI.querystring['agency'] + '&advertiser=' + listGrid.cells(rowId, 6).getValue();
+        }
+    }
+
+//Function to render page inside of the workarea as created by the basepage.js
+    function thisPageRender() {
+        // add company layout to workarea
+        companyLayout = workarea.attachLayout('2E', 'dhx_web')
+        var wizardNav = companyLayout.cells('a');
+        wizardNav.hideHeader();
+        wizardNav.setHeight('28');
+        wizardNav.fixSize(1, 1);
+
+        var wizardToolbar = wizardNav.attachToolbar();
+        wizardToolbar.setSkin('dhx_web');
+        wizardToolbar.attachEvent('onClick', onCompanyClick);
+
+        var menuResource = window.ApnxApp ? 'ApnxMenu' : $RCUI.querystring["agency"] ? 'AgencyMenu' : 'DefaultMenu';
+        var menu = $RCUI.resources('Company', menuResource);
+        for (var menuItem in menu) {
+            wizardToolbar.addButton(menuItem.toString(), menuItem, menu[menuItem].DisplayText);
+        };
+
+        gridCell = companyLayout.cells('b');
+        gridCell.hideHeader();
+        gridCell.progressOn();
+
+        var companyId = $RCUI.querystring["agency"];
+        if (window.ApnxApp && (companyId == undefined || companyId == null)) {
+            var companyList = getCompanyList('');
+            if (companyList.Companies != undefined && companyList.Companies.length > 0) {
+                var agencies = jsonPath(companyList, '$.Companies[?(@.ExternalType.toLowerCase() == "agency")]');
+                $RCUI.querystring["agency"] = agencies[0].ExternalEntityId;
+            }
+        }
+        loadCompanyGrid(companyId, gridCell);
+    }
+
+    //display routines
+    function loadCompanyGrid(companyId, layoutCell) {
+        //Advertiser List Grid formatting and population
+        listGrid = layoutCell.attachGrid();
+        listGrid.setHeader(",Company Name,City,State,Contact,Phone,Id,Type");
+        listGrid.setColAlign("center,left,left,left,left,left,left");                
+        listGrid.setInitWidths("35,250,175,50,175,100,*,*");
+        listGrid.setColSorting("str,str,str,str,str,str,str,str,str");
+        listGrid.setColTypes("ra,ro,ro,ro,ro,ro,ro,ro");
+        listGrid.setColumnsVisibility("false,false,false,false,false,false,true,true");
+        listGrid.enableRowsHover(true, "highlight");
+        listGrid.attachEvent('onRowSelect', navToCompany);
+        listGrid.init();
+        listGrid.setSkin("dhx_web");
+        if ($RCUI.querystring["agency"]) {
+            var agencyJSON = new $RCAjax($RCAPI.URI.CompanyGet.format($RCUI.querystring["agency"]) + '?Flags=WithAssociations', '', 'GET', null, null, false, null, routeGetErrors);
+            var companyList = [];
+            var assocAdvertisers;
+            try {
+                assocAdvertisers = agencyJSON.responseData.Company.Associations.AgencyAdvertiser;
+            }
+            catch (err) {
+            // Just keep on truckin
+            }
+            if (assocAdvertisers != undefined) { //make sure there are advertisers first
+                //TO DO should make these ASYNC
+                for (var association in assocAdvertisers) {
+                    var targetEntityId = assocAdvertisers[association].TargetEntityId;
+                    if (targetEntityId != undefined){
+                        var returnJSON = new $RCAjax($RCAPI.URI.CompanyGet.format(targetEntityId), '', 'GET', null, null, false, null, routeGetErrors)
+                        companyList.push(returnJSON.responseData.Company);
+                    }
+                    else{ //this should mean there is only one association
+                        var returnJSON = new $RCAjax($RCAPI.URI.CompanyGet.format(assocAdvertisers.TargetEntityId), '', 'GET', null, null, false, null, routeGetErrors)
+                        companyList.push(returnJSON.responseData.Company);
+                        break;
+                    }
+                }
+            }
+            listGrid.parse(CompanyJsonToGridArray(companyList), "jsarray");
+        }
+        else {
+            listGrid.parse(CompanyJsonToGridArray(getCompanyList(companyId).Companies), "jsarray");
+        }
+        listGrid.sortRows(1);
+        layoutCell.progressOff();
+    }
+
+    function formOnButtonClick(buttonId) {
+        switch (buttonId) {
+            case 'saveButton':
+                companySave(gridCell, companyEditForm);
+                window.location = '\/company.html';
+                break;
+            case 'cancelButton':
+                windowClose(gridCell);
+                break;
+            default:
+                return;
+        }
+    }
+
+    function formUpdateOnButtonClick(buttonId) {
+        switch (buttonId) {
+            case 'saveButton':
+                companyUpdate(gridCell, companyEditForm);
+                window.location = '\/company.html';
+                break;
+            case 'cancelButton':
+                windowClose(gridCell);
+                break;
+            case 'billingButton':
+                showBillingWindow(gridCell, 'BillingInfo');
+                break;
+            default:
+                return;
+        }
+    }
+
+    function billingFormOnButtonClick(buttonId) {
+        switch (buttonId) {
+            case 'submitButton':
+                submitBillingInfo(gridCell, companyBillingForm);
+                break;
+            default:
+                return;
+        }
+    }
+
+    function windowClose(editCell) {
+        editCell.progressOff();
+        window.location = '\/company.html';
+    }
+    function onCompanyClick(button) {
+        if (!preNavigationCheck()) {
+            return false;
+        }
+        
+        var menuResource = window.ApnxApp ? 'ApnxMenu' : $RCUI.querystring["agency"] ? 'AgencyMenu' : 'DefaultMenu';
+        var menu = $RCUI.resources('Company', menuResource);
+        var action = '';
+        if (button < menu.length) {
+            action = menu[button].Action;
+        }
+        else {
+            alert('Navigation Error');
+        }
+
+        switch (action) {
+            case 'Agency':
+                showEditWindow(gridCell, 'Agency');
+                break;
+            case 'UpdateAgency':
+                showUpdateWindow(gridCell, 'Agency');
+                break;
+            case 'Advertiser':
+                if (window.ApnxApp) {
+                    showApnxImportWindow(gridCell, 'Advertiser');
+                }
+                else {
+                    showEditWindow(gridCell, 'Advertiser');
+                }
+                break;
+            case 'UpdateAdvertiser':
+                showUpdateWindow(gridCell, 'Advertiser');
+                break;
+            case 'User':
+                window.location = '\/user.html';
+                break;
+            default:
+                alert('Unhandled Navigation');
+        }
+    }
+
+    function getSelectRowIdFromGrid() {
+        for (var count = 1; count <= listGrid.getRowsNum(); count++) {
+            var isChecked = listGrid.cells(count, 0).isChecked();
+            if (isChecked == true) {
+                return count;
+            }
+        }
+        return -1;
+    }
+    
+    function showForm(companyWorkArea){
+        companyEditForm = companyWorkArea.attachForm();
+        companyWorkArea.fixSize(1, 0);
+        companyWorkArea.setHeight('225');
+        companyWorkArea.fixSize(1, 1);
+        companyEditForm.setSkin = "dhx_web";
+        companyEditForm.loadStruct(formData, 'json');
+    }
+
+    function showUpdateWindow(companyWorkArea, hiddenValue) {
+        var rowId = getSelectRowIdFromGrid();
+        if (rowId < 0) {
+            alert("Select the Update radio button for the Company you want to update.");
+            return;
+        }
+        var companyJSON = new $RCAjax($RCAPI.URI.CompanyGet.format(listGrid.cells(rowId, 6).getValue()), '', 'GET', null, null, false, null, routeGetErrors).responseData.Company;
+        
+        showForm(companyWorkArea);
+        companyEditForm.attachEvent("onButtonClick", formUpdateOnButtonClick);
+        companyEditForm.setItemValue('inputName', companyJSON.ExternalName);
+        companyEditForm.setItemValue('inputAddress', companyJSON.Properties.Address);
+        companyEditForm.setItemValue('inputAddress2', companyJSON.Properties.Address2);
+        companyEditForm.setItemValue('inputCity', companyJSON.Properties.City);
+        companyEditForm.setItemValue('inputState', companyJSON.Properties.State);
+        companyEditForm.setItemValue('inputCountry', companyJSON.Properties.Country);
+        companyEditForm.setItemValue('inputZip', companyJSON.Properties.PostalCode);
+        companyEditForm.setItemValue('inputPhone', companyJSON.Properties.Phone);
+        companyEditForm.setItemValue('inputContact', companyJSON.Properties.Contact);
+        companyEditForm.setItemValue('inputWebsite', companyJSON.Properties.Website);
+        companyEditForm.setItemValue('localVersion', companyJSON.LocalVersion);
+        companyEditForm.setItemValue('inputType', hiddenValue);
+        companyEditForm.setItemValue('deliveryNetwork', companyJSON.Properties.DeliveryNetwork);
+    }
+
+    function showBillingForm(companyWorkArea) {
+        companyBillingForm = companyWorkArea.attachForm();
+        companyWorkArea.fixSize(1, 0);
+        companyWorkArea.setHeight('225');
+        companyWorkArea.fixSize(1, 1);
+        companyBillingForm.setSkin = "dhx_web";
+        companyBillingForm.loadStruct(billingFormData, 'json');
+    }
+    
+    function showBillingWindow(companyWorkArea, hiddenValue) {
+        showBillingForm(companyWorkArea);
+        companyBillingForm.attachEvent("onButtonClick", billingFormOnButtonClick);
+        companyBillingForm.setItemValue('inputType', hiddenValue);
+    }
+
+    function showEditWindow(companyWorkArea, hiddenValue) {
+        var deliveryNetwork = '';
+        if (hiddenValue == 'Advertiser') {
+            var agencyJSON = new $RCAjax($RCAPI.URI.CompanyGet.format($RCUI.querystring["agency"]), '', 'GET', null, null, false, null, routeGetErrors);
+            deliveryNetwork = agencyJSON.responseData.Company.Properties.DeliveryNetwork;
+        }
+
+        showForm(companyWorkArea);
+        companyEditForm.attachEvent("onButtonClick", formOnButtonClick);
+        companyEditForm.setItemValue('inputType', hiddenValue);
+        companyEditForm.setItemValue("deliveryNetwork", deliveryNetwork);
+    }
+
+    // AppNexus App advertiser import fuctions
+    function apnxAdvertiserImport(editCell, importGrid) {
+        var advertiserId = importGrid.getSelectedRowId();
+        if (advertiserId == null) {
+            alert("Please select an advertiser.");
+            return false;
+        }
+
+        editCell.progressOn();
+        var advertiserCompanyJSON = {
+            'ExternalName': importGrid.cells(advertiserId, 0).getValue(),
+            'ExternalType': 'Advertiser',
+            'Properties': {
+                'DeliveryNetwork': 'AppNexus',
+                'APNXAdvertiserId': advertiserId
+            }
+        };
+
+        var companyCreateUri = $RCAPI.URI.AdvertiserCreate.format($RCUI.querystring["agency"]);
+        var companyOutputJSON = companyJSONCall("POST", false, companyCreateUri, JSON.stringify(advertiserCompanyJSON));
+        var companyJSON = {
+            ParentEntity: $RCUI.querystring["agency"],
+            ChildEntity: companyOutputJSON.Company.ExternalEntityId,
+            AssociationName: "AgencyAdvertiser",
+            AssociationType: "Child"
+        };
+        companyJSONCall("POST", false, $RCAPI.URI.CompanyAssociate.format($RCUI.querystring["agency"]), JSON.stringify(companyJSON));
+
+        windowClose(gridCell);
+        return true;
+    }
+
+    function formApnxImportOnButtonClick(buttonId, importGrid) {
+        switch (buttonId) {
+            case 'importButton':
+                if (apnxAdvertiserImport(gridCell, importGrid)) {
+                    window.location = '\/company.html';
+                }
+                break;
+            case 'cancelButton':
+                windowClose(gridCell);
+                break;
+            default:
+                return;
+        }
+    }
+
+    function showApnxImportWindow(companyWorkArea, hiddenValue) {
+        // Display the AppNexus advertiser import form
+        companyWorkArea.attachObject('apnxFormArea');
+
+        var advertiserImportGrid = new dhtmlXGridObject("apnxGrid");
+
+        advertiserImportGrid.setHeader("Advertiser");
+        advertiserImportGrid.setColAlign("left");
+        advertiserImportGrid.setInitWidths("*");
+        advertiserImportGrid.setColSorting("str");
+        advertiserImportGrid.setColTypes("ro");
+        advertiserImportGrid.enableRowsHover(true, "highlight");
+        advertiserImportGrid.init();
+        advertiserImportGrid.loadXML('./api/data/apnxadvertisers.xml');
+
+        var advertiserImportForm = new dhtmlXForm("apnxForm");
+        var apnxImportForm = [
+            { type: "button", name: "importButton", value: 'Import' },
+            { type: "button", name: "cancelButton", value: 'Cancel' }
+        ];
+
+        companyWorkArea.fixSize(1, 0);
+        companyWorkArea.setHeight('225');
+        companyWorkArea.fixSize(1, 1);
+        advertiserImportForm.setSkin = "dhx_web";
+        advertiserImportForm.loadStruct(apnxImportForm, 'json');
+        var onButtonClick = function (buttonId) {
+            formApnxImportOnButtonClick(buttonId, advertiserImportGrid);
+        };
+        advertiserImportForm.attachEvent("onButtonClick", onButtonClick);
+    }
+</script>
+</head>
+<body onload="pageRender(thisPageRender);">
+<div id="apnxFormArea" style="display:none;width:100%;height:100%;overflow:scroll">
+<div id="apnxGrid"  style="border:1px black;width:300px;height:300px;">hi</div>
+<div id="apnxForm" style="border:1px black;width:300px;height:300px;"/>
+</div>
+</body>
+</html>

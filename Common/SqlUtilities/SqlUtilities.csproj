@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BF372B6F-D93D-4099-90AE-1B661D1948EF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SqlUtilities</RootNamespace>
+    <AssemblyName>SqlUtilities</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Storage\Constants.cs" />
+    <Compile Include="Storage\SqlDictionary.cs" />
+    <Compile Include="Storage\SqlDictionaryEntry.cs" />
+    <Compile Include="Storage\SqlDictionaryEnumerator.cs" />
+    <Compile Include="Storage\SqlDictionaryFactory.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Diagnostics\Diagnostics.csproj">
+      <Project>{25BA9F11-94F9-4D24-8F52-4E5C5AD50454}</Project>
+      <Name>Diagnostics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utilities\Utilities.csproj">
+      <Project>{78CE06F8-2B31-41A9-AA35-FE8D2F6DBF11}</Project>
+      <Name>Utilities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DictionaryStore\Scripts\Database\create\create_DictionaryStore.sql" />
+    <Content Include="DictionaryStore\Scripts\Database\create\create_Logins.sql" />
+    <Content Include="DictionaryStore\Scripts\StoredProcedures\update\update_GetStoreNames.sql" />
+    <Content Include="DictionaryStore\Scripts\StoredProcedures\update\update_DeleteEntries.sql" />
+    <Content Include="DictionaryStore\Scripts\StoredProcedures\update\update_DeleteEntry.sql" />
+    <Content Include="DictionaryStore\Scripts\StoredProcedures\update\update_GetEntry.sql" />
+    <Content Include="DictionaryStore\Scripts\StoredProcedures\update\update_GetEntryNames.sql" />
+    <Content Include="DictionaryStore\Scripts\StoredProcedures\update\update_SetEntry.sql" />
+    <Content Include="DictionaryStore\Scripts\Tables\delete\delete_AllTables.sql" />
+    <Content Include="DictionaryStore\Scripts\Tables\update\update_AllTables.sql" />
+    <Content Include="DictionaryStore\Scripts\User\create\create_Users.sql" />
+    <Content Include="DictionaryStore\Setup\Install.cmd" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(SolutionDir)..\build\common.proj" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="ProjectBeforeBuild">
+  </Target>
+  -->
+  <Target Name="ProjectAfterBuild">
+    <ItemGroup>
+      <StorageSqlFiles Include="$(ProjectDir)DictionaryStore\**\*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(StorageSqlFiles)" DestinationFiles="@(StorageSqlFiles->'$(OutDir)DictionaryStore\%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
+</Project>

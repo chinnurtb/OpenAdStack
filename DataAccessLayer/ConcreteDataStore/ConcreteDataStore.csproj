@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A7CC4F7A-15D3-4F19-BEF7-DAE737FB119E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ConcreteDataStore</RootNamespace>
+    <AssemblyName>ConcreteDataStore</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;CODE_ANALYSIS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AzureUtilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Common\Public\bin\Debug\AzureUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAccessLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DataAccessCommon\Public\bin\Debug\DataAccessLayer.dll</HintPath>
+    </Reference>
+    <Reference Include="Diagnostics, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.WindowsAzure.ServiceRuntime, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.WindowsAzure.StorageClient, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=4.0.6.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Public\bin\Debug\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Services" />
+    <Reference Include="System.Data.Services.Client" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Utilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Common\Public\bin\Debug\Utilities.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssociationComparer.cs" />
+    <Compile Include="AzureBlobStorageKey.cs" />
+    <Compile Include="AzureBlobStorageKeyFactory.cs" />
+    <Compile Include="AzureBlobStore.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AzureBlobStoreFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AzureEntityDataStore.cs" />
+    <Compile Include="AzureEntityStoreFactory.cs" />
+    <Compile Include="AzureNameEncoder.cs" />
+    <Compile Include="AzureSerializationEntity.cs" />
+    <Compile Include="AzureStorageKey.cs" />
+    <Compile Include="AzureStorageKeyFactory.cs" />
+    <Compile Include="BlobPropertyEntity.cs" />
+    <Compile Include="ConcreteEntityRepository.cs" />
+    <Compile Include="ConcreteEntitySchema.cs" />
+    <Compile Include="ConcreteUserAccessRepository.cs" />
+    <Compile Include="ConcreteSqlStore.cs" />
+    <Compile Include="ISqlStore.cs" />
+    <Compile Include="ODataPropertyName.cs" />
+    <Compile Include="QueryRecord.cs" />
+    <Compile Include="QueryResult.cs" />
+    <Compile Include="SqlUserAccessStoreFactory.cs" />
+    <Compile Include="SqlIndexDataStore.cs" />
+    <Compile Include="SqlIndexStoreFactory.cs" />
+    <Compile Include="DefaultKeyRule.cs" />
+    <Compile Include="KeyRuleFactory.cs" />
+    <Compile Include="ODataAssociationName.cs" />
+    <Compile Include="ODataAssociationValue.cs" />
+    <Compile Include="ODataElement.cs" />
+    <Compile Include="ODataName.cs" />
+    <Compile Include="ODataSerializer.cs" />
+    <Compile Include="Properties\WarningSuppressions.cs" />
+    <Compile Include="S3StorageKey.cs" />
+    <Compile Include="S3StorageKeyFactory.cs" />
+    <Compile Include="SqlUserAccessDataStore.cs" />
+    <Compile Include="XmlDataStoreBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XmlIndexDataSet.Designer.cs">
+      <DependentUpon>XmlIndexDataSet.xsd</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="XmlIndexDataStore.cs" />
+    <Compile Include="XmlIndexStoreFactory.cs" />
+    <Compile Include="XmlRawEntity.cs" />
+    <Compile Include="XmlStorageKey.cs" />
+    <Compile Include="XmlStorageKeyFactory.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SqlIndexDataStore\Setup\Install.cmd" />
+    <None Include="XmlIndexDataSet.xsc">
+      <DependentUpon>XmlIndexDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="XmlIndexDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>XmlIndexDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="XmlIndexDataSet.xss">
+      <DependentUpon>XmlIndexDataSet.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\DefaultIndexStore.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SqlIndexDataStore\Scripts\Database\create\create_IndexDatastore.sql" />
+    <Content Include="SqlIndexDataStore\Scripts\Database\create\create_Logins.sql" />
+    <Content Include="SqlIndexDataStore\Scripts\StaticData\update\update_StaticData.sql" />
+    <Content Include="SqlIndexDataStore\Scripts\StoredProcedures\update\update_GetAssociationsCurrent.sql" />
+    <Content Include="SqlIndexDataStore\Scripts\StoredProcedures\update\update_GetEntityIndexEntry.sql" />
+    <Content Include="SqlIndexDataStore\Scripts\StoredProcedures\update\update_GetEntityIndexEntryForVersion.sql" />
+    <Content Include="SqlIndexDataStore\Scripts\StoredProcedures\update\update_GetEntityInfoByCategory.sql" />
+    <Content Include="SqlIndexDataStore\Scripts\StoredProcedures\update\update_KeyFields_GetKeyFieldsCurrent.sql" />
+    <Content Include="SqlIndexDataStore\Scripts\StoredProcedures\update\update_KeyFields_InsertAzureKeyFields.sql" />
+    <Content Include="SqlIndexDataStore\Scripts\StoredProcedures\update\update_StorageAccount_GetStorageType.sql" />
+    <Content Include="SqlIndexDataStore\Scripts\StoredProcedures\update\update_UpdateAssociationsCurrent.sql" />
+    <Content Include="SqlIndexDataStore\Scripts\StoredProcedures\update\update_UpdateEntityIndexEntry.sql" />
+    <Content Include="SqlIndexDataStore\Scripts\StoredProcedures\update\update_UpdateEntityStatus.sql" />
+    <Content Include="SqlIndexDataStore\Scripts\StoredProcedures\update\update_UserAccess_GetUserAccess.sql" />
+    <Content Include="SqlIndexDataStore\Scripts\StoredProcedures\update\update_UserAccess_InsertUserAccess.sql" />
+    <Content Include="SqlIndexDataStore\Scripts\StoredProcedures\update\update_UserAccess_RemoveUserAccess.sql" />
+    <Content Include="SqlIndexDataStore\Scripts\Tables\delete\delete_AllTables.sql" />
+    <Content Include="SqlIndexDataStore\Scripts\Tables\update\update_AllTables.sql" />
+    <Content Include="SqlIndexDataStore\Scripts\User\create\create_Users.sql" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(SolutionDir)\..\build\common.proj" />
+  <Target Name="ProjectAfterBuild">
+    <ItemGroup>
+      <IndexSqlFiles Include="$(ProjectDir)SqlIndexDataStore\**\*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(IndexSqlFiles)" DestinationFiles="@(IndexSqlFiles->'$(OutDir)SqlIndexDataStore\%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
+</Project>

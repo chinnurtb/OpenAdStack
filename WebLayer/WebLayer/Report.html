@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Campaign Page</title>
+    <link rel="stylesheet" type="text/css" href="./dhtml/codebase/dhtmlx.css" /> 
+    <link rel="stylesheet" type="text/css" href="./dhtml/codebase/dhtmlx_custom.css" /> 
+    <link rel="stylesheet" type="text/css" href="./css/basestyle.css" /> 
+    
+    <style type="text/css">
+        .smallLabel {font-weight:normal;font-size:10px;margin-left:30px;}
+        .HVA {width:55%;height:100px;background:#0000BB;font:Tahoma 10px;color:#ffff99;padding:5px;}
+        .Exceptional {width:70%;height:100px;background:#000088;font:Tahoma 10px;color:#ffff99;padding:5px;}
+        .Rare {width:85%;height:100px;background:#000033;font:Tahoma 10px;color:#ffff99;padding:5px;}
+        #Display {width:100%;height:100px;background:#000000;font:Tahoma 10px;color:#ffff99;padding:5px;border-top:4px solid #ffff99}
+        #measures {width:40%;font:Tahoma 10px;}
+        .measureSection {padding-bottom:0px;}
+        .Summary {width:100%;height:100px;background:#FFFFFF;font:Tahoma 10px;color:#000000;padding:5px;}
+    </style>
+
+    <script type="text/javascript" src="./scripts/GlobalObjects.js"></script>
+    <script type="text/javascript" src="./scripts/wizardlayout.js"></script>
+    <script type="text/javascript" src="./scripts/CampaignUtils.js"></script>
+
+<!-- Page Specific Scripts -->
+    <script type="text/javascript">
+    var calculatedValuationList;
+    var headerFont = "bold 14px Tahoma";
+    var headerNormalFont = "14px Tahoma";
+    var normalFont = "12px Tahoma";
+    helpTopic = "Review";
+
+    function pageExit() {
+        return true;
+    }
+
+    function thisPageRender() {
+        workarea.progressOn();
+        calculatedValuationList = getCalculatedValuationList($RCUI.advertiser, $RCUI.campaign);
+        var FormJson = [
+                    { type: 'button', name: 'campaignGoLive', width: 125, value: 'Approve & Go Live' }
+                ];
+        var goLiveForm = new dhtmlXForm('formDiv');
+        goLiveForm.loadStruct(FormJson, 'json')
+        goLiveForm.setSkin('dhx_web');
+        goLiveForm.attachEvent('onButtonClick', goLive);
+
+        initGraph(workarea);
+        showGraph(workarea);
+        workarea.progressOff();
+    }
+
+    function goLive(buttonName) {
+        workarea.progressOn();
+        switch (buttonName) {
+            case 'campaignGoLive':
+                //validate campaign before going live
+                var errorMsg = 'Oops your campaign is not quite ready to go live.\n';
+                var isValid = true;
+                if (jsonPath(calculatedValuationList.Valuations, '$.NodeValuationSet[?(@.MeasureSet.length >= 4)]') == false) {
+                    isValid = false;
+                    errorMsg += "- A valid Rare Crowd campaign needs more ungrouped measures or more groups\n";
+                }
+                if (parseFloat(cClient.Get("Budget")) < 1000) {
+                    isValid = false;
+                    errorMsg += "- A valid Rare Crowd campaign needs more $1000 minimum spend\n";
+                }
+                if (((Date.parseISO(cClient.Get("EndDate")) - Date.parseISO(cClient.Get("StartDate"))) / 1000 / 60 / 60 / 24) < 10) {
+                    isValid = false;
+                    errorMsg += "- A valid Rare Crowd campaign must run for at least 10 days\n";
+                }
+                if (!isValid) {
+                    alert(errorMsg);
+                    workarea.progressOff();
+                    return false;
+                }
+                if (getQueryString()['campaign'] != undefined) {
+                    cClient.Set("Status", "Approved");
+                }
+                else {
+                    alert('Please be patient, you need a valid campaign first');
+                }
+                cClient.Save();
+                workarea.progressOff();
+        }
+    }
+
+    var nodes;
+    function initGraph(graphPane) {
+        nodes = calculatedValuationList.Valuations.NodeValuationSet;
+        graphPane.attachObject('canvasesdiv');
+    }
+
+    function getMinMaxEcpm(valuationList) {
+        var min = 1000000;
+        var max = 0;
+
+        for (var valuation in valuationList) {
+            if (valuationList[valuation].MaxValuation > max) {
+                max = valuationList[valuation].MaxValuation;
+            }
+
+            if (valuationList[valuation].MaxValuation < min) {
+                min = valuationList[valuation].MaxValuation;
+            }
+        }
+        return { MinECPM: min.toFixed(2), MaxECPM: max.toFixed(2) }
+    }
+
+    function getMeasureListHTML(list, heading) {
+        if (list.length == 0 || list.length == undefined) { return ''; }
+        var measureDisplay = '<div class="measureSection"><div style="font:{0}">{1}</div><ul>'.format(headerFont, heading)
+        for (var i = 0; i < list.length; i++) {
+            measureDisplay += '<li>' + getMeasureDisplayName(list[i].measureId).replace(/:/g,': ') + '</li>';
+        }
+        measureDisplay += '</ul></div>';
+        return measureDisplay;
+    }
+
+    function showGraph(graphPane, thisNode) {
+        var measureList = getMeasuresFromCampaign(cClient);
+        var MeasureDisplay = '<div style="font:' + normalFont + '">';
+        
+        MeasureDisplay += getMeasureListHTML(jsonPath(measureList, '$.[?(@.pinned == true && @.group == "")]'), 'Always All Of These');
+
+        //pinned groups
+        var GroupNames = getGroupNames(jsonPath(measureList, '$.[?(@.pinned == true && @.group != "")]'));
+        for (var group in GroupNames) {
+            MeasureDisplay += getMeasureListHTML(jsonPath(measureList, '$.[?(@.pinned == true && @.group == "' + GroupNames[group] + '")]'), 'Always One Of These');
+        }
+
+        //unpinned groups
+        GroupNames = getGroupNames(jsonPath(measureList, '$.[?(@.pinned == false && @.group != "")]'));
+        for (var group in GroupNames) {
+            MeasureDisplay += getMeasureListHTML(jsonPath(measureList, '$.[?(@.pinned == false && @.group == "' + GroupNames[group] + '")]'), 'Optionally One Of These');
+        }
+
+        MeasureDisplay += getMeasureListHTML(jsonPath(measureList, '$.[?(@.pinned == false && @.group == "")]'), 'Optionally One or More of these');
+
+        document.getElementById('measures').innerHTML = MeasureDisplay + '</div>';
+
+        var nodesRendered = 0;
+        var tierCount = getTierCount(measureList);
+
+        var standardCrowds = jsonPath(calculatedValuationList.Valuations, '$.NodeValuationSet[?(@.MeasureSet.length < 4)]') ? jsonPath(calculatedValuationList.Valuations, '$.NodeValuationSet[?(@.MeasureSet.length < 4)]') : [];
+        var standardCount = standardCrowds.length;
+        var standardBudgetWeight = 0;
+        switch (cClient.Get('InventoryStrategy')) {
+            case 1,'1':
+                standardBudgetWeight = 15;
+                break;
+            case 2,'2':
+                standardBudgetWeight = 30;
+                break;
+        }
+
+        var rareCrowds = jsonPath(calculatedValuationList.Valuations, '$.NodeValuationSet[?(@.MeasureSet.length >= 4 && @.MeasureSet.length <= 5)]') ? jsonPath(calculatedValuationList.Valuations, '$.NodeValuationSet[?(@.MeasureSet.length >= 4 && @.MeasureSet.length <= 5)]') : [];
+        var rareCount = rareCrowds.length;
+        var rareBudgetWeight = 94;
+
+        var exceptionalCrowds = jsonPath(calculatedValuationList.Valuations, '$.NodeValuationSet[?(@.MeasureSet.length >= 6 && @.MeasureSet.length <= 7)]') ? jsonPath(calculatedValuationList.Valuations, '$.NodeValuationSet[?(@.MeasureSet.length >= 6 && @.MeasureSet.length <= 7)]') : [];
+        var exceptionalCount = exceptionalCrowds.length;
+        var exceptionalBudgetWeight = 5;
+
+        var hvaCrowds = jsonPath(calculatedValuationList.Valuations, '$.NodeValuationSet[?(@.MeasureSet.length >= 8)]') ? jsonPath(calculatedValuationList.Valuations, '$.NodeValuationSet[?(@.MeasureSet.length >= 8)]') : [];
+        var hvaCount = hvaCrowds.length;
+        var hvaBudgetWeight = .1;
+
+        var totalWeightedBudget = standardCount * standardBudgetWeight + rareCount * rareBudgetWeight + exceptionalBudgetWeight * exceptionalCount + hvaCount * hvaBudgetWeight;
+
+        var rareBudgetPer = rareBudgetWeight * rareCount / totalWeightedBudget;
+        var exceptionalBudgetPer = exceptionalBudgetWeight * exceptionalCount / totalWeightedBudget;
+        var hvaBudgetPer = hvaBudgetWeight * hvaCount / totalWeightedBudget;
+
+        var barHeight = 105;
+        var padding = 20;
+
+        var displayStrings;
+        displayStrings = getDisplayStrings(hvaBudgetWeight, hvaCount, getMinMaxEcpm(hvaCrowds), 5, 100, totalWeightedBudget);
+        showLayerText("HVALabel", "Highest Value Inventory (8+ measures)", displayStrings.Budget, displayStrings.Count, displayStrings.CPM);
+
+        displayStrings = getDisplayStrings(exceptionalBudgetWeight, exceptionalCount, getMinMaxEcpm(exceptionalCrowds), 10, 130, totalWeightedBudget);
+        showLayerText("ExceptionalLabel", "Exceptional Inventory (6-7 measures)", displayStrings.Budget, displayStrings.Count, displayStrings.CPM);
+
+        displayStrings = getDisplayStrings(rareBudgetWeight, rareCount, getMinMaxEcpm(rareCrowds), 95, 180, totalWeightedBudget);
+        showLayerText("RareLabel", "Rare Inventory (4-5 measures)", displayStrings.Budget, displayStrings.Count, displayStrings.CPM);
+
+        displayStrings = getDisplayStrings(standardBudgetWeight, standardCount, getMinMaxEcpm(standardCrowds), 0, 180, totalWeightedBudget);
+        showLayerText("DisplayLabel", "Standard Inventory (1-3 measures)", displayStrings.Budget, displayStrings.Count, displayStrings.CPM);
+
+        var campaignAveCPM = cClient.Get("CPM");
+        var totalCampaigns = calculatedValuationList.Valuations.NodeValuationSet.length;
+        var summaryText =  '<div style="font:' + headerNormalFont + ';font-weight:bold">Total Budget: $' + cClient.Get("Budget").format('0,000') + '<br/>Combinations: ' + totalCampaigns.format('0,000') + '<br/>Max Average CPM: ~$' + campaignAveCPM;
+        var dateStartDate = Date.parseISO(cClient.Get("StartDate"));
+        var dateEndDate = Date.parseISO(cClient.Get("EndDate"));
+        summaryText +='<br />Flight Dates: ' + dateStartDate.toDateString() + ' to ' + dateEndDate.toDateString() + '</div>';
+        document.getElementById('SummaryLabel').innerHTML = summaryText
+    }
+
+    function getDisplayStrings(budgetWeight, count, eCPM, minFactor, maxFactor, total) {
+        var budgetPer = budgetWeight * count / total;
+        if (budgetPer == 0) {
+            return { Budget: '', Count: '', CPM: '' };
+        }
+        return { Budget: Math.round(budgetPer * minFactor).toString() + '% - ' + Math.max(Math.min(Math.round(budgetPer * maxFactor), budgetWeight),1).toString() + '% of Budget',
+            Count: count.format('0,000') + ' Combinations',
+            CPM: 'CPM range: $' + eCPM.MinECPM + ' - $' + eCPM.MaxECPM
+        }
+    }
+
+    function showLayerText(elementName, label, label2, label3, label4) {
+        var outputLabel = '';
+        outputLabel = '<div style="font:' + headerFont + '">' + label + '</div>';
+        outputLabel += '<div style="font:' + headerNormalFont + '">' + label2 + '</div>';
+        outputLabel += '<div style="font:' + headerNormalFont + '">' + label3 + '</div>';
+        outputLabel += '<div style="font:' + headerNormalFont + '">' + label4 + '</div>';
+        document.getElementById(elementName).innerHTML = outputLabel;
+        return;
+    }
+</script>
+</head>
+<body onload="pageRender(thisPageRender);">
+<div id="canvasesdiv" style="display:none;width:100%;height:100%;overflow:auto;">
+<table width="100%"><tr><td valign="top" style="width:60%;padding-right:25px">
+<table id="BudgetTable" cellpadding="0" cellspacing="0" width="100%">
+    <tr><td align="right" valign="top">
+        <div id="formDiv" style="float:left;"></div>
+        <table class="HVA" style="float:right">
+        <tr>
+            <td id="HVALabel"></td>
+        </tr>
+        </table>
+        </td>
+    </tr>
+    <tr><td align="right">
+        <table class="Exceptional">
+        <tr>
+            <td id="ExceptionalLabel"></td>
+        </tr>
+        </table>
+        </td>
+    </tr>
+    <tr><td align="right">
+        <table class="Rare">
+        <tr>
+            <td id="RareLabel"></td>
+        </tr>
+        </table>
+        </td>
+    </tr>
+    <tr><td align="right">
+        <table id="Display">
+        <tr>
+            <td id="DisplayLabel"></td>
+        </tr>
+        </table>
+        </td>
+    </tr>
+    <tr><td align="left">
+        <table id="Summary">
+        <tr>
+            <td id="SummaryLabel"></td>
+        </tr>
+        </table>
+        </td>
+    </tr>
+</table>
+</td>
+<td valign="top">
+    
+    <div id="measures" style="width:100%"></div>
+</td>
+</tr></table>
+</div>
+</body>
+</html>

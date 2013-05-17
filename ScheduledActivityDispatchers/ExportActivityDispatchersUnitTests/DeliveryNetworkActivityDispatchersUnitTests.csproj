@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BA74E144-4140-4567-B9B7-994DEA179EBC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DeliveryNetworkActivityDispatchersUnitTests</RootNamespace>
+    <AssemblyName>DeliveryNetworkActivityDispatchersUnitTests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\DeliveryNetworkActivityDispatchersUnitTests.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Activities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Public\bin\Debug\Activities.dll</HintPath>
+    </Reference>
+    <Reference Include="AppNexusUtilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ActivitiesCommon\Public\bin\Debug\AppNexusUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAccessLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DataAccessLayer\Public\bin\Debug\DataAccessLayer.dll</HintPath>
+    </Reference>
+    <Reference Include="DeliveryNetworkUtilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ActivitiesCommon\Public\bin\Debug\DeliveryNetworkUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Diagnostics, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Common\Public\bin\Debug\Diagnostics.dll</HintPath>
+    </Reference>
+    <Reference Include="DynamicAllocationEngine.Measures, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DynamicAllocation\Public\bin\Debug\DynamicAllocationEngine.Measures.dll</HintPath>
+    </Reference>
+    <Reference Include="DynamicAllocationUtilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ActivitiesCommon\Public\bin\Debug\DynamicAllocationUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityUtilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ActivitiesCommon\Public\bin\Debug\EntityUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Queuing, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Queuing\Public\bin\Debug\Queuing.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhino.Mocks, Version=3.6.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\External\Public\bin\Debug\Rhino.Mocks.dll</HintPath>
+    </Reference>
+    <Reference Include="ScheduledActivities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\WorkItemScheduler\Public\bin\Debug\ScheduledActivities.dll</HintPath>
+    </Reference>
+    <Reference Include="ScheduledWorkItems, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\WorkItemScheduler\Public\bin\Debug\ScheduledWorkItems.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="TestUtilities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=79dd387e3641c5af, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\TestUtilities\Public\bin\Debug\TestUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Utilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Common\Public\bin\Debug\Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="WorkItems, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Queuing\Public\bin\Debug\WorkItems.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CleanupCampaignsFixture.cs" />
+    <Compile Include="ExportDynamicAllocationCampaignsFixture.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RetrieveCampaignDeliveryReportsFixture.cs" />
+    <Compile Include="UpdateExportedCreativesStatusFixture.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ExportActivityDispatchers\DeliveryNetworkActivityDispatchers.csproj">
+      <Project>{C82DE817-CFAB-425D-BF19-B04FE48C6DA5}</Project>
+      <Name>DeliveryNetworkActivityDispatchers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ScheduledActivityDispatchersTestHelpers\ScheduledActivityDispatchersTestHelpers.csproj">
+      <Project>{2BE6E9C3-292D-4AC1-96EF-31A0DE0F7446}</Project>
+      <Name>ScheduledActivityDispatchersTestHelpers</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(SolutionDir)..\build\common.proj" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="ProjectBeforeBuild">
+  </Target>
+  <Target Name="ProjectAfterBuild">
+  </Target>
+  -->
+</Project>

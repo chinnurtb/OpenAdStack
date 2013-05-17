@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Measure Selection Page</title>
+    <link rel="stylesheet" type="text/css" href="./dhtml/codebase/dhtmlx.css" /> 
+    <link rel="stylesheet" type="text/css" href="./dhtml/codebase/dhtmlx_custom.css" /> 
+    <link rel="stylesheet" type="text/css" href="./css/basestyle.css" /> 
+
+    <script type="text/javascript" src="./scripts/GlobalObjects.js"></script>
+    <script type="text/javascript" src="./scripts/wizardlayout.js"></script>
+    <script type="text/javascript" src="./scripts/CampaignUtils.js"></script>
+
+    <script type="text/javascript">
+    /****************/
+    //Globals
+    var tabNames = { inventory: 'inventory', audience: 'audience', geo: 'geo' };
+    var tabAddHandlers = [];
+    var tabForms = []; //index into the form for each tab
+    var tabObjects = []; //index into other object (eg grid for audience)
+    tabAddHandlers[tabNames.inventory] = addInventory;
+    tabAddHandlers[tabNames.audience] = addAudience;
+    tabAddHandlers[tabNames.geo] = addGeo;
+    var invMeasures = ['position', 'domainlist']
+    var geoMeasures = ['geotargeting','segment.geotargeting']
+    var measureForm;
+    var measureTabs;
+    var tabHandler;
+    var checkedMeasures = []; var attribGrid, geoGrid, personaForm;
+    var lastGroupId = 0;
+    helpTopic = "MeasureCreate";
+
+    /***************/
+    //Framework functions
+    function pageExit(){
+        return true;
+    }
+
+    function thisPageRender() {
+        workarea.progressOn();
+        cachedMeasureMap.initialize();
+
+        var personaBuilder = workarea.attachLayout('3W', 'dhx_web');
+        var personaLeft = personaBuilder.cells('a');
+        var personaTools = personaBuilder.cells('b');
+        var personaRight = personaBuilder.cells('c');
+
+        personaLeft.setWidth((workarea.getWidth() - 100)/2);
+        personaTools.setWidth(100);
+        personaTools.fixSize(true);
+        personaRight.setWidth((workarea.getWidth() - 100) / 2);
+        personaLeft.setText('Measures');
+        personaTools.hideHeader();
+        personaRight.setText('Selected Measures');
+        personaTools.attachObject('MeasureTools');
+        personaRight.attachObject('SelectedMeasures');
+
+        measureTabs = personaLeft.attachTabbar();
+        measureTabs.addTab(tabNames.audience, "Audience", "100px");
+        measureTabs.addTab(tabNames.inventory, "Inventory", "100px");
+        measureTabs.addTab(tabNames.geo, "Geo", "100px");
+        measureTabs.attachEvent('onSelect', changeTabHandler);
+        measureTabs.setTabActive(tabNames.audience);
+
+        attribGrid = measureTabs.cells(tabNames.audience).attachGrid();
+        attribGrid.setHeader("Search Filter");
+        attribGrid.attachHeader("#text_filter");
+        attribGrid.selMultiRows = true;
+        attribGrid.setInitWidths("*");
+        attribGrid.setColTypes("tree");
+        attribGrid.enableMarkedCells = true;
+        attribGrid.enableTreeCellEdit(false);
+        attribGrid.enableMultiselect(true); 
+        attribGrid.attachEvent("onRowDblClicked", doubleClickHandlerAttrib);
+
+        attribGrid.init();
+        attribGrid.setSkin("dhx_web");
+        var measuresUri = './api/data/measures.xml?mode=tree&depth=15&company=' + getQueryString()['advertiser']
+                            + '&campaign=' + getQueryString()['campaign'] + '&exclude=old,' + invMeasures.join(',') + ',' + geoMeasures.join(',');
+        attribGrid.kidsXmlFile = measuresUri;
+        attribGrid.loadXML(measuresUri);
+
+        measureTabs.cells(tabNames.inventory).attachObject('InventoryTabDiv');
+        attachInventoryTab(measureTabs.cells(tabNames.inventory));
+        attachGeoTab(measureTabs.cells(tabNames.geo));
+
+        addTools();
+        addHeaderBar();
+
+        var toolHeight = document.getElementById('FormDiv').clientHeight;
+        document.getElementById('GridDiv').style.height = (personaRight.getHeight() - 52 - toolHeight).toString() + 'px';
+
+        loadSavedMeasureInfoSet();
+        workarea.progressOff();
+    }
+
+    function addAudience() {
+        addFromGrid(attribGrid)
+    }
+
+    function addGeo() {
+        addFromGrid(geoGrid);
+    }
+
+    function addFromGrid(grid) {
+        var rowIds = grid.getSelectedRowId().split(',');
+        for (var rowId in rowIds) {
+            doubleClickHandler(grid, rowIds[rowId]);
+        }
+        grid.clearSelection();
+    }
+
+    function addInventory() {
+        var measureId = 0 
+        var invOption = tabForms[tabHandler.name].getItemValue('option');
+        switch (invOption) {
+            case 'domainRadio':
+                measureId = tabForms[tabHandler.name].getItemValue('domainList');
+                break;
+            case 'pageRadio':
+                measureId = tabForms[tabHandler.name].getItemValue('pageList');
+                break;
+        }
+        for (var measure in measureId) {
+            if (addMeasure(measureId[measure], '', false)) {
+                $RCUI.isDirty = true;
+            }
+        }
+    }
+
+    // adds form to the top of the measure table
+    function addHeaderBar() {
+        var formJSON = [
+            { type: "button", name: "unGroupSubmit", width: 80, value: 'Ungroup' },
+            { type: "newcolumn", offset: 0 },
+            { type: "button", name: "groupSubmit", width: 80, value: 'Group' },
+            { type: "newcolumn", offset: 0 },
+			{ type: "input", name: 'groupName', label: '', value: '' },
+            { type: "newcolumn", offset: 100 },
+            { type: "button", name: "campaignSubmit", width: 110, value: 'Save Measures' }
+            ];
+        measureForm = new dhtmlXForm("gridForm");
+        measureForm.setSkin("dhx_web");
+        measureForm.enableLiveValidation(true);
+        measureForm.loadStruct(formJSON, 'json');
+        measureForm.attachEvent("onButtonClick", buttonSaveMeasures);
+    }
+
+    function addMeasure(newMeasure, group, isPinned) {
+        var MeasureInfoSet = getMeasureInfoSetFromCampaign(cClient);
+        var measureList = MeasureInfoSet.Measures;
+
+        //now if new measure check behavior
+        var modifiedMeasure = modifyMeasureForBehavior(makeMeasure(newMeasure, group, isPinned));
+
+        //now check if new
+        var isNewMeasure = true;
+        for (var measure in measureList) {
+            if (measureList[measure].measureId == newMeasure) {
+                isNewMeasure = false;
+                break;
+            }
+        }
+
+        if (isNewMeasure && modifiedMeasure != null) { //now add to campaign
+            if (measureList == undefined) { measureList = []; }
+            measureList.push(modifiedMeasure);
+            MeasureInfoSet.Measures = measureList;
+            setMeasureInfoSet(cClient, MeasureInfoSet);
+            $RCUI.isDirty = true;
+        }
+        return isNewMeasure;
+    }
+
+    //adds measure to selected measures table
+    function addRow(newRowId, isPinned, groupName, displayName) {
+        var measureGrid = document.getElementById("SelectedMeasureGrid");
+        var rowHTML;
+        if (groupName == '') { // this measure is not in a group
+            rowHTML = '<td class="colOne"><input type="checkbox" onclick="checkAction(this.id, this.checked)" id="' + newRowId + '" /></td><td class="{0}"><table style="width:100%;font:inherit"><tr><td class="{1}" onclick="toggle(this)" id="{3}"></td><td>{2}</td></tr></table></td>'.format(isPinned ? 'Pinned' : 'UnPinned', isPinned ? 'closed' : 'open', displayName, newRowId);
+            var newRow = document.createElement('tr');
+            newRow.innerHTML = rowHTML;
+            measureGrid.appendChild(newRow);
+        }
+        else {
+            var groupTable = document.getElementById('g_' + groupName);
+            if (groupTable == null) {
+                var newRow = document.createElement('tr');
+                rowHTML = '<td class="colOne"></td><td class="{0}"><table style="width:100%;font:inherit" id="g_{2}"><tr><td class="{1}" onclick="toggle(this)" id="{3}"></td><td colspan="2">{2} (one of these)</td></tr></table></td>'.format(isPinned ? 'Pinned' : 'UnPinned', isPinned ? 'closed' : 'open', groupName, newRowId);
+                newRow.innerHTML = rowHTML;
+                measureGrid.appendChild(newRow);
+                groupTable = document.getElementById('g_' + groupName);
+            }
+            newRow = document.createElement('tr');
+            rowHTML = '<td></td><td class="colOne"><input onclick="checkAction(this.id, this.checked)" type="checkbox" id="' + newRowId + '" /></td><td>{0}</td>'.format(displayName);
+            newRow.innerHTML = rowHTML;
+            groupTable.appendChild(newRow);
+        }
+    }
+
+    // add selected measure to the group provided
+    function addToGroup(groupName) {
+        var MeasureInfoSet = getMeasureInfoSetFromCampaign(cClient);
+        var measureList = MeasureInfoSet.Measures;
+
+        //check to see if group exists and is pinned
+        var isPinned = false;
+        if (groupName != '') {
+            for (var measure in measureList) {
+                if (measureList[measure].group == groupName) {
+                    isPinned = measureList[measure].pinned; //only need the first one
+                    break;
+                }
+            }
+        }
+        for (var id in checkedMeasures) {
+            var modifiedMeasure = modifyMeasureForBehavior(makeMeasure(checkedMeasures[id], groupName, isPinned));
+            if (modifiedMeasure != null) {
+                for (var measure in measureList) {
+                    if (measureList[measure].measureId == checkedMeasures[id]) {
+                        measureList[measure].group = modifiedMeasure.group;
+                        measureList[measure].pinned = modifiedMeasure.pinned;
+                        break;
+                    }
+                }
+            }
+            else {
+                $RCUI.debugReport.record("this measure cannot be grouped");
+            }
+        }
+        checkedMeasures = [];
+        MeasureInfoSet.Measures = measureList;
+        setMeasureInfoSet(cClient, MeasureInfoSet);
+        reloadSelectedMeasures();
+    }
+
+    //add tools to center pane
+    function addTools() {
+        /*      var toolGrid = document.getElementById("toolGrid");
+        var newRow = document.createElement('tr');
+        var rowHTML = '<td><div id="toolForm" /></td>'
+        newRow.innerHTML = rowHTML;
+        toolGrid.appendChild(newRow);
+        */
+        var formJSON = [
+            { type: "button", name: "add", width: 75, value: ' >>' },
+            { type: "label", name:'label', label: '' },
+            { type: "button", name: "remove", width: 75, value: '<< ' },
+            ];
+        var toolForm = new dhtmlXForm("toolForm");
+        toolForm.setSkin("dhx_web");
+        toolForm.loadStruct(formJSON, 'json');
+        toolForm.attachEvent("onButtonClick", buttonToolClick);
+    }
+
+    function attachGeoTab(geoTab) {
+        geoGrid = geoTab.attachGrid();
+        geoGrid.setHeader("Search Filter");
+        geoGrid.attachHeader("#text_filter");
+        geoGrid.selMultiRows = true;
+        geoGrid.setInitWidths("*");
+        geoGrid.setColTypes("tree");
+        geoGrid.enableMarkedCells = true;
+        geoGrid.enableTreeCellEdit(false);
+        geoGrid.enableMultiselect(true);
+        geoGrid.attachEvent("onRowDblClicked", doubleClickHandlerGeo);
+        geoGrid.init();
+        geoGrid.setSkin("dhx_web");
+        var measuresUri = './api/data/measures.xml?mode=tree&depth=10&company=' + getQueryString()['advertiser']
+                            + '&campaign=' + getQueryString()['campaign'] + '&include=' + geoMeasures.join(',');
+        geoGrid.kidsXmlFile = measuresUri;
+        geoGrid.loadXML(measuresUri);
+    }
+
+    function attachInventoryTab(invTab) {
+        var fieldWidth = (workarea.getWidth() - 100)/2.5;
+        var formJson = [
+            { type: "settings", position: "label-right" },
+            { type: 'block', name:'domainBlock', list: [
+                { type: 'radio', name:'option', value: 'domainRadio' },
+                { type: 'newcolumn' },
+                { type: 'fieldset', name: 'domainFields', width: fieldWidth, label: 'Domain Lists', disabled: true, list: [
+                    { type: "multiselect", name: 'domainList', height: 100, options: getDomainListMeasures() }
+                ]
+                }
+                ]
+            },
+            { type: 'block', name: 'pageBlock', list: [
+                { type: 'radio', name: 'option', value: 'pageRadio' },
+                { type: 'newcolumn' },
+                { type: 'fieldset', name: 'pageFields', width: fieldWidth, label: 'Page Location', disabled: true, list: [
+                    { type: "multiselect", name: 'pageList', height: 100, width: 300, options: getPositionMeasures() }
+                ]}
+                ]
+            }
+            ];
+
+        var invForm = invTab.attachForm();
+        invForm.setSkin("dhx_web");
+        invForm.enableLiveValidation(true);
+        invForm.loadStruct(formJson, 'json');
+        invForm.attachEvent("onChange", function (id, value, isChecked) {
+            switch (value) {
+                case 'domainRadio':
+                    disableFieldsets(invForm);
+                    invForm.enableItem('domainFields');
+                    break;
+                case 'pageRadio':
+                    disableFieldsets(invForm);
+                    invForm.enableItem('pageFields');
+                    break;
+            }
+        });
+        tabForms[tabNames.inventory] = invForm;
+    }
+
+    //save button handler
+    function buttonSaveMeasures(buttonName) {
+        switch (buttonName) {
+            case 'campaignSubmit':
+                workarea.progressOn();
+                var savedMeasureInfoSet = getMeasureInfoSetFromCampaign(cClient);
+                savedMeasureInfoSet.IdealValuation = CalculatePersonaValuation(savedMeasureInfoSet.Measures);
+                savedMeasureInfoSet.MaxValuation = savedMeasureInfoSet.IdealValuation;
+                setMeasureInfoSet(cClient, savedMeasureInfoSet);
+                if (cClient.Save()) {
+                    workarea.progressOff();
+                }
+                else {
+                    workarea.progressOff();
+                    window.location = window.location;
+                }
+                break;
+        case 'groupSubmit':
+            var groupName = measureForm.getItemValue('groupName');
+            if (groupName == '') { groupName = "Group"; }
+            addToGroup(groupName);
+            break;
+        case 'unGroupSubmit':
+            addToGroup('');
+            break;
+        }
+    }
+
+    //tool buttons handler
+    function buttonToolClick(buttonName) {
+        switch (buttonName) {
+            case 'add':
+                tabHandler.add();
+                break;
+        case 'remove':
+            for (var measure in checkedMeasures) {
+                removeMeasureFromCampaign(checkedMeasures[measure]);
+            }
+            checkedMeasures = []; //reset checked measures
+            break;
+        }
+        reloadSelectedMeasures();
+    }
+
+    function CalculatePersonaValuation(measures) {
+        var aveCPM = parseFloat(cClient.Get("CPM"));
+        var tierCount = getTierCount(measures) - 1;
+        return Math.round(tierCount * (aveCPM + .50) / 2.5 * 100) / 100;
+    }
+
+    function changeTabHandler(id) {
+        var addFunction = tabAddHandlers[id];
+        tabHandler = { 'form': '', 'name': id, 'add': addFunction };
+        return true;
+    }
+
+    //handler for check box toggling on selected measures table
+    function checkAction(id, value) {
+        if (value) {
+            checkedMeasures.push(id);
+        }
+        else {
+            for (var index in checkedMeasures) {
+                if (checkedMeasures[index] == id) {
+                    checkedMeasures.splice(index, 1);
+                    break;
+                }
+            }
+        }
+    }
+
+    //clears the selected measures table
+    function clearSelectedMeasures() {
+        document.getElementById("SelectedMeasureGrid").innerHTML = '';
+    }
+
+    function disableFieldsets(sourceForm) {
+        sourceForm.forEachItem(function (id) {
+            if (sourceForm.getItemType(id).toLowerCase() == 'fieldset') {
+                sourceForm.disableItem(id);
+            }
+        });
+    }
+
+    //handles double click in tree grid
+    function doubleClickHandler(grid, rowId) {
+        if (grid.hasChildren(rowId) > 0) { return false; }
+        var measureId = rowId;
+        if (addMeasure(measureId, '', false)) {
+            $RCUI.isDirty = true;
+            reloadSelectedMeasures();
+        }
+    }
+
+    function doubleClickHandlerGeo(rowId) {
+        doubleClickHandler(geoGrid, rowId)
+    }
+
+    function doubleClickHandlerAttrib(rowId) {
+        doubleClickHandler(attribGrid, rowId)
+    }
+
+    function getDomainListMeasures(isInclude) { //returns form JSON for the check boxes for page position
+        var filter = 'domainlist';
+        cachedMeasureMap.loadByFilter(filter);
+        var dlMeasures = cachedMeasureMap.toDictionary();
+        var dlFormJson = [];
+        for (var measure in dlMeasures) {
+            var pickThisClude = true; // isInclude && dlMeasures[measure].APNXId.toString().indexOf('Include') == 0;
+            if (dlMeasures[measure].type == filter && pickThisClude) {
+                dlFormJson.push({
+                    value: measure,
+                    text: dlMeasures[measure].displayName
+                });
+            }
+        }
+        return dlFormJson;
+    }
+
+    function getPositionMeasures() { //returns form JSON for the check boxes for page position
+        var filter = 'Position';
+        cachedMeasureMap.loadByFilter(filter);
+        var positionMeasures = cachedMeasureMap.toDictionary();
+        var positionFormJson = [];
+        for (var measure in positionMeasures) {
+            if (positionMeasures[measure].type == filter) {
+                positionFormJson.push({
+                    value: measure,
+                    text: positionMeasures[measure].displayName
+                });
+            }
+        }
+        return positionFormJson;
+    }
+
+    //fills the selected measure grid and Valuations if there is a saved measure set. 
+    function loadSavedMeasureInfoSet() {
+        var savedMeasureInfoSet = getMeasureInfoSetFromCampaign(cClient);
+        if (savedMeasureInfoSet == undefined) {
+            return; //do nothing if no MeasureInfoSet
+        }
+
+        var MeasureInfoSet = savedMeasureInfoSet.Measures.sort(function (a, b) { return b.pinned - a.pinned });
+        for (var i = 0; i < MeasureInfoSet.length; i++) {
+            var rowId = MeasureInfoSet[i].measureId;
+            var pin = (MeasureInfoSet[i].pinned) ? 1 : 0;
+            var group = MeasureInfoSet[i].group;
+            addRow(rowId, pin, group, getMeasureDisplayName(rowId));
+        }
+    }
+
+    function makeMeasure(measureId, group, isPinned) {
+        return { 'measureId': measureId,
+            'group': group == undefined ? '' : group,
+            'valuation' : 50,
+            'pinned': isPinned
+        };
+    }
+
+    function modifyMeasureForBehavior(measure) {
+        //MutX == mutually exclusive, must be in an or-group
+        //Req == required, must always be pinned
+        //Max1 == max one from this group name, 
+        var measureList = getMeasuresFromCampaign(cClient);
+        var measureTypeBehavior = [{ Type: 'position', GroupName: 'Page Position', Behavior: ['MutX'] },
+            { Type: 'domainlist', GroupName: 'Domain Lists', Behavior: ['Req', 'Max1'] },
+            { Type: 'geotargeting', GroupName: 'Geo', Behavior: ['MutX'] }
+            ];
+        var measureType = cachedMeasureMap.Get(measure.measureId).type.toLowerCase();
+        var isSafeToAdd = true;
+        for (var behavior in measureTypeBehavior) {
+            if (measureTypeBehavior[behavior].Type == measureType) {
+                for (var behaviorType in measureTypeBehavior[behavior].Behavior) {
+                    if (measureTypeBehavior[behavior].Behavior[behaviorType] == 'MutX') {
+                        measure.group = measureTypeBehavior[behavior].GroupName;
+                    }
+                    if (measureTypeBehavior[behavior].Behavior[behaviorType] == 'Req') {
+                        measure.pinned = true;
+                    }
+                    if (measureTypeBehavior[behavior].Behavior[behaviorType] == 'Max1') {
+                        var matchingMeasure = jsonPath(measureList, '$.[?(@.group == "' + measureTypeBehavior[behavior].GroupName + '")]');
+                        measure.group = measureTypeBehavior[behavior].GroupName;
+                        if (matchingMeasure) {
+                            //should not allow this to be added 
+                            isSafeToAdd = false;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        if (!isSafeToAdd) { return null; }
+        return measure;
+    }
+
+    //refreshes selected measures to match cClient
+    function reloadSelectedMeasures() {
+        clearSelectedMeasures();
+        loadSavedMeasureInfoSet();
+        var measureList = getMeasuresFromCampaign(cClient);
+        var numUnpinnedSingleMeasures = jsonPath(measureList, '$.[?(@.group == "" && @.pinned == false)]').length;
+        var groupNames = [];
+        var groupMultiplier = 1;
+        for (var measure in measureList) {
+            if (measureList[measure].group != '') {
+                var measureInGroupNames = false;
+                for (var group in groupNames) {
+                    if (groupNames[group] == measureList[measure].group) { //already added
+                        measureInGroupNames = true;
+                        break;
+                    };
+                }
+                if (!measureInGroupNames) {
+                    groupNames.push(measureList[measure].group)
+                }
+            }
+        }
+
+        for (var group in groupNames) {
+            var unPinnedGroup = jsonPath(measureList, '$.[?(@.group == "' + groupNames[group] + '" && @.pinned == false)]');
+            if (unPinnedGroup) { groupMultiplier = groupMultiplier * (unPinnedGroup.length + 1); }
+            else { groupMultiplier = groupMultiplier * jsonPath(measureList, '$.[?(@.group == "' + groupNames[group] + '" && @.pinned == true)]').length; }
+        }
+
+        var nodeCount = Math.pow(2, numUnpinnedSingleMeasures) * groupMultiplier - 1;
+        $RCUI.debugReport.record('Node Count: ' + nodeCount);
+    }
+
+    function removeMeasureFromCampaign(measure) {
+        var campaignMeasureList = getMeasuresFromCampaign(cClient);
+        for (var campaignMeasure in campaignMeasureList) {
+            if (campaignMeasureList[campaignMeasure].measureId == measure) {
+                campaignMeasureList.splice(campaignMeasure, 1);
+                break;
+            }
+        }
+
+        var campaignMeasureInfoSet = getMeasureInfoSetFromCampaign(cClient);
+        campaignMeasureInfoSet.Measures = campaignMeasureList;
+        setMeasureInfoSet(cClient, campaignMeasureInfoSet);
+    }
+
+    function setPinState(measureId, pinned) {
+        var MeasureInfoSet = getMeasureInfoSetFromCampaign(cClient);
+        var measureList = MeasureInfoSet.Measures;
+        var measure;
+        //find measure in MeasureInfoSet
+        for (measure in measureList) {
+            if (measureList[measure].measureId == measureId) { break }
+        }
+
+        var modifiedMeasure = modifyMeasureForBehavior(makeMeasure(measureId, measureList[measure].group, pinned));
+        if (modifiedMeasure != null) {
+            var groupNameOfMeasure = modifiedMeasure.group;
+            pinned = modifiedMeasure.pinned;
+            if (groupNameOfMeasure == '') {
+                measureList[measure].pinned = pinned;
+            }
+            else {
+                for (var measure in measureList) {
+                    if (measureList[measure].group == groupNameOfMeasure) {
+                        measureList[measure].pinned = pinned;
+                    }
+                }
+            }
+            MeasureInfoSet.Measures = measureList;
+            setMeasureInfoSet(cClient, MeasureInfoSet);
+        }
+        else {
+            $RCUI.debugReport.record("the pin state cannot be altered for this measure");
+        }
+    }
+        
+    function toggle(srcRow) {
+        srcRow.className = srcRow.className == 'closed' ? 'open' : 'closed';
+        var outerCell = srcRow;
+        while (outerCell.className.toString().indexOf("Pinned") == -1) {
+            outerCell = outerCell.parentNode;
+        }
+        outerCell.className = srcRow.className == 'closed' ? 'Pinned' : 'UnPinned';
+        setPinState(srcRow.id, srcRow.className == 'closed');
+        reloadSelectedMeasures();
+    }   
+  </script>
+  <style type="text/css">
+  .colOne {width:30px;vertical-align:top;}
+  .Pinned {vertical-align:top;border:1px solid #880000}
+  .UnPinned {vertical-align:top;border:1px solid #ffffff}
+  .closed {width:30px; background-image:url('/images/padlock-closed.png'); background-repeat:no-repeat;}
+  .open {width:30px; background-image:url('/images/padlock-open.png'); background-repeat:no-repeat;}
+  </style>
+</head>
+<body onload="pageRender(thisPageRender);">
+<div id="MeasureTools" style="display:none;height:100%">
+    <table id="toolGrid" style="height:100%;font-size:12px" ><tr><td><div id="toolForm"></div></td></tr></table>
+</div>
+
+<div id="SelectedMeasures" style="display:none;height:100%;width:100%;" >
+    <div id="FormDiv" style="width:100%">
+        <table id="FormGrid" style="width:100%;font-size:12px"><td colspan="2"><div id="gridForm" /></td></table>
+    </div>
+    <div id="GridDiv" style="overflow-y:auto;">
+        <table id="SelectedMeasureGrid" style="width:100%;font-size:12px"></table>
+    </div>    
+</div>
+<div id="InventoryTabDiv" style="display:none;height:100%" ></div>
+</body>
+</html>

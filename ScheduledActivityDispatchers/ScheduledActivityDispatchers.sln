@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScheduledActivityDispatchersUnitTests", "ScheduledActivityDispatcherFixture\ScheduledActivityDispatchersUnitTests.csproj", "{139EC958-7BBE-4865-824C-EE6701C22B19}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BD62B3E6-5F1A-4661-8B37-251807ADD52C}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		ScheduledActivityDispatchers.vsmdi = ScheduledActivityDispatchers.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicAllocationActivityDispatchers", "DynamicAllocationActivityDispatchers\DynamicAllocationActivityDispatchers.csproj", "{21CB6625-BB33-4684-9FE4-F254D64B9AD1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicAllocationActivityDispatchersUnitTests", "DynamicAllocationActivityDispatchersUnitTests\DynamicAllocationActivityDispatchersUnitTests.csproj", "{B2ED75DC-D3AF-4C3A-84BA-593B736AE4F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveryNetworkActivityDispatchers", "ExportActivityDispatchers\DeliveryNetworkActivityDispatchers.csproj", "{C82DE817-CFAB-425D-BF19-B04FE48C6DA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveryNetworkActivityDispatchersUnitTests", "ExportActivityDispatchersUnitTests\DeliveryNetworkActivityDispatchersUnitTests.csproj", "{BA74E144-4140-4567-B9B7-994DEA179EBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScheduledActivityDispatchersTestHelpers", "ScheduledActivityDispatchersTestHelpers\ScheduledActivityDispatchersTestHelpers.csproj", "{2BE6E9C3-292D-4AC1-96EF-31A0DE0F7446}"
+EndProject
+Global
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = ScheduledActivityDispatchers.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{139EC958-7BBE-4865-824C-EE6701C22B19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{139EC958-7BBE-4865-824C-EE6701C22B19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{139EC958-7BBE-4865-824C-EE6701C22B19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{139EC958-7BBE-4865-824C-EE6701C22B19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21CB6625-BB33-4684-9FE4-F254D64B9AD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21CB6625-BB33-4684-9FE4-F254D64B9AD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21CB6625-BB33-4684-9FE4-F254D64B9AD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21CB6625-BB33-4684-9FE4-F254D64B9AD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2ED75DC-D3AF-4C3A-84BA-593B736AE4F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2ED75DC-D3AF-4C3A-84BA-593B736AE4F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2ED75DC-D3AF-4C3A-84BA-593B736AE4F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2ED75DC-D3AF-4C3A-84BA-593B736AE4F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C82DE817-CFAB-425D-BF19-B04FE48C6DA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C82DE817-CFAB-425D-BF19-B04FE48C6DA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C82DE817-CFAB-425D-BF19-B04FE48C6DA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C82DE817-CFAB-425D-BF19-B04FE48C6DA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA74E144-4140-4567-B9B7-994DEA179EBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA74E144-4140-4567-B9B7-994DEA179EBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA74E144-4140-4567-B9B7-994DEA179EBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA74E144-4140-4567-B9B7-994DEA179EBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BE6E9C3-292D-4AC1-96EF-31A0DE0F7446}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BE6E9C3-292D-4AC1-96EF-31A0DE0F7446}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BE6E9C3-292D-4AC1-96EF-31A0DE0F7446}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BE6E9C3-292D-4AC1-96EF-31A0DE0F7446}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

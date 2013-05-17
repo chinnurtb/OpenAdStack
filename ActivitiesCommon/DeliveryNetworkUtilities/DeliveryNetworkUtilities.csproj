@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{43539841-33D7-477C-BC61-4CBB07E0FDEF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DeliveryNetworkUtilities</RootNamespace>
+    <AssemblyName>DeliveryNetworkUtilities</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ConfigManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Common\Public\bin\Debug\ConfigManager.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAccessLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DataAccessLayer\Public\bin\Debug\DataAccessLayer.dll</HintPath>
+    </Reference>
+    <Reference Include="Diagnostics, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Common\Public\bin\Debug\Diagnostics.dll</HintPath>
+    </Reference>
+    <Reference Include="DynamicAllocationEngine, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DynamicAllocation\Public\bin\Debug\DynamicAllocationEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="DynamicAllocationEngine.Measures, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DynamicAllocation\Public\bin\Debug\DynamicAllocationEngine.Measures.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Utilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Common\Public\bin\Debug\Utilities.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CampaignExporterBase.cs" />
+    <Compile Include="DeliveryNetworkActivityValues.cs" />
+    <Compile Include="DeliveryNetworkClientBase.cs" />
+    <Compile Include="DeliveryNetworkClientFactory.cs" />
+    <Compile Include="DeliveryNetworkEntityProperties.cs" />
+    <Compile Include="DeliveryNetworkExporterBase.cs" />
+    <Compile Include="DeliveryNetworkExporterException.cs" />
+    <Compile Include="DeliveryNetworkSchedulerRegistries.cs" />
+    <Compile Include="DeliveryNetworkEntityExtensions.cs" />
+    <Compile Include="CreativeType.cs" />
+    <Compile Include="GenericDeliveryNetworkClientFactory.cs" />
+    <Compile Include="IDeliveryNetworkClient.cs" />
+    <Compile Include="IDeliveryNetworkClientFactory.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EntityUtilities\EntityUtilities.csproj">
+      <Project>{F4633DC5-9115-43FE-BF35-D399BE0B8C1D}</Project>
+      <Name>EntityUtilities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(SolutionDir)..\build\common.proj" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="ProjectBeforeBuild">
+  </Target>
+  <Target Name="ProjectAfterBuild">
+  </Target>
+  -->
+</Project>

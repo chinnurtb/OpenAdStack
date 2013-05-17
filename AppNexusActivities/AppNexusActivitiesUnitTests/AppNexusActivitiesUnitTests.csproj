@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{60487DD6-BCCE-4C37-B21C-EB709E1E80E4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AppNexusActivitiesUnitTests</RootNamespace>
+    <AssemblyName>AppNexusActivitiesUnitTests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Activities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Queuing\Public\bin\Debug\Activities.dll</HintPath>
+    </Reference>
+    <Reference Include="AppNexusUtilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ActivitiesCommon\Public\bin\Debug\AppNexusUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="ConfigManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Common\Public\bin\Debug\ConfigManager.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAccessLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\DataAccessLayer\Public\bin\Debug\DataAccessLayer.dll</HintPath>
+    </Reference>
+    <Reference Include="DataServiceUtilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Public\bin\Debug\DataServiceUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="DeliveryNetworkUtilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ActivitiesCommon\Public\bin\Debug\DeliveryNetworkUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Diagnostics, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Common\Public\bin\Debug\Diagnostics.dll</HintPath>
+    </Reference>
+    <Reference Include="DynamicAllocationEngine, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\DynamicAllocation\Public\bin\Debug\DynamicAllocationEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="DynamicAllocationEngine.Measures, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DynamicAllocation\Public\bin\Debug\DynamicAllocationEngine.Measures.dll</HintPath>
+    </Reference>
+    <Reference Include="DynamicAllocationTestUtilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ActivitiesCommon\Public\bin\Debug\DynamicAllocationTestUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="DynamicAllocationUtilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ActivitiesCommon\Public\bin\Debug\DynamicAllocationUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityActivities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\EntityActivities\Public\bin\Debug\EntityActivities.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityTestUtilities">
+      <HintPath>..\..\EntityActivities\Public\bin\Release\EntityTestUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityUtilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ActivitiesCommon\Public\bin\Debug\EntityUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=4.0.6.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\External\Public\bin\Debug\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="ResourceAccess, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Public\bin\Debug\ResourceAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhino.Mocks, Version=3.6.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\External\Public\bin\Debug\Rhino.Mocks.dll</HintPath>
+    </Reference>
+    <Reference Include="ScheduledActivities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Scheduling\Public\bin\Debug\ScheduledActivities.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.XML" />
+    <Reference Include="TestUtilities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=79dd387e3641c5af, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Public\bin\Debug\TestUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Utilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Common\Public\bin\Debug\Utilities.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppNexusMeasureSourcesFixture.cs" />
+    <Compile Include="GetAdvertisersActivityFixture.cs" />
+    <Compile Include="RequestCampaignReportFixture.cs" />
+    <Compile Include="DeleteLineItemFixture.cs" />
+    <Compile Include="EntityExtensionsFixture.cs" />
+    <Compile Include="ExportCreativeFixture.cs" />
+    <Compile Include="ExportDynamicAllocationCampaignFixture.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReallocateNowFixture.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AppNexusActivities\AppNexusActivities.csproj">
+      <Project>{8CA32883-A5B1-4EE5-915A-23C7F3BE1401}</Project>
+      <Name>AppNexusActivities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AppNexusClient\AppNexusClient.csproj">
+      <Project>{6E1CDD95-E15B-49BC-BA4E-4CE83941AFA9}</Project>
+      <Name>AppNexusClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AppNexusMeasures\AppNexusMeasures.csproj">
+      <Project>{80EC7F36-FD48-48A7-9936-BE15EF8BD72C}</Project>
+      <Name>AppNexusMeasures</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\creative-formats.js" />
+    <EmbeddedResource Include="Resources\creative-templates.js" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)..\build\common.proj" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="ProjectBeforeBuild">
+  </Target>
+  <Target Name="ProjectAfterBuild">
+  </Target>
+  -->
+</Project>

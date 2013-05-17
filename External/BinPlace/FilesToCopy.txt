@@ -1,0 +1,24 @@
+#
+# List of files to copy to Public\bin\$(Configuration)
+#
+# Paths are relative to $(SolutionDir)
+# To specify a subfolder destination use "|" followed by the folder name
+# Example:
+# Stuff\*.xml|XML Stuff
+#
+
+xsd.exe
+WCF REST Starter Kit Preview 2\*.dll
+Json45r7\Bin\Net40\Newtonsoft.Json.*
+Rhino Mocks\3.6\Rhino.Mocks.*
+OpenXml\DocumentFormat.OpenXml.dll
+MS Enterprise Library\*.dll
+FedUtil\FedUtil.*
+Selenium\*.dll
+WatiN\lib\net40\*.dll
+NUnit 2.5.10\bin\net-2.0\framework|NUnit
+DopplerAgent\doppleragent\Doppler.TraceListeners.*
+dfpapi_dotnet_lib_v4.6.0\lib\*
+openssl-1.0.1c\*.dll
+Stripe\*.dll
+

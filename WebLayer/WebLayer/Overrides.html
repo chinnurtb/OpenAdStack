@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Campaign Page</title>
+        <link rel="stylesheet" type="text/css" href="./dhtml/codebase/dhtmlx.css" /> 
+        <link rel="stylesheet" type="text/css" href="./dhtml/codebase/dhtmlx_custom.css" /> 
+        <link rel="stylesheet" type="text/css" href="./css/basestyle.css" /> 
+        
+        <script type="text/javascript" src="./scripts/GlobalObjects.js"></script>
+        <script type="text/javascript" src="./scripts/Visualization.js"></script>
+
+        <script type="text/javascript" src="./scripts/wizardlayout.js"></script>
+        <script type="text/javascript" src="./scripts/CampaignUtils.js"></script>
+
+ <!-- Page Specific Scripts -->
+    <script type="text/javascript">
+        var panes;
+        var campaignData;
+        var visualizerObject;
+        helpTopic = "NodeOverride";
+
+        function pageExit() {
+            if ($RCUI.isDirty) {
+                updateCampaignWithNewOverrides();
+            }
+        }
+
+        function thisPageRender() {
+            workarea.progressOn();
+
+            //Get campaign data needed
+            //TODO: Definitely should be async vs serial here.
+            var calculatedValuationList = getCalculatedValuationList($RCUI.advertiser, $RCUI.campaign);
+            campaignData = {
+                Measures: getMeasureInfoSetFromCampaign(cClient), 
+                NodeValuations: cClient.Get("NodeValuationSet"),
+                Valuations: calculatedValuationList.Valuations.NodeValuationSet.sort(sortByTier)
+            };
+
+            panes = loadPanes(workarea);
+            initListArea(panes.MeasurePane);
+            initGraph(panes.VisualPane);
+            
+            //If no node overrides have been entered
+            if (campaignData.NodeValuations.length == 0) {
+                showMandatoryMeasureWindow();
+            }
+
+            addNodeOverrideForm();
+            visualizerObject = new visualizer(document.getElementById('DataCanvas'), document.getElementById('HighlightCanvas'),
+                document.getElementById('ClickCanvas'),
+                writeNodeInfo,
+                panes.VisualPane.getHeight() - 50, 
+                panes.VisualPane.getWidth() - 25);
+            visualizerObject.ShowValuationGraph(campaignData.Valuations, sortByTier, getValuationCalcTypeColor);
+            visualizerObject.ShowGraphHighlights(campaignData.Valuations, sortByTier, getHighlightColor);
+            workarea.progressOff();
+        }
+
+        function writeNodeInfo(selectedNode) {
+            visualizerObject.ShowLineage(campaignData.Valuations, sortByTier, getLineageColor, selectedNode);
+            var messageObject = document.getElementById("NodeInfo");
+            var valuationList = campaignData.Valuations;
+            var overrideIndex = nodeOverrideIndex(valuationList[selectedNode].MeasureSet);
+            var nodeValuation = overrideIndex == -1 ? valuationList[selectedNode] : campaignData.NodeValuations[overrideIndex];
+            messageObject.innerHTML = generateMeasuresListHTML(nodeValuation.MeasureSet);
+
+            overrideFrom.setItemValue('MaxValuation', parseFloat(nodeValuation.MaxValuation).toFixed(2));
+            overrideFrom.setItemValue('IdealValuation', nodeValuation.IdealValuation != undefined ? parseFloat(nodeValuation.IdealValuation).toFixed(2) : (parseFloat(nodeValuation.MaxValuation) * .8).toFixed(2));
+        }
+
+        var recommendNodeList = [];
+        function showMandatoryMeasureWindow() {
+        //determine the size and contents of the recommendation list
+            var tupleSize = 3;
+            var numOfRequiredNodes = 8;
+            while (recommendNodeList.length < numOfRequiredNodes && tupleSize < 10) {
+                numOfRequiredNodes++;
+                recommendNodeList = getRequiredOverrideNodes(tupleSize, numOfRequiredNodes);
+                tupleSize++;
+            }
+            prepareWindow();
+        }
+
+        var editWindow;
+        function prepareWindow() {
+            var dwin = new dhtmlXWindows();
+            dwin.setSkin('dhx_web');
+            dwin.createWindow('edit', panes.MeasurePane.getWidth() - 10, 60, 600, 300);
+            
+            editWindow = dwin.window('edit');
+            editWindow.setText("Enter Recommended Overrides");
+
+            showSelectedValuation();
+            editWindow.attachObject(document.getElementById('editForm'));
+            editWindow.show();
+        }
+
+        function generateMeasuresListHTML(measureList) {
+            var messageText = '<table cellspacing=0 style="font:tahoma;font-size:12px">';
+            var nodeValuationJson = {'MeasureSet' : [], 'IdealValuation' : 0, 'MaxValuation' : 0}
+            for (var measure in measureList) {
+                messageText += '<tr><td style="border-bottom:1px solid;">' + getMeasureDisplayName(measureList[measure]) + "<\/td><\/tr>";
+                nodeValuationJson.MeasureSet.push(measureList[measure]);
+            }
+            messageText += '<span id="hiddenNodeValuationJson" style="display:none">' + JSON.stringify(nodeValuationJson) + '</span>';
+            messageText += '<\/table>'
+            return messageText;
+        }
+
+        var selectedValuationIndex = 0;
+        function showSelectedValuation() {
+            document.getElementById('idealValuationForm').value = (recommendNodeList[selectedValuationIndex].MaxValuation * .8).toFixed(2);
+            document.getElementById('maxValuationForm').value = recommendNodeList[selectedValuationIndex].MaxValuation.toFixed(2);
+            document.getElementById('editMeasures').innerHTML = generateMeasuresListHTML(recommendNodeList[selectedValuationIndex].MeasureSet);
+            document.getElementById('pageNumber').innerHTML = '(' + (selectedValuationIndex + 1) + ' of ' + recommendNodeList.length +')';
+        }
+
+        function SaveNodeValuation(ideal, max) {
+            $RCUI.isDirty = true;
+            if (ideal != 0 && max != 0) {
+                var newNodeOverride = JSON.parse(document.getElementById('hiddenNodeValuationJson').innerHTML);
+                newNodeOverride.IdealValuation = ideal;
+                newNodeOverride.MaxValuation = max;
+                if (newNodeOverride.MeasureSet.length > 1) { //only do this if this is not a single measure node
+                    var existingOverrideIndex = nodeOverrideIndex(newNodeOverride.MeasureSet);
+                    if (existingOverrideIndex == -1) {
+                        campaignData.NodeValuations.push(newNodeOverride);
+                    }
+                    else { //replace existing node override
+                        campaignData.NodeValuations.splice(existingOverrideIndex, 1, newNodeOverride);
+                    }
+                }
+            }
+        }
+
+        function updateCampaignWithNewOverrides() {
+            workarea.progressOn();
+            cClient.Refresh();
+            cClient.Set("NodeValuationSet", campaignData.NodeValuations);
+            cClient.Save();
+            $RCUI.isDirty = false;
+            workarea.progressOff();
+        }
+
+        function nodeOverrideIndex(testNode){
+            for (var node in campaignData.NodeValuations){
+                if (campaignData.NodeValuations[node].MeasureSet.sort().join(',') == testNode.sort().join(',')){
+                    return node;
+                }
+            }
+            return -1;
+        }
+
+        function nextMeasureSet() {
+            SaveNodeValuation(document.getElementById('idealValuationForm').value, document.getElementById('maxValuationForm').value);
+            visualizerObject.ShowValuationGraph(campaignData.Valuations, sortByTier, getValuationCalcTypeColor);
+            if (selectedValuationIndex < recommendNodeList.length - 1) {
+                selectedValuationIndex++;
+                showSelectedValuation();
+            }
+            else {
+                disableNext();
+            }
+        }
+
+        function addOverride() {
+            SaveNodeValuation(document.getElementById('IValueOver').value, document.getElementById('MValueOver').value);
+        }
+
+        function removeOverride() {
+            $RCUI.isDirty = true;
+            var currentNode = JSON.parse(document.getElementById('hiddenNodeValuationJson').innerHTML)
+            var nodeIndex = nodeOverrideIndex(currentNode.MeasureSet);
+            if (nodeIndex != -1) {
+                campaignData.NodeValuations.splice(nodeIndex, 1);
+            }
+        }
+
+        function disableNext() {
+            editWindow.close();
+        }
+
+        function getRequiredOverrideNodes(tupleSize, numOfRequiredNodes) {
+            // find nodes with the tupleSize number of free floating measures
+            var tierNodeList = jsonPath(campaignData, '$.Valuations[?(@.MeasureSet.length == ' + tupleSize + ')]');
+            var tierNodePlusOneList = jsonPath(campaignData, '$.Valuations[?(@.MeasureSet.length == ' + (tupleSize + 1) + ')]');
+            tierNodeList = tierNodeList.sort(sortByValuations);
+            var coveredTargetPlusOneList = [];
+            var overrideNodes = [];
+            for (var i = 0; i < numOfRequiredNodes; i++) {
+                for (var targetNode in tierNodeList) {
+                    tierNodeList[targetNode].count = 0;
+                    tierNodeList[targetNode].parents = [];
+                    for (var tierPlusOneNode in tierNodePlusOneList) {
+                        if (isChildNodeByNode(tierNodeList[targetNode], tierNodePlusOneList[tierPlusOneNode])) {
+                            if (!isPreviouslyCovered(tierNodePlusOneList[tierPlusOneNode], coveredTargetPlusOneList)) {
+                                tierNodeList[targetNode].count++;
+                                tierNodeList[targetNode].parents.push(tierNodePlusOneList[tierPlusOneNode].MeasureSet.sort().join(','));
+                            }
+                        }
+                    }
+                }
+                overrideNodes.push(tierNodeList.sort(function (a, b) { return b.count - a.count; })[0]);
+                for (var parent in overrideNodes[overrideNodes.length-1].parents) {
+                    coveredTargetPlusOneList.push(overrideNodes[overrideNodes.length-1].parents[parent]);
+                }
+            }
+            return overrideNodes;
+        }
+
+        function isPreviouslyCovered(node, coveredList) {
+            for (var coveredNode in coveredList){
+                if (node.MeasureSet.sort().join(',') == coveredList[coveredNode]) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function getHighlightColor(node) {
+            for (var potentialParentNode in recommendNodeList) {
+                if (isChildNodeByNode(recommendNodeList[potentialParentNode], node)) {
+                    return 'rgb(0,128,255)';
+                }
+                if (node.MeasureSet.join(',') == recommendNodeList[potentialParentNode].MeasureSet.join(',')) {
+                    return 'rgb(255,255,255)';
+                }
+            }
+            return 'rgb(66,66,66)';
+        }
+
+        function getLineageColor(nodeType) {
+            switch (nodeType){
+            case'child':
+                return 'rgb(128,128,0)';
+            case 'parent':
+                return 'rgb(192,192,0)';
+            case 'self':
+                return 'rgb(255,255,0)';
+            default:
+                return 'rgb(255,0,0)';
+                }
+        }
+
+        function getValuationCalcTypeColor(node) {
+            var testNodeId = node.MeasureSet.sort().join(',');
+            var color = 'rgb(0, 0, 0)'
+            for (var explicitNode = 0; explicitNode < campaignData.NodeValuations.length; explicitNode++) {
+                if (testNodeId == campaignData.NodeValuations[explicitNode].MeasureSet.sort().join(',')) { //Exact node match
+                    color = 'rgb(255,255,0)';
+                    break;
+                }
+                if (isChildNodeByNode(campaignData.NodeValuations[explicitNode], node)) {
+                    color = 'rgb(0,128,255)';
+                }
+            }
+            return color;
+        }
+
+        function initListArea(listPane) {
+            listPane.attachObject(document.getElementById('nodePane'));
+        }
+
+        function initGraph(graphPane) {
+            graphPane.attachObject(document.getElementById('canvasesdiv'));
+        }
+
+        function loadPanes(workarea) {
+            var gridPanes = workarea.attachLayout('2U', 'dhx_web');
+            var measurePane = gridPanes.cells('a');
+            var visualizationPane = gridPanes.cells('b');
+            measurePane.setText("Valuations");
+            measurePane.setWidth(265);
+            visualizationPane.setText("Allocations");
+            return { MeasurePane: measurePane, VisualPane: visualizationPane };
+        }
+
+        // adds form to the top of the measure table
+        var overrideFrom;
+        function addNodeOverrideForm() {
+            var formJSON = [
+            { type: "settings", position: "label-left", labelWidth: 100 },
+                { type: "input", name: 'IdealValuation', inputWidth: 65, label: 'Ideal Valuation', value: '' },
+			    { type: "input", name: 'MaxValuation', inputWidth: 65, label: 'Max Valuation', value: '' },
+                { type:'block', list:[
+                { type: "button", name: "Update", width: 55, value: 'Update' },
+                { type: "newcolumn", offset: 10 },
+                { type: "button", name: "Reset", width: 55, value: 'Reset' },
+                ]},
+            { type: "button", name: "Save", width: 200, value: 'Save and Recalculate Valuations' },
+            ];
+            overrideFrom = new dhtmlXForm("OverrideForm");
+            overrideFrom.setSkin("dhx_web");
+            overrideFrom.enableLiveValidation(true);
+            overrideFrom.loadStruct(formJSON, 'json');
+            overrideFrom.attachEvent("onButtonClick", buttonSaveOverrides);
+        }
+
+        function buttonSaveOverrides(buttonId) {
+            switch (buttonId) {
+                case 'Update':
+                    SaveNodeValuation(overrideFrom.getItemValue('IdealValuation'), overrideFrom.getItemValue('MaxValuation'));
+                    visualizerObject.ShowValuationGraph(campaignData.Valuations, sortByTier, getValuationCalcTypeColor);
+                    break;
+                case 'Reset':
+                    removeOverride();
+                    visualizerObject.ShowValuationGraph(campaignData.Valuations, sortByTier, getValuationCalcTypeColor);
+                    break;
+                case 'Save':
+                    if ($RCUI.isDirty) {
+                        updateCampaignWithNewOverrides();
+                    }
+                    location.href = location.href;
+                    break;
+            }
+        }
+    </script>
+    </head>
+    <body onload="pageRender(thisPageRender);">
+    <div id="canvasesdiv" style="height:100%;width:100%;display:none;">
+    <canvas id="DataCanvas" width="5000" height="250" style="z-index: 1;position:absolute;left:0px;top:0px;"></canvas>
+    <canvas id="HighlightCanvas" width="5000" height="250" style="z-index: 2;position:absolute;left:0px;top:0px;"></canvas>
+    <canvas id="ClickCanvas" width="5000" height="250" style="z-index: 3;position:absolute;left:0px;top:0px;"></canvas>
+    </div>
+
+    <div id="nodePane" style="height:100%;width:100%;display:none;overflow-y:auto;">
+    <table height="100%" width="100%" style="padding-left:0px;padding-right:0px">
+    <tr><td height="90%" valign="top">
+    <div id="NodeInfo"></div>
+    </td></tr>
+    <tr><td valign="bottom" align="right" style="border-top:2px solid black;line-height:15pt">
+    <div id="OverrideForm" style="font: 10px Tahoma;"></div>
+    </td></tr>
+    </table>
+    </div>
+
+    <div id="editForm" style="display:none">
+        <table style="font-size:12px; font:tahoma;height:100%">
+            <tr><td valign="top">
+            <div style="text-align:right;width:100%" id="pageNumber"></div>
+            <div id="editMeasures"></div></td></tr>
+        <tr><td valign="bottom">
+        Ideal Valuation: <input type="text" id="idealValuationForm" style="width:75px"/> 
+        Max Valuation: <input type="text" id="maxValuationForm" style="width:75px"/>
+        <input id="nextButton" type="button" align="right" value="Next >>" onclick="nextMeasureSet()"/>
+        </td></tr> 
+</table>
+    </div>
+</body>
+</html>

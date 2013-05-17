@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2BE6E9C3-292D-4AC1-96EF-31A0DE0F7446}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ScheduledActivityDispatchersTestHelpers</RootNamespace>
+    <AssemblyName>ScheduledActivityDispatchersTestHelpers</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Activities">
+      <HintPath>..\..\Queuing\Public\bin\Debug\Activities.dll</HintPath>
+    </Reference>
+    <Reference Include="ConfigManager">
+      <HintPath>..\..\Common\Public\bin\Debug\ConfigManager.dll</HintPath>
+    </Reference>
+    <Reference Include="Diagnostics">
+      <HintPath>..\..\Common\Public\bin\Debug\Diagnostics.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Queuing">
+      <HintPath>..\..\Queuing\Public\bin\Debug\Queuing.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhino.Mocks">
+      <HintPath>..\..\External\Public\bin\Debug\Rhino.Mocks.dll</HintPath>
+    </Reference>
+    <Reference Include="ScheduledActivities">
+      <HintPath>..\..\Scheduling\Public\bin\Debug\ScheduledActivities.dll</HintPath>
+    </Reference>
+    <Reference Include="ScheduledWorkItems">
+      <HintPath>..\..\Scheduling\Public\bin\Debug\ScheduledWorkItems.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TestUtilities">
+      <HintPath>..\..\TestUtilities\Public\bin\Debug\TestUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Utilities">
+      <HintPath>..\..\Common\Public\bin\Debug\Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="WorkItems">
+      <HintPath>..\..\Queuing\Public\bin\Debug\WorkItems.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScheduledActivitySourceFixtureBase.cs" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)..\build\common.proj" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="ProjectBeforeBuild">
+  </Target>
+  <Target Name="ProjectAfterBuild">
+  </Target>
+  -->
+</Project>

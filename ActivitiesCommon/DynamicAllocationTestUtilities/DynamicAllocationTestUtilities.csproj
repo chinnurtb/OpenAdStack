@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3CC1281C-6E46-413E-89B4-DA6D1FC53CB2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DynamicAllocationTestUtilities</RootNamespace>
+    <AssemblyName>DynamicAllocationTestUtilities</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AzureStorageIntegrationTests, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Public\bin\Debug\AzureStorageIntegrationTests.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAccessLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DataAccessCommon\Public\bin\Debug\DataAccessLayer.dll</HintPath>
+    </Reference>
+    <Reference Include="DynamicAllocationEngine.Measures, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DynamicAllocation\Public\bin\Debug\DynamicAllocationEngine.Measures.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Rhino.Mocks, Version=3.6.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL" />
+    <Reference Include="SimulatedDataStore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Public\bin\Debug\SimulatedDataStore.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.XML" />
+    <Reference Include="TestUtilities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=79dd387e3641c5af, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Public\bin\Debug\TestUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Utilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AllocationParametersTestHelpers.cs" />
+    <Compile Include="DynamicAllocationActivitiesTestHelpers.cs" />
+    <Compile Include="DynamicAllocationCampaignTestStub.cs" />
+    <Compile Include="MeasureSourceTestHelpers.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AppNexusUtilities\AppNexusUtilities.csproj">
+      <Project>{0547160D-2818-4F22-B965-D2E249D8AE10}</Project>
+      <Name>AppNexusUtilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DeliveryNetworkUtilities\DeliveryNetworkUtilities.csproj">
+      <Project>{43539841-33D7-477C-BC61-4CBB07E0FDEF}</Project>
+      <Name>DeliveryNetworkUtilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DynamicAllocationUtilities\DynamicAllocationUtilities.csproj">
+      <Project>{47060EF3-CB5B-4AA5-8696-F8DA1A5BB03E}</Project>
+      <Name>DynamicAllocationUtilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EntityTestUtilities\EntityTestUtilities.csproj">
+      <Project>{34BAAA6A-44AE-47FF-BAA4-9BCCF25D8E63}</Project>
+      <Name>EntityTestUtilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EntityUtilities\EntityUtilities.csproj">
+      <Project>{F4633DC5-9115-43FE-BF35-D399BE0B8C1D}</Project>
+      <Name>EntityUtilities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ValuationInputs_EmptyNodeValuations.js" />
+    <EmbeddedResource Include="Resources\ValuationInputs_Measures.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ApnxDeliveryData1.csv" />
+    <EmbeddedResource Include="Resources\ApnxDeliveryData2.csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\MeasureList.js" />
+    <EmbeddedResource Include="Resources\NodeMap.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\MeasureMap.js" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)..\build\common.proj" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="ProjectBeforeBuild">
+  </Target>
+  <Target Name="ProjectAfterBuild">
+  </Target>
+  -->
+</Project>

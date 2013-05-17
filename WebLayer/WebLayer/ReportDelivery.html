@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Campaign Page</title>
+    <link rel="stylesheet" type="text/css" href="./dhtml/codebase/dhtmlx.css" />
+    <link rel="stylesheet" type="text/css" href="./dhtml/codebase/dhtmlx_custom.css" /> 
+    <link rel="stylesheet" type="text/css" href="./css/basestyle.css" />
+
+    <script type="text/javascript" src="./scripts/GlobalObjects.js"></script>
+    <script type="text/javascript" src="./scripts/Visualization.js"></script>
+    <script type="text/javascript" src="./scripts/wizardlayout.js"></script>
+    <script type="text/javascript" src="./scripts/CampaignUtils.js"></script>
+  
+    <!-- Page Specific Scripts -->
+    <script type="text/javascript">
+    var panes;
+    var NodeArray, totalGraph;
+    var visualizerObject;
+    var timer;
+    var timerOn = false;
+    var counter = -1;
+    helpTopic = "ReportDelivery";
+
+    function pageExit() {
+        return true;
+    }
+
+    var deliveryDataList = [];
+    function thisPageRender() {
+        workarea.progressOn();
+
+        if (cClient.Get('Id') != '2db94cfc39fe40ec893807fc807a77a9' && cClient.Get('Id') != '2db94cfc39fe40ec893807fc807a77a9') {
+            var allocIndex = cClient.Get('DAAllocationIndex');
+            allocIndex = allocIndex.sort(function (a, b) { return a.AllocationStartTime > b.AllocationStartTime; });
+            for (var allocation in allocIndex) {
+                deliveryDataList.push($RCAPI.URI.CampaignGetBlob.format($RCUI.advertiser, $RCUI.campaign, allocIndex[allocation].AllocationOutputsId));
+            }
+        }
+        else {  //rare crowds / comics dungeon / demo - sim
+            var numberOfAllocations = 101;
+            for (var i = 0; i < numberOfAllocations; i++){
+                deliveryDataList.push('./scripts/sim/simrun{0}.js'.format(i));
+            }
+        }
+        //Get campaign data needed
+        //TODO: Definitely should be async vs serial here.
+        panes = loadPanes(workarea);
+        initListArea(panes.MeasurePane);
+        initGraph(panes.VisualPane);
+        initButtons(panes.ButtonsPane);
+        totalGraph = getCalculatedValuationList($RCUI.advertiser, $RCUI.campaign);
+        visualizerObject = new visualizer(document.getElementById('DataCanvas'), document.getElementById('HighlightCanvas'),
+                document.getElementById('ClickCanvas'),
+                writeNodeInfo,
+                panes.VisualPane.getHeight() - 50,
+                panes.VisualPane.getWidth() - 25);
+        workarea.progressOff();
+    }
+
+    function pauseOrContinueReplay() {
+        if (timerOn == true) {
+            window.clearTimeout(timer);
+            timerOn = false;
+            panes.ButtonsPane.setText("Playback Control (Paused)");                
+        }
+        else {
+            if (counter < deliveryDataList.length) {
+                counter++;
+                timer = window.setInterval(function() { showDeliveryEntry(totalGraph) }, 1000);
+            }
+            timerOn = true;
+            panes.ButtonsPane.setText("Playback Control (Running)");                
+        }
+    }
+
+    function rewindToStart() {
+        window.clearInterval(timer);
+        counter = 0;
+        timerOn = false;
+        panes.ButtonsPane.setText("Playback Control (Paused)");
+        showDeliveryEntry(totalGraph);                     
+    }
+
+    function rewind(event) {
+        if (event.shiftKey) {
+            rewind10();
+            return;
+        }
+        if (timerOn == true) {
+            if (counter >= 1) {
+                counter--;
+            }
+            else {
+                counter -= 2;
+            }
+        }
+        if (counter != 0) {
+            counter--;
+            window.clearInterval(timer);
+            timerOn = false;
+            panes.ButtonsPane.setText("Playback Control (Paused)");
+            showDeliveryEntry(totalGraph);
+        }
+    }
+    
+    function rewind10() {
+        if (timerOn == true) {
+            if (counter >= 11) {
+                counter -= 11;
+            }
+            else {
+                rewindToStart();
+                return;
+            }
+        }
+        else {
+            if (counter >= 10) {
+                counter -= 10;
+            }
+        }
+        window.clearInterval(timer);
+        timerOn = false;
+        panes.ButtonsPane.setText("Playback Control (Paused)");
+        showDeliveryEntry(totalGraph);
+    }
+
+    function forward(event) {
+        if (event.shiftKey) {
+            forward10();
+            return;
+        }
+        if (counter < deliveryDataList.length) {
+            counter++;
+            window.clearInterval(timer);
+            timerOn = false;
+            panes.ButtonsPane.setText("Playback Control (Paused)");
+            showDeliveryEntry(totalGraph);
+        }
+    } 
+    
+    function forward10() {
+        if ((counter + 10)  < deliveryDataList.length) {
+            counter += 10;
+            window.clearInterval(timer);
+            timerOn = false;
+            panes.ButtonsPane.setText("Playback Control (Paused)");
+            showDeliveryEntry(totalGraph);
+        }
+        else {
+            forwardToEnd();
+        }
+    }
+
+    function forwardToEnd() {
+        if (counter < deliveryDataList.length) {
+            counter = deliveryDataList.length - 1;
+            window.clearInterval(timer);
+            panes.ButtonsPane.setText("Playback Control (Paused)");
+            showDeliveryEntry(totalGraph);
+            timerOn = false;
+            counter = deliveryDataList.length;
+        }
+    }
+
+    function selectPage() {
+        var pageNumber = document.getElementById("pageNumber").value;
+        if (pageNumber > deliveryDataList.length) {
+            counter = deliveryDataList.length - 1;
+        }
+        else if (pageNumber <= 0) {
+            counter = 0;
+        }
+        else {
+            counter = pageNumber;
+        }
+        window.clearInterval(timer);
+        panes.ButtonsPane.setText("Playback Control (Paused)");
+        showDeliveryEntry(totalGraph);
+        timerOn = false;
+    }
+
+    var deliveryDataAjax;
+    function showDeliveryEntry(totalGraph) {
+        workarea.progressOn();
+        deliveryDataAjax = new $RCAjax(deliveryDataList[counter], null, 'GET', null, null, false, null, null);
+        NodeArray = deliveryDataAjax.responseData;
+        if (NodeArray.Blob != undefined) { NodeArray = NodeArray.Blob; }
+        $RCUI.debugReport.record('Allocation Phase: ' + NodeArray.Phase +
+            ' Allocation: ' + counter +
+            ' Insight Score: ' + Math.round(NodeArray.InsightScore * 10000) / 10000 +
+            ' ValVol: ' + Math.round(NodeArray.ValueVolumeScore) +
+            ' Period Budget: ' + Math.round(NodeArray.PeriodBudget) +
+            ' Anticipated Spend: ' + Math.round(NodeArray.AnticipatedSpendForDay) +
+            ' Remaining Budget: ' + Math.round(NodeArray.RemainingBudget) +
+            ' Exported Nodes: ' + jsonPath(NodeArray, '$.PerNodeResults[?(@.ExportBudget > 0)]').length);
+        visualizerObject.ShowValuationGraph(totalGraph.Valuations.NodeValuationSet, sortByTier, getHighlightColor);
+        if (timerOn != false) {
+            counter++;   
+        }
+        if (counter >= deliveryDataList.length) {
+            window.clearInterval(timer);
+        }
+        workarea.progressOff();
+    }
+
+    function writeNodeInfo(selectedNode) { //TODO Dedupe and genericize with Overrides.html
+        visualizerObject.ShowLineage(totalGraph.Valuations.NodeValuationSet, sortByTier, getLineageColor, selectedNode);
+
+        var valuationList = totalGraph.Valuations.NodeValuationSet.sort(sortByTier);
+        var messageObject = document.getElementById("NodeInfo");
+        var messageText = '<table height="100%" cellspacing="0" cellpadding="1" style="font:tahoma;font-size:12px">';
+        for (var measure in valuationList[selectedNode].MeasureSet) {
+            messageText += '<tr><td valign="top" style="border-bottom:1px solid;">' + getMeasureDisplayName(valuationList[selectedNode].MeasureSet[measure]) + "<\/td><\/tr>";
+        }
+        messageText += '<tr><td style="font:tahoma;font-size:13px"><b>Valuation: <\/b>' + valuationList[selectedNode].MaxValuation + '<\/td><\/tr>';
+        messageText += '<tr><td height="100%" style="font:tahoma;font-size:12px;">' + getPerNodeResults(valuationList[selectedNode].MeasureSet); +'<\/td><\/tr><\/table>';
+        messageObject.innerHTML = messageText;
+    }
+
+    function getPerNodeResults(measureSet) {
+        var perNodeResult = '';
+        var testMeasureString = measureSet.sort().join(', ');
+        var perNode = deliveryDataAjax.responseData.PerNodeResults;
+        if (perNode == undefined) {
+            perNode = deliveryDataAjax.responseData.Blob.PerNodeResults;
+        }
+        var node = perNode[testMeasureString];
+        if (node != undefined) {
+            perNodeResult = '<br /><b>Impressions to date: </b>' + node.LifetimeImpressions;
+            perNodeResult += '<br /><b>Aprrox. Spend to date: </b>' + CurrentSpend(node);
+            perNodeResult += '<br /><b>Export count: </b>' + node.ExportCount;
+        }
+        else {
+            perNodeResult = "Node Excluded due to high data cost";
+        }
+        return perNodeResult;
+    }
+
+    //calculates approximate budget spent to date
+    function CurrentSpend(nodeResult) {
+        return ((parseFloat(nodeResult.EffectiveMediaSpendRate) + parseFloat(nodeResult.Valuation) - parseFloat(nodeResult.MaxBid)) * parseFloat(nodeResult.LifetimeImpressions) / 1000.0).toFixed(2);
+    }
+
+    function generateMeasuresListHTML(measureList) { //TODO Dedupe with Overrides.html
+        var messageText = '<table cellspacing=0 style="font:tahoma;font-size:12px">';
+        var nodeValuationJson = { 'MeasureSet': [], 'IdealValuation': 0, 'MaxValuation': 0 }
+        for (var measure in measureList) {
+            messageText += '<tr><td style="border-bottom:1px solid;">' + getMeasureDisplayName(measureList[measure]) + "<\/td><\/tr>";
+            nodeValuationJson.MeasureSet.push(measureList[measure]);
+        }
+        messageText += '<span id="hiddenNodeValuationJson" style="display:none">' + JSON.stringify(nodeValuationJson) + '</span>';
+        messageText += '<\/table>'
+        return messageText;
+    }
+
+    function getLineageColor(nodeType) { //TODO Dedupe with Overrides
+        switch (nodeType) {
+            case 'child':
+                return 'rgb(128,128,0)';
+            case 'parent':
+                return 'rgb(192,192,0)';
+            case 'self':
+                return 'rgb(255,255,0)';
+            default:
+                return 'rgb(255,0,0)';
+        }
+    }
+
+    function getHighlightColor(node) {
+        var color = 'rgb(128,64,32)';
+        var historyNode = node.MeasureSet.sort().join(', ');
+        if (NodeArray.PerNodeResults[historyNode] == undefined) {
+            return 'rgb(128,0,128)';
+        }
+        if (NodeArray.PerNodeResults[historyNode].ExportBudget > 0) {
+            if (NodeArray.PerNodeResults[historyNode].ExportCount > 1) {
+                color = 'rgb(' + (255 - NodeArray.PerNodeResults[historyNode].ExportCount * 4) + ',255,0)';
+            }
+            else {
+                color = 'rgb(0,0,255)';
+            }
+            return color;
+        }
+        if (NodeArray.PerNodeResults[historyNode].ExportCount > 0) {
+            var grey = 92 + NodeArray.PerNodeResults[historyNode].ExportCount * 5;
+            color = 'rgb(' + grey + ',' + grey + ',' + grey + ')';
+        }
+        if (NodeArray.PerNodeResults[historyNode].LineagePenalty < 1) {
+            color = 'rgb(48,0,0)';
+        }
+        if (NodeArray.PerNodeResults[historyNode].NodeIsIneligible) {
+            color = 'rgb(255,0,0)';
+        }
+        return color;
+    }
+
+    function initListArea(listPane) {
+        listPane.attachObject(document.getElementById('NodeInfo'));
+    }
+
+    function initGraph(graphPane) {
+        graphPane.attachObject(document.getElementById('canvasesdiv'));
+    }
+
+    function initButtons(buttonsPane) {
+        buttonsPane.attachObject(document.getElementById('buttonsdiv'));
+    }
+
+    function loadPanes(workarea) {
+        var gridPanes = workarea.attachLayout('3L', 'dhx_web');
+        var measurePane = gridPanes.cells('a');
+        var visualizationPane = gridPanes.cells('b');
+        var buttonsPane = gridPanes.cells('c');
+        measurePane.setText("Valuations");
+        measurePane.setWidth(265);
+        visualizationPane.setText("Allocations");
+        buttonsPane.setHeight(90);
+        buttonsPane.setText("Playback Control (Paused)");
+        return { MeasurePane: measurePane, VisualPane: visualizationPane, ButtonsPane: buttonsPane };
+    }
+    function validate(evt) {
+        var theEvent = evt || window.event;
+        var key = theEvent.keyCode || theEvent.which;
+        key = String.fromCharCode(key);
+        var regex = /[0-9]|\./;
+        if (!regex.test(key)) {
+            theEvent.returnValue = false;
+            if (theEvent.preventDefault) theEvent.preventDefault();
+        }
+    }
+    </script>
+    <style type="text/css">
+        #selectPage
+        {
+            width: 181px;
+            height: 16px;
+        }
+        #buttonsdiv
+        {
+            width: 935px;
+            height: 65px;
+        }
+        .style1
+        {
+            width: 244px;
+            vertical-align: middle;
+            font-size: 4px;
+            line-height: .1;
+        }
+    </style>
+</head>
+<body onload="pageRender(thisPageRender);">
+<div id="canvasesdiv" style="display:none;width:100%;height:100%;">
+    <canvas id="DataCanvas" width="500" height="250" style="position: absolute;
+        left: 0px; top: 0px; display:block;"></canvas>
+    <canvas id="HighlightCanvas" width="500" height="250" style="position: absolute;
+        left: 0px; top: 0px; display:block;"></canvas>
+    <canvas id="ClickCanvas" width="500" height="250" style="position: absolute;
+        left: 0px; top: 0px; display:block;"></canvas>
+</div>
+    <div id="buttonsdiv" style="display:none;">
+        <table>
+            <tr>
+                <td>
+                    <button type="button" onclick="JavaScript:rewindToStart();" title="Rewind to Start">
+                        <img src="./images/RewindToStart.png" alt="Rewind"/></button>
+                </td>
+                <td>
+                    <button type="button" onclick="JavaScript:rewind(event);" title="Rewind, Shift Click Rewind 10">
+                        <img src="./images/Rewind.png" alt="Rewind, Shift Click Rewind 10"/></button>
+                </td>
+                <td>
+                    <button type="button" onclick="JavaScript:pauseOrContinueReplay();" title="Start/Pause">
+                        <img src="./images/StartPause.png" alt="Start/Pause"/></button>
+                </td>
+                <td>
+                    <button type="button" onclick="JavaScript:forward(event);" title="Forward, Shift Click Forward 10">
+                        <img src="./images/Forward.png" alt="Forward, Shift Click Forward 10"/></button>
+                </td>
+                <td>
+                    <button type="button" onclick="JavaScript:forwardToEnd();" title="Forward to End">
+                        <img src="./images/ForwardToEnd.png" alt="Forward" /></button>
+                </td>
+   
+ <td style="horiz-align: center" class="style1">&nbsp; <form id="selectPage">&nbsp;&nbsp;
+                                     <input id="pageNumber" name="pageNumber" type="text" size="4" maxlength="4" width="30px" onkeypress='validate(event)'  />
+                                     <input type="button" onclick="selectPage()" value="Select Page"/>
+                                 </form></td>
+            </tr>
+            <tr></tr>
+        </table>                 
+
+    </div>
+
+<div id="NodeInfo" style="display:none;width:100%;height:100%;overflow-y:auto;">
+</div>
+</body>
+</html>

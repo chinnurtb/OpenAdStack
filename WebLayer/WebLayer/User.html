@@ -1,0 +1,315 @@
+<html>
+<head>
+    <title>Manage Users</title>
+    <link rel="stylesheet" type="text/css" href="./dhtml/codebase/dhtmlx.css" />
+    <link rel="stylesheet" type="text/css" href="./dhtml/codebase/dhtmlx_custom.css" /> 
+    <link rel="stylesheet" type="text/css" href="./css/basestyle.css" />
+    <script type="text/javascript" src="./scripts/GlobalObjects.js"></script>
+    <script type="text/javascript" src="./scripts/baselayout.js"></script>
+    
+    <script type="text/javascript">
+        var userEditForm, wizardworkarea, listGrid, treeArea, userAccessValue;
+        var formData = [
+                { type: "settings", position: "label-left", labelWidth: 150 },
+                { type: "input", name: 'inputFirstName', label: 'First Name', required: true },
+                { type: "input", name: 'inputLastName', label: 'Last Name', required: true },
+                { type: "input", name: 'inputEmail', label: 'Email Address', required: true, validate: "ValidEmail" },
+                { type: "input", name: 'inputPhone', label: 'Phone Number' },
+                { type: "select", name: 'selectUserType', label: 'User Type', options: [
+                    { text: "Stand-alone", value: "StandAlone", selected: true },
+                    { text: "AppNexus App", value: "AppNexusApp", selected: false}]
+                },
+                { type: "input", name: 'inputUserId', label: 'UserId (AppNexus Only)' },
+                { type: "hidden", name: 'id', value: '' }, //only if editing
+                {type: "hidden", name: 'version', value: '' }, //only if editing
+                {type: "button", name: "saveButton", value: 'Save', "width": "80" },
+                { type: "button", name: "cancelButton", value: 'Cancel', "width": "80" }
+                ];
+
+        function thisPageRender() {
+            userLayout = workarea.attachLayout('3T', 'dhx_web');
+            wizardworkarea = userLayout.cells('b');
+            treeArea = userLayout.cells('c');
+            //  userLayout.dhxWins.window("c").hide();
+            var wizardNav = userLayout.cells('a');
+            attachWizardToolbar(wizardNav);
+            showUserGrid(wizardworkarea);
+            treeArea.hideHeader();
+            treeArea.setWidth('600');
+        }
+
+        function attachWizardToolbar(navCell) {
+            navCell.hideHeader();
+            navCell.setHeight('28');
+            navCell.fixSize(1, 1);
+            var wizardToolbar = navCell.attachToolbar();
+            wizardToolbar.setSkin('dhx_web');
+            wizardToolbar.attachEvent('onClick', onUserMenuClick);
+            var menu = $RCUI.resources('User', 'DefaultMenu');
+            for (var menuItem in menu) {
+                wizardToolbar.addButton(menuItem.toString(), menuItem, menu[menuItem].DisplayText);
+            };
+            return wizardToolbar;
+        }
+
+        function onUserMenuClick(button) {
+            var menu = $RCUI.resources('User', 'DefaultMenu');
+            var action = '';
+            if (button < menu.length) {
+                action = menu[button].Action;
+            }
+            else {
+                alert('Unhandled Click' + button);
+            }
+            switch (action) {
+                case 'NewUser':
+                    showEditWindow(wizardworkarea);
+                    break;
+                case 'UpdateUser':
+                    showUpdateWindow(wizardworkarea);
+                    break;
+                default:
+                    alert('Unhandled Click ' + button);
+            }
+        }
+
+        function showUserGrid(layoutCell) {
+            createUserGrid(layoutCell);
+        }
+
+        function createUserGrid(layoutCell) {
+            layoutCell.hideHeader();
+            listGrid = layoutCell.attachGrid();
+            listGrid.setHeader(",Name,Email,EntityId,Type,UserId");
+            listGrid.setColAlign("center,left,left,left,left,left");
+            listGrid.setInitWidths("35,200,150,100,50,100");
+            listGrid.setColSorting("str,str,str,str,str,str");
+            listGrid.setColumnsVisibility("false,false,false,true,true,true");
+            listGrid.setColTypes("ra,ro,ro,ro,ro,ro");
+            listGrid.setImagePath("./dhtml/codebase/imgs/"); 
+            listGrid.enableRowsHover(true, "highlight");
+            listGrid.attachEvent('onRowSelect', getUser);
+            listGrid.init();
+            listGrid.setSkin("dhx_web");
+            listGrid.parse(userJsonToGridArray(getUserList().Users), "jsarray");
+            return listGrid;
+        }
+
+        function getUser() {
+        //TODO hardcoded
+            return { User: { Name: "Scott", Email: "IDK@woonos.com", ExternalId: "2342342"} };
+        }
+
+        function userJsonToGridArray(userList) {
+            var gridArray = new Array();
+            for (var user in userList) {
+                var tmpArr = [];
+                if (userList[user].Properties.FirstName) {
+                    tmpArr.push(false);
+                    tmpArr.push(userList[user].Properties.FirstName + " " + userList[user].Properties.LastName);
+                    tmpArr.push(userList[user].Properties.ContactEmail);
+                    tmpArr.push(userList[user].ExternalEntityId);
+                    tmpArr.push(userList[user].ExternalType);
+                    tmpArr.push(userList[user].UserId);
+                    gridArray.push(tmpArr);
+                }
+            }
+            return gridArray;
+        }
+
+        function getUserList() {
+            var usersJSON = new $RCAjax($RCAPI.URI.UsersGet, '', 'GET', null, null, false, null, routeGetErrors);
+            return usersJSON.responseData;
+       }
+        
+        function routeGetErrors(data, errorType, errorText, resource) {
+            alert(resource);
+            switch (data.status) {
+            case 202:
+                alert('Server appears to be backlogged, please try later');
+                break;
+            case 401:
+                authExpiration();
+                break;
+            default:
+                getCompanyListFailure(data, errorType, errorText);
+                break;
+            }
+            ;
+        }
+
+
+        function getSelectRowIdFromGrid() {
+            for (var count = 1; count <= listGrid.getRowsNum(); count++) {
+                var isChecked = listGrid.cells(count, 0).isChecked();
+                if (isChecked == true) {
+                    return count;
+                }
+            }
+            return -1;
+        }
+
+        function tree_progress_off( object) {
+            object.progressOff();
+        }
+
+
+        function showUserForm(userWorkArea) {
+            userEditForm = userWorkArea.attachForm();
+            userWorkArea.fixSize(1, 0);
+            userWorkArea.setHeight('225');
+            userWorkArea.fixSize(1, 1);
+            userEditForm.setSkin = "dhx_web";
+            userEditForm.loadStruct(formData, 'json');
+            userEditForm.enableLiveValidation(true);
+            userWorkArea.setWidth('300');
+
+            treeArea.setSkin = "dhx_web";
+            treeArea.setWidth('500');
+            treeArea.attachURL('./UserPermissionTreeGrid.htm');
+        }
+        
+        function showUpdateWindow(userWorkArea) {
+            var rowId = getSelectRowIdFromGrid();
+            if (rowId < 0) {
+                alert("Select the Update radio button for the User you want to update.");
+                return;
+            }
+            var userJSON = new $RCAjax($RCAPI.URI.UserGet.format(listGrid.cells(rowId, 3).getValue()), '', 'GET', null, null, false, null, routeGetErrors);
+            userAccessValue = userJSON.responseData.User.Properties.AccessList;
+            showUserForm(userWorkArea);
+            sessionStorage.removeItem("userAccessValue");
+            sessionStorage.setItem("userAccessValue", userAccessValue);
+
+            userEditForm.attachEvent("onButtonClick", formUpdateOnButtonClick);
+
+            userEditForm.setItemValue('inputFirstName', userJSON.responseData.User.Properties.FirstName);
+            userEditForm.setItemValue('inputLastName', userJSON.responseData.User.Properties.LastName);
+            userEditForm.setItemValue('inputEmail', userJSON.responseData.User.Properties.ContactEmail);
+            userEditForm.setItemValue('inputPhone', userJSON.responseData.User.Properties.Phone);
+            userEditForm.setItemValue('inputUserId', userJSON.responseData.User.Properties.UserId);
+            userEditForm.setItemValue('id', userJSON.responseData.User.ExternalEntityId);
+            userEditForm.setItemValue('version', userJSON.responseData.User.LocalVersion);
+            userEditForm.setItemValue('selectUserType', userJSON.responseData.User.ExternalType);
+
+        }
+
+        function showEditWindow(userWorkArea) {
+            showUserForm(userWorkArea);
+            sessionStorage.removeItem("userAccessValue");
+            sessionStorage.setItem("userAccessValue", "");
+            userEditForm.attachEvent("onButtonClick", formOnButtonClick);
+        }
+
+        function formOnButtonClick(buttonId) {
+            switch (buttonId) {
+                case 'saveButton':
+                    createUser();
+                    window.location = '\/company.html';
+                    break;
+                case 'cancelButton':
+                    windowClose(wizardworkarea);
+                    break;
+                default:
+                    return;
+            }
+        }
+
+        function formUpdateOnButtonClick(buttonId) {
+            switch (buttonId) {
+                case 'saveButton':
+                    updateUser(wizardworkarea, userEditForm);
+                    window.location = '\/user.html';
+                    break;
+                case 'cancelButton':
+                    windowClose(wizardworkarea);
+                    break;
+                default:
+                    return;
+            }
+        }
+
+        function createUserJSON(form, accessList) {
+                return {
+                    'ExternalName': form.getItemValue("inputFirstName") + ' ' + form.getItemValue("inputLastName"),
+                    'ExternalType': form.getItemValue("selectUserType"),
+                    'LocalVersion': form.getItemValue("version"),
+                    'Properties': {
+                        "FirstName": form.getItemValue("inputFirstName"),
+                        "LastName": form.getItemValue("inputLastName"),
+                        "ContactEmail": form.getItemValue("inputEmail"),
+                        "Phone": form.getItemValue("inputPhone"),
+                        "UserId": form.getItemValue("inputUserId"),
+                        "AccessList": accessList
+                    }
+                };
+        }
+
+        function createUser() {
+            wizardworkarea.progressOn();
+            var userAccessRaw = sessionStorage.getItem("userAccessGrid");
+            var accessListPropertyValue = createUserAccessProperty(userAccessRaw);
+            // new users dont have any access values yet, so nothing to prepend
+            var userJSON = createUserJSON(userEditForm, accessListPropertyValue);
+            var userOutputJSON = new $RCAjax($RCAPI.URI.UserCreate, JSON.stringify(userJSON), 'POST', null, null, false, null, routePostErrors);
+            // Send invite mail to non-app users (app users are created in response
+            // to registration requests and don't need to be invited).
+            if (userJSON.ExternalType != "AppNexusApp") {
+                userOutputJSON = new $RCAjax($RCAPI.URI.UserInvite.format(userOutputJSON.responseData.User.ExternalEntityId), '{}', 'POST', null, null, false, null, routePostErrors);
+            }
+            windowClose();
+        }
+
+        function updateUser(wizardworkarea, userEditForm) {
+            wizardworkarea.progressOn();
+            var userAccessRaw = sessionStorage.getItem("userAccessGrid");
+            var accessListPropertyValue = createUserAccessProperty(userAccessRaw);
+            // only add the USER components of existing access values
+            var existingAccessArray = userAccessValue.split("|");
+            for (var i = 0; i < existingAccessArray.length; i++ ) {
+                if (existingAccessArray[i].indexOf("USER") != -1) {
+                    accessListPropertyValue = existingAccessArray[i] + "|" + accessListPropertyValue;
+                }
+            }            
+            var userOutputJSON = new $RCAjax($RCAPI.URI.UserUpdate.format(listGrid.cells(getSelectRowIdFromGrid(), 3).getValue()), JSON.stringify(createUserJSON(userEditForm, accessListPropertyValue)), 'PUT', null, null, false, null, routePostErrors);
+            windowClose();
+        }
+
+        function createUserAccessProperty(userAccessRaw) {
+            var accessString = new String("");
+            if (userAccessRaw != null) {
+                var completeEntries = userAccessRaw.split("|");
+                for (var i = 0; i < completeEntries.length; i++) {
+                    var accessArrayValue;
+                    var accessValue = completeEntries[i].substring(completeEntries[i].indexOf("#") + 1);
+                    if (accessValue.length > 0 && accessValue != "none") {
+                        if (completeEntries[i].indexOf("campaign") == -1) {
+                            accessArrayValue = "COMPANY" + completeEntries[i].slice(completeEntries[i].indexOf(":"), completeEntries[i].indexOf("#")) + ":#:";
+                        }
+                        else {
+                            accessArrayValue = "COMPANY" + completeEntries[i].slice(completeEntries[i].indexOf(":"), completeEntries[i].indexOf(",")) + ":CAMPAIGN" + completeEntries[i].slice(completeEntries[i].indexOf(":", completeEntries[i].indexOf(",")), completeEntries[i].indexOf("#")) + ":#:";
+                        }
+                        accessArrayValue += accessValue == "r" ? "GET:*" : "*:*";
+                        accessString += (accessArrayValue) + "|";
+                    }
+                }
+            }
+            return accessString;
+        }
+        
+        function windowClose() {
+            wizardworkarea.progressOff();
+            location.href = '\/user.html';
+        }
+        function routePostErrors(data, errorType, errorText) {
+            switch (data.status) {
+                default:
+                    alert(errorType +' - ' + errorText);
+                    break;
+            };
+        }
+    </script>
+</head>
+<body onload="pageRender(thisPageRender);">
+</body>
+</html>

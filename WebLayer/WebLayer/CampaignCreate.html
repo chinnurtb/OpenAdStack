@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Campaign Page</title>
+        <link rel="stylesheet" type="text/css" href="./dhtml/codebase/dhtmlx.css" /> 
+        <link rel="stylesheet" type="text/css" href="./dhtml/codebase/dhtmlx_custom.css" /> 
+        <link rel="stylesheet" type="text/css" href="./css/basestyle.css" /> 
+
+        <script type="text/javascript" src="./scripts/GlobalObjects.js"></script>
+        <script type="text/javascript" src="./scripts/wizardlayout.js"></script>
+        <script type="text/javascript" src="./scripts/CampaignUtils.js"></script>
+        <style type="text/css">
+            #BudgetTable {visibility:hidden;}
+            .smallLabel {font-weight:normal;font-size:10px;margin-left:30px;}
+            .HVA {width:200px;height:75px;background:#0000BB;font:Tahoma 10px;color:#ffff99;padding:5px;}
+            .Exceptional {width:275px;height:75px;background:#000088;font:Tahoma 10px;color:#ffff99;padding:5px;}
+            .Rare {width:350px;height:75px;background:#000033;font:Tahoma 10px;color:#ffff99;padding:5px;}
+            #Display {width:425px;height:75px;background:#000000;font:Tahoma 10px;color:#ffff99;padding:5px;border-top:4px solid #ffff99}
+        </style>
+
+ <!-- Page Specific Scripts -->
+        <script type="text/javascript">
+            var campaignForm;
+
+            helpTopic = "CampaignCreate";
+
+            function thisPageRender() {
+                loadCampaignForm(workarea);
+                cachedMeasureMap.initialize();
+            }
+
+            function loadCampaignForm(workareaCell) {
+                workareaCell.attachObject("formHolder");
+                var campaignFormData = [
+                    { type: "settings", position: "label-left", labelWidth: 175 },
+                    { type: "fieldset", width: 400, name: "campaignData", label: "Campaign Setup", inputWidth: "auto", list: [
+	                    { type: "hidden", name: 'campaignStatus', value: cClient.Get('Status') },
+	                    { type: "input", name: 'campaignName', label: 'Campaign Name', value: cClient.Get('Name') },
+	                    { type: "label", label: 'Goals' },
+	                    { type: "input", name: 'campaignBudget', label: 'Total Budget', value: parseFloat(cClient.Get('Budget')).toFixed(2), validate: 'ValidNumeric,GreaterThanMinBudget'},
+	                    { type: "input", name: 'campaignCPM', label: 'Max Average CPM', value: parseFloat(cClient.Get('CPM')).toFixed(2), validate: 'ValidNumeric,GreaterThanMinCPM' },
+	                    { type: "label", label: 'Flight Dates' },
+	                    { type: "calendar", dateFormat: "%m-%d-%Y %H:%i", enableTime: true, name: 'campaignStart', label: 'Start (UTC)', value: new Date(Date.parseISO(cClient.Get('StartDate'))).shiftToUTC() },
+	                    { type: "calendar", dateFormat: "%m-%d-%Y %H:%i", enableTime: true, name: 'campaignEnd', label: 'End (UTC)', value: new Date(Date.parseISO(cClient.Get('EndDate'))).shiftToUTC() },
+	                    { type: "fieldset", hidden: true, width: 330, name: "CampaignType", label: 'Rare Crowds Campaign Type', list: [
+                            { type: "radio", name: 'campaignInventoryStrategy', position: "label-right", value: '0', label: 'Only Rare Inventory', checked: cClient.Get('InventoryStrategy') == '0' },
+		                    { type: "label", className: 'smallLabel', label: '(No fixed budget goals, just budget caps)', labelWidth: 250 },
+                            { type: "radio", name: 'campaignInventoryStrategy', position: "label-right", value: '1', label: 'Fixed Budget Goal', checked: cClient.Get('InventoryStrategy') == '1' },
+		                    { type: "label", className: 'smallLabel', label: '(Up to 10% of budget could be spent on Standard Inventory)', labelWidth: 250 },
+                            { type: "radio", name: 'campaignInventoryStrategy', position: "label-right", value: '2', label: 'Blended Inventory Mix', checked: cClient.Get('InventoryStrategy') == '2' },
+		                    { type: "label", className: 'smallLabel', label: '(Find Rare Inventory, but also freely spend on Standard Inventory)', labelWidth: 250}]
+                        },
+                        { type: "button", name: "campaignSubmit", width: 150, value: 'Save Campaign Setup' }]
+                    }
+                ];
+
+                campaignForm = new dhtmlXForm("formCell");
+                campaignForm.setSkin("dhx_web");
+                campaignForm.enableLiveValidation(true);
+                //showGraph(cClient.Get('InventoryStrategy'));
+                campaignForm.loadStruct(campaignFormData, 'json');
+                campaignForm.attachEvent("onValidateError", invalidateForm);
+                campaignForm.attachEvent("onButtonClick", saveCampaignDetails);
+                campaignForm.attachEvent("onChange", entryChange);
+                
+                // Hide the campaign types in AppNexus App mode
+                if (window.ApnxApp) {
+                    campaignForm.hideItem("CampaignType");
+                }
+            }
+
+            var isFormValid = true;
+            function invalidateForm() {
+                isFormValid = false;
+            }
+
+            function GreaterThanMinBudget(data) {
+                return (data >= 1000);
+            }
+
+            function GreaterThanMinCPM(data) {
+                return (data > .50);
+            }
+
+            function entryChange(src, value) {
+                if (src == "campaignInventoryStrategy") {
+                    showGraph(value);
+                }
+            }
+
+            function showGraph(graphType) {
+                switch (graphType) {
+                    case '0':
+                        document.getElementById("Display").style.visibility = 'hidden';
+                        document.getElementById("Display").style.height = '0px';
+                        break;
+                    case '1':
+                        document.getElementById("Display").style.visibility = 'visible';
+                        document.getElementById("Display").style.height = '37px';
+                        break;
+                    case '2':
+                        document.getElementById("Display").style.visibility = 'visible';
+                        document.getElementById("Display").style.height = '75px';
+                        break;
+                }
+                document.getElementById("BudgetTable").style.visibility = 'visible';
+            }
+
+            function saveCampaignDetails(buttonName) {
+                isFormValid = true;
+                campaignForm.validate();
+                if (!isFormValid) {
+                    return false;
+                }
+                
+                workarea.progressOn();
+                switch (buttonName) {
+                    case 'campaignSubmit':
+                        var startDate = campaignForm.getItemValue("campaignStart");
+                        startDate = startDate.shiftFromUTC(); // UI is "UTC" but Date is local (representing UTC)
+                        var endDate = campaignForm.getItemValue("campaignEnd");
+                        endDate = endDate.shiftFromUTC(); // Same as startDate
+                        if (cClient.Get("Version") != null) {
+                            cClient.Refresh();
+                        }
+                        cClient.Set("Name", campaignForm.getItemValue("campaignName"));
+                        cClient.Set("Type", 'DynamicAllocationCampaign');
+                        cClient.Set("Status", campaignForm.getItemValue("campaignStatus"));
+                        cClient.Set("Budget", parseFloat(campaignForm.getItemValue("campaignBudget")));
+                        cClient.Set("CPM", parseFloat(campaignForm.getItemValue("campaignCPM")));
+                        cClient.Set("InventoryStrategy", campaignForm.getItemValue("campaignInventoryStrategy"));
+                        cClient.Set("StartDate", startDate);
+                        cClient.Set("EndDate", endDate);
+                        break;
+                }
+                if (cClient.Save()) {
+                    workarea.progressOff();
+                    $RCUI.breadCrumbs.add(cClient.Get("Name"), "campaign", cClient.Get("Id"));
+                    rcBaseWindow.location = rcBaseWindow.location + '&campaign=' + cClient.Get("Id");
+                }
+                else {
+                    workarea.progressOff();
+                    window.location = window.location;
+                }
+            }
+        </script>
+    </head>
+    <body onload="pageRender(thisPageRender);">
+    <div id="formHolder" style="display:none;overflow:auto;">
+    <table style="height:100%">
+    <tr>
+    <td id="formCell" width="425" style="padding-right:30px;" valign="top"></td>
+    <td id="graphCell" valign="middle">
+    <table id="BudgetTable" cellpadding="0" cellspacing="0">
+    <tr><td align="right">
+        <table class="HVA">
+        <tr>
+            <td id="HVALabel">Highest Value Inventory<br />(8+ measures)</td>
+        </tr>
+        </table>
+        </td>
+    </tr>
+    <tr><td align="right">
+        <table class="Exceptional">
+        <tr>
+            <td id="ExceptionalLabel">Exceptional Inventory<br />(5 - 7 measures)</td>
+        </tr>
+        </table>
+        </td>
+    </tr>
+    <tr><td align="right">
+        <table class="Rare">
+        <tr>
+            <td id="RareLabel">Rare Inventory (4 - 5 measures)</td>
+        </tr>
+        </table>
+        </td>
+    </tr>
+    <tr><td align="right">
+        <table id="Display">
+        <tr>
+            <td id="DisplayLabel">Standard Inventory (1 - 3 measures)</td>
+        </tr>
+        </table>
+        </td>
+    </tr>
+    </table>
+    </td>
+    </tr>
+<!--    <tr><td colspan="2" height="100%" align="right"><a style="font-size:10px; color:Gray; font-family:Tahoma; text-decoration:none;" href="Budget.html?agency=a897c4205e0b40eca04433ce557883a8&advertiser=caddd0e42abc4ae5a2e4b05df912d132&campaign=1678158bf8a54104bc90a5dad0ecc504">Advanced -- Inventory Configuration</a></td></tr>
+ -->   </table>
+    </div>
+</body>
+</html> 

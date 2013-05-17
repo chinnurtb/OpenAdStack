@@ -1,0 +1,2405 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Google.Dfp</name>
+    </assembly>
+    <members>
+        <member name="T:Google.Api.Ads.Dfp.Headers.Authentication">
+            <summary>
+            The authentication header.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Headers.Authentication.authenticationTypeField">
+            <summary>
+            The authentication type.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.Headers.Authentication.AuthenticationType">
+            <summary>
+            Gets or sets the type of the authentication.
+            </summary>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Headers.ClientLogin">
+            <summary>
+            The client login authentication header.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Headers.ClientLogin.tokenField">
+            <summary>
+            The authToken.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.Headers.ClientLogin.token">
+            <summary>
+            Gets or sets the authToken.
+            </summary>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Headers.DfpSoapHeader">
+            <summary>
+            Base class for Dfp API Soap headers.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.Headers.DfpSoapHeader.Version">
+            <summary>
+            Gets or sets the API version.
+            </summary>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Headers.OAuth">
+            <summary>
+            The oauth authentication header.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Headers.OAuth.parametersField">
+            <summary>
+            The oauth parameters.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.Headers.OAuth.parameters">
+            <summary>
+            Gets or sets the oauth parameters.
+            </summary>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Headers.RequestHeader">
+            <summary>
+            Soap Request header for DFP API services.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Headers.RequestHeader.stub">
+            <summary>
+            The request header stub that this class wraps.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.Headers.RequestHeader.Stub">
+            <summary>
+            Gets or sets the stub that is wrapped by this object.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.Headers.RequestHeader.authentication">
+            <summary>
+            Gets or sets the authentication field.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.Headers.RequestHeader.authToken">
+            <summary>
+            Gets or sets the auth token.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.Headers.RequestHeader.oAuthToken">
+            <summary>
+            Gets or sets the OAuth token.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.Headers.RequestHeader.networkCode">
+            <summary>
+            Gets or sets the network code.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.Headers.RequestHeader.applicationName">
+            <summary>
+            Gets or sets the application name.
+            </summary>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Headers.RequestHeaderStub">
+            <summary>
+            A SOAP stub class that represents the request headers for a DFP API call.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Headers.RequestHeaderStub.authToken">
+            <summary>
+            Auth token.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Headers.RequestHeaderStub.oAuthToken">
+            <summary>
+            OAuth token.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Headers.RequestHeaderStub.networkCode">
+            <summary>
+            Network code.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Headers.RequestHeaderStub.applicationName">
+            <summary>
+            Application name.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Headers.RequestHeaderStub.authentication">
+            <summary>
+            The authentication field.
+            </summary>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Headers.ResponseHeader">
+            <summary>
+            SOAP Response header for DFP API services.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Headers.ResponseHeader.stub">
+            <summary>
+            The request header stub that this class wraps.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Headers.ResponseHeader.ReadXml(System.Xml.XmlReader)">
+            <summary>
+            Deserialize the object from xml.
+            </summary>
+            <param name="reader">The xml reader for reading the serialized xml.
+            </param>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.Headers.ResponseHeader.Stub">
+            <summary>
+            Gets or sets the stub that is wrapped by this object.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.Headers.ResponseHeader.requestId">
+            <summary>
+            Gets or sets the request id for this API call.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.Headers.ResponseHeader.responseTime">
+            <summary>
+            Gets or sets the response time for this API call.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.Headers.ResponseHeader.responseTimeSpecified">
+            <summary>
+            Gets or sets the response time for this API call.
+            </summary>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.ResponseHeaderStub">
+            <summary>
+            A SOAP stub class that represents the response headers for a DFP API call.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.ResponseHeaderStub.requestId">
+            <summary>
+            Request ID for this API call.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.ResponseHeaderStub.responseTime">
+            <summary>
+            Response time for this API call.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.ResponseHeaderStub.responseTimeSpecified">
+            <summary>
+            True, if response time is set.
+            </summary>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Lib.DfpApiException">
+            <summary>
+            Custom exception class for wrapping DFP API SOAP exceptions.
+            </summary>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Lib.DfpException">
+            <summary>
+            Base class for all exceptions specific to DFP.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpException.#ctor">
+            <summary>
+            Public constructor.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpException.#ctor(System.String)">
+            <summary>
+            Public constructor.
+            </summary>
+            <param name="message">Error message for this API exception.</param>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpException.#ctor(System.String,System.Exception)">
+            <summary>
+            Public constructor.
+            </summary>
+            <param name="message">Error message for this API exception.</param>
+            <param name="innerException">Inner exception, if any.</param>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Protected constructor. Used by serialization frameworks while
+            deserializing an exception object.
+            </summary>
+            <param name="info">Info about the serialization context.</param>
+            <param name="context">A streaming context that represents the
+            serialization stream.</param>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpApiException.apiException">
+            <summary>
+            The original ApiException object from DFP API.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpApiException.#ctor">
+            <summary>
+            Public constructor.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpApiException.#ctor(System.Object)">
+            <summary>
+            Public constructor.
+            </summary>
+            <param name="apiException">The underlying ApiException from the
+            server.</param>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpApiException.#ctor(System.Object,System.String)">
+            <summary>
+            Public constructor.
+            </summary>
+            <param name="apiException">The underlying ApiException from the
+            server.</param>
+            <param name="message">Error message for this API exception.</param>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpApiException.#ctor(System.Object,System.String,System.Exception)">
+            <summary>
+            Public constructor.
+            </summary>
+            <param name="apiException">The underlying ApiException from the
+            server.</param>
+            <param name="message">Error message for this API exception.</param>
+            <param name="innerException">Inner exception, if any.</param>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpApiException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Protected constructor. Used by serialization frameworks while
+            deserializing an exception object.
+            </summary>
+            <param name="info">Info about the serialization context.</param>
+            <param name="context">A streaming context that represents the
+            serialization stream.</param>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpApiException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            This method is called by serialization frameworks while serializing
+            an exception object.
+            </summary>
+            <param name="info">Info about the serialization context.</param>
+            <param name="context">A streaming context that represents the
+            serialization stream.</param>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.Lib.DfpApiException.ApiException">
+            <summary>
+            Gets the ApiException object.
+            </summary>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Lib.DfpAppConfig">
+            <summary>
+            This class reads the configuration keys from App.config.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpAppConfig.SHORT_NAME">
+            <summary>
+            The short name to identify this assembly.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpAppConfig.ENABLE_GZIP_COMPRESSION">
+            <summary>
+            Key name for enableGzipCompression.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpAppConfig.AUTHTOKEN">
+            <summary>
+            Key name for authToken.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpAppConfig.EMAIL">
+            <summary>
+            Key name for email.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpAppConfig.PASSWORD">
+            <summary>
+            Key name for password.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpAppConfig.NETWORK_CODE">
+            <summary>
+            Key name for networkCode.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpAppConfig.APPLICATION_NAME">
+            <summary>
+            Key name for applicationName.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpAppConfig.DFPAPI_SERVER">
+            <summary>
+            Key name for Dfp API URL.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpAppConfig.AUTHORIZATION_METHOD">
+            <summary>
+            Key name for authorizationMethod.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpAppConfig.OAUTH_CONSUMER_KEY">
+            <summary>
+            Key name for oAuthConsumerKey.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpAppConfig.OAUTH_CONSUMER_SECRET">
+            <summary>
+            Key name for oAuthConsumerKey.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpAppConfig.DEFAULT_DFPAPI_SERVER">
+            <summary>
+            Default value for DFPAPI_SERVER.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpAppConfig.DEFAULT_AUTHORIZATION_METHOD">
+            <summary>
+            Default value for authorizationMethod.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpAppConfig.authToken">
+            <summary>
+            Authtoken to be used in making API calls.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpAppConfig.email">
+            <summary>
+            Email to be used in getting AuthToken.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpAppConfig.password">
+            <summary>
+            Password to be used in getting AuthToken.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpAppConfig.networkCode">
+            <summary>
+            NetworkCode to be used in SOAP headers.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpAppConfig.applicationName">
+            <summary>
+            Application name to be used in SOAP headers.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpAppConfig.dfpApiServer">
+            <summary>
+            URL for DFP API.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpAppConfig.enableGzipCompression">
+            <summary>
+            True, if gzip compression should be turned on for SOAP requests and
+            responses.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpAppConfig.authorizationMethod">
+            <summary>
+            Authorization method to be used when making API calls.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpAppConfig.oAuthConsumerKey">
+            <summary>
+            OAuth consumer key.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpAppConfig.oAuthConsumerSecret">
+            <summary>
+            OAuth consumer value.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpAppConfig.GetUserAgent">
+            <summary>
+            Gets a useragent string that can be used with the library.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpAppConfig.#ctor">
+            <summary>
+            Public constructor.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpAppConfig.ReadSettings(System.Collections.Hashtable)">
+            <summary>
+            Read all settings from App.config.
+            </summary>
+            <param name="settings">The parsed App.config settings.</param>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.Lib.DfpAppConfig.AuthToken">
+            <summary>
+            Gets or sets the auth token to be used in SOAP headers.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.Lib.DfpAppConfig.Email">
+            <summary>
+            Gets or sets the email to be used in getting AuthToken.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.Lib.DfpAppConfig.Password">
+            <summary>
+            Gets or sets the password to be used in getting AuthToken.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.Lib.DfpAppConfig.NetworkCode">
+            <summary>
+            Gets or sets networkCode to be used in SOAP headers.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.Lib.DfpAppConfig.ApplicationName">
+            <summary>
+            Gets or sets application name to be used in SOAP headers.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.Lib.DfpAppConfig.DfpApiServer">
+            <summary>
+            Gets or sets URL for DFP API.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.Lib.DfpAppConfig.EnableGzipCompression">
+            <summary>
+            Gets or sets whether gzip compression should be turned on for SOAP
+            requests and responses.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.Lib.DfpAppConfig.AuthorizationMethod">
+            <summary>
+            Gets or sets the authorization method to be used when making API calls.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.Lib.DfpAppConfig.OAuthConsumerKey">
+            <summary>
+            Gets or sets the OAuth consumer key.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.Lib.DfpAppConfig.OAuthConsumerSecret">
+            <summary>
+            Gets or sets the OAuth consumer secret.
+            </summary>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Lib.DfpAuthorizationMethod">
+            <summary>
+            List of supported Authorization methods for Dfp API.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpAuthorizationMethod.ClientLogin">
+            <summary>
+            ClientLogin API.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpAuthorizationMethod.OAuth">
+            <summary>
+            OAuth 1.0a API.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpAuthorizationMethod.OAuth2">
+            <summary>
+            OAuth 2.0 draft 10 API.
+            </summary>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Lib.DfpService">
+            <summary>
+            Lists all the services available through this library.
+            </summary>
+            <summary>
+            Lists all the services available through this library.
+            </summary>
+            <summary>
+            Lists all the services available through this library.
+            </summary>
+            <summary>
+            Lists all the services available through this library.
+            </summary>
+            <summary>
+            Lists all the services available through this library.
+            </summary>
+            <summary>
+            Lists all the services available through this library.
+            </summary>
+            <summary>
+            Lists all the services available through this library.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpService.GetOAuthScope(Google.Api.Ads.Dfp.Lib.DfpAppConfig)">
+            <summary>
+            Gets the OAuth scope parameter for getting request token.
+            </summary>
+            <returns>The OAuth scope parameter for AdWords API.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpService.MakeServiceSignature(System.String,System.String)">
+            <summary>
+            Creates a service creation parameter for defining a DFP service.
+            </summary>
+            <param name="version">Service version.</param>
+            <param name="serviceName">Service name.</param>
+            <returns>A service creation parameter defining this service.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpService.GetServiceTypes">
+            <summary>
+            Gets all service types defined in this service.
+            </summary>
+            <returns>The nested types that define service versions under this
+            service.</returns>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Lib.DfpService.v201108">
+            <summary>
+            All the services available in v201108.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201108.CompanyService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201108/CompanyService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201108.CreativeService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201108/CreativeService.html">
+            this page </a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201108.CustomTargetingService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201108/CustomTargetingService.html">
+            this page </a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201108.ForecastService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201108/ForecastService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201108.InventoryService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201108/InventoryService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201108.LabelService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201108/LabelService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201108.LineItemService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201108/LineItemService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:Google.Api.Ads.Dfp.Lib.DfpService.v201108.LineItemCreativeAssociationService" -->
+        <!-- Badly formed XML comment ignored for member "F:Google.Api.Ads.Dfp.Lib.DfpService.v201108.NetworkService" -->
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201108.OrderService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201108/OrderService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:Google.Api.Ads.Dfp.Lib.DfpService.v201108.PlacementService" -->
+        <!-- Badly formed XML comment ignored for member "F:Google.Api.Ads.Dfp.Lib.DfpService.v201108.PublisherQueryLanguageService" -->
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201108.ReportService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201108/ReportService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201108.ThirdPartySlotService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201108/ThirdPartySlotService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201108.UserService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201108/UserService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201108.factoryType">
+            <summary>
+            Factory type for v201108 services.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpService.v201108.#cctor">
+            <summary>
+            Static constructor to initialize the service constants.
+            </summary>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Lib.DfpService.v201111">
+            <summary>
+            All the services available in v201111.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201111.CompanyService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201111/CompanyService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201111.ContentService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201111/ContentService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201111.CreativeService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201111/CreativeService.html">
+            this page </a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201111.CreativeTemplateService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201111/CreativeTemplateService.html">
+            this page </a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201111.CustomTargetingService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201111/CustomTargetingService.html">
+            this page </a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201111.ForecastService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201111/ForecastService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201111.InventoryService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201111/InventoryService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201111.LabelService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201111/LabelService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201111.LineItemService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201111/LineItemService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:Google.Api.Ads.Dfp.Lib.DfpService.v201111.LineItemCreativeAssociationService" -->
+        <!-- Badly formed XML comment ignored for member "F:Google.Api.Ads.Dfp.Lib.DfpService.v201111.NetworkService" -->
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201111.OrderService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201111/OrderService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:Google.Api.Ads.Dfp.Lib.DfpService.v201111.PlacementService" -->
+        <!-- Badly formed XML comment ignored for member "F:Google.Api.Ads.Dfp.Lib.DfpService.v201111.PublisherQueryLanguageService" -->
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201111.ReportService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201111/ReportService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201111.SuggestedAdUnitService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201111/SuggestedAdUnitService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201111.ThirdPartySlotService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201111/ThirdPartySlotService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201111.UserService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201111/UserService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201111.factoryType">
+            <summary>
+            Factory type for v201111 services.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpService.v201111.#cctor">
+            <summary>
+            Static constructor to initialize the service constants.
+            </summary>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Lib.DfpService.v201201">
+            <summary>
+            All the services available in v201201.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201201.CompanyService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201201/CompanyService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201201.ContentService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201201/ContentService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201201.CreativeService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201201/CreativeService.html">
+            this page </a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201201.CreativeTemplateService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201201/CreativeTemplateService.html">
+            this page </a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201201.CustomTargetingService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201201/CustomTargetingService.html">
+            this page </a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201201.ForecastService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201201/ForecastService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201201.InventoryService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201201/InventoryService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201201.LabelService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201201/LabelService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201201.LineItemService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201201/LineItemService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:Google.Api.Ads.Dfp.Lib.DfpService.v201201.LineItemCreativeAssociationService" -->
+        <!-- Badly formed XML comment ignored for member "F:Google.Api.Ads.Dfp.Lib.DfpService.v201201.NetworkService" -->
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201201.OrderService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201201/OrderService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:Google.Api.Ads.Dfp.Lib.DfpService.v201201.PlacementService" -->
+        <!-- Badly formed XML comment ignored for member "F:Google.Api.Ads.Dfp.Lib.DfpService.v201201.PublisherQueryLanguageService" -->
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201201.ReportService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201201/ReportService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201201.SuggestedAdUnitService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201201/SuggestedAdUnitService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201201.TeamService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201201/TeamService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201201.ThirdPartySlotService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201201/ThirdPartySlotService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201201.UserService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201201/UserService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201201.factoryType">
+            <summary>
+            Factory type for v201201 services.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpService.v201201.#cctor">
+            <summary>
+            Static constructor to initialize the service constants.
+            </summary>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Lib.DfpService.v201203">
+            <summary>
+            All the services available in v201203.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201203.AudienceSegmentService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201203/AudienceSegmentService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201203.CompanyService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201203/CompanyService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201203.ContentService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201203/ContentService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201203.CreativeService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201203/CreativeService.html">
+            this page </a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201203.CreativeTemplateService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201203/CreativeTemplateService.html">
+            this page </a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201203.CustomTargetingService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201203/CustomTargetingService.html">
+            this page </a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201203.ForecastService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201203/ForecastService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201203.InventoryService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201203/InventoryService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201203.LabelService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201203/LabelService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201203.LineItemService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201203/LineItemService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:Google.Api.Ads.Dfp.Lib.DfpService.v201203.LineItemCreativeAssociationService" -->
+        <!-- Badly formed XML comment ignored for member "F:Google.Api.Ads.Dfp.Lib.DfpService.v201203.NetworkService" -->
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201203.OrderService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201203/OrderService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:Google.Api.Ads.Dfp.Lib.DfpService.v201203.PlacementService" -->
+        <!-- Badly formed XML comment ignored for member "F:Google.Api.Ads.Dfp.Lib.DfpService.v201203.PublisherQueryLanguageService" -->
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201203.ReportService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201203/ReportService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201203.SuggestedAdUnitService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201203/SuggestedAdUnitService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201203.TeamService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201203/TeamService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201203.ThirdPartySlotService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201203/ThirdPartySlotService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201203.UserService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201203/UserService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201203.factoryType">
+            <summary>
+            Factory type for v201203 services.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpService.v201203.#cctor">
+            <summary>
+            Static constructor to initialize the service constants.
+            </summary>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Lib.DfpService.v201204">
+            <summary>
+            All the services available in v201204.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201204.AudienceSegmentService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201204/AudienceSegmentService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201204.CompanyService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201204/CompanyService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201204.ContentService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201204/ContentService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201204.CreativeService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201204/CreativeService.html">
+            this page </a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201204.CreativeTemplateService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201204/CreativeTemplateService.html">
+            this page </a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201204.CustomFieldService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201204/CustomFieldService.html">
+            this page </a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201204.CustomTargetingService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201204/CustomTargetingService.html">
+            this page </a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201204.ForecastService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201204/ForecastService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201204.InventoryService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201204/InventoryService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201204.LabelService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201204/LabelService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201204.LineItemService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201204/LineItemService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:Google.Api.Ads.Dfp.Lib.DfpService.v201204.LineItemCreativeAssociationService" -->
+        <!-- Badly formed XML comment ignored for member "F:Google.Api.Ads.Dfp.Lib.DfpService.v201204.NetworkService" -->
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201204.OrderService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201204/OrderService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:Google.Api.Ads.Dfp.Lib.DfpService.v201204.PlacementService" -->
+        <!-- Badly formed XML comment ignored for member "F:Google.Api.Ads.Dfp.Lib.DfpService.v201204.PublisherQueryLanguageService" -->
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201204.ReportService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201204/ReportService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201204.SuggestedAdUnitService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201204/SuggestedAdUnitService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201204.TeamService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201204/TeamService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201204.ThirdPartySlotService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201204/ThirdPartySlotService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201204.UserService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201204/UserService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201204.UserTeamAssociationService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201204/UserTeamAssociationService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201204.factoryType">
+            <summary>
+            Factory type for v201204 services.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpService.v201204.#cctor">
+            <summary>
+            Static constructor to initialize the service constants.
+            </summary>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Lib.DfpService.v201206">
+            <summary>
+            All the services available in v201206.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201206.AudienceSegmentService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201206/AudienceSegmentService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201206.CompanyService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201206/CompanyService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201206.ContentService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201206/ContentService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201206.CreativeService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201206/CreativeService.html">
+            this page </a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201206.CreativeSetService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201206/CreativeSetService.html">
+            this page </a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201206.CreativeTemplateService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201206/CreativeTemplateService.html">
+            this page </a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201206.CustomFieldService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201206/CustomFieldService.html">
+            this page </a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201206.CustomTargetingService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201206/CustomTargetingService.html">
+            this page </a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201206.ForecastService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201206/ForecastService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201206.InventoryService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201206/InventoryService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201206.LabelService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201206/LabelService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201206.LineItemService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201206/LineItemService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:Google.Api.Ads.Dfp.Lib.DfpService.v201206.LineItemCreativeAssociationService" -->
+        <!-- Badly formed XML comment ignored for member "F:Google.Api.Ads.Dfp.Lib.DfpService.v201206.NetworkService" -->
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201206.OrderService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201206/OrderService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:Google.Api.Ads.Dfp.Lib.DfpService.v201206.PlacementService" -->
+        <!-- Badly formed XML comment ignored for member "F:Google.Api.Ads.Dfp.Lib.DfpService.v201206.PublisherQueryLanguageService" -->
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201206.ReportService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201206/ReportService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201206.SuggestedAdUnitService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201206/SuggestedAdUnitService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201206.TeamService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201206/TeamService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201206.ThirdPartySlotService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201206/ThirdPartySlotService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201206.UserService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201206/UserService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201206.UserTeamAssociationService">
+            <summary>
+            See <a href="http://code.google.com/apis/dfp/docs/reference/v201206/UserTeamAssociationService.html">
+            this page</a> for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpService.v201206.factoryType">
+            <summary>
+            Factory type for v201206 services.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpService.v201206.#cctor">
+            <summary>
+            Static constructor to initialize the service constants.
+            </summary>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Lib.DfpServiceFactory">
+            <summary>
+            The factory class for all DFP API services.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpServiceFactory.requestHeader">
+            <summary>
+            The request header to be used with DFP API services.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpServiceFactory.#ctor">
+            <summary>
+            Default public constructor.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpServiceFactory.CreateService(Google.Api.Ads.Common.Lib.ServiceSignature,Google.Api.Ads.Common.Lib.AdsUser,System.Uri)">
+            <summary>
+            Create a service object.
+            </summary>
+            <param name="signature">Signature of the service being created.</param>
+            <param name="user">The user for which the service is being created.
+            <param name="serverUrl">The server to which the API calls should be
+            made.</param>
+            </param>
+            <returns>An object of the desired service type.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpServiceFactory.ReadHeadersFromConfig(Google.Api.Ads.Common.Lib.AppConfig)">
+            <summary>
+            Reads the headers from App.config.
+            </summary>
+            <param name="config">The configuration class.</param>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Lib.DfpServiceSignature">
+            <summary>
+            Service creation params for DFP API family of services.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpServiceSignature.#ctor(System.String,System.String)">
+            <summary>
+            Public constructor.
+            </summary>
+            <param name="version">Service version.</param>
+            <param name="serviceName">Service name.</param>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.Lib.DfpServiceSignature.ServiceType">
+            <summary>
+            Gets the type of service.
+            </summary>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Lib.DfpSoapClient">
+            <summary>
+            Base class for DFP API services.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpSoapClient.COOKIE_INVALID_ERROR">
+            <summary>
+            The error thrown when an auth token expires.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpSoapClient.OAUTH_TOKEN_EXPIRED_ERROR">
+            <summary>
+            The error thrown when an oauth token expires.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpSoapClient.SERVICE_NAME">
+            <summary>
+            The service name for use with ClientLogin server.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpSoapClient.GetCustomException(System.Web.Services.Protocols.SoapException)">
+            <summary>
+            Gets a custom exception that wraps the SOAP exception thrown
+            by the server.
+            </summary>
+            <param name="ex">SOAPException that was thrown by the server.</param>
+            <returns>A custom exception object that wraps the SOAP exception.
+            </returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpSoapClient.MakeApiCall(System.String,System.Object[])">
+            <summary>
+            This method makes the actual SOAP API call. It is a thin wrapper
+            over SOAPHttpClientProtocol:Invoke, and provide things like
+            protection from race condition.
+            </summary>
+            <param name="methodName">The name of the SOAP API method.</param>
+            <param name="parameters">The list of parameters for the SOAP API
+            method.</param>
+            <returns>
+            The results from calling the SOAP API method.
+            </returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpSoapClient.ShouldRetry(System.Exception)">
+            <summary>
+            Whether the current API call should be retried or not.
+            </summary>
+            <param name="ex">The exception thrown from the previous call.</param>
+            <returns>
+            True, if the current API call should be retried.
+            </returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpSoapClient.PrepareForRetry(System.Exception)">
+            <summary>
+            Prepares for retrying the API call.
+            </summary>
+            <param name="ex">The exception thrown from the previous call.</param>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpSoapClient.IsCookieInvalidError(Google.Api.Ads.Dfp.Lib.DfpApiException)">
+            <summary>
+            Determines whether the exception thrown by the server is an AuthToken
+            Invalid Error.
+            </summary>
+            <param name="dfpApiException">The DFP Api exception.</param>
+            <returns>True, if the server exception is a AuthToken invalid error,
+            false otherwise.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpSoapClient.IsOAuthTokenExpiredError(Google.Api.Ads.Dfp.Lib.DfpApiException)">
+            <summary>
+            Determines whether the exception thrown by the server is an OAuth token
+            expired error.
+            </summary>
+            <param name="dfpApiException">The DFP Api exception.</param>
+            <returns>True, if the server exception is a OAuth token expired error,
+            false otherwise.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpSoapClient.MatchesError(Google.Api.Ads.Dfp.Lib.DfpApiException,System.String)">
+            <summary>
+            Determines whether the exception thrown by the server matches a known
+            error.
+            </summary>
+            <param name="dfpApiException">The DFP Api exception.</param>
+            <param name="errorMessage">The known error message.</param>
+            <returns>True, if the server exception matches the known error, false
+            otherwise.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpSoapClient.RefreshOAuthTokenIfNecessary(Google.Api.Ads.Dfp.Lib.DfpApiException)">
+            <summary>
+            Refreshes the OAuth access token if necessary.
+            </summary>
+            <param name="dfpApiException">The DFP Api exception.</param>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpSoapClient.InvalidateAuthTokenCacheIfNecessary(Google.Api.Ads.Dfp.Lib.DfpApiException)">
+            <summary>
+            Invalidates the auth token cache if necessary.
+            </summary>
+            <param name="dfpApiException">The DFP Api exception.</param>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Lib.DfpTraceListener">
+            <summary>
+            Listens to SOAP messages sent and received by this library.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Lib.DfpTraceListener.instance">
+            <summary>
+            The singleton instance.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpTraceListener.#ctor">
+            <summary>
+            Protected constructor.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpTraceListener.FormatHttpRequest(System.String)">
+            <summary>
+            Create a formatted HTTP request text, to be written into HTTP logs.
+            </summary>
+            <param name="soapRequest">The request XML for this SOAP call.</param>
+            <returns>A formatted string that represents the HTTP request.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpTraceListener.FormatHttpResponse(System.String)">
+            <summary>
+            Create a formatted http response text, to be written into HTTP logs.
+            </summary>
+            <param name="soapResponse">The response xml for this SOAP call.</param>
+            <returns>A formatted string that represents the HTTP response.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpTraceListener.GetFieldsToMask">
+            <summary>
+            Gets a list of fields to be masked in xml logs.
+            </summary>
+            <returns>The list of fields to be masked.</returns>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.Lib.DfpTraceListener.Instance">
+            <summary>
+            Gets the singleton instance.
+            </summary>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Lib.DfpUser">
+            <summary>
+            Represents an DFP API user.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpUser.#ctor">
+            <summary>
+            Public constructor. Use this version if you want the library to
+            use all settings from App.config.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpUser.#ctor(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Parameterized constructor. Use this version if you want to construct
+            a DfpUser with a custom set of headers.
+            </summary>
+            <param name="headers">The custom set of headers.</param>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpUser.GetServiceTypes">
+            <summary>
+            Gets all the service types to be registered against this user.
+            </summary>
+            <returns>The type of all service classes to be registered.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Lib.DfpUser.GetDefaultListeners">
+            <summary>
+            Gets the default listeners.
+            </summary>
+            <returns>A list of default listeners</returns>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Util.v201108.DateTimeUtilities">
+            <summary>
+            A utility class that allows you to build Datetime objects from strings.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201108.DateTimeUtilities.FromString(System.String)">
+            <summary>
+            Converts the string in format yyyyMMdd HH:mm:ss to a date object.
+            </summary>
+            <param name="dateString">The date string.</param>
+            <returns>A Dfp Datetime object.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201108.DateTimeUtilities.FromDateTime(System.DateTime)">
+            <summary>
+            Converts a System.DateTime object to a date object.
+            </summary>
+            <param name="dateTime">The DateTime object.</param>
+            <returns>A Dfp Datetime object.</returns>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Util.v201108.PqlUtilities">
+            <summary>
+            A utility class for handling PQL objects.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201108.PqlUtilities.GetValue(Google.Api.Ads.Dfp.v201108.Value)">
+            <summary>
+            Gets the underlying value of the Value object.
+            </summary>
+            <value>The Value object to get the value from.</value>
+            <returns>The underlying value.</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Google.Api.Ads.Dfp.Util.v201108.PqlUtilities.ResultSetToStringArrayList(Google.Api.Ads.Dfp.v201108.ResultSet)" -->
+        <member name="M:Google.Api.Ads.Dfp.Util.v201108.PqlUtilities.ResultSetToString(Google.Api.Ads.Dfp.v201108.ResultSet)">
+             <summary>
+             Gets the result set as a table represenation in the form of:
+            
+             <pre>
+             +-------+-------+-------+
+             |column1|column2|column3|
+             +-------+-------+-------+
+             |value1 |value2 |value3 |
+             +-------+-------+-------+
+             |value1 |value2 |value3 |
+             +-------+-------+-------+
+             </pre>
+             </summary>
+             <param name="resultSet">The result set to display as a string</param>
+             <returns>The string represenation of result set as a table.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201108.PqlUtilities.CreateRowTemplate(System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Creates the row template given the maximum size for each column.
+            </summary>
+            <param name="maxColumnSizes">The maximum size for each column</param>
+            <returns>The row template to format row data into.</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Google.Api.Ads.Dfp.Util.v201108.PqlUtilities.CreateRowSeperator(System.Collections.Generic.List{System.Int32})" -->
+        <member name="M:Google.Api.Ads.Dfp.Util.v201108.PqlUtilities.GetMaxColumnSizes(System.Collections.Generic.List{System.String[]})">
+            <summary>
+            Gets a list of the maximum size for each column.
+            </summary>
+            <param name="resultSet">The result set to process.</param>
+            <returns>A list of the maximum size for each column.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201108.PqlUtilities.GetColumnLabels(Google.Api.Ads.Dfp.v201108.ResultSet)">
+            <summary>
+            Gets the column labels for the result set.
+            </summary>
+            <param name="resultSet">The result set to get the column labels for.
+            </param>
+            <returns>The string array of column labels.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201108.PqlUtilities.GetRowValues(Google.Api.Ads.Dfp.v201108.Row)">
+            <summary>
+            Gets the row values for a row of the result set in the form of an object
+            array.
+            </summary>
+            <param name="row">The row to get the values for.</param>
+            <returns>The object array of the row values.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201108.PqlUtilities.GetRowStringValues(Google.Api.Ads.Dfp.v201108.Row)">
+            <summary>
+            Gets the row values for a row of the result set in a the form of a string
+            array. <code>null</code> values are interperted as empty strings.
+            </summary>
+            <param name="row">The row to get the values for.</param>
+            <returns>The string array of the row values.</returns>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Util.v201108.StatementBuilder">
+            <summary>
+            A utility class that allows you to build a DFP Statement from query
+            and parameters.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Util.v201108.StatementBuilder.statement">
+            <summary>
+            The DFP statement.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Util.v201108.StatementBuilder.valueEntries">
+            <summary>
+            The list of query parameters.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201108.StatementBuilder.#ctor(System.String)">
+            <summary>
+            Parameterized public constructor.
+            </summary>
+            <param name="query">The query string.</param>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201108.StatementBuilder.AddValue(System.String,System.String)">
+            <summary>
+            Adds a new string value to the list of query parameters.
+            </summary>
+            <param name="key">The parameter name.</param>
+            <param name="value">The parameter value.</param>
+            <returns>The statement builder, for chaining method calls.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201108.StatementBuilder.AddValue(System.String,System.Boolean)">
+            <summary>
+            Adds a new boolean value to the list of query parameters.
+            </summary>
+            <param name="key">The parameter name.</param>
+            <param name="value">The parameter value.</param>
+            <returns>The statement builder, for chaining method calls.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201108.StatementBuilder.AddValue(System.String,System.Decimal)">
+            <summary>
+            Adds a new decimal value to the list of query parameters.
+            </summary>
+            <param name="key">The parameter name.</param>
+            <param name="value">The parameter value.</param>
+            <returns>The statement builder, for chaining method calls.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201108.StatementBuilder.AddValue(System.String,Google.Api.Ads.Dfp.v201108.Value)">
+            <summary>
+            Adds a new value to the list of query parameters.
+            </summary>
+            <param name="key">The parameter name.</param>
+            <param name="value">The parameter value.</param>
+            <returns>The statement builder, for chaining method calls.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201108.StatementBuilder.ToStatement">
+            <summary>
+            Gets the statement built by this builder.
+            </summary>
+            <returns>The statement.</returns>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.Util.v201108.StatementBuilder.Query">
+            <summary>
+            Gets or sets the statement query.
+            </summary>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Util.v201111.DateTimeUtilities">
+            <summary>
+            A utility class that allows you to build Datetime objects from strings.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201111.DateTimeUtilities.FromString(System.String)">
+            <summary>
+            Converts the string in format yyyyMMdd HH:mm:ss to a date object.
+            </summary>
+            <param name="dateString">The date string.</param>
+            <returns>A Dfp Datetime object.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201111.DateTimeUtilities.FromDateTime(System.DateTime)">
+            <summary>
+            Converts a System.DateTime object to a date object.
+            </summary>
+            <param name="dateTime">The DateTime object.</param>
+            <returns>A Dfp Datetime object.</returns>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Util.v201111.PqlUtilities">
+            <summary>
+            A utility class for handling PQL objects.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201111.PqlUtilities.GetValue(Google.Api.Ads.Dfp.v201111.Value)">
+            <summary>
+            Gets the underlying value of the Value object.
+            </summary>
+            <value>The Value object to get the value from.</value>
+            <returns>The underlying value.</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Google.Api.Ads.Dfp.Util.v201111.PqlUtilities.ResultSetToStringArrayList(Google.Api.Ads.Dfp.v201111.ResultSet)" -->
+        <member name="M:Google.Api.Ads.Dfp.Util.v201111.PqlUtilities.ResultSetToString(Google.Api.Ads.Dfp.v201111.ResultSet)">
+             <summary>
+             Gets the result set as a table represenation in the form of:
+            
+             <pre>
+             +-------+-------+-------+
+             |column1|column2|column3|
+             +-------+-------+-------+
+             |value1 |value2 |value3 |
+             +-------+-------+-------+
+             |value1 |value2 |value3 |
+             +-------+-------+-------+
+             </pre>
+             </summary>
+             <param name="resultSet">The result set to display as a string</param>
+             <returns>The string represenation of result set as a table.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201111.PqlUtilities.CreateRowTemplate(System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Creates the row template given the maximum size for each column.
+            </summary>
+            <param name="maxColumnSizes">The maximum size for each column</param>
+            <returns>The row template to format row data into.</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Google.Api.Ads.Dfp.Util.v201111.PqlUtilities.CreateRowSeperator(System.Collections.Generic.List{System.Int32})" -->
+        <member name="M:Google.Api.Ads.Dfp.Util.v201111.PqlUtilities.GetMaxColumnSizes(System.Collections.Generic.List{System.String[]})">
+            <summary>
+            Gets a list of the maximum size for each column.
+            </summary>
+            <param name="resultSet">The result set to process.</param>
+            <returns>A list of the maximum size for each column.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201111.PqlUtilities.GetColumnLabels(Google.Api.Ads.Dfp.v201111.ResultSet)">
+            <summary>
+            Gets the column labels for the result set.
+            </summary>
+            <param name="resultSet">The result set to get the column labels for.
+            </param>
+            <returns>The string array of column labels.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201111.PqlUtilities.GetRowValues(Google.Api.Ads.Dfp.v201111.Row)">
+            <summary>
+            Gets the row values for a row of the result set in the form of an object
+            array.
+            </summary>
+            <param name="row">The row to get the values for.</param>
+            <returns>The object array of the row values.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201111.PqlUtilities.GetRowStringValues(Google.Api.Ads.Dfp.v201111.Row)">
+            <summary>
+            Gets the row values for a row of the result set in a the form of a string
+            array. <code>null</code> values are interperted as empty strings.
+            </summary>
+            <param name="row">The row to get the values for.</param>
+            <returns>The string array of the row values.</returns>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Util.v201111.StatementBuilder">
+            <summary>
+            A utility class that allows you to build a DFP Statement from query
+            and parameters.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Util.v201111.StatementBuilder.statement">
+            <summary>
+            The DFP statement.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Util.v201111.StatementBuilder.valueEntries">
+            <summary>
+            The list of query parameters.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201111.StatementBuilder.#ctor(System.String)">
+            <summary>
+            Parameterized public constructor.
+            </summary>
+            <param name="query">The query string.</param>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201111.StatementBuilder.AddValue(System.String,System.String)">
+            <summary>
+            Adds a new string value to the list of query parameters.
+            </summary>
+            <param name="key">The parameter name.</param>
+            <param name="value">The parameter value.</param>
+            <returns>The statement builder, for chaining method calls.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201111.StatementBuilder.AddValue(System.String,System.Boolean)">
+            <summary>
+            Adds a new boolean value to the list of query parameters.
+            </summary>
+            <param name="key">The parameter name.</param>
+            <param name="value">The parameter value.</param>
+            <returns>The statement builder, for chaining method calls.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201111.StatementBuilder.AddValue(System.String,System.Decimal)">
+            <summary>
+            Adds a new decimal value to the list of query parameters.
+            </summary>
+            <param name="key">The parameter name.</param>
+            <param name="value">The parameter value.</param>
+            <returns>The statement builder, for chaining method calls.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201111.StatementBuilder.AddValue(System.String,Google.Api.Ads.Dfp.v201111.Value)">
+            <summary>
+            Adds a new value to the list of query parameters.
+            </summary>
+            <param name="key">The parameter name.</param>
+            <param name="value">The parameter value.</param>
+            <returns>The statement builder, for chaining method calls.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201111.StatementBuilder.ToStatement">
+            <summary>
+            Gets the statement built by this builder.
+            </summary>
+            <returns>The statement.</returns>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.Util.v201111.StatementBuilder.Query">
+            <summary>
+            Gets or sets the statement query.
+            </summary>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Util.v201201.DateTimeUtilities">
+            <summary>
+            A utility class that allows you to build Datetime objects from strings.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201201.DateTimeUtilities.FromString(System.String)">
+            <summary>
+            Converts the string in format yyyyMMdd HH:mm:ss to a date object.
+            </summary>
+            <param name="dateString">The date string.</param>
+            <returns>A Dfp Datetime object.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201201.DateTimeUtilities.FromDateTime(System.DateTime)">
+            <summary>
+            Converts a System.DateTime object to a date object.
+            </summary>
+            <param name="dateTime">The DateTime object.</param>
+            <returns>A Dfp Datetime object.</returns>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Util.v201201.PqlUtilities">
+            <summary>
+            A utility class for handling PQL objects.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201201.PqlUtilities.GetValue(Google.Api.Ads.Dfp.v201201.Value)">
+            <summary>
+            Gets the underlying value of the Value object.
+            </summary>
+            <value>The Value object to get the value from.</value>
+            <returns>The underlying value.</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Google.Api.Ads.Dfp.Util.v201201.PqlUtilities.ResultSetToStringArrayList(Google.Api.Ads.Dfp.v201201.ResultSet)" -->
+        <member name="M:Google.Api.Ads.Dfp.Util.v201201.PqlUtilities.ResultSetToString(Google.Api.Ads.Dfp.v201201.ResultSet)">
+             <summary>
+             Gets the result set as a table represenation in the form of:
+            
+             <pre>
+             +-------+-------+-------+
+             |column1|column2|column3|
+             +-------+-------+-------+
+             |value1 |value2 |value3 |
+             +-------+-------+-------+
+             |value1 |value2 |value3 |
+             +-------+-------+-------+
+             </pre>
+             </summary>
+             <param name="resultSet">The result set to display as a string</param>
+             <returns>The string represenation of result set as a table.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201201.PqlUtilities.CreateRowTemplate(System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Creates the row template given the maximum size for each column.
+            </summary>
+            <param name="maxColumnSizes">The maximum size for each column</param>
+            <returns>The row template to format row data into.</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Google.Api.Ads.Dfp.Util.v201201.PqlUtilities.CreateRowSeperator(System.Collections.Generic.List{System.Int32})" -->
+        <member name="M:Google.Api.Ads.Dfp.Util.v201201.PqlUtilities.GetMaxColumnSizes(System.Collections.Generic.List{System.String[]})">
+            <summary>
+            Gets a list of the maximum size for each column.
+            </summary>
+            <param name="resultSet">The result set to process.</param>
+            <returns>A list of the maximum size for each column.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201201.PqlUtilities.GetColumnLabels(Google.Api.Ads.Dfp.v201201.ResultSet)">
+            <summary>
+            Gets the column labels for the result set.
+            </summary>
+            <param name="resultSet">The result set to get the column labels for.
+            </param>
+            <returns>The string array of column labels.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201201.PqlUtilities.GetRowValues(Google.Api.Ads.Dfp.v201201.Row)">
+            <summary>
+            Gets the row values for a row of the result set in the form of an object
+            array.
+            </summary>
+            <param name="row">The row to get the values for.</param>
+            <returns>The object array of the row values.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201201.PqlUtilities.GetRowStringValues(Google.Api.Ads.Dfp.v201201.Row)">
+            <summary>
+            Gets the row values for a row of the result set in a the form of a string
+            array. <code>null</code> values are interperted as empty strings.
+            </summary>
+            <param name="row">The row to get the values for.</param>
+            <returns>The string array of the row values.</returns>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Util.v201201.StatementBuilder">
+            <summary>
+            A utility class that allows you to build a DFP Statement from query
+            and parameters.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Util.v201201.StatementBuilder.statement">
+            <summary>
+            The DFP statement.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Util.v201201.StatementBuilder.valueEntries">
+            <summary>
+            The list of query parameters.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201201.StatementBuilder.#ctor(System.String)">
+            <summary>
+            Parameterized public constructor.
+            </summary>
+            <param name="query">The query string.</param>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201201.StatementBuilder.AddValue(System.String,System.String)">
+            <summary>
+            Adds a new string value to the list of query parameters.
+            </summary>
+            <param name="key">The parameter name.</param>
+            <param name="value">The parameter value.</param>
+            <returns>The statement builder, for chaining method calls.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201201.StatementBuilder.AddValue(System.String,System.Boolean)">
+            <summary>
+            Adds a new boolean value to the list of query parameters.
+            </summary>
+            <param name="key">The parameter name.</param>
+            <param name="value">The parameter value.</param>
+            <returns>The statement builder, for chaining method calls.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201201.StatementBuilder.AddValue(System.String,System.Decimal)">
+            <summary>
+            Adds a new decimal value to the list of query parameters.
+            </summary>
+            <param name="key">The parameter name.</param>
+            <param name="value">The parameter value.</param>
+            <returns>The statement builder, for chaining method calls.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201201.StatementBuilder.AddValue(System.String,Google.Api.Ads.Dfp.v201201.DateTime)">
+            <summary>
+            Adds a new DateTime value to the list of query parameters.
+            </summary>
+            <param name="key">The parameter name.</param>
+            <param name="value">The parameter value.</param>
+            <returns>The statement builder, for chaining method calls.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201201.StatementBuilder.AddValue(System.String,Google.Api.Ads.Dfp.v201201.Value)">
+            <summary>
+            Adds a new value to the list of query parameters.
+            </summary>
+            <param name="key">The parameter name.</param>
+            <param name="value">The parameter value.</param>
+            <returns>The statement builder, for chaining method calls.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201201.StatementBuilder.ToStatement">
+            <summary>
+            Gets the statement built by this builder.
+            </summary>
+            <returns>The statement.</returns>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.Util.v201201.StatementBuilder.Query">
+            <summary>
+            Gets or sets the statement query.
+            </summary>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Util.v201203.DateTimeUtilities">
+            <summary>
+            A utility class that allows you to build Datetime objects from strings.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201203.DateTimeUtilities.FromString(System.String)">
+            <summary>
+            Converts the string in format yyyyMMdd HH:mm:ss to a date object.
+            </summary>
+            <param name="dateString">The date string.</param>
+            <returns>A Dfp Datetime object.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201203.DateTimeUtilities.FromDateTime(System.DateTime)">
+            <summary>
+            Converts a System.DateTime object to a date object.
+            </summary>
+            <param name="dateTime">The DateTime object.</param>
+            <returns>A Dfp Datetime object.</returns>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Util.v201203.PqlUtilities">
+            <summary>
+            A utility class for handling PQL objects.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201203.PqlUtilities.GetValue(Google.Api.Ads.Dfp.v201203.Value)">
+            <summary>
+            Gets the underlying value of the Value object.
+            </summary>
+            <value>The Value object to get the value from.</value>
+            <returns>The underlying value.</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Google.Api.Ads.Dfp.Util.v201203.PqlUtilities.ResultSetToStringArrayList(Google.Api.Ads.Dfp.v201203.ResultSet)" -->
+        <member name="M:Google.Api.Ads.Dfp.Util.v201203.PqlUtilities.ResultSetToString(Google.Api.Ads.Dfp.v201203.ResultSet)">
+             <summary>
+             Gets the result set as a table represenation in the form of:
+            
+             <pre>
+             +-------+-------+-------+
+             |column1|column2|column3|
+             +-------+-------+-------+
+             |value1 |value2 |value3 |
+             +-------+-------+-------+
+             |value1 |value2 |value3 |
+             +-------+-------+-------+
+             </pre>
+             </summary>
+             <param name="resultSet">The result set to display as a string</param>
+             <returns>The string represenation of result set as a table.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201203.PqlUtilities.CreateRowTemplate(System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Creates the row template given the maximum size for each column.
+            </summary>
+            <param name="maxColumnSizes">The maximum size for each column</param>
+            <returns>The row template to format row data into.</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Google.Api.Ads.Dfp.Util.v201203.PqlUtilities.CreateRowSeperator(System.Collections.Generic.List{System.Int32})" -->
+        <member name="M:Google.Api.Ads.Dfp.Util.v201203.PqlUtilities.GetMaxColumnSizes(System.Collections.Generic.List{System.String[]})">
+            <summary>
+            Gets a list of the maximum size for each column.
+            </summary>
+            <param name="resultSet">The result set to process.</param>
+            <returns>A list of the maximum size for each column.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201203.PqlUtilities.GetColumnLabels(Google.Api.Ads.Dfp.v201203.ResultSet)">
+            <summary>
+            Gets the column labels for the result set.
+            </summary>
+            <param name="resultSet">The result set to get the column labels for.
+            </param>
+            <returns>The string array of column labels.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201203.PqlUtilities.GetRowValues(Google.Api.Ads.Dfp.v201203.Row)">
+            <summary>
+            Gets the row values for a row of the result set in the form of an object
+            array.
+            </summary>
+            <param name="row">The row to get the values for.</param>
+            <returns>The object array of the row values.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201203.PqlUtilities.GetRowStringValues(Google.Api.Ads.Dfp.v201203.Row)">
+            <summary>
+            Gets the row values for a row of the result set in a the form of a string
+            array. <code>null</code> values are interperted as empty strings.
+            </summary>
+            <param name="row">The row to get the values for.</param>
+            <returns>The string array of the row values.</returns>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Util.v201203.StatementBuilder">
+            <summary>
+            A utility class that allows you to build a DFP Statement from query
+            and parameters.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Util.v201203.StatementBuilder.statement">
+            <summary>
+            The DFP statement.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Util.v201203.StatementBuilder.valueEntries">
+            <summary>
+            The list of query parameters.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201203.StatementBuilder.#ctor(System.String)">
+            <summary>
+            Parameterized public constructor.
+            </summary>
+            <param name="query">The query string.</param>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201203.StatementBuilder.AddValue(System.String,System.String)">
+            <summary>
+            Adds a new string value to the list of query parameters.
+            </summary>
+            <param name="key">The parameter name.</param>
+            <param name="value">The parameter value.</param>
+            <returns>The statement builder, for chaining method calls.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201203.StatementBuilder.AddValue(System.String,System.Boolean)">
+            <summary>
+            Adds a new boolean value to the list of query parameters.
+            </summary>
+            <param name="key">The parameter name.</param>
+            <param name="value">The parameter value.</param>
+            <returns>The statement builder, for chaining method calls.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201203.StatementBuilder.AddValue(System.String,System.Decimal)">
+            <summary>
+            Adds a new decimal value to the list of query parameters.
+            </summary>
+            <param name="key">The parameter name.</param>
+            <param name="value">The parameter value.</param>
+            <returns>The statement builder, for chaining method calls.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201203.StatementBuilder.AddValue(System.String,Google.Api.Ads.Dfp.v201203.DateTime)">
+            <summary>
+            Adds a new DateTime value to the list of query parameters.
+            </summary>
+            <param name="key">The parameter name.</param>
+            <param name="value">The parameter value.</param>
+            <returns>The statement builder, for chaining method calls.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201203.StatementBuilder.AddValue(System.String,Google.Api.Ads.Dfp.v201203.Value)">
+            <summary>
+            Adds a new value to the list of query parameters.
+            </summary>
+            <param name="key">The parameter name.</param>
+            <param name="value">The parameter value.</param>
+            <returns>The statement builder, for chaining method calls.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201203.StatementBuilder.ToStatement">
+            <summary>
+            Gets the statement built by this builder.
+            </summary>
+            <returns>The statement.</returns>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.Util.v201203.StatementBuilder.Query">
+            <summary>
+            Gets or sets the statement query.
+            </summary>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Util.v201204.DateTimeUtilities">
+            <summary>
+            A utility class that allows you to build Datetime objects from strings.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201204.DateTimeUtilities.FromString(System.String)">
+            <summary>
+            Converts the string in format yyyyMMdd HH:mm:ss to a date object.
+            </summary>
+            <param name="dateString">The date string.</param>
+            <returns>A Dfp Datetime object.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201204.DateTimeUtilities.FromDateTime(System.DateTime)">
+            <summary>
+            Converts a System.DateTime object to a date object.
+            </summary>
+            <param name="dateTime">The DateTime object.</param>
+            <returns>A Dfp Datetime object.</returns>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Util.v201204.PqlUtilities">
+            <summary>
+            A utility class for handling PQL objects.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201204.PqlUtilities.GetValue(Google.Api.Ads.Dfp.v201204.Value)">
+            <summary>
+            Gets the underlying value of the Value object.
+            </summary>
+            <value>The Value object to get the value from.</value>
+            <returns>The underlying value.</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Google.Api.Ads.Dfp.Util.v201204.PqlUtilities.ResultSetToStringArrayList(Google.Api.Ads.Dfp.v201204.ResultSet)" -->
+        <member name="M:Google.Api.Ads.Dfp.Util.v201204.PqlUtilities.ResultSetToString(Google.Api.Ads.Dfp.v201204.ResultSet)">
+             <summary>
+             Gets the result set as a table represenation in the form of:
+            
+             <pre>
+             +-------+-------+-------+
+             |column1|column2|column3|
+             +-------+-------+-------+
+             |value1 |value2 |value3 |
+             +-------+-------+-------+
+             |value1 |value2 |value3 |
+             +-------+-------+-------+
+             </pre>
+             </summary>
+             <param name="resultSet">The result set to display as a string</param>
+             <returns>The string represenation of result set as a table.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201204.PqlUtilities.CreateRowTemplate(System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Creates the row template given the maximum size for each column.
+            </summary>
+            <param name="maxColumnSizes">The maximum size for each column</param>
+            <returns>The row template to format row data into.</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Google.Api.Ads.Dfp.Util.v201204.PqlUtilities.CreateRowSeperator(System.Collections.Generic.List{System.Int32})" -->
+        <member name="M:Google.Api.Ads.Dfp.Util.v201204.PqlUtilities.GetMaxColumnSizes(System.Collections.Generic.List{System.String[]})">
+            <summary>
+            Gets a list of the maximum size for each column.
+            </summary>
+            <param name="resultSet">The result set to process.</param>
+            <returns>A list of the maximum size for each column.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201204.PqlUtilities.GetColumnLabels(Google.Api.Ads.Dfp.v201204.ResultSet)">
+            <summary>
+            Gets the column labels for the result set.
+            </summary>
+            <param name="resultSet">The result set to get the column labels for.
+            </param>
+            <returns>The string array of column labels.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201204.PqlUtilities.GetRowValues(Google.Api.Ads.Dfp.v201204.Row)">
+            <summary>
+            Gets the row values for a row of the result set in the form of an object
+            array.
+            </summary>
+            <param name="row">The row to get the values for.</param>
+            <returns>The object array of the row values.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201204.PqlUtilities.GetRowStringValues(Google.Api.Ads.Dfp.v201204.Row)">
+            <summary>
+            Gets the row values for a row of the result set in a the form of a string
+            array. <code>null</code> values are interperted as empty strings.
+            </summary>
+            <param name="row">The row to get the values for.</param>
+            <returns>The string array of the row values.</returns>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Util.v201204.StatementBuilder">
+            <summary>
+            A utility class that allows you to build a DFP Statement from query
+            and parameters.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Util.v201204.StatementBuilder.statement">
+            <summary>
+            The DFP statement.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Util.v201204.StatementBuilder.valueEntries">
+            <summary>
+            The list of query parameters.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201204.StatementBuilder.#ctor(System.String)">
+            <summary>
+            Parameterized public constructor.
+            </summary>
+            <param name="query">The query string.</param>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201204.StatementBuilder.AddValue(System.String,System.String)">
+            <summary>
+            Adds a new string value to the list of query parameters.
+            </summary>
+            <param name="key">The parameter name.</param>
+            <param name="value">The parameter value.</param>
+            <returns>The statement builder, for chaining method calls.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201204.StatementBuilder.AddValue(System.String,System.Boolean)">
+            <summary>
+            Adds a new boolean value to the list of query parameters.
+            </summary>
+            <param name="key">The parameter name.</param>
+            <param name="value">The parameter value.</param>
+            <returns>The statement builder, for chaining method calls.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201204.StatementBuilder.AddValue(System.String,System.Decimal)">
+            <summary>
+            Adds a new decimal value to the list of query parameters.
+            </summary>
+            <param name="key">The parameter name.</param>
+            <param name="value">The parameter value.</param>
+            <returns>The statement builder, for chaining method calls.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201204.StatementBuilder.AddValue(System.String,Google.Api.Ads.Dfp.v201204.DateTime)">
+            <summary>
+            Adds a new DateTime value to the list of query parameters.
+            </summary>
+            <param name="key">The parameter name.</param>
+            <param name="value">The parameter value.</param>
+            <returns>The statement builder, for chaining method calls.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201204.StatementBuilder.AddValue(System.String,Google.Api.Ads.Dfp.v201204.Value)">
+            <summary>
+            Adds a new value to the list of query parameters.
+            </summary>
+            <param name="key">The parameter name.</param>
+            <param name="value">The parameter value.</param>
+            <returns>The statement builder, for chaining method calls.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201204.StatementBuilder.ToStatement">
+            <summary>
+            Gets the statement built by this builder.
+            </summary>
+            <returns>The statement.</returns>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.Util.v201204.StatementBuilder.Query">
+            <summary>
+            Gets or sets the statement query.
+            </summary>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Util.v201206.DateTimeUtilities">
+            <summary>
+            A utility class that allows you to build Datetime objects from strings.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201206.DateTimeUtilities.FromString(System.String)">
+            <summary>
+            Converts the string in format yyyyMMdd HH:mm:ss to a date object.
+            </summary>
+            <param name="dateString">The date string.</param>
+            <returns>A Dfp Datetime object.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201206.DateTimeUtilities.FromDateTime(System.DateTime)">
+            <summary>
+            Converts a System.DateTime object to a date object.
+            </summary>
+            <param name="dateTime">The DateTime object.</param>
+            <returns>A Dfp Datetime object.</returns>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Util.v201206.PqlUtilities">
+            <summary>
+            A utility class for handling PQL objects.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201206.PqlUtilities.GetValue(Google.Api.Ads.Dfp.v201206.Value)">
+            <summary>
+            Gets the underlying value of the Value object.
+            </summary>
+            <value>The Value object to get the value from.</value>
+            <returns>The underlying value.</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Google.Api.Ads.Dfp.Util.v201206.PqlUtilities.ResultSetToStringArrayList(Google.Api.Ads.Dfp.v201206.ResultSet)" -->
+        <member name="M:Google.Api.Ads.Dfp.Util.v201206.PqlUtilities.ResultSetToString(Google.Api.Ads.Dfp.v201206.ResultSet)">
+             <summary>
+             Gets the result set as a table represenation in the form of:
+            
+             <pre>
+             +-------+-------+-------+
+             |column1|column2|column3|
+             +-------+-------+-------+
+             |value1 |value2 |value3 |
+             +-------+-------+-------+
+             |value1 |value2 |value3 |
+             +-------+-------+-------+
+             </pre>
+             </summary>
+             <param name="resultSet">The result set to display as a string</param>
+             <returns>The string represenation of result set as a table.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201206.PqlUtilities.CreateRowTemplate(System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Creates the row template given the maximum size for each column.
+            </summary>
+            <param name="maxColumnSizes">The maximum size for each column</param>
+            <returns>The row template to format row data into.</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Google.Api.Ads.Dfp.Util.v201206.PqlUtilities.CreateRowSeperator(System.Collections.Generic.List{System.Int32})" -->
+        <member name="M:Google.Api.Ads.Dfp.Util.v201206.PqlUtilities.GetMaxColumnSizes(System.Collections.Generic.List{System.String[]})">
+            <summary>
+            Gets a list of the maximum size for each column.
+            </summary>
+            <param name="resultSet">The result set to process.</param>
+            <returns>A list of the maximum size for each column.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201206.PqlUtilities.GetColumnLabels(Google.Api.Ads.Dfp.v201206.ResultSet)">
+            <summary>
+            Gets the column labels for the result set.
+            </summary>
+            <param name="resultSet">The result set to get the column labels for.
+            </param>
+            <returns>The string array of column labels.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201206.PqlUtilities.GetRowValues(Google.Api.Ads.Dfp.v201206.Row)">
+            <summary>
+            Gets the row values for a row of the result set in the form of an object
+            array.
+            </summary>
+            <param name="row">The row to get the values for.</param>
+            <returns>The object array of the row values.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201206.PqlUtilities.GetRowStringValues(Google.Api.Ads.Dfp.v201206.Row)">
+            <summary>
+            Gets the row values for a row of the result set in a the form of a string
+            array. <code>null</code> values are interperted as empty strings.
+            </summary>
+            <param name="row">The row to get the values for.</param>
+            <returns>The string array of the row values.</returns>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.Util.v201206.StatementBuilder">
+            <summary>
+            A utility class that allows you to build a DFP Statement from query
+            and parameters.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Util.v201206.StatementBuilder.statement">
+            <summary>
+            The DFP statement.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Dfp.Util.v201206.StatementBuilder.valueEntries">
+            <summary>
+            The list of query parameters.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201206.StatementBuilder.#ctor(System.String)">
+            <summary>
+            Parameterized public constructor.
+            </summary>
+            <param name="query">The query string.</param>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201206.StatementBuilder.AddValue(System.String,System.String)">
+            <summary>
+            Adds a new string value to the list of query parameters.
+            </summary>
+            <param name="key">The parameter name.</param>
+            <param name="value">The parameter value.</param>
+            <returns>The statement builder, for chaining method calls.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201206.StatementBuilder.AddValue(System.String,System.Boolean)">
+            <summary>
+            Adds a new boolean value to the list of query parameters.
+            </summary>
+            <param name="key">The parameter name.</param>
+            <param name="value">The parameter value.</param>
+            <returns>The statement builder, for chaining method calls.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201206.StatementBuilder.AddValue(System.String,System.Decimal)">
+            <summary>
+            Adds a new decimal value to the list of query parameters.
+            </summary>
+            <param name="key">The parameter name.</param>
+            <param name="value">The parameter value.</param>
+            <returns>The statement builder, for chaining method calls.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201206.StatementBuilder.AddValue(System.String,Google.Api.Ads.Dfp.v201206.DateTime)">
+            <summary>
+            Adds a new DateTime value to the list of query parameters.
+            </summary>
+            <param name="key">The parameter name.</param>
+            <param name="value">The parameter value.</param>
+            <returns>The statement builder, for chaining method calls.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201206.StatementBuilder.AddValue(System.String,Google.Api.Ads.Dfp.v201206.Value)">
+            <summary>
+            Adds a new value to the list of query parameters.
+            </summary>
+            <param name="key">The parameter name.</param>
+            <param name="value">The parameter value.</param>
+            <returns>The statement builder, for chaining method calls.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Dfp.Util.v201206.StatementBuilder.ToStatement">
+            <summary>
+            Gets the statement built by this builder.
+            </summary>
+            <returns>The statement.</returns>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.Util.v201206.StatementBuilder.Query">
+            <summary>
+            Gets or sets the statement query.
+            </summary>
+        </member>
+        <member name="T:Google.Api.Ads.Dfp.DfpErrorMessages">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.DfpErrorMessages.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.DfpErrorMessages.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.DfpErrorMessages.FailedToSetAuthorizationHeader">
+            <summary>
+              Looks up a localized string similar to Could not set AuthToken or OAuthHeader for outgoing API call. Please check if service.RequestHeader is not null..
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.DfpErrorMessages.OAuthProviderCannotBeNull">
+            <summary>
+              Looks up a localized string similar to OAuth provider cannot be null when selecting Authorization method as &quot;OAuth&quot;..
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Dfp.DfpErrorMessages.SignatureIsOfWrongType">
+            <summary>
+              Looks up a localized string similar to Signature should be a {0} instance..
+            </summary>
+        </member>
+    </members>
+</doc>

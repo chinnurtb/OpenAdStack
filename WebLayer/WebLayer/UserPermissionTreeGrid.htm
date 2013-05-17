@@ -1,0 +1,351 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="./dhtml/codebase/dhtmlx.css" />
+    <link rel="stylesheet" type="text/css" href="./dhtml/codebase/dhtmlx_custom.css" /> 
+    <link rel="stylesheet" type="text/css" href="./css/basestyle.css" /> 
+    <script type="text/javascript" src="./dhtml/codebase/dhtmlx.js"></script>   
+    <script type="text/javascript" src="./scripts/GlobalObjects.js"></script>
+    <script type="text/javascript" src="./scripts/baselayout.js"></script>
+
+</head>
+    <body>
+        
+        <style>
+            div.gridbox div.ftr td{
+                text-align:right;
+                background-color:#E7F0FF;        
+            }
+        </style>
+ 
+        <table style="width:500px;table-layout:fixed;">
+            <tr>
+                <td>
+                    <div id="gridbox" width="500px" height="390px" style="background-color:white;"></div>
+                </td>
+            </tr>
+        </table>
+ 
+        <script>
+            var mygrid, changeEventId;
+            globalInitialize();            
+            mygrid = new dhtmlXGridObject('gridbox');
+            mygrid.setImagePath("./dhtml/codebase/imgs/");
+            mygrid.setHeader("Agency/Advertiser/Campaign,Permissions,Ids");
+            mygrid.setInitWidths("375,100,100");
+            mygrid.setColAlign("left,center,left");
+            mygrid.setColTypes("tree,co,ro");
+            mygrid.setColSorting("str,int,str");
+            mygrid.init();
+            mygrid.setColumnHidden(2, true);
+            mygrid.setSkin("dhx_skyblue");
+
+            comboItem = mygrid.getCombo(1);
+            comboItem.put("r", "Read");
+            comboItem.put("w", "Write");
+            comboItem.put("none", "No Access");
+            changeEventId = mygrid.attachEvent("onCellChanged", gridCellChanged);
+            
+            var userTreeEntries = buildUserTreeEntries();
+            var topLevelRowId = 100;
+            var secondLevelRowId = 1000;
+            var thirdLevelRowId = 10000;
+            for (var i = 0; i < userTreeEntries.length; i++) {
+                if (occurrences(userTreeEntries[i].displayValue, "/", false) == 0) {
+                    mygrid.addRow(topLevelRowId, userTreeEntries[i].displayValue);
+                    mygrid.cellById(topLevelRowId, 2).setValue(userTreeEntries[i].entityId);
+                    var accessSetting = findMatchingEntityIdAccessValue(userTreeEntries[i].entityId);
+                    switch(accessSetting) {
+                        case "":
+                            mygrid.cellById(topLevelRowId, 1).setValue("none");
+                            break;
+                        case "*:*":
+                            mygrid.cellById(topLevelRowId, 1).setValue("w");
+                            break;
+                        case "GET:*":
+                            mygrid.cellById(topLevelRowId, 1).setValue("r");
+                            break;
+                    }
+                    topLevelRowId++;
+                }
+                else if (userTreeEntries[i] && occurrences(userTreeEntries[i].displayValue, "/", false) == 1) {
+                    mygrid.addRow(secondLevelRowId, userTreeEntries[i].displayValue, null, topLevelRowId - 1);
+                    mygrid.cellById(secondLevelRowId, 2).setValue(userTreeEntries[i].entityId);
+                    var accessSetting = findMatchingEntityIdAccessValue(userTreeEntries[i].entityId);
+                    switch (accessSetting) {
+                        case "":
+                            mygrid.cellById(secondLevelRowId, 1).setValue("none");
+                            break;
+                        case "*:*":
+                            mygrid.cellById(secondLevelRowId, 1).setValue("w");
+                            break;
+                        case "GET:*":
+                            mygrid.cellById(secondLevelRowId, 1).setValue("r");
+                            break;
+                    }
+                    secondLevelRowId++;
+                }
+                else if (userTreeEntries[i] && occurrences(userTreeEntries[i].displayValue, "/", false) == 2) {
+                    mygrid.addRow(thirdLevelRowId, userTreeEntries[i].displayValue, null, secondLevelRowId - 1);
+                    mygrid.cellById(thirdLevelRowId, 2).setValue(userTreeEntries[i].entityId);
+                    var accessSetting = findMatchingEntityIdAccessValue(userTreeEntries[i].entityId);
+                    switch (accessSetting) {
+                        case "":
+                            mygrid.cellById(thirdLevelRowId, 1).setValue("none");
+                            break;
+                        case "*:*":
+                            mygrid.cellById(thirdLevelRowId, 1).setValue("w");
+                            break;
+                        case "GET:*":
+                            mygrid.cellById(thirdLevelRowId, 1).setValue("r");
+                            break;
+                    }
+                    thirdLevelRowId++;
+                }
+            }
+
+            function findMatchingEntityIdAccessValue(entityId) {
+                var userAccessValue = sessionStorage.getItem("userAccessValue");
+                var existingAccessArray = userAccessValue.split("|");
+                for (var i = 0; i < existingAccessArray.length; i++) {
+                    var accessEntityId, accessValue;
+                    if (existingAccessArray[i].indexOf("COMPANY") != -1 && existingAccessArray[i].indexOf("CAMPAIGN") != -1) {
+                        accessEntityId = existingAccessArray[i].substr(existingAccessArray[i].indexOf("CAMPAIGN") + 9, 32);
+                    } 
+                    else if (existingAccessArray[i].indexOf("COMPANY") != -1) {
+                        accessEntityId = existingAccessArray[i].substr(existingAccessArray[i].indexOf("COMPANY") + 8, 32);
+                    }
+                    accessValue = existingAccessArray[i].substr(existingAccessArray[i].indexOf("#:") + 2);
+                    if (entityId.substr(entityId.lastIndexOf(":") + 1) == accessEntityId) {
+                        return accessValue;
+                    }
+                }
+                return "";
+            }
+
+            function occurrences(string, subString, allowOverlapping) {
+                string += "";
+                subString += "";
+                if (subString.length <= 0) return string.length + 1;
+
+                var n = 0, pos = 0;
+                var step = (allowOverlapping) ? (1) : (subString.length);
+
+                while (true) {
+                    pos = string.indexOf(subString, pos);
+                    if (pos >= 0) {
+                        n++;
+                        pos += step;
+                    } else break;
+                }
+                return (n);
+            }
+
+            function gridCellChanged(rowId, cellId, value) {
+                mygrid.detachEvent(changeEventId);
+                // cascade the change
+                setGridChildValues(rowId, value);
+                setSessionStorageValue();
+                // set a timeout to re-enable the event
+                setTimeout(function() { changeEventId = mygrid.attachEvent("onCellChanged", gridCellChanged); }, 500);
+                return true;
+            }
+            
+            function setGridChildValues(rowId, value) {
+                var subItems = mygrid.getSubItems(rowId);
+                if (subItems) {
+                    if (occurrences(subItems, ",", false) > 0) {
+                        var subItemsArray = subItems.split(",");
+                        for (var i = 0; i < subItemsArray.length; i++) {
+                            mygrid.cellById(subItemsArray[i], 1).setValue(value);
+                            if (mygrid.getSubItems(subItemsArray[i])) {
+                                setGridChildValues(subItemsArray[i], value);
+                            }
+                        }
+                    } else {
+                        mygrid.cellById(subItems, 1).setValue(value);
+                        if (mygrid.getSubItems(subItems)) {
+                            setGridChildValues(subItems, value);
+                        }
+                    }
+                }
+            }
+
+            function setSessionStorageValue() {
+                sessionStorage.removeItem("userAccessGrid");
+                var accessString = new String("");
+                mygrid.forEachRow(function (id) {
+                    if (id < 999) {
+                        // top level
+                        accessString += buildAgencyAccessList(id);
+                    }
+                    //                    if (mygrid.cellById(id, 2).getValue().length > 0 && differentFromParent(id, mygrid.cellById(id, 2).getValue(), mygrid.cellById(id, 1).getValue())) {
+                    //                        accessString += mygrid.cellById(id, 2).getValue() + "#" + mygrid.cellById(id, 1).getValue() + "|";
+                    //                    }
+                });
+                sessionStorage.setItem("userAccessGrid", accessString);
+            }
+            
+            function buildAgencyAccessList(rowId) {
+                var agencyAccessList = mygrid.cellById(rowId, 2).getValue() + "#" + mygrid.cellById(rowId, 1).getValue() + "|";
+                var previousAccessValue = mygrid.cellById(rowId, 1).getValue();
+                if (mygrid.hasChildren(rowId)) {
+                    var childRowItemsList = mygrid.getAllSubItems(rowId);
+                    var childRowItemsArray = childRowItemsList.split(",");
+                    for (var n = 0; n < childRowItemsArray.length; n++) {
+                        if (mygrid.cellById(childRowItemsArray[n], 1).getValue() == previousAccessValue)
+                            continue;
+
+                        agencyAccessList += mygrid.cellById(childRowItemsArray[n], 2).getValue() + "#" + mygrid.cellById(childRowItemsArray[n], 1).getValue() + "|";
+                        previousAccessValue = mygrid.cellById(childRowItemsArray[n], 1).getValue();
+                    }
+                }
+                return agencyAccessList;
+            }
+
+            function differentFromParent(rowId, entityId, accessValue ) {
+                if (rowId < 1000) {
+                    //toplevel already
+                    return true;
+                }
+                var parentId = mygrid.getParentId(rowId);
+                if (mygrid.cellById(parentId, 1).getValue() != accessValue) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+ 
+            function buildUserTreeEntries() {
+                var companyJSON = new $RCAjax($RCAPI.URI.CompanyGetByUser + '?Flags=WithAssociations', '', 'GET', null, null, false, null, null);
+                var companyCampaignArray = addAgencyToArray(companyJSON.responseData);
+                return companyCampaignArray;
+            }
+            
+            function addAgencyToArray(companysJSON) {
+                var returnArray = new Array();
+                if ($.isArray(companysJSON.Companies)) {
+                    for (var i = 0; i < companysJSON.Companies.length; i++) {
+                        if (companysJSON.Companies[i].ExternalType == "Agency") {
+                            var arrayItem = new Object;
+                            arrayItem.displayValue = companysJSON.Companies[i].ExternalName;
+                            arrayItem.entityId = "agency:" + companysJSON.Companies[i].ExternalEntityId;
+                            returnArray.push(arrayItem);
+                            if (companysJSON.Companies[i].Associations && companysJSON.Companies[i].Associations.AgencyAdvertiser) {
+                                returnArray = addAdvertiserToArray(companysJSON, companysJSON.Companies[i].Associations.AgencyAdvertiser, companysJSON.Companies[i].ExternalName, returnArray);
+                            }
+                        }
+                    }
+                }
+                else {
+                    var arrayItem2 = new Object;
+                    arrayItem2.displayValue = companysJSON.Companies.ExternalName;
+                    arrayItem2.entityId = "agency:" + companysJSON.Companies.ExternalEntityId;
+                    returnArray.push(arrayItem2);
+                }
+                return returnArray;
+            }
+
+            // for this agency, add advertiser(s)
+            function addAdvertiserToArray(companyJSON, associations, agencyName, returnArray) {
+                var localReturnArray = returnArray;
+                if ($.isArray(associations)) {
+                    for (var i = 0; i < associations.length; i++) {
+                        var advertiser = associations[i];
+                        for (var j = 0; j < companyJSON.Companies.length; j++) {
+                            var company = companyJSON.Companies[j];
+                            if (company.ExternalEntityId == advertiser.TargetEntityId) {
+                                var arrayItem = new Object;
+                                arrayItem.displayValue = agencyName + "/" + company.ExternalName;
+                                arrayItem.entityId = "advertiser:" + company.ExternalEntityId;
+                                localReturnArray.push(arrayItem);
+
+                                if (company.Associations && company.Associations.campaign) {
+                                    localReturnArray = addCampaignToArray(companyJSON, company.Associations.campaign, company.ExternalEntityId, agencyName + "/" + company.ExternalName, localReturnArray);
+                                }
+                            }
+                        }
+                    }
+                }
+                else {
+                    var advertiser = associations;
+                    for (var j = 0; j < companyJSON.Companies.length; j++) {
+                        company = companyJSON.Companies[j];
+                        if (company.ExternalEntityId == advertiser.TargetEntityId) {
+                            var arrayItem2 = new Object;
+                            arrayItem2.displayValue = agencyName + "/" + company.ExternalName;
+                            arrayItem2.entityId = "advertiser:" + company.ExternalEntityId;                            
+                            localReturnArray.push(arrayItem2);
+
+                            if (company.Associations && company.Associations.campaign) {
+                                localReturnArray = addCampaignToArray(companyJSON, company.Associations.campaign, company.ExternalEntityId, agencyName + "/" + company.ExternalName, localReturnArray);
+                            }
+                        }
+                    }
+                }
+
+                return localReturnArray;
+            }
+            
+            // for this advertiser, add the campaign(s)
+            function addCampaignToArray(companyJSON, associations, advertiserEntityId, advertiserName, returnArray) {
+                var localReturnArray = returnArray;
+                var campaignJSON = new $RCAjax($RCAPI.URI.CampaignCampaignForCompany.format(advertiserEntityId), '', 'GET', null, null, false, null, null);
+                if ($.isArray(associations)) {
+                    for (var i = 0; i < associations.length; i++) {
+                        var campaign = associations[i];
+                        if (campaign.TargetEntityCategory == "Campaign") {
+                            if ($.isArray(campaignJSON.responseData.Campaigns)) {
+                                for (var j = 0; j < campaignJSON.responseData.Campaigns.length; j++) {
+                                    var fullCampaignInfo = campaignJSON.responseData.Campaigns[j];
+                                    if (fullCampaignInfo.ExternalEntityId == campaign.TargetEntityId) {
+                                        var arrayItem3 = new Object;
+                                        arrayItem3.displayValue = advertiserName + "/" + fullCampaignInfo.ExternalName;
+                                        arrayItem3.entityId = "advertiser:" + advertiserEntityId + ",campaign:" + fullCampaignInfo.ExternalEntityId;                                                        
+                                        localReturnArray.push(arrayItem3);
+                                    }
+                                }
+                            }
+                            else {
+                                if (campaignJSON.responseData.Campaigns.ExternalEntityId == campaign.TargetEntityId) {
+                                    var arrayItem4 = new Object;
+                                    arrayItem4.displayValue = advertiserName + "/" + campaignJSON.responseData.Campaigns.ExternalName;
+                                    arrayItem4.entityId = "advertiser:" + advertiserEntityId + ",campaign:" + campaignJSON.responseData.Campaigns.ExternalEntityId;                                        
+                                    localReturnArray.push(arrayItem4);
+                                }                                
+                            }
+                        }
+                    }
+                }
+                else {
+                    var campaign = associations;
+                    if (campaign.TargetEntityCategory == "Campaign") {
+                        if ($.isArray(campaignJSON.responseData.Campaigns)) {
+                            for (var j = 0; j < campaignJSON.responseData.Campaigns.length; j++) {
+                                var fullCampaignInfo = campaignJSON.responseData.Campaigns[j];
+                                if (fullCampaignInfo.ExternalEntityId == campaign.TargetEntityId) {
+                                    var arrayItem5 = new Object;
+                                    arrayItem5.displayValue = advertiserName + "/" + fullCampaignInfo.ExternalName;
+                                    arrayItem5.entityId = "advertiser:" + advertiserEntityId + ",campaign:" + fullCampaignInfo.ExternalEntityId;                                             
+                                    localReturnArray.push(arrayItem5);
+                                }
+                            }
+                        }
+                        else {
+                            if (campaignJSON.responseData.Campaigns.ExternalEntityId == campaign.TargetEntityId) {
+                                var arrayItem6 = new Object;
+                                arrayItem6.displayValue = advertiserName + "/" + campaignJSON.responseData.Campaigns.ExternalName;
+                                arrayItem6.entityId = "advertiser:" + advertiserEntityId + ",campaign:" + campaignJSON.responseData.Campaigns.ExternalEntityId;                                        
+                                localReturnArray.push(arrayItem6);
+                            }
+                        }
+                    }                    
+                }
+                return localReturnArray;
+            }
+
+        </script>
+    </body>
+</html>

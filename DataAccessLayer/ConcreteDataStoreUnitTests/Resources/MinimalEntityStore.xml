@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" standalone="yes"?>
+<XmlEntityDataSet xmlns="http://tempuri.org/XmlEntityDataSet.xsd">
+  <CompanyFoo>
+    <iType>Entity</iType>
+    <Partition>FooCampaign1</Partition>
+    <RowId>00000000000000000000000000000010</RowId>
+    <xId>00000000000000000000000000000001</xId>
+    <eType>EntityFoo</eType>
+    <eName>entity1</eName>
+    <CreateDate>2012-01-01T00:00:00</CreateDate>
+    <LastModifiedDate>2012-01-01T00:00:00</LastModifiedDate>
+    <LocalVersion>0</LocalVersion>
+    <Fields>thisisserializeddata</Fields>
+  </CompanyFoo>
+</XmlEntityDataSet>

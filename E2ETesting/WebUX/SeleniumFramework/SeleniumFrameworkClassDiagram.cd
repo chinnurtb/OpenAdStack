@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SeleniumFramework.Driver.WebDriverFactory">
+    <Position X="5.75" Y="5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAACAAAAAAAAAgAAAAAAAAAAACAA=</HashCode>
+      <FileName>Driver\WebDriverFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SeleniumFramework.Persistence.ExcelHelper">
+    <Position X="8.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAIAAAAAABAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Persistence\ExcelHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SeleniumFramework.Persistence.LogWriter">
+    <Position X="8.25" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAACgEBACAIAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Persistence\LogWriter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SeleniumFramework.Utilities.Constants">
+    <Position X="2.75" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAABAAAAAAAAAAAAABAAAAgAAABAEAAA=</HashCode>
+      <FileName>Utilities\Constants.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SeleniumFramework.Utilities.StringExtensionMethods">
+    <Position X="5.75" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAAAAAACAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utilities\StringExtensionMethods.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SeleniumFramework.Utilities.Utility">
+    <Position X="0.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAQAAAAAAAAAAAAAAAQAAAQBAAAAAIAAAAA=</HashCode>
+      <FileName>Utilities\Utility.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SeleniumFramework.Utilities.WebDriverExtensionMethods">
+    <Position X="5.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAABgAAAIAABAAAAAAAAAABEAAAABAAAAAAAAAACAAA=</HashCode>
+      <FileName>Utilities\WebDriverExtensionMethods.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SeleniumFramework.Persistence.ResourceReader">
+    <Position X="2.75" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Persistence\ResourceReader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SeleniumFramework.Helpers.UIHelper">
+    <Position X="0.5" Y="5.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAIAAAAAAAAAAAAAAAAAAAAQAAAAAABhAAAA=</HashCode>
+      <FileName>Helpers\UIHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SeleniumFramework.Persistence.ConfigReader">
+    <Position X="2.75" Y="4.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAADIAAAAAAEAAAAAABQgAAAAAAAAA=</HashCode>
+      <FileName>Persistence\ConfigReader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="SeleniumFramework.Utilities.BrowserType">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Utilities\BrowserType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="SeleniumFramework.Utilities.Mode">
+    <Position X="8.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utilities\Mode.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

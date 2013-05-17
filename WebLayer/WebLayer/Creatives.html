@@ -1,0 +1,447 @@
+<html>
+<head>
+    <title>Campaign Page</title>
+    <link rel="stylesheet" type="text/css" href="./dhtml/codebase/dhtmlx.css" /> 
+    <link rel="stylesheet" type="text/css" href="./dhtml/codebase/dhtmlx_custom.css" /> 
+
+    <script type="text/javascript" src="./scripts/GlobalObjects.js"></script>
+    <script type="text/javascript" src="./scripts/wizardlayout.js"></script>
+    <script type="text/javascript" src="./scripts/CampaignUtils.js"></script>
+    <script type="text/javascript">
+
+    //------------------------------------------------------------------------------------------
+    // Creative import/creation/updates forms
+    //------------------------------------------------------------------------------------------
+    var creativeEditForms = {
+        //------------------------------------------------------------------------------------------
+        // Third Party Ad Tag
+        //------------------------------------------------------------------------------------------
+        ThirdPartyAd: {
+            label: "Upload 3rd party ad tag",
+            fieldset :[
+                { type: "input", name: 'creativeName', inputWidth: 150, label: 'Name' },
+                { type: "input", name: 'creativeWidth', inputWidth: 100, label: 'Width' },
+                { type: "input", name: 'creativeHeight', inputWidth: 100, label: 'Height' },
+                { type: "newcolumn" },
+                { type: "input", name: 'creativeTag', rows: 3, inputWidth: 350, label: 'Tag', labelWidth: 'auto' },
+                { type: "hidden", name: 'entityVersion', value: "0" },
+                { type: "hidden", name: 'entityId', value: "0" }
+            ],
+            onLoad: function(creative) {
+                if (creative) {
+                    creativeForm.setItemValue('creativeName', creative.ExternalName);
+                    creativeForm.setItemValue('creativeWidth', creative.Properties.Width);
+                    creativeForm.setItemValue('creativeHeight', creative.Properties.Height);
+                    creativeForm.setItemValue('creativeTag', creative.Properties.Tag);
+                    creativeForm.setItemValue('entityVersion', creative.LocalVersion);
+                    creativeForm.setItemValue('entityId', creative.ExternalEntityId);
+                }
+            },
+            onSubmit: function() {
+                var creativeJSON = {
+                    ExternalName: creativeForm.getItemValue("creativeName"),
+                    ExternalType: 'ThirdPartyAd',
+                    LocalVersion: creativeForm.getItemValue("entityVersion"),
+                    Properties: {
+                        Height: creativeForm.getItemValue("creativeHeight"),
+                        Width: creativeForm.getItemValue("creativeWidth"),
+                        Tag: creativeForm.getItemValue("creativeTag")
+                    }
+                };
+                createOrUpdateJSON(creativeJSON);
+            }
+        },
+        //------------------------------------------------------------------------------------------
+        // Upload Image Ad
+        //------------------------------------------------------------------------------------------
+        ImageAd: {
+            label: "Upload Image Ad",
+            fieldset :[
+                { type: "input", name: 'creativeName', inputWidth: 150, label: 'Name' },
+                { type: "input", name: 'creativeWidth', inputWidth: 100, label: 'Width' },
+                { type: "input", name: 'creativeHeight', inputWidth: 100, label: 'Height' },
+                { type: "newcolumn" },
+                { type: "label", label: "Select an image file", labelWidth: 150 },
+                { type: "fileUpload", name: 'imageFile', accept: 'image/*', label: "Select a File", inputWidth: 40 },
+                { type: "input", name: 'clickUrl', inputWidth: 200, label: 'Click Url', },
+                { type: "hidden", name: 'entityVersion', value: "0" },
+                { type: "hidden", name: 'entityId', value: "0" }
+            ],
+            onLoad: function(creative) {
+                if (creative) {
+                    creativeForm.setItemValue('creativeName', creative.ExternalName);
+                    creativeForm.setItemValue('creativeWidth', creative.Properties.Width);
+                    creativeForm.setItemValue('creativeHeight', creative.Properties.Height);
+                    // TODO: Populate imageFile fileUpload
+                    creativeForm.setItemValue('clickUrl', creative.Properties.ClickUrl);
+                    creativeForm.setItemValue('entityVersion', creative.LocalVersion);
+                    creativeForm.setItemValue('entityId', creative.ExternalEntityId);
+                }
+            },
+            onSubmit: function() {
+                // Read the image file
+                var imageInput = document.getElementById("imageFile");
+                readFileInput(imageInput, 102400, function(imageReadEvt) {
+                    var imageContent = imageReadEvt.target.result;
+                    var imageName = imageReadEvt.target.fileName;
+                    var creativeJSON = {
+                        ExternalName: creativeForm.getItemValue("creativeName"),
+                        ExternalType: 'ImageAd',
+                        LocalVersion: creativeForm.getItemValue("entityVersion"),
+                        Properties: {
+                            Height: creativeForm.getItemValue("creativeHeight"),
+                            Width: creativeForm.getItemValue("creativeWidth"),
+                            ClickUrl: creativeForm.getItemValue("clickUrl"),
+                            ImageName: imageName,
+                            ImageContent: encode64(imageContent)
+                        }
+                    };
+                    createOrUpdateJSON(creativeJSON);
+                });
+            }
+        },
+        //------------------------------------------------------------------------------------------
+        // Upload Flash Ad (with backup image)
+        //------------------------------------------------------------------------------------------
+        FlashAd: {
+            label: "Upload Flash Ad",
+            fieldset :[
+                { type: "input", name: 'creativeName', inputWidth: 150, label: 'Name' },
+                { type: "input", name: 'creativeWidth', inputWidth: 100, label: 'Width' },
+                { type: "input", name: 'creativeHeight', inputWidth: 100, label: 'Height' },
+                { type: "newcolumn" },
+                { type: "label", label: "Flash content", labelWidth: 150 },
+                { type: "fileUpload", name: 'flashFile', accept: '.swf', label: "Flash Content", inputWidth: 40 },
+                { type: "input", name: 'flashClickVariable', inputWidth: 100, label: 'Flash Click Variable', labelWidth: 125 },
+                { type: "newcolumn" },
+                { type: "label", label: "Backup image", labelWidth: 150 },
+                { type: "fileUpload", name: 'imageFile', accept: 'image/*', label: "Select a File", inputWidth: 40 },
+                { type: "input", name: 'clickUrl', inputWidth: 200, label: 'Click Url' },
+                { type: "hidden", name: 'entityVersion', value: "0" },
+                { type: "hidden", name: 'entityId', value: "0" }
+            ],
+            onLoad: function(creative) {
+                if (creative) {
+                    creativeForm.setItemValue('creativeName', creative.ExternalName);
+                    creativeForm.setItemValue('creativeWidth', creative.Properties.Width);
+                    creativeForm.setItemValue('creativeHeight', creative.Properties.Height);
+                    // TODO: Populate flashFile fileUpload
+                    creativeForm.setItemValue('flashClickVariable', creative.Properties.FlashClickVariable);
+                    // TODO: Populate imageFile fileUpload
+                    creativeForm.setItemValue('clickUrl', creative.Properties.ClickUrl);
+                    creativeForm.setItemValue('entityVersion', creative.LocalVersion);
+                    creativeForm.setItemValue('entityId', creative.ExternalEntityId);
+                }
+            },
+            onSubmit: function() {
+                // Read the flash file
+                var flashInput = document.getElementById("flashFile");
+                readFileInput(flashInput, 40960, function(flashReadEvt) {
+                    var flashContent = flashReadEvt.target.result;
+                    var flashName = flashReadEvt.target.fileName;
+                    // Read the image file
+                    var imageInput = document.getElementById("imageFile");
+                    readFileInput(imageInput, 102400, function(imageReadEvt) {
+                        var imageContent = imageReadEvt.target.result;
+                        var imageName = imageReadEvt.target.fileName;
+                        // Compose the creative JSON
+                        var creativeJSON = {
+                            ExternalName: creativeForm.getItemValue("creativeName"),
+                            ExternalType: 'FlashAd',
+                            LocalVersion: creativeForm.getItemValue("entityVersion"),
+                            Properties: {
+                                Height: creativeForm.getItemValue("creativeHeight"),
+                                Width: creativeForm.getItemValue("creativeWidth"),
+                                ClickUrl: creativeForm.getItemValue("clickUrl"),
+                                ImageName: imageName,
+                                ImageContent: encode64(imageContent),
+                                FlashName: flashName,
+                                FlashContent: encode64(flashContent),
+                                FlashClickVariable: creativeForm.getItemValue("flashClickVariable")
+                            }
+                        };
+                        // Upload the new/updated creative
+                        createOrUpdateJSON(creativeJSON);
+                    });
+                });
+            }
+        },
+        //------------------------------------------------------------------------------------------
+        // Import AppNexus creative
+        //------------------------------------------------------------------------------------------
+        AppNexus: {
+            label: "Import AppNexus Creative",
+            fieldset :[
+                { type: "select", name: 'creatives', label: 'Creative', options: [{ text: "Select a creative" }] },
+                { type: "button", name: "creativeSubmit", value: 'Add Creative' }
+            ],
+            onLoad: function(creative) {
+                creativeForm.hideItem('creativeType');
+
+                // Get the creatives from AppNexus
+                var getCreativesUri = $RCAPI.URI.ApnxGetAdvertiserCreatives.format($RCUI.querystring['advertiser'], $RCUI.querystring['campaign']);
+                var apnxCreativesJSON = new $RCAjax(getCreativesUri, '', 'GET', null, null, false, null, routeErrors);
+                var apnxCreatives = apnxCreativesJSON.responseData;
+
+                // Populate the advertiser select box with the user's advertisers
+                var creativeSelect = creativeForm.getSelect('creatives');
+                creativeSelect.options[0].disabled = true;
+                for (var i in apnxCreatives) {
+                    var apnxCreative = apnxCreatives[i];
+                    if (apnxCreative.state == "active") {
+                        var option = document.createElement("option");
+                        option.value = apnxCreative.id;
+                        option.text = apnxCreative.name;
+                        creativeSelect.add(option, null);
+                    }
+                } 
+            },
+            onSubmit: function() {
+                var creativeSelect = creativeForm.getSelect('creatives');
+                var selectedCreative = creativeSelect.options[creativeSelect.selectedIndex];
+                if (selectedCreative.value) {
+                    var creativeJSON = {
+                        ExternalName: selectedCreative.text,
+                        ExternalType: 'AppNexus',
+                        Properties: {
+                            APNXCreativeId: selectedCreative.value
+                        }
+                    };
+                    createOrUpdateJSON(creativeJSON);
+                }
+            }
+        }
+    };
+    
+    function getCreativeFormData(creativeType) {
+        return {
+            formData: [
+                { type: "settings", position: "label-left", labelWidth: 50 },
+                { type: "select", name: 'creativeType', label: 'Creative Type', labelWidth: 150, position: "label-left", options: [
+                    { text: "3rd Party Tag", value: "ThirdPartyAd", selected: creativeType == "ThirdPartyAd" },
+                    { text: "Image Ad", value: "ImageAd", selected: creativeType == "ImageAd" },
+                    { text: "Flash Ad", value: "FlashAd", selected: creativeType == "FlashAd" }]
+                },
+                {
+                    type: "fieldset",
+                    name: "creativeData",
+                    label: creativeEditForms[creativeType].label,
+                    inputWidth: "auto",
+                    list: creativeEditForms[creativeType].fieldset
+                },
+                {
+                    type: "block",
+                    list: [
+                        { type: "button", name: "creativeSubmit", value: 'Save Creative' },
+                        { type: "newcolumn" },
+                        { type: "button", name: "creativeRemove", value: 'Remove Creative', disabled: true },
+                        { type: "newcolumn" },
+                        { type: "button", name: "creativeCreate", value: 'New Creative', offsetLeft: 200 },
+                    ]
+                }
+            ],
+            onButtonClick: function(buttonName) {
+                switch (buttonName) {
+                    case "creativeSubmit": creativeEditForms[creativeType].onSubmit(); break;
+                    case "creativeRemove": removeSelectedCreative(); break;
+                    case "creativeCreate": thisPageRender(); break;
+                }
+            },
+            onLoad: creativeEditForms[creativeType].onLoad,
+        };
+    }
+
+    function removeSelectedCreative() {
+        var rowId = listGrid.getSelectedRowId();
+        var creativeNameA = listGrid.cells(rowId, 1).getValue();
+        var creativeName = listGrid.cells(rowId, 0).getValue();
+        dhtmlx.confirm({
+            title: "Remove Creative",
+            text: 'Remove creative "' + creativeName + '" (' + rowId + ') from this campaign?',
+            callback: function(confirmed) {
+                if (!confirmed) return;
+                var creativeAssocJSON = {
+                    ParentEntity: getQueryString()['campaign'],
+                    ChildEntity: rowId,
+                    AssociationName: "creatives"
+                };
+                creativeJSON = creativeJSONCall("POST", false, $RCAPI.URI.CreativeCampaignRemove.format(getQueryString()['advertiser'], getQueryString()['campaign']), creativeAssocJSON);
+                thisPageRender();
+            }
+        });
+    }
+
+    function showCreativeForm(workareaCell, creativeType, creative) {
+        var creativeFormData = getCreativeFormData(creativeType);
+        workareaCell.hideHeader();
+        workareaCell.setHeight('200');
+        workareaCell.fixSize(1, 1);
+        creativeForm = workareaCell.attachForm();
+        creativeForm.setSkin = "dhx_web";
+        creativeForm.loadStruct(creativeFormData.formData, 'json');
+        creativeForm.attachEvent('onButtonClick', creativeFormData.onButtonClick);
+        creativeForm.attachEvent('OnChange', changeSelected);
+        creativeFormData.onLoad(creative);
+    }
+
+    function createOrUpdateJSON(creativeJSON) {
+        // Create or Update
+        if (creativeForm.getItemValue("entityId") == "0") {
+            creativeJSON = creativeJSONCall("POST", false, $RCAPI.URI.CreativeCreate.format(getQueryString()['advertiser']), creativeJSON);
+            //Then Associate
+            var creativeAssocJSON = {
+                ParentEntity: getQueryString()['campaign'],
+                ChildEntity: creativeJSON.Creative.ExternalEntityId,
+                AssociationName: "creatives"
+            };
+            creativeJSON = creativeJSONCall("POST", false, $RCAPI.URI.CreativeCampaignAssociate.format(getQueryString()['advertiser'], getQueryString()['campaign']), creativeAssocJSON);
+        }
+        else {
+            creativeJSON = creativeJSONCall("PUT", false, $RCAPI.URI.CreativeUpdate.format(getQueryString()['advertiser'], creativeForm.getItemValue("entityId")), creativeJSON);
+        }
+        thisPageRender(); // todo: need to make sure objects are deleted first 
+    }
+
+    //---------------------------------------------------------------------------------------------
+    // Creative grid
+    //---------------------------------------------------------------------------------------------
+    function loadCreativeGrid(layoutCell) {
+        layoutCell.hideHeader();
+        layoutCell.fixSize(1, 1);
+        listGrid = layoutCell.attachGrid();
+        listGrid.setHeader("Name,Type,Dimensions,Content,RCID");
+        listGrid.setInitWidths("150,100,80,*,120");
+        listGrid.setColSorting("str,str,str,str,str");
+        listGrid.setColTypes("ro,ro,ro,ro,ro");
+        listGrid.setImagePath("./dhtml/codebase/imgs/");
+        listGrid.enableRowsHover(true, "highlight");
+        if (!window.ApnxApp) {
+            listGrid.attachEvent('onRowSelect', populateCreativeData);
+        }
+        listGrid.init();
+        listGrid.setSkin("dhx_web");
+        listGrid.parse(CreativeJsonToGridJson(getCreativeList().Creatives), "json");
+        $RCUI.CreativeGrid = listGrid;
+        return listGrid;
+    }
+
+    function CreativeJsonToGridJson(creativeJson) {
+        var gridJson = { rows: [] };
+        for (var item in creativeJson) {
+            var creative = creativeJson[item];
+            var preview =
+                creative.ExternalType == 'AppNexus' ? "<b>Creative ID:</b> " + creative.Properties.APNXCreativeId :
+                creative.ExternalType == 'ThirdPartyAd' && creative.Properties.Tag ? creative.Properties.Tag.replace(/</g, "&lt;").replace(/>/g, "&gt;") :
+                creative.ExternalType == 'ImageAd' ? "<b>Image:</b> " + creative.Properties.ImageName + "<br/><b>Url:</b> " + creative.Properties.ClickUrl :
+                creative.ExternalType == 'FlashAd' ? "<b>SWF:</b> " + creative.Properties.FlashName + "<br/><b>Flash Click Variable:</b> " + creative.Properties.FlashClickVariable + "<br/><b>Backup Image:</b> " + creative.Properties.ImageName + "<br/><b>Backup Click Url:</b> " + creative.Properties.ClickUrl :
+                "";
+            var row = {
+                id: creative.ExternalEntityId,
+                data: [
+                    creative.ExternalName,
+                    creative.ExternalType,
+                    creative.Properties.Width + "x" + creative.Properties.Height,
+                    preview,
+                    "<span style='font-size:xx-small;'>" + creative.ExternalEntityId + "</span>"
+                ]};
+            gridJson.rows.push(row);
+        }
+        return gridJson;
+    }
+
+    function changeSelected(name, item) {
+        if (name == "creativeType") {
+            var creativeLayout = workarea.attachLayout("2E");
+            var editArea = creativeLayout.cells('a');
+
+            var creativeTypeOptions = creativeForm.getOptions('creativeType');
+            var selectedIndex = creativeTypeOptions.selectedIndex;
+            var creativeType = creativeTypeOptions[selectedIndex].value;
+            showCreativeForm(editArea, creativeType);
+
+            var gridArea = creativeLayout.cells('b');
+            loadCreativeGrid(gridArea);
+        }
+    }
+    
+    function populateCreativeData(rowId) {
+        var creativeJSON = creativeJSONCall("GET", false, $RCAPI.URI.CreativeGet.format(getQueryString()['advertiser'], rowId));
+        var creative = creativeJSON.Creative;
+        var creativeLayout = workarea.attachLayout("2E");
+        var editArea = creativeLayout.cells('a');
+        
+        showCreativeForm(editArea, creative.ExternalType, creative);
+        var gridArea = creativeLayout.cells('b');
+        var listGrid = loadCreativeGrid(gridArea);
+        listGrid.selectRowById(rowId, false, true, false);
+
+        creativeForm.enableItem('creativeRemove');
+    }
+
+    function getCreativeList() {
+        return creativeJSONCall("GET", false, $RCAPI.URI.CampaignGetCreatives.format(getQueryString()['advertiser'], getQueryString()['campaign']));
+    }
+
+    function creativeJSONCall(messageType, async, url, data) {
+        var creativeAjax = new $RCAjax(url, JSON.stringify(data), messageType, null, null, async, null, routeErrors);
+        return creativeAjax.responseData;
+    }
+    
+    function routeErrors(data, errorType, errorText) {
+        switch (data.status) {
+            case 202:
+                alert('accepted but not complete');
+                break;
+            case 401:
+                authExpiration();
+                break;
+            default:
+                alert('fail - ' + errorType + ' - ' + errorText);
+                break;
+        };
+    }
+
+    function thisPageRender() {
+        var creativeLayout = workarea.attachLayout("2E");
+        var editArea = creativeLayout.cells('a');
+        var gridArea = creativeLayout.cells('b');
+        showCreativeForm(editArea, window.ApnxApp ? 'AppNexus':'ThirdPartyAd', null);
+        loadCreativeGrid(gridArea);
+    }
+
+    function pageExit() { return true; }
+
+    dhtmlXForm.prototype.items.fileUpload = {
+        render: function (item, data) {
+            item._type = "fileUpload";
+            var fileInput = document.createElement('input');
+            fileInput.setAttribute('type', "file");
+            fileInput.setAttribute('name', data.name);
+            fileInput.setAttribute('id', data.name);
+            if (data.inputWidth != undefined) fileInput.setAttribute('size', data.inputWidth);
+            if (data.accept != undefined) fileInput.setAttribute('accept', data.accept);
+            item.appendChild(fileInput);
+            return this;
+        },
+        destruct: function (item) {
+            item.innerHTML = "";
+        },
+        enable: function (item) {
+            item.lastChild.style.color = "black";
+            item._is_enabled = true;
+        },
+        disable: function (item) {
+            item.lastChild.style.color = "gray";
+            item._is_enabled = false;
+        },
+        setValue: function (item, val) {
+            item._value = val;
+        },
+        getValue: function (item) {
+            return item._value;
+        }
+    };
+    </script>
+</head>
+<body onload="pageRender(thisPageRender);"></body>
+</html>

@@ -1,0 +1,138 @@
+﻿<html>
+    <head>
+        <title>JSON Edit Page</title>
+        <link rel="stylesheet" type="text/css" href="./dhtml/codebase/dhtmlx.css" /> 
+        <link rel="stylesheet" type="text/css" href="./dhtml/codebase/dhtmlx_custom.css" /> 
+        <link rel="stylesheet" type="text/css" href="./css/basestyle.css" /> 
+
+        <script type="text/javascript" src="./scripts/GlobalObjects.js"></script>
+
+        <script type="text/javascript" src="./scripts/baselayout.js"></script>
+        <script type="text/javascript" src="./scripts/CampaignUtils.js"></script>
+
+        <!-- Page Specific Scripts -->
+        <script type="text/javascript">
+            var campaignForm;
+            var iFrame;
+
+            function thisPageRender() {
+                var valueJSON;
+                var typeJSON;
+                var campaignJSON = { ExternalEntityId: -1, ExternalName: '', Properties: { Budget: 0.00, StartDate: '', EndDate: '', Status: 'Draft'} };
+                if (getQueryString()['campaign'] != undefined) {
+                    var campaign = campaignJSONCall("GET", false, $RCAPI.URI.CampaignGet.format(getQueryString()['advertiser'], getQueryString()['campaign']) + '?Flags=WithAssociations,WithSystemproperties');
+                    sessionStorage.setItem("currentCampaign", JSON.stringify({
+                        "lastSaved": new Date(),
+                        "campaign": campaign
+                    }));
+
+                    valueJSON = campaign.Campaign;
+                    typeJSON = 'campaign';
+                    sessionStorage.setItem("advertiserId", getQueryString()['advertiser']); 
+                    sessionStorage.removeItem("currentAdvertiser");
+                    sessionStorage.removeItem("currentAgency");
+                }
+                else if (getQueryString()['advertiser']) {
+                    objJSON = new $RCAjax($RCAPI.URI.CompanyGet.format($RCUI.querystring["advertiser"]) + '?Flags=WithAssociations,WithSystemproperties', '', 'GET', null, null, false, null, null);
+                    sessionStorage.setItem("currentAdvertiser", JSON.stringify({
+                        "lastSaved": new Date(),
+                        "advertiser": objJSON.responseData
+                    }));
+                    valueJSON = objJSON.responseData.Company;
+                    typeJSON = 'advertiser';
+                    sessionStorage.removeItem("currentAgency");
+                }
+
+                else if (getQueryString()['agency']) {
+                    objJSON = new $RCAjax($RCAPI.URI.CompanyGet.format($RCUI.querystring["agency"]) + '?Flags=WithAssociations,WithSystemproperties', '', 'GET', null, null, false, null, null);
+                    sessionStorage.setItem("currentAgency", JSON.stringify({
+                        "lastSaved": new Date(),
+                        "agency": objJSON.responseData
+                    }));
+                    valueJSON = objJSON.responseData.Company;
+                    typeJSON = 'agency';
+                    sessionStorage.removeItem("currentAdvertiser");
+                    
+                }
+   
+                var innerLayout = workarea.attachLayout("2U");
+                workarea = innerLayout.cells('a');
+                workarea.setText("Debug | Debug | Debug | Debug | Debug | Debug");
+                debugArea = innerLayout.cells('b');
+                debugArea.attachURL("./JSONFormatter.html");
+                iFrame = debugArea.getFrame();
+                iFrame.name = "jsoniframe1";
+                debugArea.setText("Debug | Debug | Debug | Debug | Debug | Debug");
+                workarea.attachObject(showDebug(valueJSON, typeJSON));
+                iFrame.innerText = valueJSON;
+                
+            }
+
+            function showDebug(json, typeJSON) {
+                var debugDataContainer = document.createElement('div');
+                debugDataContainer.setAttribute('style', 'font-size:10pt;');
+                switch (typeJSON) {
+                    case 'campaign':
+                        debugDataContainer.innerHTML += "<b>Campaign</b><br>";
+                        break;
+                    case 'advertiser':
+                        debugDataContainer.innerHTML += "<b>Advertiser</b><br>";
+                        break;
+                    case 'agency':
+                        debugDataContainer.innerHTML += "<b>Agency</b><br>";
+                        break;
+                }                
+                for (var j in json.Properties) {
+                    debugDataContainer.innerHTML += j + " = ";
+                    debugDataContainer.innerHTML += json.Properties[j] + "<br>";
+                }
+                debugDataContainer.innerHTML += "<b>Associations</b><br>";
+                if (typeJSON == 'campaign') {
+                    for (var j in json.Associations) {
+                        if (json.Associations[j].TargetEntityCategory == "BlobReference") {
+                            if (typeJSON == 'campaign') {
+                                debugDataContainer.innerHTML += j + " = <a href=\"\/api\/entity\/company\/" + getQueryString()['advertiser'] + "\/campaign\/" + getQueryString()['campaign'] + '?BLOB=' + json.Associations[j].TargetEntityId + "\" target=\"iframe2\">" + json.Associations[j].TargetEntityId + "<\/a><br>";
+                            }
+                        }
+                        else {
+                            debugDataContainer.innerHTML += j + " = ";
+                            if (Array.isArray(json.Associations[j])) {
+                                for (var k in json.Associations[j]) {
+                                    debugDataContainer.innerHTML += json.Associations[j][k].TargetEntityId + "; ";
+                                }
+                            }
+                            else {
+                                debugDataContainer.innerHTML += json.Associations[j].TargetEntityId;
+                            }
+                        }
+                    }
+                }
+                else if (typeJSON == 'advertiser') {
+                    if (json.Associations.campaign != undefined) {
+                        for (var k in json.Associations.campaign) {
+                            debugDataContainer.innerHTML += "Campaign ID: <a href=\"\/api\/entity\/company\/" + getQueryString()['advertiser'] + "\/campaign\/" + json.Associations.campaign[k].TargetEntityId + "?Flags=WithAssociations,WithSystemproperties" + "\" target=\"iframe2\"\">" + json.Associations.campaign[k].TargetEntityId + "<\/a><br>";
+                        }
+                    }
+                }
+                else if (typeJSON == 'agency') {
+                    if (json.Associations.AgencyAdvertiser != undefined) {
+                        for (var k in json.Associations.AgencyAdvertiser) {
+                            debugDataContainer.innerHTML += "Advertiser ID: <a href=\"\/api\/entity\/company\/" + json.Associations.AgencyAdvertiser[k].TargetEntityId + "?Flags=WithAssociations,WithSystemproperties" + "\" target=\"iframe2\">" + json.Associations.AgencyAdvertiser[k].TargetEntityId + "<\/a><br>";
+                        }
+                    }
+                }
+
+                return debugDataContainer;
+            }
+
+//            function disableAssign() {
+//                alert("DISABLE!");
+//                var disableButton = debugArea.getElementById('DisableButton');
+//                disableButton.disabled = true;
+//                return true;
+//            }
+        </script>
+    </head>
+    <body onload="pageRender(thisPageRender);">
+</body>
+</html>

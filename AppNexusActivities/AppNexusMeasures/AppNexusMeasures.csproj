@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{80EC7F36-FD48-48A7-9936-BE15EF8BD72C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AppNexusActivities.Measures</RootNamespace>
+    <AssemblyName>AppNexusActivities.Measures</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ConfigManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Common\Public\bin\Debug\ConfigManager.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAccessLayer">
+      <HintPath>..\..\DataAccessLayer\Public\bin\Debug\DataAccessLayer.dll</HintPath>
+    </Reference>
+    <Reference Include="DeliveryNetworkUtilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ActivitiesCommon\Public\bin\Debug\DeliveryNetworkUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Diagnostics, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Common\Public\bin\Debug\Diagnostics.dll</HintPath>
+    </Reference>
+    <Reference Include="DynamicAllocationEngine.Measures">
+      <HintPath>..\..\DynamicAllocation\Public\bin\Debug\DynamicAllocationEngine.Measures.dll</HintPath>
+    </Reference>
+    <Reference Include="DynamicAllocationUtilities">
+      <HintPath>..\..\ActivitiesCommon\Public\bin\Debug\DynamicAllocationUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityUtilities">
+      <HintPath>..\..\ActivitiesCommon\Public\bin\Debug\EntityUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Http, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\External\Public\bin\Debug\Microsoft.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\External\Public\bin\Debug\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Utilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Common\Public\bin\Debug\Utilities.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AgeRangeMeasureSource.cs" />
+    <Compile Include="AppNexusLegacyMeasureSourceProvider.cs" />
+    <Compile Include="AppNexusMeasureSourceBase.cs" />
+    <Compile Include="AppNexusMeasureSourceProvider.cs" />
+    <Compile Include="AppNexusMeasureSourceVersion.cs" />
+    <Compile Include="AppNexusMeasureTypes.cs" />
+    <Compile Include="AppNexusMeasureValues.cs" />
+    <Compile Include="CategoryMeasureSource.cs" />
+    <Compile Include="CityMeasureSource.cs" />
+    <Compile Include="DomainListMeasureSource.cs" />
+    <Compile Include="GeotargetingMeasureSourceBase.cs" />
+    <Compile Include="InventoryMeasureSource.cs" />
+    <Compile Include="MetroCodeMeasureSource.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegionMeasureSource.cs" />
+    <Compile Include="SegmentMeasureSource.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ageranges.csv" />
+    <EmbeddedResource Include="Resources\metrocodes.csv" />
+    <EmbeddedResource Include="Resources\regions.csv" />
+    <EmbeddedResource Include="Resources\SegmentDataCosts-1320[Rare Crowds Inc.].csv" />
+    <EmbeddedResource Include="Resources\SegmentDataCosts-2131[RareCrowds].csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\AppNexusBuiltin.js" />
+    <EmbeddedResource Include="Resources\LegacyMeasureMap.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AppNexusClient\AppNexusClient.csproj">
+      <Project>{6E1CDD95-E15B-49BC-BA4E-4CE83941AFA9}</Project>
+      <Name>AppNexusClient</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(SolutionDir)..\build\common.proj" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="ProjectBeforeBuild">
+  </Target>
+  <Target Name="ProjectAfterBuild">
+  </Target>
+  -->
+</Project>

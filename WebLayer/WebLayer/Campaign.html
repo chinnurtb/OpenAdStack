@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Campaign Page</title>
+    <link rel="stylesheet" type="text/css" href="./dhtml/codebase/dhtmlx.css" />
+    <link rel="stylesheet" type="text/css" href="./dhtml/codebase/dhtmlx_custom.css" /> 
+    <link rel="stylesheet" type="text/css" href="./css/basestyle.css" /> 
+
+    <script type="text/javascript" src="./scripts/GlobalObjects.js"></script>
+    <script type="text/javascript" src="./scripts/baselayout.js"></script>
+    <script type="text/javascript" src="./scripts/CampaignUtils.js"></script>
+<!-- Page Specific Scripts -->
+    <script type="text/javascript">
+    //global layout objects, global for convenience and short cutting code paths
+    var campaignLayout, wizardworkarea;
+    var wizardToolbar;
+    //page library functions
+    function wizNavHandler(id) {
+        if (!preNavigationCheck()) {
+            return false;
+        }
+        wizardToolbar.forEachItem(function (itemId) { wizardToolbar.setItemState(itemId, false); });
+        wizardToolbar.setItemState(id, true);
+        var menuResource = $RCUI.querystring["campaign"] ? 'EnabledWizardMenu' : 'DefaultWizardMenu';
+        var menu = $RCUI.resources('Campaign', menuResource);
+        if (id < menu.length) {
+            wizardworkarea.attachURL('\/'+ menu[id].Href + '?' + companyCampaignQueryString());
+        }
+        else {
+            alert('please come back later');
+        }
+    }
+
+    function companyCampaignQueryString() {
+        var QS = companyQueryString();
+        if ($RCUI.campaign) {
+            QS = companyQueryString() + "&campaign=" + $RCUI.campaign;
+        }
+        return QS;
+    }
+
+    function companyQueryString() {
+        return 'agency=' + $RCUI.agency + '&advertiser=' + $RCUI.advertiser;
+    }
+
+    //attaches navigation the cell passed in
+    function attachCampaignWizardToolbar(wizardNavCell) {
+        wizardToolbar = wizardNavCell.attachToolbar();
+        wizardToolbar.setSkin('dhx_web');
+        wizardToolbar.attachEvent('onStateChange', wizNavHandler);
+        var menuResource = $RCUI.querystring["campaign"] ? 'EnabledWizardMenu' : 'DefaultWizardMenu';
+        var menu = $RCUI.resources('Campaign', menuResource);
+        for (var menuItem in menu) {
+            wizardToolbar.addButtonTwoState(menuItem.toString(), menuItem, menu[menuItem].DisplayText);
+        };
+        return wizardToolbar;
+    }
+
+    // configures wizard navigation cell
+    function configureNavCell(navCell) {
+        navCell.hideHeader();
+        navCell.setHeight('25');
+        navCell.fixSize(1, 1);
+    }
+
+    // configures wizard workarea cell
+    function configureWorkCell(workarea) {
+        workarea.hideHeader();
+        wizNavHandler(0);
+    }
+
+    //local page renderer, called by the generic page renderer in baselayout.js
+    function thisPageRender() {
+        //assign globals
+        initializeCampaignClient();
+        campaignLayout = workarea.attachLayout('2E', 'dhx_web')
+        wizardworkarea = campaignLayout.cells('b');
+                
+        var wizardNav = campaignLayout.cells('a');
+        configureNavCell(wizardNav);
+        attachCampaignWizardToolbar(wizardNav);
+
+        if (!$RCUI.campaign) //load campaign grid if one is not already selected
+        {
+            workarea.progressOn();
+            loadCampaignGrid($RCUI.advertiser, wizardworkarea.view("campaignGrid"));
+            wizardworkarea.view("campaignGrid").setActive()
+            workarea.progressOff();
+        }
+        else {
+            configureWorkCell(wizardworkarea);
+            $RCUI.breadCrumbs.add(cClient.Get("Name"), "campaign", cClient.Get("Id"));
+        }
+    }
+
+    function loadCampaignGrid(companyId, layoutCell) {
+        //campaign List Grid formatting and population
+        layoutCell.hideHeader();
+        listGrid = layoutCell.attachGrid();
+        listGrid.setHeader("Campaign Name,Start Date,End Date,Budget,Spend,id");
+        listGrid.setColAlign("left,Right,Right,Right,Right,Right");
+        listGrid.setInitWidths("150,200,200,100,100,*");
+        listGrid.setColSorting("str,date,date,int,int,str");
+        listGrid.setColumnsVisibility("false,false,false,false,false,true");
+        listGrid.setColTypes("ro,dhxCalendar,dhxCalendar,ron,ron,ro");
+        listGrid.setNumberFormat("0,000.00", 3, ".", ",");
+        listGrid.setNumberFormat("0,000.00", 4, ".", ",");
+        listGrid.setDateFormat("%m/%d/%Y %H:%i (%D)");
+        listGrid.enableRowsHover(true, "highlight");
+        listGrid.attachEvent('onRowSelect', navToCampaignWorkflow)
+        listGrid.init();
+        listGrid.setSkin("dhx_web");
+        listGrid.parse(CampaignJsonToGridArray(getCampaignList(companyId).Campaigns), "jsarray");
+        return listGrid;
+    }
+
+    function CampaignJsonToGridArray(campaignJson) {
+        var gridArray = new Array();
+        for (var campaign in campaignJson) {
+            var tmpArr = [campaignJson[campaign].ExternalName];
+            tmpArr.push(Date.parseISO(campaignJson[campaign].Properties.StartDate).shiftToUTC());
+            tmpArr.push(Date.parseISO(campaignJson[campaign].Properties.EndDate).shiftToUTC());
+            tmpArr.push(campaignJson[campaign].Properties.Budget);
+            var spend = 0.00;
+            if (campaignJson[campaign].Properties.RemainingBudget) {
+                spend = campaignJson[campaign].Properties.Budget - campaignJson[campaign].Properties.RemainingBudget;
+            }
+            tmpArr.push(spend);
+            tmpArr.push(campaignJson[campaign].ExternalEntityId);
+            gridArray.push(tmpArr);
+        }
+        return gridArray;
+    }
+
+    function navToCampaignWorkflow(rowId) {
+        $RCUI.breadCrumbs.add(listGrid.cells(rowId, 0).getValue(), "campaign", listGrid.cells(rowId, 5).getValue());
+        window.location = '\/campaign.html?agency=' + $RCUI.agency + '&advertiser=' + $RCUI.advertiser + "&campaign=" + listGrid.cells(rowId, 5).getValue();
+    }
+    </script>
+</head>
+<body onload="pageRender(thisPageRender);">
+</body>
+</html>

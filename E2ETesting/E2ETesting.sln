@@ -1,0 +1,70 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Solution Items", ".Solution Items", "{38BB6034-660F-40BE-A5A3-2072F73E276F}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppNexus", "AppNexus", "{CBFF1175-EA45-443A-B171-C67390625DA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppNexusClientE2ETests", "AppNexus\AppNexusClientE2ETests\AppNexusClientE2ETests.csproj", "{0E69C3C6-AE5A-4110-A2F3-B4C72250D05D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppNexusActivitiesE2ETests", "AppNexus\AppNexusActivitiesE2ETests\AppNexusActivitiesE2ETests.csproj", "{8D3A2526-79B0-491F-BE37-D67735438506}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{7EF54104-2B94-4AE4-BBED-14F1ED05991E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiE2ETests", "Api\ApiE2ETests\ApiE2ETests.csproj", "{5D76F4F6-A941-4783-AB4F-C8161C31DF95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScenarioE2ETests", "ScenarioE2ETests\ScenarioE2ETests.csproj", "{F9CDA55A-8C2C-445C-AD46-1E462940DC5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E2ETestUtilities", "E2ETestUtilities\E2ETestUtilities.csproj", "{F659357A-9C61-461B-B853-89435CA24D52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppNexusTestUtilities", "AppNexus\AppNexusTestUtilities\AppNexusTestUtilities.csproj", "{3133ECEF-DDB6-457E-8664-827A82A02C32}"
+EndProject
+Global
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0E69C3C6-AE5A-4110-A2F3-B4C72250D05D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E69C3C6-AE5A-4110-A2F3-B4C72250D05D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E69C3C6-AE5A-4110-A2F3-B4C72250D05D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E69C3C6-AE5A-4110-A2F3-B4C72250D05D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D3A2526-79B0-491F-BE37-D67735438506}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D3A2526-79B0-491F-BE37-D67735438506}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D3A2526-79B0-491F-BE37-D67735438506}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D3A2526-79B0-491F-BE37-D67735438506}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D76F4F6-A941-4783-AB4F-C8161C31DF95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D76F4F6-A941-4783-AB4F-C8161C31DF95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D76F4F6-A941-4783-AB4F-C8161C31DF95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D76F4F6-A941-4783-AB4F-C8161C31DF95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9CDA55A-8C2C-445C-AD46-1E462940DC5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9CDA55A-8C2C-445C-AD46-1E462940DC5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9CDA55A-8C2C-445C-AD46-1E462940DC5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9CDA55A-8C2C-445C-AD46-1E462940DC5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F659357A-9C61-461B-B853-89435CA24D52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F659357A-9C61-461B-B853-89435CA24D52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F659357A-9C61-461B-B853-89435CA24D52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F659357A-9C61-461B-B853-89435CA24D52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3133ECEF-DDB6-457E-8664-827A82A02C32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3133ECEF-DDB6-457E-8664-827A82A02C32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3133ECEF-DDB6-457E-8664-827A82A02C32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3133ECEF-DDB6-457E-8664-827A82A02C32}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0E69C3C6-AE5A-4110-A2F3-B4C72250D05D} = {CBFF1175-EA45-443A-B171-C67390625DA5}
+		{8D3A2526-79B0-491F-BE37-D67735438506} = {CBFF1175-EA45-443A-B171-C67390625DA5}
+		{3133ECEF-DDB6-457E-8664-827A82A02C32} = {CBFF1175-EA45-443A-B171-C67390625DA5}
+		{5D76F4F6-A941-4783-AB4F-C8161C31DF95} = {7EF54104-2B94-4AE4-BBED-14F1ED05991E}
+	EndGlobalSection
+EndGlobal

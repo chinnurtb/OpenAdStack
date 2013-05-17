@@ -1,0 +1,6 @@
+﻿<MailTemplate xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/Utilities.Net.Mail">
+  <BodyFormat>Click link below to verify your RareCrowds account:&lt;br&gt;&lt;a href="{0}"&gt;{0}&lt;/a&gt;</BodyFormat>
+  <IsBodyHtml>true</IsBodyHtml>
+  <Sender>userverify@rarecrowds.com</Sender>
+  <SubjectFormat>RareCrowds Account Validation</SubjectFormat>
+</MailTemplate>

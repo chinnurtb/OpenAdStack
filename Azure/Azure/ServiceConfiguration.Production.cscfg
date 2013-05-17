@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="Azure" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="1" osVersion="*" schemaVersion="2012-05.1.7">
+  <Role name="WebRole">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Queue.ConnectionString" value="$(AzureConnectionString)" />
+      <Setting name="Queue.WorkItemStoreName" value="workitems" />
+      <Setting name="Queue.EnqueueRetries" value="5" />
+      <Setting name="Queue.EnqueueRetryWait" value="00:00:00.500" />
+      <Setting name="Index.ConnectionString" value="$(AzureSqlConnectionString)" />
+      <Setting name="Entity.ConnectionString" value="$(AzureConnectionString)" />
+      <!-- Logging.FileSize set to 0 means the log files roll over every hour, otherwise, they roll over at the size indicated-->
+      <Setting name="Logging.FileSizeBytes" value="2097152" />
+      <Setting name="Logging.BlobContainer" value="weblogs" />
+      <Setting name="Logging.ScheduledTransferPeriodMinutes" value="5" />
+      <Setting name="Logging.ConnectionString" value="$(AzureConnectionString)" />
+      <Setting name="ACS.SymmetricSignatureKey" value="3kxJBpK68iwTDyVtFMtodPN/Bd1jd2AcghCFEaa0kf0=" />
+      <Setting name="ACS.AcsHostUrl" value="accesscontrol.windows.net" />
+      <Setting name="ACS.RelyingPartySecurityKey" value="3kxJBpK68iwTDyVtFMtodPN/Bd1jd2AcghCFEaa0kf0=" />
+      <Setting name="ACS.ServiceNamespace" value="$(HostedServiceName)" />
+      <Setting name="ACS.FederationMetadataLocation" value="https://$(HostedServiceName).accesscontrol.windows.net/FederationMetadata/2007-06/FederationMetadata.xml" />
+      <Setting name="ACS.AudienceUri" value="https://apps.rarecrowds.com/" />
+      <Setting name="ACS.RelyingPartyRealm" value="https://apps.rarecrowds.com/" />
+      <Setting name="ACS.TokenDurationMinutes" value="$(TokenDurationMinutes)" />
+      <Setting name="ACS.Issuer" value="https://$(HostedServiceName).accesscontrol.windows.net/" />
+      <Setting name="WL.LogOffUrl" value="https://apps.rarecrowds.com/LogOff.aspx" />
+      <Setting name="WL.WLIDLogOffUrl" value="https://login.live.com/logout.srf" />
+      <Setting name="ApiLayer.QueueResponsePollTime" value="70" />
+      <Setting name="ApiLayer.MaxQueueResponseWaitTime" value="7000" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Connect.ActivationToken" value="" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Connect.Refresh" value="" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Connect.WaitForConnectivity" value="" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Connect.Upgrade" value="" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Connect.EnableDomainJoin" value="" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Connect.DomainFQDN" value="" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Connect.DomainControllerFQDN" value="" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Connect.DomainAccountName" value="" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Connect.DomainPassword" value="" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Connect.DomainOU" value="" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Connect.Administrators" value="" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Connect.DomainSiteName" value="" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="lucyRdc" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBpQYJKoZIhvcNAQcDoIIBljCCAZICAQAxggFOMIIBSgIBADAyMB4xHDAaBgNVBAMME1dpbmRvd3MgQXp1cmUgVG9vbHMCEDvmwNOOEQqLSYE7wIhSkDYwDQYJKoZIhvcNAQEBBQAEggEASamZe3bdd4ZWaZ5+TixnPNrEQtyj12D22NIoF8osp4fJy/vFBlYFiy1L3ugHdPcCeFwbutmE6byBEPum4s1N63hyAd4GFpK+sfC6B4TZRDExinG23Z+WzPoGV9il/rGgX9SniatS1yediyIM7E4IMIpd7XOiX4rvKZ5yyb1du8yXxmTQ8TfBn7VYdzjjgRrOFCXXwfE/UqyaYeuxPRKikDXnpY/u56uHzvOz2LrjyXd79xyGe8s0xQic3nIc6hAcOLmkaMN0SZ+cnJQKmLw66HnoPkBtFdK8813Xqyg+k5ceP98Nq1uK8n+eGTwAz5jfP/jITHCr3mVCCEsoWbhLezA7BgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECLRcYhcJ35DZgBhkT/4RiV86GIjVKhOvM4f2opOP7MW4kcw=" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2013-03-20T23:59:59.0000000-07:00" />
+      <Setting name="PersistentDictionary.CompressionThresholdBytes" value="5120" />
+      <Setting name="PersistentDictionary.DefaultType" value="Sql" />
+      <Setting name="Dictionary.Blob.ConnectionString" value="$(AzureConnectionString)" />
+      <Setting name="Dictionary.Sql.ConnectionString" value="$(AzureSqlDictionaryConnectionString)" />
+      <Setting name="Logging.LocalResource" value="DiagnosticsStore" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="$(AzureConnectionString)" />
+      <Setting name="Testing.HttpHeaderClaimOverrides" value="false" />
+      <Setting name="Microsoft.Doppler.EnvironmentId" value="Production" />
+      <Setting name="Microsoft.Doppler.UnprocessedDataStore.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=rarecrowdsstore;AccountKey=YOWtq900BMOCMeEKP4arMTSOvmiSRohrM/ajYwRTrdnYGKmPW32iXmDnYfidJ8mOkJQvVFgtiSVC4PsJJOHrcg==" />
+      <Setting name="AppNexus.IsApp" value="false" />
+      <Setting name="ApiLayer.DataService.MaxQueueResponseWaitTime" value="15000" />
+    </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Website SSL" thumbprint="A3E329FD6D7C96C7F7F2DB246E16CE06AC663679" thumbprintAlgorithm="sha1" />
+      <Certificate name="Intermediate CA" thumbprint="3E4B4FBD77E5A8A89D58E835B9652E8BCFA2C3FA" thumbprintAlgorithm="sha1" />
+      <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="8FE52936F15FCBAE28B77738AE28752E08048825" thumbprintAlgorithm="sha1" />
+    </Certificates>
+  </Role>
+  <Role name="WorkerRole">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="$(AzureConnectionString)" />
+      <Setting name="Index.ConnectionString" value="$(AzureSqlConnectionString)" />
+      <Setting name="Entity.ConnectionString" value="$(AzureConnectionString)" />
+      <Setting name="Queue.ConnectionString" value="$(AzureConnectionString)" />
+      <Setting name="Queue.WorkItemStoreName" value="workitems" />
+      <Setting name="Queue.EnqueueRetries" value="5" />
+      <Setting name="Queue.EnqueueRetryWait" value="00:00:00.500" />
+      <Setting name="QueueProcessor.MinQueuePollWait" value="20" />
+      <Setting name="QueueProcessor.MaxQueuePollWait" value="334" />
+      <Setting name="QueueProcessor.QueuePollBackoff" value="1.085" />
+      <Setting name="QueueProcessor.MaxPollBatchSize" value="32" />
+      <!-- Logging.FileSize set to 0 means the log files roll over every hour, otherwise, they roll over at the size indicated-->
+      <Setting name="Logging.FileSizeBytes" value="2097152" />
+      <Setting name="Logging.BlobContainer" value="workerlogs" />
+      <Setting name="Logging.ScheduledTransferPeriodMinutes" value="5" />
+      <Setting name="Logging.ConnectionString" value="$(AzureConnectionString)" />
+      <Setting name="Mail.SmtpHost" value="$(MailSmtpHost)" />
+      <Setting name="UserMail.Invitation.LinkFormat" value="https://apps.rarecrowds.com/userverification.html?id={0}" />
+      <Setting name="Scheduler.UpdateInterval" value="00:05:23.456" />
+      <Setting name="WorkerRole.ThreadCheckInterval" value="00:00:05" />
+      <Setting name="ScheduledActivities.MaxCreateRequestRunTime" value="00:00:10" />
+      <Setting name="Activities.SubmitRequestRetries" value="3" />
+      <Setting name="Activities.SubmitRequestRetryWait" value="00:00:00.100" />
+      <Setting name="QueueProcessor.InactiveQueuePollWait" value="1000" />
+      <Setting name="QueueProcessor.InactiveQueueTime" value="900000" />
+      <Setting name="System.AuthUserId" value="1AD0DD27B0DE4605B8DA6F5C6C26A9E8" />
+      <Setting name="Delivery.ReportFrequency" value="01:00:00" />
+      <Setting name="AppNexus.PostEndDateReportPeriod" value="3.00:00:00" />
+      <Setting name="AppNexus.RetrieveReportRetryWait" value="00:00:30" />
+      <Setting name="AppNexus.RetrieveReportRetries" value="10" />
+      <Setting name="AppNexus.Endpoint" value="$(AppNexusEndpoint)" />
+      <Setting name="AppNexus.Timeout" value="00:01:00" />
+      <Setting name="AppNexus.Username" value="$(AppNexusUsername)" />
+      <Setting name="AppNexus.Password" value="$(AppNexusPassword)" />
+      <Setting name="Delivery.CreativeUpdateFrequency" value="02:00:00" />
+      <Setting name="AppNexus.CreateSegments" value="false" />
+      <Setting name="AppNexus.Retries" value="10" />
+      <Setting name="AppNexus.RetryWait" value="00:00:08.250" />
+      <Setting name="Experimental" value="false" />
+      <Setting name="QueueProcessor.Categories" value="0,1|0,1|1,2,0|2,3,0,1|2,3,0,1|3,2,1,0|3,2,1,0" />
+      <Setting name="Delivery.RetrieveCampaignReportsSchedule" value="00:05:00" />
+      <Setting name="Delivery.ReportsRequestExpiry" value="00:10:00" />
+      <Setting name="DynamicAllocation.UpdateAllocationsRequestExpiry" value="02:00:00" />
+      <Setting name="DynamicAllocation.UpdateBudgetAllocationsSchedule" value="00:05:00" />
+      <Setting name="Delivery.UpdateCreativeStatusSchedule" value="00:30:00" />
+      <Setting name="AppNexus.MaxReportRequests" value="5" />
+      <Setting name="Delivery.CreativeStatusUpdateRequestExpiry" value="00:30:00" />
+      <Setting name="AppNexus.Sandbox" value="$(AppNexusSandbox)" />
+      <Setting name="Delivery.ReportsRetrieveExpiry" value="00:10:00" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="lucyRdc" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBpQYJKoZIhvcNAQcDoIIBljCCAZICAQAxggFOMIIBSgIBADAyMB4xHDAaBgNVBAMME1dpbmRvd3MgQXp1cmUgVG9vbHMCEDvmwNOOEQqLSYE7wIhSkDYwDQYJKoZIhvcNAQEBBQAEggEASamZe3bdd4ZWaZ5+TixnPNrEQtyj12D22NIoF8osp4fJy/vFBlYFiy1L3ugHdPcCeFwbutmE6byBEPum4s1N63hyAd4GFpK+sfC6B4TZRDExinG23Z+WzPoGV9il/rGgX9SniatS1yediyIM7E4IMIpd7XOiX4rvKZ5yyb1du8yXxmTQ8TfBn7VYdzjjgRrOFCXXwfE/UqyaYeuxPRKikDXnpY/u56uHzvOz2LrjyXd79xyGe8s0xQic3nIc6hAcOLmkaMN0SZ+cnJQKmLw66HnoPkBtFdK8813Xqyg+k5ceP98Nq1uK8n+eGTwAz5jfP/jITHCr3mVCCEsoWbhLezA7BgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECLRcYhcJ35DZgBhkT/4RiV86GIjVKhOvM4f2opOP7MW4kcw=" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2013-03-20T23:59:59.0000000-07:00" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" value="true" />
+      <Setting name="PersistentDictionary.CompressionThresholdBytes" value="5120" />
+      <Setting name="QueueProcessor.LogStatsFrequency" value="00:15:00" />
+      <Setting name="Delivery.CleanupCampaignsSchedule" value="02:00:00" />
+      <Setting name="Delivery.CleanupCampaignsRequestExpiry" value="02:00:00" />
+      <Setting name="PersistentDictionary.DefaultType" value="Sql" />
+      <Setting name="DynamicAllocation.ReallocationSchedule" value="23:00:00" />
+      <Setting name="Delivery.ExportDACampaignsSchedule" value="00:05:00" />
+      <Setting name="Delivery.ExportDACampaignRequestExpiry" value="03:30:00" />
+      <Setting name="Dictionary.Blob.ConnectionString" value="$(AzureConnectionString)" />
+      <Setting name="Dictionary.Sql.ConnectionString" value="$(AzureSqlDictionaryConnectionString)" />
+      <Setting name="Queue.FailedWorkItemStoreName" value="failedworkitems" />
+      <Setting name="Queue.WorkItemRetentionPeriod" value="3.00:00:00" />
+      <Setting name="QueueProcessor.WorkItemCleanupFrequency" value="08:00:00" />
+      <Setting name="DynamicAllocation.PerMilleFees" value="0" />
+      <Setting name="DynamicAllocation.Margin" value="1.17647059 " />
+      <Setting name="DynamicAllocation.DefaultEstimatedCostPerMille" value="1.5 " />
+      <Setting name="DynamicAllocation.InitialAllocationTotalPeriodDuration" value="1.00:00:00 " />
+      <Setting name="DynamicAllocation.InitialAllocationSinglePeriodDuration" value="6:00:00 " />
+      <Setting name="DynamicAllocation.AllocationTopTier" value="7 " />
+      <Setting name="DynamicAllocation.AllocationNumberofTiersToAllocateTo" value="4 " />
+      <Setting name="DynamicAllocation.BudgetBuffer" value="1.1 " />
+      <Setting name="DynamicAllocation.AllocationNumberOfNodes" value="800" />
+      <Setting name="DynamicAllocation.MaxNodesToExport" value="150" />
+      <Setting name="DynamicAllocation.UnderspendExperimentNodeCount" value="10 " />
+      <Setting name="DynamicAllocation.UnderspendExperimentTier" value="3 " />
+      <Setting name="DynamicAllocation.MinBudget" value=".6 " />
+      <Setting name="DynamicAllocation.ExportBudgetBoost" value="1 " />
+      <Setting name="DynamicAllocation.LargestBudgetPercentAllowed" value=".03 " />
+      <Setting name="DynamicAllocation.NeutralBudgetCappingTier" value="4 " />
+      <Setting name="DynamicAllocation.LineagePenalty" value=".1 " />
+      <Setting name="DynamicAllocation.LineagePenaltyNeutral" value="1 " />
+      <Setting name="Logging.LocalResource" value="DiagnosticsStore" />
+      <Setting name="DynamicAllocation.MinimumImpressionCap" value="100" />
+      <Setting name="QueueProcessor.DrainStabilizationPeriod" value="00:07:30" />
+      <Setting name="Logging.AlertRecipients" value="$(AlertRecipients)" />
+      <Setting name="Logging.MailAlerts" value="true" />
+      <Setting name="Microsoft.Doppler.EnvironmentId" value="production" />
+      <Setting name="Microsoft.Doppler.UnprocessedDataStore.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=rarecrowdsstore;AccountKey=YOWtq900BMOCMeEKP4arMTSOvmiSRohrM/ajYwRTrdnYGKmPW32iXmDnYfidJ8mOkJQvVFgtiSVC4PsJJOHrcg==" />
+      <Setting name="GoogleDfp.TraffickerId" value="$(GoogleDfpTraffickerId)" />
+      <Setting name="GoogleDfp.NetworkTimezone" value="$(GoogleDfpNetworkTimezone)" />
+      <Setting name="GoogleDfp.ApplicationName" value="$(GoogleApplicationName)" />
+      <Setting name="GoogleDfp.Username" value="$(GoogleDfpUsername)" />
+      <Setting name="GoogleDfp.Password" value="$(GoogleDfpPassword)" />
+      <Setting name="GoogleDfp.NetworkId" value="$(GoogleDfpNetworkId)" />
+      <Setting name="GoogleDfp.ReportFrequency" value="01:00:00" />
+      <Setting name="Delivery.ExportCreativesSchedule" value="00:05:00" />
+      <Setting name="GoogleDfp.MaxReportRequests" value="20" />
+      <Setting name="DynamicAllocation.InitialMaxNumberOfNodes" value="200" />
+      <Setting name="Delivery.ExportCreativeRequestExpiry" value="00:30:00" />
+      <Setting name="DynamicAllocation.InsightThreshold" value=".9" />
+      <Setting name="DynamicAllocation.PhaseOneExitPercentage" value=".5" />
+      <Setting name="Delivery.DefaultNetwork" value="AppNexus" />
+      <Setting name="AppNexus.DefaultExporterVersion" value="1" />
+      <Setting name="GoogleDfp.DefaultExporterVersion" value="1" />
+      <Setting name="AppNexus.DataProviders" value="exelate|Lotame|Peer39|BlueKai" />
+      <Setting name="Mail.Username" value="$(MailUsername)" />
+      <Setting name="Mail.Password" value="$(MailPassword)" />
+      <Setting name="AppNexus.App.AppId" value="63" />
+      <Setting name="AppNexus.App.PrivateKey" value="$(AppNexusAppPrivateKey)" />
+      <Setting name="AppNexus.App.PrivateKeyPassword" value="$(AppNexusAppPrivateKeyPassword)" />
+      <Setting name="UserMail.Registration.Address" value="RegTest@rarecrowds.com" />
+      <Setting name="UserMail.Registration.LinkFormat" value="https://$(HostedServiceName).cloudapp.net/user.html?apnxid={0}" />
+      <Setting name="AppNexus.SegmentCacheExpiry" value="12:00:00" />
+      <Setting name="Mail.ApnxAppRegistration.SmtpHost" value="$(MailSmtpHost)" />
+      <Setting name="Mail.ApnxAppRegistration.Username" value="$(MailUsername)" />
+      <Setting name="Mail.ApnxAppRegistration.Password" value="$(MailPassword)" />
+      <Setting name="Mail.UserInvite.SmtpHost" value="$(MailSmtpHost)" />
+      <Setting name="Mail.UserInvite.Username" value="$(MailUsername)" />
+      <Setting name="Mail.UserInvite.Password" value="$(MailPassword)" />
+      <Setting name="Mail.LogAlerts.SmtpHost" value="$(MailSmtpHost)" />
+      <Setting name="Mail.LogAlerts.Username" value="$(MailUsername)" />
+      <Setting name="Mail.LogAlerts.Password" value="$(MailPassword)" />
+      <Setting name="AppNexus.SegmentDataCostsRequired" value="false" />
+      <Setting name="PaymentProcessor.ApiSecretKey" value="$(PaymentProcessorApiSecretKey)" />
+      <Setting name="PaymentProcessor.ApiPublicKey" value="$(PaymentProcessorApiPublicKey)" />
+    </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="8FE52936F15FCBAE28B77738AE28752E08048825" thumbprintAlgorithm="sha1" />
+    </Certificates>
+  </Role>
+</ServiceConfiguration>

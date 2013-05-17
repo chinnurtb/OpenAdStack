@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <AzureCredentials>Windows Azure BizSpark 1111</AzureCredentials>
+    <AzureHostedServiceName>rcprodapnxapp</AzureHostedServiceName>
+    <AzureHostedServiceLabel>rcprodapnxapp</AzureHostedServiceLabel>
+    <AzureSlot>Production</AzureSlot>
+    <AzureEnableIntelliTrace>False</AzureEnableIntelliTrace>
+    <AzureEnableProfiling>False</AzureEnableProfiling>
+    <AzureEnableWebDeploy>False</AzureEnableWebDeploy>
+    <AzureStorageAccountName>rarecrowdsprod</AzureStorageAccountName>
+    <AzureStorageAccountLabel>rarecrowdsprod</AzureStorageAccountLabel>
+    <AzureDeploymentLabel>Azure</AzureDeploymentLabel>
+    <AzureSolutionConfiguration>Release</AzureSolutionConfiguration>
+    <AzureServiceConfiguration>ApnxAppProd</AzureServiceConfiguration>
+    <AzureAppendTimestampToDeploymentLabel>False</AzureAppendTimestampToDeploymentLabel>
+    <AzureEnableRemoteDesktop>True</AzureEnableRemoteDesktop>
+    <AzureDeploymentReplacementMethod>AutomaticUpgrade</AzureDeploymentReplacementMethod>
+    <AzureDeleteDeploymentOnFailure>False</AzureDeleteDeploymentOnFailure>
+    <AzureFallbackToDeleteAndRecreateIfUpgradeFails>False</AzureFallbackToDeleteAndRecreateIfUpgradeFails>
+  </PropertyGroup>
+</Project>

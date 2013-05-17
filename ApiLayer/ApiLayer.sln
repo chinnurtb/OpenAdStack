@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiLayer", "ApiLayer\ApiLayer.csproj", "{3F8AFCF6-1740-4B0C-90EE-F79CC6F71C00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiLayerUnitTests", "ApiLayerUnitTests\ApiLayerUnitTests.csproj", "{95704E1E-4084-4372-9854-93D3D341DAEE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{54C035CA-4E09-4232-A46F-00C764AB4C11}"
+	ProjectSection(SolutionItems) = preProject
+		ApiLayer.vsmdi = ApiLayer.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFMock", "WCFMock\WCFMock.csproj", "{1C97CC1D-27E9-4DD0-B1D3-BE0541162ED9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ConfigTransforms", "ConfigTransforms", "{9345B5C7-D1D3-43C4-83A3-599C9D1329ED}"
+	ProjectSection(SolutionItems) = preProject
+		..\build\Config\Transforms\ApiLayer.web.config.ApnxAppProd.xml = ..\build\Config\Transforms\ApiLayer.web.config.ApnxAppProd.xml
+		..\build\Config\Transforms\ApiLayer.web.config.ApnxAppSand.xml = ..\build\Config\Transforms\ApiLayer.web.config.ApnxAppSand.xml
+		..\build\Config\Transforms\ApiLayer.web.config.Cloud.xml = ..\build\Config\Transforms\ApiLayer.web.config.Cloud.xml
+		..\build\Config\Transforms\ApiLayer.web.config.Integration.xml = ..\build\Config\Transforms\ApiLayer.web.config.Integration.xml
+		..\build\Config\Transforms\ApiLayer.web.config.Local.xml = ..\build\Config\Transforms\ApiLayer.web.config.Local.xml
+		..\build\Config\Transforms\ApiLayer.web.config.Production.xml = ..\build\Config\Transforms\ApiLayer.web.config.Production.xml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = ApiLayer.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3F8AFCF6-1740-4B0C-90EE-F79CC6F71C00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F8AFCF6-1740-4B0C-90EE-F79CC6F71C00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F8AFCF6-1740-4B0C-90EE-F79CC6F71C00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F8AFCF6-1740-4B0C-90EE-F79CC6F71C00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95704E1E-4084-4372-9854-93D3D341DAEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95704E1E-4084-4372-9854-93D3D341DAEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95704E1E-4084-4372-9854-93D3D341DAEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95704E1E-4084-4372-9854-93D3D341DAEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C97CC1D-27E9-4DD0-B1D3-BE0541162ED9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C97CC1D-27E9-4DD0-B1D3-BE0541162ED9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C97CC1D-27E9-4DD0-B1D3-BE0541162ED9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C97CC1D-27E9-4DD0-B1D3-BE0541162ED9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

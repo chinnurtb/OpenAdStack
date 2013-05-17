@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<OrderedTest name="lucywebtest" storage="lucywebtest.orderedtest" id="c9afe44e-5ecb-47c4-a1a7-a3b7d8f567f1" continueAfterFailure="true" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Execution id="ea770c5e-b77f-40c1-9c9c-19116d081eab" />
+  <TestLinks>
+    <TestLink id="85b770ff-47e7-a597-1a86-9ebb77ec8c06" name="UserInvitation" storage="bin\Release\weblayertest.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="c97626ba-e3fe-04eb-9a5a-c9e6e11ee3dd" name="CampaignCreate" storage="bin\Release\weblayertest.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="7c215245-5037-c124-bfba-dbd037fc24bf" name="CompanyCreate" storage="bin\Release\weblayertest.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="fbd2a50e-8c5b-5f0b-9346-0bc82db9ccdc" name="UserVerification" storage="bin\Release\weblayertest.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  </TestLinks>
+</OrderedTest>

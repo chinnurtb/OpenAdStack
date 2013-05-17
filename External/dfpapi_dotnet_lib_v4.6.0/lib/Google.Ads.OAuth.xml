@@ -1,0 +1,571 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Google.Ads.OAuth</name>
+    </assembly>
+    <members>
+        <member name="T:Google.Api.Ads.Common.OAuth.Lib.AdsServiceComponent">
+            <summary>
+            This class stores the definition of a service component. This class is
+            used by AdsServiceLocator class for storing type definitions.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Common.OAuth.Lib.AdsServiceComponent.id">
+            <summary>
+            The component id.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Common.OAuth.Lib.AdsServiceComponent.serviceType">
+            <summary>
+            Type of the service.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Common.OAuth.Lib.AdsServiceComponent.instanceType">
+            <summary>
+            The underlying type of the service.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Common.OAuth.Lib.AdsServiceComponent.isDefault">
+            <summary>
+            True, if this is the default instance of serviceType.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Common.OAuth.Lib.AdsServiceComponent.#ctor(System.String,System.Type,System.Type)">
+            <summary>
+            Default public constructor.
+            </summary>
+            <param name="id">The component id.</param>
+            <param name="serviceType">Type of the service.</param>
+            <param name="instanceType">The underlying type of the service.</param>
+        </member>
+        <member name="M:Google.Api.Ads.Common.OAuth.Lib.AdsServiceComponent.#ctor(System.String,System.Type,System.Type,System.Boolean)">
+            <summary>
+            Overloaded public constructor.
+            </summary>
+            <param name="id">The component id.</param>
+            <param name="serviceType">Type of the service.</param>
+            <param name="instanceType">The underlying type of the service.</param>
+            <param name="isDefault">True, if this is the default instance of
+            serviceType.</param>
+        </member>
+        <member name="P:Google.Api.Ads.Common.OAuth.Lib.AdsServiceComponent.Id">
+            <summary>
+            Gets the component id.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Common.OAuth.Lib.AdsServiceComponent.ServiceType">
+            <summary>
+            Gets the type of the service.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Common.OAuth.Lib.AdsServiceComponent.InstanceType">
+            <summary>
+            Gets the underlying type of the service.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Common.OAuth.Lib.AdsServiceComponent.IsDefault">
+            <summary>
+            Gets a value indicating whether this instance is the default instance of
+            ServiceType.
+            </summary>
+        </member>
+        <member name="T:Google.Api.Ads.Common.OAuth.Lib.AdsServiceLocator">
+            <summary>
+            Provides a default implementation of Microsoft Common Service Locator, to
+            be used with OAuth.Net library.
+            </summary>
+            <remarks>OAuth.net library uses Microsoft Common Service Locator library
+            (http://commonservicelocator.codeplex.com/) for dependency injection. The
+            default library implementation uses Castle Project, which adds another
+            external library dependency on the Ads client libraries. To avoid this,
+            we are providing a simple replacement to suit just the need of OAuth.Net
+            library.</remarks>
+        </member>
+        <member name="F:Google.Api.Ads.Common.OAuth.Lib.AdsServiceLocator.serviceLookup">
+            <summary>
+            A map to store the registered types.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Common.OAuth.Lib.AdsServiceLocator.useMemoryStore">
+            <summary>
+            Choose whether to use an in-memory store or session store for storing
+            OAuth state.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Common.OAuth.Lib.AdsServiceLocator.#ctor">
+            <summary>
+            Default public constructor.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Common.OAuth.Lib.AdsServiceLocator.RegisterDefaultServices">
+            <summary>
+            Registers the default set of services provided by this service locator.
+            </summary>
+            <remarks>These are the types required by OAuth.Net library.</remarks>
+        </member>
+        <member name="M:Google.Api.Ads.Common.OAuth.Lib.AdsServiceLocator.RegisterService(Google.Api.Ads.Common.OAuth.Lib.AdsServiceComponent)">
+            <summary>
+            Registers a service component with this locator.
+            </summary>
+            <param name="component">The component.</param>
+        </member>
+        <member name="M:Google.Api.Ads.Common.OAuth.Lib.AdsServiceLocator.GetAllInstances``1">
+            <summary>
+            Gets all instances of TService.
+            </summary>
+            <typeparam name="TService">The type of the service.</typeparam>
+            <returns>An enumerator that can be used to get all instances of
+            TService.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Common.OAuth.Lib.AdsServiceLocator.GetAllInstances(System.Type)">
+            <summary>
+            Gets all instances of service type.
+            </summary>
+            <param name="serviceType">Type of the service.</param>
+            <returns>An enumerator that can be used to get all instances of
+            service type.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Common.OAuth.Lib.AdsServiceLocator.GetInstance(System.Type)">
+            <summary>
+            Gets a default instance of the specified service type.
+            </summary>
+            <param name="serviceType">Type of the service.</param>
+            <returns>An instance of service type.</returns>
+            <exception cref="T:Microsoft.Practices.ServiceLocation.ActivationException">Thrown if the object cannot be
+            created. The inner exception contains more details about why the object
+            could not be created.</exception>
+            <remarks>This method never returns a null, failure to create an object
+            always causes an ActivationException to be thrown.</remarks>
+        </member>
+        <member name="M:Google.Api.Ads.Common.OAuth.Lib.AdsServiceLocator.GetService(System.Type)">
+            <summary>
+            Gets a default instance of the specified service type.
+            </summary>
+            <param name="serviceType">The service type.</param>
+            <returns>An instance of service type.</returns>
+            <exception cref="T:Microsoft.Practices.ServiceLocation.ActivationException">Thrown if the object cannot be
+            created. The inner exception contains more details about why the object
+            could not be created.</exception>
+            <remarks>This method never returns a null, failure to create an object
+            always causes an ActivationException to be thrown.</remarks>
+        </member>
+        <member name="M:Google.Api.Ads.Common.OAuth.Lib.AdsServiceLocator.GetInstance``1">
+            <summary>
+            Gets a default instance of the specified service type.
+            </summary>
+            <typeparam name="TService">The type of the service.</typeparam>
+            <returns>An instance of service type.</returns>
+            <exception cref="T:Microsoft.Practices.ServiceLocation.ActivationException">Thrown if the object cannot be
+            created. The inner exception contains more details about why the object
+            could not be created.</exception>
+            <remarks>This method never returns a null, failure to create an object
+            always causes an ActivationException to be thrown.</remarks>
+        </member>
+        <member name="M:Google.Api.Ads.Common.OAuth.Lib.AdsServiceLocator.GetInstance``1(System.String)">
+            <summary>
+            Gets a instance of the specified service type, registered with an
+            identifier key.
+            </summary>
+            <typeparam name="TService">The type of the service.</typeparam>
+            <param name="key">The identifier key.</param>
+            <returns>An instance of service type.</returns>
+            <exception cref="T:Microsoft.Practices.ServiceLocation.ActivationException">Thrown if the object cannot be
+            created. The inner exception contains more details about why the object
+            could not be created.</exception>
+            <remarks>This method never returns a null, failure to create an object
+            always causes an ActivationException to be thrown.</remarks>
+        </member>
+        <member name="M:Google.Api.Ads.Common.OAuth.Lib.AdsServiceLocator.GetInstance(System.Type,System.String)">
+            <summary>
+            Gets a instance of the specified service type, registered with an
+            identifier key.
+            </summary>
+            <param name="serviceType">Type of the service.</param>
+            <param name="key">The identifier key.</param>
+            <returns>An instance of service type.</returns>
+            <exception cref="T:Microsoft.Practices.ServiceLocation.ActivationException">Thrown if the object cannot be
+            created. The inner exception contains more details about why the object
+            could not be created.</exception>
+            <remarks>This method never returns a null, failure to create an object
+            always causes an ActivationException to be thrown.</remarks>
+        </member>
+        <member name="P:Google.Api.Ads.Common.OAuth.Lib.AdsServiceLocator.UseMemoryStore">
+            <summary>
+            Gets or sets whether to use an in-memory store or session store for
+            storing OAuth state.
+            </summary>
+        </member>
+        <member name="T:Google.Api.Ads.Common.OAuth.Lib.OAuth1aProvider">
+            <summary>
+            Provides a default implementation of OAuth1a protocol using OAuth.Net
+            library.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Common.OAuth.Lib.OAuth1aProvider.RequestTokenUrl">
+            <summary>
+            The OAuth endpoint for obtaining request token.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Common.OAuth.Lib.OAuth1aProvider.AuthorizationUrl">
+            <summary>
+            The OAuth endpoint for authorizing request token.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Common.OAuth.Lib.OAuth1aProvider.AccessTokenUrl">
+            <summary>
+            The OAuth endpoint for obtaining access token.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Common.OAuth.Lib.OAuth1aProvider.SignatureMethod">
+            <summary>
+            Default signature method supported by this class.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Common.OAuth.Lib.OAuth1aProvider.OAuthVersion">
+            <summary>
+            OAuth version supported by this class.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Common.OAuth.Lib.OAuth1aProvider.config">
+            <summary>
+            The configuration class for getting application settings.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Common.OAuth.Lib.OAuth1aProvider.injector">
+            <summary>
+            The ads service locator.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Common.OAuth.Lib.OAuth1aProvider.#ctor(Google.Api.Ads.Common.Lib.AppConfigBase)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Google.Api.Ads.Common.OAuth.Lib.OAuth1aProvider"/> class.
+            </summary>
+            <param name="config">The configuration object to be used to configure
+            this class.</param>
+        </member>
+        <member name="M:Google.Api.Ads.Common.OAuth.Lib.OAuth1aProvider.#ctor(OAuth.Net.Consumer.OAuthService,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Google.Api.Ads.Common.OAuth.Lib.OAuth1aProvider"/> class.
+            </summary>
+            <param name="service">The OAuthService class.</param>
+            <param name="callbackUrl">The callback URL.</param>
+        </member>
+        <member name="M:Google.Api.Ads.Common.OAuth.Lib.OAuth1aProvider.GetInjector">
+            <summary>
+            Intitializes and returns an ads service locator.
+            </summary>
+            <returns>The ads service locator.</returns>
+            <remarks>This is required for OAuth.NET library, since it uses
+            Microsoft.Practices.ServiceLocation to create various types using
+            dependency injection.</remarks>
+        </member>
+        <member name="M:Google.Api.Ads.Common.OAuth.Lib.OAuth1aProvider.ConfigureConnection(System.Net.HttpWebRequest)">
+            <summary>
+            Configures the HTTP connection.
+            </summary>
+            <param name="request">The web request object.</param>
+            <returns>
+            The configured web request object.
+            </returns>
+        </member>
+        <member name="M:Google.Api.Ads.Common.OAuth.Lib.OAuth1aProvider.FetchRequestToken">
+            <summary>
+            Fetches the request token.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Common.OAuth.Lib.OAuth1aProvider.GetAuthorizationUrl">
+            <summary>
+            Gets the authorization URL.
+            </summary>
+            <returns>
+            The authorization url.
+            </returns>
+        </member>
+        <member name="M:Google.Api.Ads.Common.OAuth.Lib.OAuth1aProvider.FetchAccessAndRefreshTokens(System.String)">
+            <summary>
+            Fetches the access token.
+            </summary>
+            <param name="authorizationCode">The verifier token returned by the OAuth
+            server on callback.</param>
+            <returns>
+            True if the access token was fetched correctly, false otherwise.
+            </returns>
+        </member>
+        <member name="M:Google.Api.Ads.Common.OAuth.Lib.OAuth1aProvider.GetAuthHeader(System.String)">
+            <summary>
+            Gets the AuthorizationHeader value to be set on outgoing HTTP calls.
+            </summary>
+            <param name="apiCallUrl">The URL to which API call is being made.
+            </param>
+            <returns>The AuthorizationHeader value to be set on outgoing HTTP calls.
+            </returns>
+        </member>
+        <member name="F:Google.Api.Ads.Common.OAuth.Lib.OAuth1aProvider.oAuthTokensObtained">
+            <summary>
+            Callback triggered when this provider obtains a new access token or
+            refresh token from the OAuth server.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Common.OAuth.Lib.OAuth1aProvider.TokensUpdatedCallback(Google.Api.Ads.Common.Lib.AdsOAuthProvider)">
+            <summary>
+            Default callback when this provider obtains a new access token or
+            refresh token from the OAuth server.
+            </summary>
+            <param name="provider">The provider.</param>
+        </member>
+        <member name="P:Google.Api.Ads.Common.OAuth.Lib.OAuth1aProvider.Config">
+            <summary>
+            Gets or sets the configuration class for getting application settings.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Common.OAuth.Lib.OAuth1aProvider.OnOAuthTokensObtained">
+            <summary>
+            Callback triggered when this provider obtains a new access token or
+            refresh token from the OAuth server.
+            </summary>
+        </member>
+        <member name="T:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider">
+            <summary>
+            Implements OAuth2 protocol, draft 10, web server flow for authenticating
+            users. See http://code.google.com/apis/accounts/docs/OAuth2WebServer.html
+            for details.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.OFFLINE_REDIRECT_URL">
+            <summary>
+            The OAuth2 redirect url to be used if your application is a desktop
+            application. To use this url, your client should be registered as an
+            installed application on the
+            <a href="https://code.google.com/apis/console">API console</a>.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.RESPONSE_TYPE">
+            <summary>
+            Determines if the Google OAuth 2.0 endpoint returns an authorization
+            code.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.AUTH_ENDPOINT">
+            <summary>
+            The OAuth2 endpoint for obtaining an authorization token.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.TOKEN_ENDPOINT">
+            <summary>
+            The OAuth2 endpoint for obtaining or refreshing an access token.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.REVOKE_ENDPOINT">
+            <summary>
+            The OAuth2 endpoint for revoking a refresh token programmatically.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.clientId">
+            <summary>
+            Indicates the client that is making the request. This value is obtained
+            from the <a href="https://code.google.com/apis/console">API console</a>
+            during application registration.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.redirectUri">
+            <summary>
+            Determines where the response is sent. This should be a registered
+            redirect uri on the <a href="https://code.google.com/apis/console">
+            API console</a>.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.scope">
+            <summary>
+            Indicates the API access your application is requesting. This is space
+            delimited.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.state">
+            <summary>
+            A parameter that your application can use for keeping state. The
+            OAuth Authorization Server roundtrips this parameter.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.isOffline">
+            <summary>
+            Indicates if your application needs to access APIs when the user is not
+            present at the browser. This is defaulted to true.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.clientSecret">
+            <summary>
+            The client secret obtained from the
+            <a href="https://code.google.com/apis/console">API console</a>
+            during application registration.during application registration.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.tokenType">
+            <summary>
+            Indicates the type of token returned by the server. This field will
+            always have the value Bearer for now.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.expiresIn">
+            <summary>
+            The remaining lifetime on the access token.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.accessToken">
+            <summary>
+            The token that can be sent to a Google API for authentication.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.refreshToken">
+            <summary>
+            A token that may be used to obtain a new access token. Refresh tokens
+            are valid until the user revokes access.
+            </summary>
+        </member>
+        <member name="F:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.config">
+            <summary>
+            The configuration object to be used with this client.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.#ctor(Google.Api.Ads.Common.Lib.AppConfigBase)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Google.Api.Ads.Common.Lib.OAuth2"/> class.
+            </summary>
+            <param name="config">The config.</param>
+        </member>
+        <member name="M:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.GetAuthorizationUrl">
+            <summary>
+            Builds the OAuth2 authorization url.
+            </summary>
+            <returns>The Authorization url that the user needs to visit to authorize
+            the application.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.FetchAccessAndRefreshTokens(System.String)">
+            <summary>
+            Gets the OAuth access and refresh tokens.
+            </summary>
+            <param name="authorizationCode">The authorization code obtained from the
+            Authorization url after the user authorizes the application to make API
+            calls.</param>
+            <remarks>Refresh tokens are obtained only if access mode was set to
+            offline.</remarks>
+        </member>
+        <member name="M:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.RefreshAccessToken">
+            <summary>
+            Refreshes the access token.
+            </summary>
+            <remarks>This method should be used only when access mode is set to
+            offline.</remarks>
+        </member>
+        <member name="M:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.RevokeRefreshToken">
+            <summary>
+            Revokes the refresh token.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.GetAuthHeader(System.String)">
+            <summary>
+            Gets the auth header.
+            </summary>
+            <param name="url">The url for which auth header is to be generated.
+            </param>
+            <returns>The auth header.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.GetResponseText(System.Net.WebResponse)">
+            <summary>
+            Gets the response text from a web response.
+            </summary>
+            <param name="response">The web response.</param>
+            <returns>The web response contents.</returns>
+        </member>
+        <member name="M:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.ParseJsonObjectResponse(System.String)">
+            <summary>
+            Parses a json object response.
+            </summary>
+            <param name="contents">The json contents.</param>
+            <returns>A dictionary of key-value pairs.</returns>
+            <remarks>This is not a full-blown json parser, it can handle only cases
+            where the response is a json object without nested objects or arrays.
+            </remarks>
+        </member>
+        <member name="F:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.oAuthTokensObtained">
+            <summary>
+            Callback triggered when this provider obtains a new access token or
+            refresh token from the OAuth server.
+            </summary>
+        </member>
+        <member name="M:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.TokensUpdatedCallback(Google.Api.Ads.Common.Lib.AdsOAuthProvider)">
+            <summary>
+            Default callback when this provider obtains a new access token or
+            refresh token from the OAuth server.
+            </summary>
+            <param name="provider">The provider.</param>
+        </member>
+        <member name="P:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.ClientId">
+            <summary>
+            Gets or sets the client that is making the request. This value is
+            obtained from the <a href="https://code.google.com/apis/console">
+            API console</a> during application registration.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.RedirectUri">
+            <summary>
+            Gets or sets where the url where the response is sent. This should be a
+            registered redirect uri on the
+            <a href="https://code.google.com/apis/console">API console</a>.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.Scope">
+            <summary>
+            Gets or sets the API access your application is requesting. This is
+            space delimited.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.State">
+            <summary>
+            Gets or sets a parameter that your application can use for keeping
+            state. The OAuth Authorization Server roundtrips this parameter.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.IsOffline">
+            <summary>
+            Indicates if your application needs to access APIs when the user is not
+            present at the browser. This is defaulted to true.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.ClientSecret">
+            <summary>
+            Gets or sets the client secret obtained from the
+            <a href="https://code.google.com/apis/console">API console</a>
+            during application registration.during application registration.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.TokenType">
+            <summary>
+            Gets the type of token returned by the server. This field will
+            always have the value Bearer for now.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.ExpiresIn">
+            <summary>
+            Gets the remaining lifetime on the access token.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.AccessToken">
+            <summary>
+            Gets or sets the token that can be sent to a Google API for
+            authentication.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.RefreshToken">
+            <summary>
+            Gets or sets a token that may be used to obtain a new access token.
+            Refresh tokens are valid until the user revokes access.
+            </summary>
+        </member>
+        <member name="P:Google.Api.Ads.Common.OAuth.Lib.OAuth2Provider.OnOAuthTokensObtained">
+            <summary>
+            Callback triggered when this provider obtains a new access token or
+            refresh token from the OAuth server.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,87 @@
+<html>
+<head>
+    <title>Please Register with Rare Crowds, Inc.</title>
+    <link rel="stylesheet" type="text/css" href="./dhtml/codebase/dhtmlx.css" />
+    <link rel="stylesheet" type="text/css" href="./dhtml/codebase/dhtmlx_custom.css" /> 
+    <link rel="stylesheet" type="text/css" href="./css/basestyle.css" /> 
+    <script type="text/javascript" src="./scripts/GlobalObjects.js"></script>
+    <script type="text/javascript" src="./scripts/baselayout.js"></script>
+    <script type="text/javascript">
+        chromeOn = false;
+        function thisPageRender() {
+            workarea.attachObject("mainContent");
+
+            //construct with ref to DHMTLXForm class
+            function registrationClass(regForm) {
+
+            this.Register = function () {
+                validate();
+                var user = getUserFromForm();
+                new $RCAjax($RCAPI.URI.ApnxUserRegister, JSON.stringify(user), 'POST', null, null, false, null, routePostErrors);
+            };
+
+            function getUserFromForm() {
+                return {
+                    'ExternalName': regForm.getItemValue("firstName") + ' ' + regForm.getItemValue("lastName"),
+                    'Properties': {
+                        "FirstName": regForm.getItemValue("firstName"),
+                        "LastName": regForm.getItemValue("lastName"),
+                        "ContactEmail": regForm.getItemValue("email"),
+                        "Account": regForm.getItemValue("accountName")
+                    }
+                };
+            }
+
+            function validate() { } //TODO add client validation
+                regForm.validate();
+            }
+
+            var formData = [
+                           { type: "settings", position: "label-left", labelWidth: 175 },
+                           { type: "fieldset", width: 400, name: "campaignData", label: "New Rare Crowds Account Request", inputWidth: "auto", list: [
+				                { type: "input", name: 'accountName', label: 'Account Name', required: true },
+				                { type: "input", name: 'firstName', label: 'First Name', required: true },
+				                { type: "input", name: 'lastName', label: 'Last Name', required: true },
+				                { type: "input", name: 'email', label: 'Email Address', validate: 'ValidEmail', required: true },
+                                ]
+                           }
+                           , { type: "button", name: "submit", width: 75, value: 'Sign Me Up!' }
+                           ];
+
+            var regForm = new dhtmlXForm("signupform");
+            regForm.enableLiveValidation(true);
+            regForm.setSkin("dhx_web");
+            regForm.loadStruct(formData, 'json');
+
+            var regInstance = new registrationClass(regForm);
+            regForm.attachEvent("onButtonClick", regInstance.Register);
+
+            function registrationSent() {
+                alert('Registration sent.');
+            }
+
+            function routePostErrors(data, errorType, errorText) {
+                switch (data.status) {
+                    default:
+                        alert(errorType + ' - ' + errorText);
+                        break;
+                };
+            } 
+        }
+    </script>
+</head>
+<body onload="pageRender(thisPageRender);">
+<div id="mainContent">
+<h1>How does Rare Crowds Dynamic Allocation Work?</h1>
+<p>
+The "rare crowd" is premium inventory that is customized to match the explicit goals of an ad campaign. 
+We can find thousands of small pockets of audience that are the most ideal available at the moment you have budget to spend. 
+The inventory we find is more targeted than any other ad inventory that you can buy at scale on any media. 
+<br /><br />
+Reach your "most perfect" available audience, extend your inventory footprint, and get much better results using Rare Crowds.  
+This simple tool only takes a few minutes to learn, and campaign setup takes less than 10 minutes.
+</p>
+<div id="signupform"></div>
+</div>
+</body>
+</html>

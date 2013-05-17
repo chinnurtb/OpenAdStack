@@ -1,0 +1,36 @@
+﻿<MailTemplate xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/Utilities.Net.Mail">
+  <!-- 0 = level, 1 = DateTime.UtcNow, 2 = instance, 3 = thread, 4 = source, 5 = message -->
+  <BodyFormat>
+    <![CDATA[
+<html>
+<head>
+<style>
+BODY {{ font-family:sans-serif; }}
+TABLE {{ border-collapse:collapse; }}
+TH, TD {{ border:1px solid black; padding:4px;}}
+TH {{ background-color:#889; color:white; }}
+#Level {{ font-weight:bold; }}
+#Message {{ white-space:pre; }}
+.Information {{ background-color:#69D; color:white; }}
+.Warning {{ background-color:yellow; color:darkred; }}
+.Error {{ background-color:red; color:white; text-decoration:blink; }}
+.Header td, .Header th {{ text-align:center;width:90px;white-space:nowrap; }}
+</style>
+</head>
+<body>
+<table>
+<tr class="Header"><th>Level</th><td id="Level" class="{0}">{0}</td><th>Time</th><td style="border-right:0px;">{1}</td><td style="width:auto;border-left:0px;" /></tr>
+<tr><th>Instance</th><td colspan="4">{2}</td></tr>
+<tr><th>Thread</th><td colspan="4">{3}</td></tr>
+<tr><th>Source</th><td colspan="4">{4}</td></tr>
+<tr><th>Message</th><td colspan="4" id="Message">{5}</td></tr>
+</table>
+</body>
+</html>
+]]>
+  </BodyFormat>
+  <IsBodyHtml>true</IsBodyHtml>
+  <Sender>sys.alerts@rarecrowds.com</Sender>
+  <!-- 0 = level, 1 = source, 2 = message[0..100] -->
+  <SubjectFormat>[{0} Alert] {1} - {2}</SubjectFormat>
+</MailTemplate>

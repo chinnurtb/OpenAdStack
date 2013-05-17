@@ -1,0 +1,427 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2FB82551-D11A-41DE-907E-ED3CF08F2CFC}</ProjectGuid>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebLayer</RootNamespace>
+    <AssemblyName>WebLayer</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ConfigManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Common\Public\bin\Debug\ConfigManager.dll</HintPath>
+    </Reference>
+    <Reference Include="Diagnostics, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="IdentityFederation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\OAuthSecurity\Public\bin\Debug\IdentityFederation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.IdentityModel, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=2.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="OAuthSecurity, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\OAuthSecurity\Public\bin\Release\OAuthSecurity.dll</HintPath>
+    </Reference>
+    <Reference Include="RuntimeIoc.WebRole, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\RuntimeIoc\Public\bin\Debug\RuntimeIoc.WebRole.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Utilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Common\Public\bin\Debug\Utilities.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="LogOff.aspx.cs">
+      <DependentUpon>LogOff.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LogOff.aspx.designer.cs">
+      <DependentUpon>LogOff.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BlankFrame.html" />
+    <Content Include="Company.html" />
+    <Content Include="Campaign.html" />
+    <Content Include="CampaignCreate.html" />
+    <Content Include="BaseValuations.html" />
+    <Content Include="Budget.html" />
+    <None Include="ReportDeliverySA.html" />
+    <Content Include="images\padlock-closed.png" />
+    <Content Include="images\padlock-open.png" />
+    <Content Include="Registration.html" />
+    <Content Include="dhtml\codebase\imgs\arrow.gif" />
+    <Content Include="dhtml\codebase\imgs\bg_selection.gif" />
+    <Content Include="dhtml\codebase\imgs\bottom.gif" />
+    <Content Include="dhtml\codebase\imgs\but_cut.gif" />
+    <Content Include="dhtml\codebase\imgs\color.png" />
+    <Content Include="dhtml\codebase\imgs\colormini.png" />
+    <Content Include="dhtml\codebase\imgs\combo_select_dhx_web.gif" />
+    <Content Include="dhtml\codebase\imgs\combo_select_dis_dhx_web.gif" />
+    <Content Include="dhtml\codebase\imgs\cp_buttons_panel.gif" />
+    <Content Include="dhtml\codebase\imgs\cross.gif" />
+    <Content Include="dhtml\codebase\imgs\dhxform_dhx_web\dhxform_upload_buttons.gif" />
+    <Content Include="dhtml\codebase\imgs\dhxform_dhx_web\dhxform_upload_uploading.gif" />
+    <Content Include="dhtml\codebase\imgs\dhxtoolbar_dhx_web\dhxtoolbar_imgs.gif" />
+    <Content Include="dhtml\codebase\imgs\dhx_web\close.png" />
+    <Content Include="dhtml\codebase\imgs\dhx_web\dhx_web_bottom.gif" />
+    <Content Include="dhtml\codebase\imgs\dhx_web\dhx_web_left.gif" />
+    <Content Include="dhtml\codebase\imgs\dhx_web\dhx_web_right.gif" />
+    <Content Include="dhtml\codebase\imgs\dhx_web\dhx_web_scroll_left.gif" />
+    <Content Include="dhtml\codebase\imgs\dhx_web\dhx_web_scroll_right.gif" />
+    <Content Include="dhtml\codebase\imgs\dhx_web\dhx_web_top.gif" />
+    <Content Include="dhtml\codebase\imgs\left.gif" />
+    <Content Include="dhtml\codebase\imgs\left_bottom.gif" />
+    <Content Include="dhtml\codebase\imgs\left_top.gif" />
+    <Content Include="dhtml\codebase\imgs\lock.gif" />
+    <Content Include="dhtml\codebase\imgs\radio_off.gif" />
+    <Content Include="dhtml\codebase\imgs\radio_on.gif" />
+    <Content Include="dhtml\codebase\imgs\right.gif" />
+    <Content Include="dhtml\codebase\imgs\right_bottom.gif" />
+    <Content Include="dhtml\codebase\imgs\right_top.gif" />
+    <Content Include="dhtml\codebase\imgs\slide.gif" />
+    <Content Include="dhtml\codebase\imgs\top.gif" />
+    <Content Include="images\blank.gif" />
+    <Content Include="images\Forward.png" />
+    <Content Include="images\ForwardToEnd.png" />
+    <Content Include="images\Rewind.png" />
+    <Content Include="images\RewindToStart.png" />
+    <Content Include="images\StartPause.png" />
+    <Content Include="JSON.html" />
+    <Content Include="JSONFormatter.html" />
+    <Content Include="proxy.html" />
+    <Content Include="ReportDelivery.html" />
+    <Content Include="dhtml\codebase\imgs\dhxwins_dhx_web\active\header_bg.gif" />
+    <Content Include="dhtml\codebase\imgs\dhxwins_dhx_web\active\icon_blank.gif" />
+    <Content Include="dhtml\codebase\imgs\dhxwins_dhx_web\active\icon_normal.gif" />
+    <Content Include="dhtml\codebase\imgs\dhxwins_dhx_web\active\progress.gif" />
+    <Content Include="dhtml\codebase\imgs\dhxwins_dhx_web\buttons.gif" />
+    <Content Include="dhtml\codebase\imgs\dhxwins_dhx_web\inactive\header_bg.gif" />
+    <Content Include="dhtml\codebase\imgs\dhxwins_dhx_web\inactive\icon_blank.gif" />
+    <Content Include="dhtml\codebase\imgs\dhxwins_dhx_web\inactive\icon_normal.gif" />
+    <Content Include="dhtml\codebase\imgs\dhxwins_dhx_web\inactive\progress.gif" />
+    <Content Include="dhtml\codebase\imgs\dhxwins_dhx_web\statusbar_bg.gif" />
+    <Content Include="dhtml\codebase\imgs\iconCheckAll.gif" />
+    <Content Include="dhtml\codebase\imgs\iconCheckDis.gif" />
+    <Content Include="dhtml\codebase\imgs\iconCheckGray.gif" />
+    <Content Include="dhtml\codebase\imgs\iconUncheckAll.gif" />
+    <Content Include="dhtml\codebase\imgs\iconUncheckDis.gif" />
+    <Content Include="Overrides.html" />
+    <Content Include="Ping.html" />
+    <Content Include="Report.html" />
+    <Content Include="dhtml\codebase\imgs\skins\arrow\bg.gif" />
+    <Content Include="dhtml\codebase\imgs\skins\arrow\leftside_bg.gif" />
+    <Content Include="dhtml\codebase\imgs\skins\arrow\rightside_bg.gif" />
+    <Content Include="dhtml\codebase\imgs\skins\arrow\selector.gif" />
+    <Content Include="dhtml\codebase\imgs\skins\arrow\vertical\bg.gif" />
+    <Content Include="dhtml\codebase\imgs\skins\arrow\vertical\leftside_bg.gif" />
+    <Content Include="dhtml\codebase\imgs\skins\arrow\vertical\rightside_bg.gif" />
+    <Content Include="dhtml\codebase\imgs\skins\arrow\vertical\selector.gif" />
+    <Content Include="Scripts\ApnxHandshake.js" />
+    <Content Include="Scripts\GlobalObjects.js" />
+    <Content Include="Scripts\jsonpath-0.8.0.js" />
+    <Content Include="Scripts\Sim\measuremap.js" />
+    <Content Include="Scripts\Sim\simrun0.js" />
+    <Content Include="Scripts\Sim\simrun1.js" />
+    <Content Include="Scripts\Sim\simrun10.js" />
+    <Content Include="Scripts\Sim\simrun100.js" />
+    <Content Include="Scripts\Sim\simrun11.js" />
+    <Content Include="Scripts\Sim\simrun12.js" />
+    <Content Include="Scripts\Sim\simrun13.js" />
+    <Content Include="Scripts\Sim\simrun14.js" />
+    <Content Include="Scripts\Sim\simrun15.js" />
+    <Content Include="Scripts\Sim\simrun16.js" />
+    <Content Include="Scripts\Sim\simrun17.js" />
+    <Content Include="Scripts\Sim\simrun18.js" />
+    <Content Include="Scripts\Sim\simrun19.js" />
+    <Content Include="Scripts\Sim\simrun2.js" />
+    <Content Include="Scripts\Sim\simrun20.js" />
+    <Content Include="Scripts\Sim\simrun21.js" />
+    <Content Include="Scripts\Sim\simrun22.js" />
+    <Content Include="Scripts\Sim\simrun23.js" />
+    <Content Include="Scripts\Sim\simrun24.js" />
+    <Content Include="Scripts\Sim\simrun25.js" />
+    <Content Include="Scripts\Sim\simrun26.js" />
+    <Content Include="Scripts\Sim\simrun27.js" />
+    <Content Include="Scripts\Sim\simrun28.js" />
+    <Content Include="Scripts\Sim\simrun29.js" />
+    <Content Include="Scripts\Sim\simrun3.js" />
+    <Content Include="Scripts\Sim\simrun30.js" />
+    <Content Include="Scripts\Sim\simrun31.js" />
+    <Content Include="Scripts\Sim\simrun32.js" />
+    <Content Include="Scripts\Sim\simrun33.js" />
+    <Content Include="Scripts\Sim\simrun34.js" />
+    <Content Include="Scripts\Sim\simrun35.js" />
+    <Content Include="Scripts\Sim\simrun36.js" />
+    <Content Include="Scripts\Sim\simrun37.js" />
+    <Content Include="Scripts\Sim\simrun38.js" />
+    <Content Include="Scripts\Sim\simrun39.js" />
+    <Content Include="Scripts\Sim\simrun4.js" />
+    <Content Include="Scripts\Sim\simrun40.js" />
+    <Content Include="Scripts\Sim\simrun41.js" />
+    <Content Include="Scripts\Sim\simrun42.js" />
+    <Content Include="Scripts\Sim\simrun43.js" />
+    <Content Include="Scripts\Sim\simrun44.js" />
+    <Content Include="Scripts\Sim\simrun45.js" />
+    <Content Include="Scripts\Sim\simrun46.js" />
+    <Content Include="Scripts\Sim\simrun47.js" />
+    <Content Include="Scripts\Sim\simrun48.js" />
+    <Content Include="Scripts\Sim\simrun49.js" />
+    <Content Include="Scripts\Sim\simrun5.js" />
+    <Content Include="Scripts\Sim\simrun50.js" />
+    <Content Include="Scripts\Sim\simrun51.js" />
+    <Content Include="Scripts\Sim\simrun52.js" />
+    <Content Include="Scripts\Sim\simrun53.js" />
+    <Content Include="Scripts\Sim\simrun54.js" />
+    <Content Include="Scripts\Sim\simrun55.js" />
+    <Content Include="Scripts\Sim\simrun56.js" />
+    <Content Include="Scripts\Sim\simrun57.js" />
+    <Content Include="Scripts\Sim\simrun58.js" />
+    <Content Include="Scripts\Sim\simrun59.js" />
+    <Content Include="Scripts\Sim\simrun6.js" />
+    <Content Include="Scripts\Sim\simrun60.js" />
+    <Content Include="Scripts\Sim\simrun61.js" />
+    <Content Include="Scripts\Sim\simrun62.js" />
+    <Content Include="Scripts\Sim\simrun63.js" />
+    <Content Include="Scripts\Sim\simrun64.js" />
+    <Content Include="Scripts\Sim\simrun65.js" />
+    <Content Include="Scripts\Sim\simrun66.js" />
+    <Content Include="Scripts\Sim\simrun67.js" />
+    <Content Include="Scripts\Sim\simrun68.js" />
+    <Content Include="Scripts\Sim\simrun69.js" />
+    <Content Include="Scripts\Sim\simrun7.js" />
+    <Content Include="Scripts\Sim\simrun70.js" />
+    <Content Include="Scripts\Sim\simrun71.js" />
+    <Content Include="Scripts\Sim\simrun72.js" />
+    <Content Include="Scripts\Sim\simrun73.js" />
+    <Content Include="Scripts\Sim\simrun74.js" />
+    <Content Include="Scripts\Sim\simrun75.js" />
+    <Content Include="Scripts\Sim\simrun76.js" />
+    <Content Include="Scripts\Sim\simrun77.js" />
+    <Content Include="Scripts\Sim\simrun78.js" />
+    <Content Include="Scripts\Sim\simrun79.js" />
+    <Content Include="Scripts\Sim\simrun8.js" />
+    <Content Include="Scripts\Sim\simrun80.js" />
+    <Content Include="Scripts\Sim\simrun81.js" />
+    <Content Include="Scripts\Sim\simrun82.js" />
+    <Content Include="Scripts\Sim\simrun83.js" />
+    <Content Include="Scripts\Sim\simrun84.js" />
+    <Content Include="Scripts\Sim\simrun85.js" />
+    <Content Include="Scripts\Sim\simrun86.js" />
+    <Content Include="Scripts\Sim\simrun87.js" />
+    <Content Include="Scripts\Sim\simrun88.js" />
+    <Content Include="Scripts\Sim\simrun89.js" />
+    <Content Include="Scripts\Sim\simrun9.js" />
+    <Content Include="Scripts\Sim\simrun90.js" />
+    <Content Include="Scripts\Sim\simrun91.js" />
+    <Content Include="Scripts\Sim\simrun92.js" />
+    <Content Include="Scripts\Sim\simrun93.js" />
+    <Content Include="Scripts\Sim\simrun94.js" />
+    <Content Include="Scripts\Sim\simrun95.js" />
+    <Content Include="Scripts\Sim\simrun96.js" />
+    <Content Include="Scripts\Sim\simrun97.js" />
+    <Content Include="Scripts\Sim\simrun98.js" />
+    <Content Include="Scripts\Sim\simrun99.js" />
+    <Content Include="Scripts\Sim\simulatorconfig.js" />
+    <Content Include="Scripts\Sim\valuations.js" />
+    <Content Include="Scripts\Visualization.js" />
+    <Content Include="UserPermissionTreeGrid.htm" />
+    <Content Include="UserVerification.html" />
+    <Content Include="Creatives.html" />
+    <Content Include="CSS\style.css" />
+    <Content Include="images\rclogo.png" />
+    <Content Include="LogOff.aspx" />
+    <Content Include="dhtml\codebase\dhtmlx.js" />
+    <Content Include="dhtml\codebase\imgs\dhtmlxcalendar_dhx_web\arrow_left.png" />
+    <Content Include="dhtml\codebase\imgs\dhtmlxcalendar_dhx_web\arrow_left_hover.png" />
+    <Content Include="dhtml\codebase\imgs\dhtmlxcalendar_dhx_web\arrow_right.png" />
+    <Content Include="dhtml\codebase\imgs\dhtmlxcalendar_dhx_web\arrow_right_hover.png" />
+    <Content Include="dhtml\codebase\imgs\dhtmlxcalendar_dhx_web\bg_days.png" />
+    <Content Include="dhtml\codebase\imgs\dhtmlxcalendar_dhx_web\bg_main.png" />
+    <Content Include="dhtml\codebase\imgs\dhxform_dhx_web\dhxform_btns.gif" />
+    <Content Include="dhtml\codebase\imgs\dhxform_dhx_web\dhxform_chbxrd.gif" />
+    <Content Include="dhtml\codebase\imgs\dhxgrid_dhx_web\separator.png" />
+    <Content Include="dhtml\codebase\dhtmlx.css" />
+    <Content Include="dhtml\codebase\dhtmlx_custom.css" />
+    <Content Include="dhtml\codebase\imgs\ar_left.gif" />
+    <Content Include="dhtml\codebase\imgs\ar_left_abs.gif" />
+    <Content Include="dhtml\codebase\imgs\ar_left_abs_dis.gif" />
+    <Content Include="dhtml\codebase\imgs\ar_left_dis.gif" />
+    <Content Include="dhtml\codebase\imgs\ar_right.gif" />
+    <Content Include="dhtml\codebase\imgs\ar_right_abs.gif" />
+    <Content Include="dhtml\codebase\imgs\ar_right_abs_dis.gif" />
+    <Content Include="dhtml\codebase\imgs\ar_right_dis.gif" />
+    <Content Include="dhtml\codebase\imgs\blanc.gif" />
+    <Content Include="dhtml\codebase\imgs\blank.gif" />
+    <Content Include="dhtml\codebase\imgs\combo_select.gif" />
+    <Content Include="dhtml\codebase\imgs\dhxlayout_dhx_web\dhxlayout_bg_sb.gif" />
+    <Content Include="dhtml\codebase\imgs\dhxlayout_dhx_web\dhxlayout_btns.gif" />
+    <Content Include="dhtml\codebase\imgs\dhxlayout_dhx_web\dhxlayout_drag_hor.gif" />
+    <Content Include="dhtml\codebase\imgs\dhxlayout_dhx_web\dhxlayout_drag_ver.gif" />
+    <Content Include="dhtml\codebase\imgs\dhxlayout_dhx_web\dhxlayout_progress.gif" />
+    <Content Include="dhtml\codebase\imgs\dhxlayout_dhx_web\dhxlayout_progress_global.gif" />
+    <Content Include="dhtml\codebase\imgs\dhx_simple_sep.png" />
+    <Content Include="dhtml\codebase\imgs\dyn_.gif" />
+    <Content Include="dhtml\codebase\imgs\dyn_down.gif" />
+    <Content Include="dhtml\codebase\imgs\dyn_up.gif" />
+    <Content Include="dhtml\codebase\imgs\false.gif" />
+    <Content Include="dhtml\codebase\imgs\folder.gif" />
+    <Content Include="dhtml\codebase\imgs\folderClosed.gif" />
+    <Content Include="dhtml\codebase\imgs\folderOpen.gif" />
+    <Content Include="dhtml\codebase\imgs\green.gif" />
+    <Content Include="dhtml\codebase\imgs\header_bg.gif" />
+    <Content Include="dhtml\codebase\imgs\header_bg_60.gif" />
+    <Content Include="dhtml\codebase\imgs\imageloaderror.gif" />
+    <Content Include="dhtml\codebase\imgs\item_chk0.gif" />
+    <Content Include="dhtml\codebase\imgs\item_chk0_dis.gif" />
+    <Content Include="dhtml\codebase\imgs\item_chk1.gif" />
+    <Content Include="dhtml\codebase\imgs\item_chk1_dis.gif" />
+    <Content Include="dhtml\codebase\imgs\leaf.gif" />
+    <Content Include="dhtml\codebase\imgs\line.gif" />
+    <Content Include="dhtml\codebase\imgs\line1.gif" />
+    <Content Include="dhtml\codebase\imgs\line1_rtl.gif" />
+    <Content Include="dhtml\codebase\imgs\line2.gif" />
+    <Content Include="dhtml\codebase\imgs\line2_rtl.gif" />
+    <Content Include="dhtml\codebase\imgs\line3.gif" />
+    <Content Include="dhtml\codebase\imgs\line3_rtl.gif" />
+    <Content Include="dhtml\codebase\imgs\line4.gif" />
+    <Content Include="dhtml\codebase\imgs\line4_rtl.gif" />
+    <Content Include="dhtml\codebase\imgs\minus.gif" />
+    <Content Include="dhtml\codebase\imgs\minus1.gif" />
+    <Content Include="dhtml\codebase\imgs\minus2.gif" />
+    <Content Include="dhtml\codebase\imgs\minus2_rtl.gif" />
+    <Content Include="dhtml\codebase\imgs\minus3.gif" />
+    <Content Include="dhtml\codebase\imgs\minus3_rtl.gif" />
+    <Content Include="dhtml\codebase\imgs\minus4.gif" />
+    <Content Include="dhtml\codebase\imgs\minus4_rtl.gif" />
+    <Content Include="dhtml\codebase\imgs\minus5.gif" />
+    <Content Include="dhtml\codebase\imgs\minus5_rtl.gif" />
+    <Content Include="dhtml\codebase\imgs\minus_ar.gif" />
+    <Content Include="dhtml\codebase\imgs\plus.gif" />
+    <Content Include="dhtml\codebase\imgs\plus1.gif" />
+    <Content Include="dhtml\codebase\imgs\plus2.gif" />
+    <Content Include="dhtml\codebase\imgs\plus2_rtl.gif" />
+    <Content Include="dhtml\codebase\imgs\plus3.gif" />
+    <Content Include="dhtml\codebase\imgs\plus3_rtl.gif" />
+    <Content Include="dhtml\codebase\imgs\plus4.gif" />
+    <Content Include="dhtml\codebase\imgs\plus4_rtl.gif" />
+    <Content Include="dhtml\codebase\imgs\plus5.gif" />
+    <Content Include="dhtml\codebase\imgs\plus5_rtl.gif" />
+    <Content Include="dhtml\codebase\imgs\plus_ar.gif" />
+    <Content Include="dhtml\codebase\imgs\radio_chk0.gif" />
+    <Content Include="dhtml\codebase\imgs\radio_chk0_dis.gif" />
+    <Content Include="dhtml\codebase\imgs\radio_chk1.gif" />
+    <Content Include="dhtml\codebase\imgs\radio_chk1_dis.gif" />
+    <Content Include="dhtml\codebase\imgs\red.gif" />
+    <Content Include="dhtml\codebase\imgs\results.gif" />
+    <Content Include="dhtml\codebase\imgs\separator.png" />
+    <Content Include="dhtml\codebase\imgs\sort_asc.gif" />
+    <Content Include="dhtml\codebase\imgs\sort_desc.gif" />
+    <Content Include="dhtml\codebase\imgs\true.gif" />
+    <Content Include="FederationMetadata\2007-06\FederationMetadata.xml" />
+    <Content Include="images\progress.gif" />
+    <Content Include="Jquery\jquery-1.7.1.min.js" />
+    <Content Include="PersonaCreate.html" />
+    <Content Include="Scripts\BaseLayout.js" />
+    <Content Include="Scripts\CampaignUtils.js" />
+    <Content Include="Scripts\WizardLayout.js" />
+    <Content Include="User.html" />
+    <Content Include="CSS\BaseStyle.css" />
+    <Content Include="Global.asax" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(SolutionDir)\..\build\common.proj" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>59510</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost/WebLayer</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /eiry $(SolutionDir)..\External\HtmlScripts\misc $(OutDir)\_PublishedWebsites\$(ProjectName)\Scripts\misc
+xcopy /eiry $(SolutionDir)..\External\HtmlScripts\json $(OutDir)\_PublishedWebsites\$(ProjectName)\Scripts\json</PostBuildEvent>
+  </PropertyGroup>
+</Project>

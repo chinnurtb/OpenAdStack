@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Doppler.TraceListeners</name>
+    </assembly>
+    <members>
+        <member name="T:Doppler.TraceListeners.AsyncOperationCorrelation">
+            <summary>
+            This class implements functionality to correlate multiple operations belonging to same activity.
+            For example, let us say an activity A1 starting with an operation O1 in Web Role is queued as a job.
+            A Worker Role is monitoring this queue. It picks up this job and processes it as operation 02.
+            This class lets the developer of the application correlate O1 with O2 easily so that developer
+            can see the logs from both operations as part of activity A1.
+            </summary>
+            <seealso cref="T:Doppler.TraceListeners.CorrelationMapper"/>
+        </member>
+        <member name="M:Doppler.TraceListeners.AsyncOperationCorrelation.#ctor(System.String,System.String)">
+            <summary>
+            Indicates that this is a start of an handed off operation (say start of asynchronous
+            processing in the background by worker role) with the given correlation id and name. 
+            </summary>
+            <param name="correlationId">The correlation id.</param>
+            <param name="operationName">The operation name.</param>
+        </member>
+        <member name="M:Doppler.TraceListeners.AsyncOperationCorrelation.Dispose">
+            <summary>
+            Indicates that this is an end of an handed off operation (say end of asynchronous
+            processing in the background by worker role). 
+            </summary>
+        </member>
+        <member name="T:Doppler.TraceListeners.CorrelationMapper">
+            <summary>
+            This class implements functionality to correlate multiple operations belonging to same activity.
+            For example, let us say an activity A1 starting with an operation O1 in Web Role is queued as a job.
+            A Worker Role is monitoring this queue. It picks up this job and processes it as operation 02.
+            This class lets the developer of the application correlate O1 with O2 easily so that developer
+            can see the logs from both operations as part of activity A1.
+            </summary>
+            <seealso cref="T:Doppler.TraceListeners.AsyncOperationCorrelation"/>
+        </member>
+        <member name="M:Doppler.TraceListeners.CorrelationMapper.OperationHandoff(System.String)">
+            <summary>
+            Indicates that this activity is handing off an operation (say for asynchronous processing
+            in the background to another role) with the given correlation id.
+            </summary>
+            <param name="correlationId">The unique correlation id.</param>
+            <seealso cref="M:Doppler.TraceListeners.CorrelationMapper.HandoffOperationStart(System.String,System.String)"/>
+            <seealso cref="M:Doppler.TraceListeners.CorrelationMapper.HandoffOperationEnd"/>
+        </member>
+        <member name="M:Doppler.TraceListeners.CorrelationMapper.HandoffOperationStart(System.String,System.String)">
+            <summary>
+            Indicates that this is a start of an handed off operation (say start of asynchronous
+            processing in the background by worker role) with the given correlation id and name. 
+            </summary>
+            <param name="correlationId">The correlation id.</param>
+            <param name="operationName">The operation name.</param>
+            <seealso cref="M:Doppler.TraceListeners.CorrelationMapper.HandoffOperationEnd"/>
+            <seealso cref="M:Doppler.TraceListeners.CorrelationMapper.OperationHandoff(System.String)"/>
+            <seealso cref="T:Doppler.TraceListeners.AsyncOperationCorrelation"/>
+        </member>
+        <member name="M:Doppler.TraceListeners.CorrelationMapper.HandoffOperationEnd">
+            <summary>
+            Indicates that this is an end of an handed off operation (say end of asynchronous
+            processing in the background by worker role). 
+            </summary>
+            <seealso cref="M:Doppler.TraceListeners.CorrelationMapper.HandoffOperationStart(System.String,System.String)"/>
+            <seealso cref="M:Doppler.TraceListeners.CorrelationMapper.OperationHandoff(System.String)"/>
+            <seealso cref="T:Doppler.TraceListeners.AsyncOperationCorrelation"/>
+        </member>
+    </members>
+</doc>

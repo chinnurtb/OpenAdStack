@@ -1,0 +1,77 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "Azure", "Azure\Azure.ccproj", "{51E2862E-3F8B-4499-9C99-08740D181D1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebRole", "WebRole\WebRole.csproj", "{830B81FE-1062-469D-8905-AB1B3A45F42F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerRole", "WorkerRole\WorkerRole.csproj", "{572C9991-D619-4EC7-88A4-8C51DE2090A1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F1BC8409-069C-4C12-89EE-F8C520F39901}"
+	ProjectSection(SolutionItems) = preProject
+		Azure.vsmdi = Azure.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ConfigTransforms", "ConfigTransforms", "{2D5837A9-ED66-4A8C-9A24-75EF5B20A5B8}"
+	ProjectSection(SolutionItems) = preProject
+		..\build\Config\Transforms\ApiLayer.web.config.ApnxAppProd.xml = ..\build\Config\Transforms\ApiLayer.web.config.ApnxAppProd.xml
+		..\build\Config\Transforms\ApiLayer.web.config.Cloud.xml = ..\build\Config\Transforms\ApiLayer.web.config.Cloud.xml
+		..\build\Config\Transforms\ApiLayer.web.config.Local.xml = ..\build\Config\Transforms\ApiLayer.web.config.Local.xml
+		..\build\Config\Transforms\ApiLayer.web.config.Production.xml = ..\build\Config\Transforms\ApiLayer.web.config.Production.xml
+		..\build\Config\Transforms\CreateCompany.app.config.ApnxAppProd.xml = ..\build\Config\Transforms\CreateCompany.app.config.ApnxAppProd.xml
+		..\build\Config\Transforms\CreateCompany.app.config.ApnxAppSand.xml = ..\build\Config\Transforms\CreateCompany.app.config.ApnxAppSand.xml
+		..\build\Config\Transforms\CreateCompany.app.config.Cloud.xml = ..\build\Config\Transforms\CreateCompany.app.config.Cloud.xml
+		..\build\Config\Transforms\CreateUser.app.config.ApnxAppProd.xml = ..\build\Config\Transforms\CreateUser.app.config.ApnxAppProd.xml
+		..\build\Config\Transforms\CreateUser.app.config.ApnxAppSand.xml = ..\build\Config\Transforms\CreateUser.app.config.ApnxAppSand.xml
+		..\build\Config\Transforms\CreateUser.app.config.Cloud.xml = ..\build\Config\Transforms\CreateUser.app.config.Cloud.xml
+		..\build\Config\Transforms\WebLayer.web.config.ApnxAppProd.xml = ..\build\Config\Transforms\WebLayer.web.config.ApnxAppProd.xml
+		..\build\Config\Transforms\WebLayer.web.config.ApnxAppSand.xml = ..\build\Config\Transforms\WebLayer.web.config.ApnxAppSand.xml
+		..\build\Config\Transforms\WebLayer.web.config.Cloud.xml = ..\build\Config\Transforms\WebLayer.web.config.Cloud.xml
+		..\build\Config\Transforms\WebLayer.web.config.Local.xml = ..\build\Config\Transforms\WebLayer.web.config.Local.xml
+		..\build\Config\Transforms\WebLayer.web.config.Production.xml = ..\build\Config\Transforms\WebLayer.web.config.Production.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EnvironmentSettings", "EnvironmentSettings", "{CE9466D5-4E9B-4204-B45B-6FF86968D2E6}"
+	ProjectSection(SolutionItems) = preProject
+		..\build\Config\EnvironmentSettings.ApnxAppProd.proj = ..\build\Config\EnvironmentSettings.ApnxAppProd.proj
+		..\build\Config\EnvironmentSettings.ApnxAppSand.proj = ..\build\Config\EnvironmentSettings.ApnxAppSand.proj
+		..\build\Config\EnvironmentSettings.Cloud.proj = ..\build\Config\EnvironmentSettings.Cloud.proj
+		..\build\Config\EnvironmentSettings.Integration.proj = ..\build\Config\EnvironmentSettings.Integration.proj
+		..\build\Config\EnvironmentSettings.Local.proj = ..\build\Config\EnvironmentSettings.Local.proj
+		..\build\Config\EnvironmentSettings.Production.proj = ..\build\Config\EnvironmentSettings.Production.proj
+	EndProjectSection
+EndProject
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "AzureWebOnly", "AzureWebOnly\AzureWebOnly.ccproj", "{3C109CED-CED9-42FF-9465-D495A65530FA}"
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Azure.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{51E2862E-3F8B-4499-9C99-08740D181D1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51E2862E-3F8B-4499-9C99-08740D181D1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51E2862E-3F8B-4499-9C99-08740D181D1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51E2862E-3F8B-4499-9C99-08740D181D1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{830B81FE-1062-469D-8905-AB1B3A45F42F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{830B81FE-1062-469D-8905-AB1B3A45F42F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{830B81FE-1062-469D-8905-AB1B3A45F42F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{830B81FE-1062-469D-8905-AB1B3A45F42F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{572C9991-D619-4EC7-88A4-8C51DE2090A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{572C9991-D619-4EC7-88A4-8C51DE2090A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{572C9991-D619-4EC7-88A4-8C51DE2090A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{572C9991-D619-4EC7-88A4-8C51DE2090A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C109CED-CED9-42FF-9465-D495A65530FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C109CED-CED9-42FF-9465-D495A65530FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C109CED-CED9-42FF-9465-D495A65530FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C109CED-CED9-42FF-9465-D495A65530FA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

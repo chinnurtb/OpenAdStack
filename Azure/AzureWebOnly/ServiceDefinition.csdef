@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceDefinition name="Azure" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2012-05.1.7">
+  <WebRole name="WebRole" vmsize="Small">
+    <Sites>
+      <Site name="WebLayer" physicalDirectory="..\..\Public\bin\$(Configuration)\_PublishedWebsites\WebLayer">
+        <VirtualApplication name="api" physicalDirectory="..\..\Public\bin\$(Configuration)\_PublishedWebsites\ApiLayer" />
+        <Bindings>
+          <Binding name="HttpIn" endpointName="HttpIn" />
+          <Binding name="HttpsIn" endpointName="HttpsIn" />
+        </Bindings>
+      </Site>
+    </Sites>
+    <Endpoints>
+      <InputEndpoint name="HttpIn" protocol="http" port="80" />
+      <InputEndpoint name="HttpsIn" protocol="https" port="443" certificate="Website SSL" />
+    </Endpoints>
+    <Imports>
+      <Import moduleName="Connect" />
+      <Import moduleName="RemoteAccess" />
+      <Import moduleName="Diagnostics" />
+      <Import moduleName="RemoteForwarder" />
+    </Imports>
+    <ConfigurationSettings>
+      <Setting name="Queue.ConnectionString" />
+      <Setting name="Queue.WorkItemStoreName" />
+      <Setting name="Queue.EnqueueRetries" />
+      <Setting name="Queue.EnqueueRetryWait" />
+      <Setting name="Index.ConnectionString" />
+      <Setting name="Entity.ConnectionString" />
+      <Setting name="Logging.FileSizeBytes" />
+      <Setting name="Logging.BlobContainer" />
+      <Setting name="Logging.ScheduledTransferPeriodMinutes" />
+      <Setting name="Logging.ConnectionString" />
+      <Setting name="ACS.SymmetricSignatureKey" />
+      <Setting name="ACS.AcsHostUrl" />
+      <Setting name="ACS.RelyingPartySecurityKey" />
+      <Setting name="ACS.ServiceNamespace" />
+      <Setting name="ACS.FederationMetadataLocation" />
+      <Setting name="ACS.AudienceUri" />
+      <Setting name="ACS.RelyingPartyRealm" />
+      <Setting name="ACS.TokenDurationMinutes" />
+      <Setting name="ACS.Issuer" />
+      <Setting name="WL.LogOffUrl" />
+      <Setting name="WL.WLIDLogOffUrl" />
+      <Setting name="ApiLayer.QueueResponsePollTime" />
+      <Setting name="ApiLayer.MaxQueueResponseWaitTime" />
+      <Setting name="PersistentDictionary.CompressionThresholdBytes" />
+      <Setting name="PersistentDictionary.DefaultType" />
+      <Setting name="Dictionary.Blob.ConnectionString" />
+      <Setting name="Dictionary.Sql.ConnectionString" />
+      <Setting name="Logging.LocalResource" />
+      <Setting name="Testing.HttpHeaderClaimOverrides" />
+      <Setting name="Microsoft.Doppler.EnvironmentId" />
+      <Setting name="Microsoft.Doppler.UnprocessedDataStore.ConnectionString" />
+      <Setting name="AppNexus.IsApp" />
+      <Setting name="ApiLayer.DataService.MaxQueueResponseWaitTime" />
+    </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Website SSL" storeLocation="LocalMachine" storeName="My" />
+      <Certificate name="Intermediate CA" storeLocation="LocalMachine" storeName="CA" />
+    </Certificates>
+    <LocalResources>
+      <LocalStorage name="DiagnosticsStore" cleanOnRoleRecycle="false" sizeInMB="512" />
+    </LocalResources>
+    <Startup>
+      <Task commandLine="iisconfig.cmd" executionContext="elevated" taskType="simple">
+      </Task>
+      <!--
+      <Task commandLine="doppleragent\Bootstrap.bat" executionContext="elevated" taskType="simple">
+        <Environment>
+          <Variable name="Microsoft.Doppler.EnvironmentId">
+            <RoleInstanceValue xpath="/RoleEnvironment/CurrentInstance/ConfigurationSettings/ConfigurationSetting[@name='Microsoft.Doppler.EnvironmentId']/@value" />
+          </Variable>
+          <Variable name="Microsoft.Doppler.UnprocessedDataStore.ConnectionString">
+            <RoleInstanceValue xpath="/RoleEnvironment/CurrentInstance/ConfigurationSettings/ConfigurationSetting[@name='Microsoft.Doppler.UnprocessedDataStore.ConnectionString']/@value" />
+          </Variable>
+        </Environment>
+      </Task>
+      -->
+    </Startup>
+  </WebRole>
+</ServiceDefinition>

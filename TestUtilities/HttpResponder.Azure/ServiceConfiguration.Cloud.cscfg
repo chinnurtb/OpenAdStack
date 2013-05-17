@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="HttpResponder.Azure" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="1" osVersion="*" schemaVersion="2012-05.1.7">
+  <Role name="HttpResponder">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=traffiqdev;AccountKey=WXkrV49GHq+B/CYNjM9KRXiUOCKa9sdaoAHdMmzQKnTzqaO6DEZtzw2wKqXbWFjQkl6CpAnaYbBYwrz7DhJ+0g==" />
+    </ConfigurationSettings>
+  </Role>
+</ServiceConfiguration>

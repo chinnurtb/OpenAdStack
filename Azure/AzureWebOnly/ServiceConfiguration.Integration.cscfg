@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="Azure" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="1" osVersion="*" schemaVersion="2012-05.1.7">
+  <Role name="WebRole">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Queue.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="Queue.WorkItemStoreName" value="workitems" />
+      <Setting name="Queue.EnqueueRetries" value="5" />
+      <Setting name="Queue.EnqueueRetryWait" value="00:00:00.500" />
+      <Setting name="Index.ConnectionString" value="$(AzureSqlConnectionString)" />
+      <Setting name="Entity.ConnectionString" value="UseDevelopmentStorage=true" />
+      <!-- Logging.FileSize set to 0 means the log files roll over every hour, otherwise, they roll over at the size indicated-->
+      <Setting name="Logging.FileSizeBytes" value="2097152" />
+      <Setting name="Logging.BlobContainer" value="weblogs" />
+      <Setting name="Logging.ScheduledTransferPeriodMinutes" value="1" />
+      <Setting name="Logging.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="ACS.SymmetricSignatureKey" value="3kxJBpK68iwTDyVtFMtodPN/Bd1jd2AcghCFEaa0kf0=" />
+      <Setting name="ACS.AcsHostUrl" value="accesscontrol.windows.net" />
+      <Setting name="ACS.RelyingPartySecurityKey" value="3kxJBpK68iwTDyVtFMtodPN/Bd1jd2AcghCFEaa0kf0=" />
+      <Setting name="ACS.ServiceNamespace" value="traffiqemu" />
+      <Setting name="ACS.FederationMetadataLocation" value="https://traffiqemu.accesscontrol.windows.net/FederationMetadata/2007-06/FederationMetadata.xml" />
+      <Setting name="ACS.AudienceUri" value="https://localhost/" />
+      <Setting name="ACS.RelyingPartyRealm" value="https://localhost/" />
+      <Setting name="ACS.TokenDurationMinutes" value="$(TokenDurationMinutes)" />
+      <Setting name="ACS.Issuer" value="https://traffiqemu.accesscontrol.windows.net/" />
+      <Setting name="WL.LogOffUrl" value="https://localhost/LogOff.aspx" />
+      <Setting name="WL.WLIDLogOffUrl" value="https://login.live.com/logout.srf" />
+      <Setting name="ApiLayer.QueueResponsePollTime" value="70" />
+      <Setting name="ApiLayer.MaxQueueResponseWaitTime" value="7000" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Connect.ActivationToken" value="" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Connect.Refresh" value="" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Connect.WaitForConnectivity" value="" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Connect.Upgrade" value="" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Connect.EnableDomainJoin" value="" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Connect.DomainFQDN" value="" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Connect.DomainControllerFQDN" value="" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Connect.DomainAccountName" value="" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Connect.DomainPassword" value="" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Connect.DomainOU" value="" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Connect.Administrators" value="" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Connect.DomainSiteName" value="" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="lucyRdc" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBpQYJKoZIhvcNAQcDoIIBljCCAZICAQAxggFOMIIBSgIBADAyMB4xHDAaBgNVBAMME1dpbmRvd3MgQXp1cmUgVG9vbHMCEDvmwNOOEQqLSYE7wIhSkDYwDQYJKoZIhvcNAQEBBQAEggEASamZe3bdd4ZWaZ5+TixnPNrEQtyj12D22NIoF8osp4fJy/vFBlYFiy1L3ugHdPcCeFwbutmE6byBEPum4s1N63hyAd4GFpK+sfC6B4TZRDExinG23Z+WzPoGV9il/rGgX9SniatS1yediyIM7E4IMIpd7XOiX4rvKZ5yyb1du8yXxmTQ8TfBn7VYdzjjgRrOFCXXwfE/UqyaYeuxPRKikDXnpY/u56uHzvOz2LrjyXd79xyGe8s0xQic3nIc6hAcOLmkaMN0SZ+cnJQKmLw66HnoPkBtFdK8813Xqyg+k5ceP98Nq1uK8n+eGTwAz5jfP/jITHCr3mVCCEsoWbhLezA7BgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECLRcYhcJ35DZgBhkT/4RiV86GIjVKhOvM4f2opOP7MW4kcw=" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2013-03-20T23:59:59.0000000-07:00" />
+      <Setting name="PersistentDictionary.CompressionThresholdBytes" value="5120" />
+      <Setting name="PersistentDictionary.DefaultType" value="Sql" />
+      <Setting name="Dictionary.Blob.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="Dictionary.Sql.ConnectionString" value="$(AzureSqlDictionaryConnectionString)" />
+      <Setting name="Logging.LocalResource" value="DiagnosticsStore" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="Testing.HttpHeaderClaimOverrides" value="true" />
+      <Setting name="Microsoft.Doppler.EnvironmentId" value="Integration" />
+      <Setting name="Microsoft.Doppler.UnprocessedDataStore.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=rarecrowdsstore;AccountKey=YOWtq900BMOCMeEKP4arMTSOvmiSRohrM/ajYwRTrdnYGKmPW32iXmDnYfidJ8mOkJQvVFgtiSVC4PsJJOHrcg==" />
+      <Setting name="AppNexus.IsApp" value="false" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" value="true" />
+      <Setting name="ApiLayer.DataService.MaxQueueResponseWaitTime" value="15000" />
+    </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Website SSL" thumbprint="9F430E1E4BFD24CD6872CD4D894300C18017C008" thumbprintAlgorithm="sha1" />
+      <Certificate name="Intermediate CA" thumbprint="3E4B4FBD77E5A8A89D58E835B9652E8BCFA2C3FA" thumbprintAlgorithm="sha1" />
+      <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="8FE52936F15FCBAE28B77738AE28752E08048825" thumbprintAlgorithm="sha1" />
+    </Certificates>
+  </Role>
+</ServiceConfiguration>

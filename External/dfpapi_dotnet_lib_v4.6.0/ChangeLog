@@ -1,0 +1,66 @@
+4.6.0
+- Fixed issues 13, 14.
+
+4.5.0
+- Added experimental support for OAuth2 as an authentication mechanism.
+- Added support for v201206.
+- Common library version was bumped to 1.2.0.
+- Changed the way user agents are constructed for SOAP requests.
+
+4.4.0
+- Added support for v201204.
+- Fixed issue 10.
+
+4.3.0
+- Added support for v201203.
+- Removed support for v201103, v201104, v201107.
+
+4.2.0
+- Fixed issues 8, 9
+- Added support for OAuth 1.0a in non ASP.NET environments.
+
+4.1.0
+- Added support for v201201.
+- Added new code examples for Team.
+- Added new reports examples and fixed some existing ones.
+
+4.0.0
+- Split the project into Google.Ads.Common and Google.Dfp. If you are using
+  a binary distribution, you need to add reference to Google.Ads.Common.dll in
+  addition to Google.Dfp.dll. You also need to update your Web.config and
+  App.config to fix the assembly name.
+
+3.7.0
+- Added support for ThirdPartySlotService.
+
+3.6.0
+- Added support for v201111.
+
+3.5.0
+- Exposed Timeout setting in App.config.
+- Default service Timeout is now infinite.
+
+3.4.0
+- Fixed issues 4, 5, 6
+- Fixed broken csproj files.
+
+3.3.0
+- Added support for v201108.
+
+3.2.0
+- Added OAuth support.
+- Added support for v201107.
+
+3.1.0
+- Added support for v201104.
+
+3.0.0
+- Added support for v201103.
+
+2.0.0
+- Added support for v201101.
+
+1.0.0
+- Released the first version of client library.
+- Added support for v201004 and v201010.
+- Code examples for all services.

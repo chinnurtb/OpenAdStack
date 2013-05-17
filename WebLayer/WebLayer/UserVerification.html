@@ -1,0 +1,92 @@
+﻿<html>
+<head>
+    <title>Confirmation</title>
+    <link rel="stylesheet" type="text/css" href="./dhtml/codebase/dhtmlx.css" />
+    <link rel="stylesheet" type="text/css" href="./dhtml/codebase/dhtmlx_custom.css" /> 
+    <link rel="stylesheet" type="text/css" href="./css/basestyle.css" /> 
+    
+    <script type="text/javascript" src="./scripts/GlobalObjects.js"></script>
+    <script type="text/javascript" src="./scripts/baselayout.js"></script>
+
+    <script type="text/javascript">
+    // Constants
+    var EXTERNAL_ENTITY_ID = "ExternalEntityId",
+    ENTITY_CATEGORY = "EntityCategory",
+    LOCAL_VERSION = "LocalVersion",
+    CONTACT_EMAIL = "ContactEmail",
+    USER_ID = "UserId",
+    FIRST_NAME = "FirstName",
+    LAST_NAME = "LastName",
+    CONTACT_PHONE = "Phone",
+    USER_ENTITY_CATEGORY = "User",
+    SUCCESS_STATUS_CODE = "Success",
+    FAILURE_STATUS_CODE = "Fail";
+
+    function getUserDetails(uid) {
+        var returnJSON = new $RCAjax($RCAPI.URI.UserGet.format(uid), '', 'GET', null, null, false, null, null);
+        showUserDetails(returnJSON.responseData);
+        return returnJSON;
+    }
+
+    function showUserDetails(response) {
+        // Check status
+        if (response != null && "Message" in response) {
+            // Remove server error later (Right now it is there to help us in debugging)
+            displayErrorMsg(GET_USER_DETAILS_FAILED + "<br /> Server Error: " + response.Message);
+            return;
+        }
+
+        var user = response.User;
+
+        $('#lblFirstName').text(getValue(user.Properties, FIRST_NAME));
+        $('#lblLastName').text(getValue(user.Properties, LAST_NAME));
+        $('#lblEmail').text(getValue(user.Properties, CONTACT_EMAIL));
+        $('#lblPhone').text(getValue(user.Properties, CONTACT_PHONE));
+        $('#hfExternalEntityId').val(user.ExternalEntityId);
+    }
+
+    function verifyComplete() {
+        var uid = $RCUI.querystring["id"];
+        var returnJSON = new $RCAjax($RCAPI.URI.UserConfirm.format(uid), '{"foo":"bar"}', 'POST', null, null, false, null, null);
+        return returnJSON;
+    }
+
+    function getValue(source, key) {
+        if (source == null || key == null)
+            throw new Error("getValue method: Invalid input values");
+
+        var value = '-';
+
+        $.each(source, function (index, obj) {
+            if (source[key] != null) {
+                // Persist value in a variable
+                value = source[key];
+
+                // Break loop
+                return false;
+            }
+        });
+        return value;
+    }
+
+    function thisPageRender()
+    {
+        userLayout = workarea.attachObject("wrap");
+        setTimeout(function() { workarea.progressOn(); }, 5000); // 5 second delay so user sees the logout notice
+        verifyComplete();
+		location.href="LogOff.aspx";
+        workarea.progressOff();
+    }
+</script>
+</head>
+<body onload="pageRender(thisPageRender);">
+    <!-- start wrap div -->  
+    <div id="wrap">  
+        <!-- title and description -->  
+        <p>Your user account is being verified...</p>  
+        <br/><br/>
+        You will be logged off. Please relogin after your credentails have been verified.
+    </div>  
+    <!-- end wrap div -->  
+</body>
+</html>

@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebLayer", "WebLayer\WebLayer.csproj", "{2FB82551-D11A-41DE-907E-ED3CF08F2CFC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ConfigTransforms", "ConfigTransforms", "{F1ABC8B6-C556-4EBB-8035-DE831516854C}"
+	ProjectSection(SolutionItems) = preProject
+		..\build\Config\Transforms\WebLayer.web.config.ApnxAppProd.xml = ..\build\Config\Transforms\WebLayer.web.config.ApnxAppProd.xml
+		..\build\Config\Transforms\WebLayer.web.config.ApnxAppSand.xml = ..\build\Config\Transforms\WebLayer.web.config.ApnxAppSand.xml
+		..\build\Config\Transforms\WebLayer.web.config.Cloud.xml = ..\build\Config\Transforms\WebLayer.web.config.Cloud.xml
+		..\build\Config\Transforms\WebLayer.web.config.Integration.xml = ..\build\Config\Transforms\WebLayer.web.config.Integration.xml
+		..\build\Config\Transforms\WebLayer.web.config.Local.xml = ..\build\Config\Transforms\WebLayer.web.config.Local.xml
+		..\build\Config\Transforms\WebLayer.web.config.Production.xml = ..\build\Config\Transforms\WebLayer.web.config.Production.xml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2FB82551-D11A-41DE-907E-ED3CF08F2CFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FB82551-D11A-41DE-907E-ED3CF08F2CFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FB82551-D11A-41DE-907E-ED3CF08F2CFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FB82551-D11A-41DE-907E-ED3CF08F2CFC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="AzureSimulatorRole" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="1" osVersion="*" schemaVersion="2012-05.1.7">
+  <Role name="SimulatorRole">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="simulator" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBnQYJKoZIhvcNAQcDoIIBjjCCAYoCAQAxggFOMIIBSgIBADAyMB4xHDAaBgNVBAMME1dpbmRvd3MgQXp1cmUgVG9vbHMCEGHdrH/DEF2wQPDiJoXrFD8wDQYJKoZIhvcNAQEBBQAEggEAJyn/F2OXFuvSO8KDnF5AT6QeQNTL7GTI3ORbM0VyZDtyqvRNvCk8tGAtYYFE9u+Lk48mRMj72FXcAX8Kq10CTEj8l3gKyX61XOx8otnzprClN8PjEsCZlE03l3nwJIi1TnodHOSCdjS8tq81GbkzFcce42SBq3kuy9duvTVVy8IUMyv+FAPJBcVMCGV5f4q13jHErLxenmF9O878xBaszkE323cweg4i+/r+I2WKpOAGG5ZGIA0BJim+pcrv1c+qQIw9iJ0PL5zf52irKvjQoBm+nVYVwS0F+AbZGvBbJNFVCvw+bs/GOAhtMn8BGptEAB/n+cXur2VaxKU1iPTInTAzBgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECKFfrhta/wXrgBCcexJphOWpJTIMhBnPuwIP" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2013-10-15T23:59:59.0000000-07:00" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" value="true" />
+    </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="9C0BDE51820E40344A46E77A90A2E5FCBF264D5A" thumbprintAlgorithm="sha1" />
+    </Certificates>
+  </Role>
+</ServiceConfiguration>

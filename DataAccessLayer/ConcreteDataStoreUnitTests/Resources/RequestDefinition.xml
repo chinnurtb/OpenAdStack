@@ -1,0 +1,13 @@
+﻿<RequestDefinition RequestType="Put">
+  <EntityTypes>
+    <Entity EntityType="PlacementFoo">
+      <Property Name="EndDate" Type="Date"/>
+      <Property Name="Width" Type="Int32"/>
+      <Property Name="Height" Type="Int32"/>
+    </Entity>
+  </EntityTypes>
+  <InstructionSequence>
+    <Instruction Name="GetEntities" EntityType="CampaignFoo" iType="Campaign"/>
+    <Instruction Name="GetEntitiesByAssociation" EntityType="PlacementFoo" iType="Entity" AssociationName="PlacementFoos"/>
+  </InstructionSequence>  
+</RequestDefinition>

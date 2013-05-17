@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{78CE06F8-2B31-41A9-AA35-FE8D2F6DBF11}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Utilities</RootNamespace>
+    <AssemblyName>Utilities</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Http, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\External\Public\bin\Debug\Microsoft.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\Program Files\Reference Assemblies\Microsoft\Windows Identity Foundation\v3.5\Microsoft.IdentityModel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.ServiceRuntime, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=4.0.6.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Public\bin\Debug\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppsGenericException.cs" />
+    <Compile Include="Cryptography\IPemKeyContainer.cs" />
+    <Compile Include="Cryptography\ICryptoProvider.cs" />
+    <Compile Include="Cryptography\ICipherEngine.cs" />
+    <Compile Include="Cryptography\IKeyContainer.cs" />
+    <Compile Include="Data\ISqlClient.cs" />
+    <Compile Include="Data\SqlWrapper.cs" />
+    <Compile Include="Data\ThrottlingCondition.cs" />
+    <Compile Include="Diagnostics\MailAlertLogger.cs" />
+    <Compile Include="Extensions\CollectionExtensions.cs" />
+    <Compile Include="Extensions\MathExtensions.cs" />
+    <Compile Include="Extensions\IOExtensions.cs" />
+    <Compile Include="Extensions\TextExtensions.cs" />
+    <Compile Include="IdentityFederation\HttpContextClaimRetriever.cs" />
+    <Compile Include="IdentityFederation\IAuthenticationManager.cs" />
+    <Compile Include="IdentityFederation\IAuthorizationManager.cs" />
+    <Compile Include="IdentityFederation\IClaimRetriever.cs" />
+    <Compile Include="IdentityFederation\Testing\HttpHeaderTestClaimRetriever.cs" />
+    <Compile Include="Runtime\InteropServices\NativeBuffer.cs" />
+    <Compile Include="Runtime\InteropServices\NativeWrapper.cs" />
+    <Compile Include="Serialization\AppsJsonException.cs" />
+    <Compile Include="Serialization\AppsJsonSerializer.cs" />
+    <Compile Include="Serialization\CsvParser.cs" />
+    <Compile Include="Net\HttpRestClientException.cs" />
+    <Compile Include="Net\Http\Extensions.cs" />
+    <Compile Include="Net\Http\HttpClient.cs" />
+    <Compile Include="Net\Http\IHttpClient.cs" />
+    <Compile Include="Net\IHttpRestClient.cs" />
+    <Compile Include="Net\Mail\IMailClient.cs" />
+    <Compile Include="Net\Mail\IMailTemplateProvider.cs" />
+    <Compile Include="Net\Mail\MailTemplate.cs" />
+    <Compile Include="Net\Mail\SmtpMailClient.cs" />
+    <Compile Include="Runtime\DeploymentProperties.cs" />
+    <Compile Include="Runtime\DeploymentState.cs" />
+    <Compile Include="Runtime\RoleInstanceState.cs" />
+    <Compile Include="Runtime\Testing\TestDeploymentProperties.cs" />
+    <Compile Include="Storage\InvalidETagException.cs" />
+    <Compile Include="Storage\IPersistentDictionaryEntry.cs" />
+    <Compile Include="Storage\AbstractPersistentDictionary.cs" />
+    <Compile Include="Storage\MemoryPersistentDictionaryEntry.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Storage\PersistentDictionaryFactory.cs" />
+    <Compile Include="Storage\PersistentDictionaryType.cs" />
+    <Compile Include="Storage\MemoryPersistentDictionary.cs" />
+    <Compile Include="Storage\MemoryPersistentDictionaryFactory.cs" />
+    <Compile Include="Storage\SimulatedPersistentStorage.cs" />
+    <Compile Include="Runtime\IRunner.cs" />
+    <Compile Include="Net\HttpRestClient.cs" />
+    <Compile Include="Serialization\IJsonSerializable.cs" />
+    <Compile Include="Storage\IPersistentDictionary.cs" />
+    <Compile Include="Storage\IPersistentDictionaryFactory.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Storage\PersistentDictionaryExtensions.cs" />
+    <Compile Include="Storage\Testing\SimulatedPersistentDictionaryFactory.cs" />
+    <Compile Include="Serialization\GenericXmlSerializableBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ConfigManager\ConfigManager.csproj">
+      <Project>{99DC8F9C-B5BE-4DA8-995B-CAF12A1214A6}</Project>
+      <Name>ConfigManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Diagnostics\Diagnostics.csproj">
+      <Project>{25BA9F11-94F9-4D24-8F52-4E5C5AD50454}</Project>
+      <Name>Diagnostics</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(SolutionDir)..\build\common.proj" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="ProjectBeforeBuild">
+  </Target>
+  <Target Name="ProjectAfterBuild">
+  </Target>
+  -->
+</Project>

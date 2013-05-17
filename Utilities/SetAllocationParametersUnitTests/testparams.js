@@ -1,0 +1,22 @@
+{
+	"DynamicAllocation.DefaultEstimatedCostPerMille" : "1.5",
+	"DynamicAllocation.Margin" : "1.17647059",
+	"DynamicAllocation.PerMilleFees" : "0",
+	"DynamicAllocation.BudgetBuffer" : "1.1",
+	"DynamicAllocation.InitialAllocationTotalPeriodDuration" : "1.00:00:00",
+	"DynamicAllocation.InitialAllocationSinglePeriodDuration" : "6:00:00",
+	"DynamicAllocation.AllocationTopTier" : "7",
+	"DynamicAllocation.AllocationNumberOfTiersToAllocateTo" : "4",
+	"DynamicAllocation.AllocationNumberOfNodes" : "350",
+	"DynamicAllocation.MaxNodesToExport" : "100",
+	"DynamicAllocation.UnderSpendExperimentNodeCount" : "10",
+	"DynamicAllocation.UnderSpendExperimentTier" : "3",
+	"DynamicAllocation.MinBudget" : ".6",
+	"DynamicAllocation.ExportBudgetBoost" : "1",
+	"DynamicAllocation.LargestBudgetPercentAllowed" : ".03",
+	"DynamicAllocation.NeutralBudgetCappingTier" : "4",
+	"DynamicAllocation.LineagePenalty" : ".1",
+	"DynamicAllocation.LineagePenaltyNeutral" : "1",
+	"DynamicAllocation.MinimumImpressionCap" : "100",
+	"DynamicAllocation.InitialMaxNumberOfNodes" : "150"
+}

@@ -1,0 +1,18 @@
+﻿<entry m:etag="W/&quot;datetime'2012-01-21T06%3A28%3A09.69Z'&quot;" xmlns="http://www.w3.org/2005/Atom" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
+  <id>http://127.0.0.1:10002/devstoreaccount1/DefaultCompany(PartitionKey='DefaultPartition',RowKey='8bc2426d153c4a66991c74df247a0af0')</id>
+  <title type="text"></title>
+  <updated>2012-01-21T06:28:09Z</updated>
+  <author>
+    <name />
+  </author>
+  <link rel="edit" title="DefaultCompany" href="DefaultCompany(PartitionKey='DefaultPartition',RowKey='8bc2426d153c4a66991c74df247a0af0')" />
+  <category term="devstoreaccount1.DefaultCompany" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+  <content type="application/xml">
+    <m:properties>
+      <d:PartitionKey xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">DefaultPartition</d:PartitionKey>
+      <d:RowKey xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">8bc2426d153c4a66991c74df247a0af0</d:RowKey>
+      <d:Timestamp m:type="Edm.DateTime" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">2012-01-21T06:28:09.69Z</d:Timestamp>
+      <d:TheStuff xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">theValue</d:TheStuff>
+    </m:properties>
+  </content>
+</entry>

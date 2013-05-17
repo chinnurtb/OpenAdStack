@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="XmlIndexDataSet" targetNamespace="http://tempuri.org/XmlIndexDataSet.xsd" xmlns:mstns="http://tempuri.org/XmlIndexDataSet.xsd" xmlns="http://tempuri.org/XmlIndexDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="XmlIndexDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="XmlIndexDataSet" msprop:Generator_UserDSName="XmlIndexDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Company" msprop:Generator_TableClassName="CompanyDataTable" msprop:Generator_TableVarName="tableCompany" msprop:Generator_TablePropName="Company" msprop:Generator_RowDeletingName="CompanyRowDeleting" msprop:Generator_UserTableName="Company" msprop:Generator_RowChangingName="CompanyRowChanging" msprop:Generator_RowEvHandlerName="CompanyRowChangeEventHandler" msprop:Generator_RowDeletedName="CompanyRowDeleted" msprop:Generator_RowEvArgName="CompanyRowChangeEvent" msprop:Generator_RowChangedName="CompanyRowChanged" msprop:Generator_RowClassName="CompanyRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="xId" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msdata:ReadOnly="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnxId" msprop:Generator_ColumnPropNameInRow="xId" msprop:Generator_ColumnPropNameInTable="xIdColumn" msprop:Generator_UserColumnName="xId" type="xs:string" />
+              <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Associations" msprop:Generator_TableClassName="AssociationsDataTable" msprop:Generator_TableVarName="tableAssociations" msprop:Generator_TablePropName="Associations" msprop:Generator_RowDeletingName="AssociationsRowDeleting" msprop:Generator_UserTableName="Associations" msprop:Generator_RowChangingName="AssociationsRowChanging" msprop:Generator_RowEvHandlerName="AssociationsRowChangeEventHandler" msprop:Generator_RowDeletedName="AssociationsRowDeleted" msprop:Generator_RowEvArgName="AssociationsRowChangeEvent" msprop:Generator_RowChangedName="AssociationsRowChanged" msprop:Generator_RowClassName="AssociationsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SourceRowId" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:Generator_ColumnVarNameInTable="columnSourceRowId" msprop:Generator_ColumnPropNameInRow="SourceRowId" msprop:Generator_ColumnPropNameInTable="SourceRowIdColumn" msprop:Generator_UserColumnName="SourceRowId" type="xs:string" />
+              <xs:element name="TargetRowId" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:Generator_ColumnVarNameInTable="columnTargetRowId" msprop:Generator_ColumnPropNameInRow="TargetRowId" msprop:Generator_ColumnPropNameInTable="TargetRowIdColumn" msprop:Generator_UserColumnName="TargetRowId" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EntityId" msprop:Generator_TableClassName="EntityIdDataTable" msprop:Generator_TableVarName="tableEntityId" msprop:Generator_TablePropName="EntityId" msprop:Generator_RowDeletingName="EntityIdRowDeleting" msprop:Generator_UserTableName="EntityId" msprop:Generator_RowChangingName="EntityIdRowChanging" msprop:Generator_RowEvHandlerName="EntityIdRowChangeEventHandler" msprop:Generator_RowDeletedName="EntityIdRowDeleted" msprop:Generator_RowEvArgName="EntityIdRowChangeEvent" msprop:Generator_RowChangedName="EntityIdRowChanged" msprop:Generator_RowClassName="EntityIdRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="xId" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnxId" msprop:Generator_ColumnPropNameInRow="xId" msprop:Generator_ColumnPropNameInTable="xIdColumn" msprop:Generator_UserColumnName="xId" type="xs:string" />
+              <xs:element name="StorageType" msprop:Generator_ColumnVarNameInTable="columnStorageType" msprop:Generator_ColumnPropNameInRow="StorageType" msprop:Generator_ColumnPropNameInTable="StorageTypeColumn" msprop:Generator_UserColumnName="StorageType">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Version" msprop:Generator_ColumnVarNameInTable="columnVersion" msprop:Generator_ColumnPropNameInRow="Version" msprop:Generator_ColumnPropNameInTable="VersionColumn" msprop:Generator_UserColumnName="Version" type="xs:int" />
+              <xs:element name="CreateDate" msdata:DateTimeMode="Utc" msprop:Generator_ColumnVarNameInTable="columnCreateDate" msprop:Generator_ColumnPropNameInRow="CreateDate" msprop:Generator_ColumnPropNameInTable="CreateDateColumn" msprop:Generator_UserColumnName="CreateDate" type="xs:dateTime" />
+              <xs:element name="LastModifiedDate" msdata:DateTimeMode="Utc" msprop:Generator_ColumnVarNameInTable="columnLastModifiedDate" msprop:Generator_ColumnPropNameInRow="LastModifiedDate" msprop:Generator_ColumnPropNameInTable="LastModifiedDateColumn" msprop:Generator_UserColumnName="LastModifiedDate" type="xs:dateTime" />
+              <xs:element name="WriteLock" msprop:Generator_ColumnVarNameInTable="columnWriteLock" msprop:Generator_ColumnPropNameInRow="WriteLock" msprop:Generator_ColumnPropNameInTable="WriteLockColumn" msprop:Generator_UserColumnName="WriteLock" type="xs:boolean" default="false" />
+              <xs:element name="HomeStorageAccountName" msprop:Generator_ColumnVarNameInTable="columnHomeStorageAccountName" msprop:Generator_ColumnPropNameInRow="HomeStorageAccountName" msprop:Generator_ColumnPropNameInTable="HomeStorageAccountNameColumn" msprop:Generator_UserColumnName="HomeStorageAccountName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="RequestDefinition" msprop:Generator_TableClassName="RequestDefinitionDataTable" msprop:Generator_TableVarName="tableRequestDefinition" msprop:Generator_TablePropName="RequestDefinition" msprop:Generator_RowDeletingName="RequestDefinitionRowDeleting" msprop:Generator_UserTableName="RequestDefinition" msprop:Generator_RowChangingName="RequestDefinitionRowChanging" msprop:Generator_RowEvHandlerName="RequestDefinitionRowChangeEventHandler" msprop:Generator_RowDeletedName="RequestDefinitionRowDeleted" msprop:Generator_RowEvArgName="RequestDefinitionRowChangeEvent" msprop:Generator_RowChangedName="RequestDefinitionRowChanged" msprop:Generator_RowClassName="RequestDefinitionRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name" type="xs:string" />
+              <xs:element name="Definition" msprop:Generator_ColumnVarNameInTable="columnDefinition" msprop:Generator_ColumnPropNameInRow="Definition" msprop:Generator_ColumnPropNameInTable="DefinitionColumn" msprop:Generator_UserColumnName="Definition" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="StorageAccount" msprop:Generator_TableClassName="StorageAccountDataTable" msprop:Generator_TableVarName="tableStorageAccount" msprop:Generator_TablePropName="StorageAccount" msprop:Generator_RowDeletingName="StorageAccountRowDeleting" msprop:Generator_UserTableName="StorageAccount" msprop:Generator_RowChangingName="StorageAccountRowChanging" msprop:Generator_RowEvHandlerName="StorageAccountRowChangeEventHandler" msprop:Generator_RowDeletedName="StorageAccountRowDeleted" msprop:Generator_RowEvArgName="StorageAccountRowChangeEvent" msprop:Generator_RowChangedName="StorageAccountRowChanged" msprop:Generator_RowClassName="StorageAccountRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="StorageAccountName" msprop:Generator_ColumnVarNameInTable="columnStorageAccountName" msprop:Generator_ColumnPropNameInRow="StorageAccountName" msprop:Generator_ColumnPropNameInTable="StorageAccountNameColumn" msprop:Generator_UserColumnName="StorageAccountName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="StorageAddress" msprop:Generator_ColumnVarNameInTable="columnStorageAddress" msprop:Generator_ColumnPropNameInRow="StorageAddress" msprop:Generator_ColumnPropNameInTable="StorageAddressColumn" msprop:Generator_UserColumnName="StorageAddress">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="StorageType" msprop:Generator_ColumnVarNameInTable="columnStorageType" msprop:Generator_ColumnPropNameInRow="StorageType" msprop:Generator_ColumnPropNameInTable="StorageTypeColumn" msprop:Generator_UserColumnName="StorageType" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="AzureKeyFields" msprop:Generator_TableClassName="AzureKeyFieldsDataTable" msprop:Generator_TableVarName="tableAzureKeyFields" msprop:Generator_TablePropName="AzureKeyFields" msprop:Generator_RowDeletingName="AzureKeyFieldsRowDeleting" msprop:Generator_UserTableName="AzureKeyFields" msprop:Generator_RowChangingName="AzureKeyFieldsRowChanging" msprop:Generator_RowEvHandlerName="AzureKeyFieldsRowChangeEventHandler" msprop:Generator_RowDeletedName="AzureKeyFieldsRowDeleted" msprop:Generator_RowEvArgName="AzureKeyFieldsRowChangeEvent" msprop:Generator_RowChangedName="AzureKeyFieldsRowChanged" msprop:Generator_RowClassName="AzureKeyFieldsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="xId" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnxId" msprop:Generator_ColumnPropNameInRow="xId" msprop:Generator_ColumnPropNameInTable="xIdColumn" msprop:Generator_UserColumnName="xId" type="xs:string" />
+              <xs:element name="StorageAccountName" msprop:Generator_ColumnVarNameInTable="columnStorageAccountName" msprop:Generator_ColumnPropNameInRow="StorageAccountName" msprop:Generator_ColumnPropNameInTable="StorageAccountNameColumn" msprop:Generator_UserColumnName="StorageAccountName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TableName" msprop:Generator_ColumnVarNameInTable="columnTableName" msprop:Generator_ColumnPropNameInRow="TableName" msprop:Generator_ColumnPropNameInTable="TableNameColumn" msprop:Generator_UserColumnName="TableName" type="xs:string" />
+              <xs:element name="Partition" msprop:Generator_ColumnVarNameInTable="columnPartition" msprop:Generator_ColumnPropNameInRow="Partition" msprop:Generator_ColumnPropNameInTable="PartitionColumn" msprop:Generator_UserColumnName="Partition" type="xs:string" />
+              <xs:element name="RowId" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msdata:AutoIncrementSeed="10" msprop:Generator_ColumnVarNameInTable="columnRowId" msprop:Generator_ColumnPropNameInRow="RowId" msprop:Generator_ColumnPropNameInTable="RowIdColumn" msprop:Generator_UserColumnName="RowId" type="xs:string" />
+              <xs:element name="LocalVersion" msprop:Generator_ColumnVarNameInTable="columnLocalVersion" msprop:Generator_ColumnPropNameInRow="LocalVersion" msprop:Generator_ColumnPropNameInTable="LocalVersionColumn" msprop:Generator_UserColumnName="LocalVersion" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="S3KeyFields" msprop:Generator_TableClassName="S3KeyFieldsDataTable" msprop:Generator_TableVarName="tableS3KeyFields" msprop:Generator_TablePropName="S3KeyFields" msprop:Generator_RowDeletingName="S3KeyFieldsRowDeleting" msprop:Generator_UserTableName="S3KeyFields" msprop:Generator_RowChangingName="S3KeyFieldsRowChanging" msprop:Generator_RowEvHandlerName="S3KeyFieldsRowChangeEventHandler" msprop:Generator_RowDeletedName="S3KeyFieldsRowDeleted" msprop:Generator_RowEvArgName="S3KeyFieldsRowChangeEvent" msprop:Generator_RowChangedName="S3KeyFieldsRowChanged" msprop:Generator_RowClassName="S3KeyFieldsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="xId" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnxId" msprop:Generator_ColumnPropNameInRow="xId" msprop:Generator_ColumnPropNameInTable="xIdColumn" msprop:Generator_UserColumnName="xId" type="xs:string" />
+              <xs:element name="StorageAccountName" msprop:Generator_ColumnVarNameInTable="columnStorageAccountName" msprop:Generator_ColumnPropNameInRow="StorageAccountName" msprop:Generator_ColumnPropNameInTable="StorageAccountNameColumn" msprop:Generator_UserColumnName="StorageAccountName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TBDS3" msprop:Generator_ColumnVarNameInTable="columnTBDS3" msprop:Generator_ColumnPropNameInRow="TBDS3" msprop:Generator_ColumnPropNameInTable="TBDS3Column" msprop:Generator_UserColumnName="TBDS3" type="xs:string" />
+              <xs:element name="LocalVersion" msprop:Generator_ColumnVarNameInTable="columnLocalVersion" msprop:Generator_ColumnPropNameInRow="LocalVersion" msprop:Generator_ColumnPropNameInTable="LocalVersionColumn" msprop:Generator_UserColumnName="LocalVersion" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="XmlKeyFields" msprop:Generator_TableClassName="XmlKeyFieldsDataTable" msprop:Generator_TableVarName="tableXmlKeyFields" msprop:Generator_TablePropName="XmlKeyFields" msprop:Generator_RowDeletingName="XmlKeyFieldsRowDeleting" msprop:Generator_UserTableName="XmlKeyFields" msprop:Generator_RowChangingName="XmlKeyFieldsRowChanging" msprop:Generator_RowEvHandlerName="XmlKeyFieldsRowChangeEventHandler" msprop:Generator_RowDeletedName="XmlKeyFieldsRowDeleted" msprop:Generator_RowEvArgName="XmlKeyFieldsRowChangeEvent" msprop:Generator_RowChangedName="XmlKeyFieldsRowChanged" msprop:Generator_RowClassName="XmlKeyFieldsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="xId" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnxId" msprop:Generator_ColumnPropNameInRow="xId" msprop:Generator_ColumnPropNameInTable="xIdColumn" msprop:Generator_UserColumnName="xId" type="xs:string" />
+              <xs:element name="StorageAccountName" msprop:Generator_ColumnVarNameInTable="columnStorageAccountName" msprop:Generator_ColumnPropNameInRow="StorageAccountName" msprop:Generator_ColumnPropNameInTable="StorageAccountNameColumn" msprop:Generator_UserColumnName="StorageAccountName">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TableName" msprop:Generator_ColumnVarNameInTable="columnTableName" msprop:Generator_ColumnPropNameInRow="TableName" msprop:Generator_ColumnPropNameInTable="TableNameColumn" msprop:Generator_UserColumnName="TableName" type="xs:string" />
+              <xs:element name="Partition" msprop:Generator_ColumnVarNameInTable="columnPartition" msprop:Generator_ColumnPropNameInRow="Partition" msprop:Generator_ColumnPropNameInTable="PartitionColumn" msprop:Generator_UserColumnName="Partition" type="xs:string" />
+              <xs:element name="RowId" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msdata:AutoIncrementSeed="10" msprop:Generator_ColumnVarNameInTable="columnRowId" msprop:Generator_ColumnPropNameInRow="RowId" msprop:Generator_ColumnPropNameInTable="RowIdColumn" msprop:Generator_UserColumnName="RowId" type="xs:string" />
+              <xs:element name="LocalVersion" msprop:Generator_ColumnVarNameInTable="columnLocalVersion" msprop:Generator_ColumnPropNameInRow="LocalVersion" msprop:Generator_ColumnPropNameInTable="LocalVersionColumn" msprop:Generator_UserColumnName="LocalVersion" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint3">
+      <xs:selector xpath=".//mstns:Company" />
+      <xs:field xpath="mstns:xId" />
+    </xs:unique>
+    <xs:unique name="Constraint1">
+      <xs:selector xpath=".//mstns:EntityId" />
+      <xs:field xpath="mstns:xId" />
+    </xs:unique>
+    <xs:unique name="RequestDefinition_Constraint1" msdata:ConstraintName="Constraint1">
+      <xs:selector xpath=".//mstns:RequestDefinition" />
+      <xs:field xpath="mstns:Name" />
+    </xs:unique>
+    <xs:unique name="StorageAccount_Constraint1" msdata:ConstraintName="Constraint1">
+      <xs:selector xpath=".//mstns:StorageAccount" />
+      <xs:field xpath="mstns:StorageAccountName" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,263 @@
+<html>
+<head>
+    <title>Campaign Page</title>
+    <link rel="stylesheet" type="text/css" href="./css/basestyle.css" /> 
+    <link rel="stylesheet" type="text/css" href="./dhtml/codebase/dhtmlx.css" /> 
+    <link rel="stylesheet" type="text/css" href="./dhtml/codebase/dhtmlx_custom.css" /> 
+
+    <style type="text/css">
+    .Heading {font:Tahoma;font-size:14px;color:#ffffff;font-weight:bold;background:#880000;border-bottom:2px solid #880000;}
+    .Group {font:Tahoma;font-size:14px;font-weight:bold;background:#dddddd;border-bottom:3px solid #880000;}
+    </style>
+
+    <script type="text/javascript" src="./scripts/GlobalObjects.js"></script>
+    <script type="text/javascript" src="./scripts/wizardlayout.js"></script>
+    <script type="text/javascript" src="./scripts/CampaignUtils.js"></script>
+
+<!-- Page Specific Scripts -->
+    <script type="text/javascript">
+    helpTopic = "MeasureValuation";
+
+    var maxSlider = 10;
+    var sliders = [];
+    function pageExit() {
+        if ($RCUI.isDirty) { saveValuations(); }
+    }
+
+    function thisPageRender() { loadValuationsForm(workarea); }
+
+    function saveValuations() {
+        workarea.progressOn();
+        setMeasureInfoSet(cClient, getBaseValuationsFromInput(getMeasureInfoSetFromCampaign(cClient)));
+        cClient.Save();
+        $RCUI.isDirty = false;
+        workarea.progressOff();
+    }
+
+//UI Functions
+    function addButton(destinationObject) {
+        var valuationFormData = [
+                    { type: "settings", position: "label-left", labelWidth: 165 },
+                    { type: "button", name: "valuationSubmit", value: 'Save Measure Weights'}];
+        var valuationForm = new dhtmlXForm(destinationObject);
+        valuationForm.setSkin("dhx_web");
+        valuationForm.loadStruct(valuationFormData, 'json');
+        valuationForm.attachEvent("onButtonClick", saveValuations);
+    }
+
+    function loadValuationsForm(workareaCell) {
+        workareaCell.attachObject("valuationsGrid");
+        var newTable = document.createElement('table');
+        var valuationList = getGroupedValuations();
+        newTable = addMeasureRows(valuationList, "Pinned", newTable);
+        newTable = addMeasureRows(valuationList, "UnPinned", newTable);
+        document.getElementById('sliderCell').innerHTML = '<table style="font:Tahoma; font-size: 12px;">' + newTable.innerHTML + '<\/table>'
+        addSliders(getMeasuresFromCampaign(cClient));
+        updateValuations(getMeasuresFromCampaign(cClient));
+        addButton("buttonCell");
+    }
+
+    function updatePersonaValuation() {
+        var baseValuationWorking = getMeasuresFromCampaign(cClient);
+        for (var val in baseValuationWorking) {
+            var inputField = document.getElementById("value" + baseValuationWorking[val].measureId);
+            baseValuationWorking[val].valuation = (parseFloat(inputField.value) * 200).toFixed(0);
+        }
+        updateValuations(baseValuationWorking);
+    }
+
+    function updateValuations(baseVals) {
+        var MeasureInfoSet = getMeasureInfoSetFromCampaign(cClient);
+        for (var val in baseVals) {
+            var hiddenField = document.getElementById("value" + baseVals[val].measureId);
+            var inputField = document.getElementById(baseVals[val].measureId);
+            var measureValuation = parseFloat(baseVals[val].valuation) > 10 ? baseVals[val].valuation : 10;
+            hiddenField.value = (parseFloat(measureValuation) / 200).toFixed(2);
+            inputField.value = (parseFloat(measureValuation) / 200).toFixed(2);
+        }
+
+        var sumOfUngroupedMeasureValuations = sumValuations(getMeasuresFromCampaign(cClient), getUngroupedMeasures(MeasureInfoSet.Measures));
+        var groupNames = getGroupNames(jsonPath(MeasureInfoSet, '$.[?(@.group != "")]'));
+        var sumOfMaxMeasuresPerGroupValuations = 0;
+
+        for (var group in groupNames) {
+            sumOfMaxMeasuresPerGroupValuations += getGroupMaxValuation(groupNames[group]);
+        }
+        var tiers = getTierCount(MeasureInfoSet.Measures);
+        var joiningBonus = 1.04;
+
+        var personaValuation = (Math.pow(joiningBonus, tiers) * (sumOfMaxMeasuresPerGroupValuations + sumOfUngroupedMeasureValuations)).toFixed(2);
+        $RCUI.debugReport.record('Persona Valuation: ' + personaValuation);
+        MeasureInfoSet.MaxValuation = personaValuation;
+        setMeasureInfoSet(cClient, MeasureInfoSet);
+    }
+
+    function getGroupMaxValuation(groupName) {
+        if (groupName == null || groupName == undefined) { return 0; }
+
+        //TODO can we call getmeasuresfromcampaign?
+        var measureList = jsonPath(getMeasureInfoSetFromCampaign(cClient), '$.[?(@.group != "' + groupName + '")]');
+        var maxValuation = 0;
+        var baseValuations = getMeasuresFromCampaign(cClient);
+        for (var measure in measureList) {
+            for (var baseValuation in baseValuations) {
+                if (baseValuations[baseValuation].measureId == measureList[measure].measureId) {
+                    maxValuation = baseValuations[baseValuation].valuation > maxValuation ? parseFloat(baseValuations[baseValuation].valuation) : maxValuation;
+                    break;
+                }
+            }
+        }
+        return maxValuation / 200;
+    }
+
+    function getUngroupedMeasures(list) {
+        return jsonPath(list, '$.[?(@.group == "")]');
+    }
+
+    function sumValuations(list, filterList) {
+        if (filterList == false || filterList == undefined) {
+            return 0;
+        }
+        var sum = 0;
+        for (var index in list) {
+            for (var filterIndex in filterList) {
+                if (filterList[filterIndex].measureId == list[index].measureId) {
+                    sum += parseFloat(list[index].valuation);
+                    break;
+                }
+            }
+        }
+        return sum / 200.0;
+    }
+
+    function addMeasureRows(list, node, newTable) {
+        if (list[node] == undefined) {
+            return newTable;
+        }
+        var tempObj = document.createElement('tr');
+        var tempChildObj = document.createElement('td');
+        tempChildObj.setAttribute('colspan', '4');
+        tempChildObj.className = 'Heading';
+        tempChildObj.innerHTML = node;
+        tempObj.appendChild(tempChildObj);
+        newTable.appendChild(tempObj);
+        newTable = addMeasureGroupRows(list[node], newTable);
+        return newTable;
+    }
+
+    function addMeasureGroupRows(list, newTable) {
+        for (var group in list) {
+            var tempObj = document.createElement('tr');
+            var tempChildObj = document.createElement('td');
+            var childIndentation = 1;
+            tempChildObj.setAttribute('colspan', '4');
+            tempChildObj.className = 'Group';
+            if (list[group].Name.length > 1) { //indent and put header if there are childen
+                tempChildObj.innerHTML = list[group].Name;
+                childIndentation = 13;
+            }
+            tempObj.appendChild(tempChildObj);
+            newTable.appendChild(tempObj);
+            newTable = addMeasureSliderRow(list[group].Measures, newTable, childIndentation);
+        }
+        return newTable;
+    }
+
+    function addMeasureSliderRow(list, newRow, indentation) {
+        for (var i = 0; i < list.length; i++) {
+            var measureId = list[i].MeasureId;
+            var valuation = list[i].Valuation;
+
+            var newTableRow = document.createElement('tr');
+
+            var tempCell = document.createElement('td');
+            tempCell.innerHTML = list[i].MeasureName;
+            newTableRow.appendChild(tempCell);
+
+            var tempCell2 = document.createElement('td');
+            tempCell2.setAttribute('id', 'slider' + measureId);
+            tempCell2.setAttribute('width', '325');
+            newTableRow.appendChild(tempCell2);
+
+            var tempCell5 = document.createElement('td');
+            var hiddenField = document.createElement('input');
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute('id', "value" + measureId);
+            tempCell5.appendChild(hiddenField); 
+
+            var inputField = document.createElement('input');
+            inputField.setAttribute("type", "text");
+            inputField.setAttribute('id', measureId);
+            inputField.setAttribute('style', 'font:8pt tahoma;height:16px;width:50px;');
+            inputField.setAttribute('onchange', 'updateSliderMax(this.value); document.getElementById("value' + measureId + '").value = this.value;updatePersonaValuation();');
+            tempCell5.appendChild(inputField);
+            newTableRow.appendChild(tempCell5);
+
+            newRow.appendChild(newTableRow);
+        }
+        return newRow;
+    }
+
+    function updateSliderMax(newMax) {
+        newMax = parseFloat(newMax);
+        var updateMax = false;
+        if (newMax > maxSlider) {
+            updateMax = true;
+            maxSlider = newMax;
+        }
+        var inputBaseVals = getBaseValuationsFromInput(getMeasureInfoSetFromCampaign(cClient));
+        for (var slider in sliders) {
+            if (updateMax) {
+                sliders[slider].sliderObject.setMax(maxSlider);
+            }
+            for (var valuation in inputBaseVals) {
+                if (inputBaseVals[valuation].measureId == sliders[slider].sliderMeasureId) {
+                    sliders[slider].sliderObject.setValue((inputBaseVals[valuation].valuation / 200).toFixed(2));
+                    break;
+                }
+            }
+        }
+    }
+
+    function addSliders(list) {
+        for (var valuation in list) {
+            if (list[valuation].valuation / 200 > maxSlider) {
+                maxSlider = list[valuation].valuation / 200;
+            }
+        }
+        for (var i = 0; i < list.length; i++) {
+            var id = list[i].measureId;
+            var valuation = list[i].valuation / 200;
+            var slider = new dhtmlxSlider('slider' + id, { min: .1, max: maxSlider, step: .01, size: 300, vertical: false });
+            slider.setSkin("arrow");
+            slider.attachEvent('onChange', function (a, b) { $RCUI.isDirty = true; updatePersonaValuation(); });
+            if (valuation) {
+                slider.setValue(valuation);
+            }
+            else {
+                slider.setValue(50);
+            }
+            slider.init();
+            slider.linkTo('value' + id);
+            sliders.push({ sliderMeasureId: id, sliderObject: slider });
+        }
+    }
+
+    function getBaseValuationsFromInput(list) {
+        for (var i = 0; i < list.Measures.length; i++) {
+            var value = document.getElementById(list.Measures[i].measureId).value;
+            list.Measures[i].valuation = (value * 200).toFixed(0);
+        }
+        return list;
+    }
+    </script>
+</head>
+<body onload="pageRender(thisPageRender);">
+<div id="valuationsGrid" style="display:none; width:100%; height:100%; overflow:auto">
+<table style="font:Tahoma; font-size: 12px;">
+<tr><td id="sliderCell"></td></tr>
+<tr><td id="buttonCell"></td></tr>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<ArrayOfResponseMapping xmlns="http://schemas.datacontract.org/2004/07/HttpResponder" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+  <ResponseMapping>
+    <HttpVerb>GET</HttpVerb>
+    <ResourceName>HttpResponder.Resources.GetUserJson</ResourceName>
+    <ResponseStatusCode>404</ResponseStatusCode>
+    <UrlRegex>/user/.*</UrlRegex>
+  </ResponseMapping>
+  <ResponseMapping>
+    <BodyRegex>"EntityCategory"[ ]*:[ ]*"User"</BodyRegex>
+    <HttpVerb>PUT</HttpVerb>
+    <ResourceName>HttpResponder.Resources.SavedUserJson</ResourceName>
+    <ResponseStatusCode>404</ResponseStatusCode>
+    <UrlContains>/user</UrlContains>
+  </ResponseMapping>
+</ArrayOfResponseMapping>

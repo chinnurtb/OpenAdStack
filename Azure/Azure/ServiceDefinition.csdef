@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceDefinition name="Azure" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2012-05.1.7">
+  <WebRole name="WebRole" vmsize="Small">
+    <Sites>
+      <Site name="WebLayer" physicalDirectory="..\..\Public\bin\$(Configuration)\_PublishedWebsites\WebLayer">
+        <VirtualApplication name="api" physicalDirectory="..\..\Public\bin\$(Configuration)\_PublishedWebsites\ApiLayer" />
+        <Bindings>
+          <Binding name="HttpIn" endpointName="HttpIn" />
+          <Binding name="HttpsIn" endpointName="HttpsIn" />
+        </Bindings>
+      </Site>
+    </Sites>
+    <Endpoints>
+      <InputEndpoint name="HttpIn" protocol="http" port="80" />
+      <InputEndpoint name="HttpsIn" protocol="https" port="443" certificate="Website SSL" />
+    </Endpoints>
+    <Imports>
+      <Import moduleName="Connect" />
+      <Import moduleName="RemoteAccess" />
+      <Import moduleName="Diagnostics" />
+    </Imports>
+    <ConfigurationSettings>
+      <Setting name="Queue.ConnectionString" />
+      <Setting name="Queue.WorkItemStoreName" />
+      <Setting name="Queue.EnqueueRetries" />
+      <Setting name="Queue.EnqueueRetryWait" />
+      <Setting name="Index.ConnectionString" />
+      <Setting name="Entity.ConnectionString" />
+      <Setting name="Logging.FileSizeBytes" />
+      <Setting name="Logging.BlobContainer" />
+      <Setting name="Logging.ScheduledTransferPeriodMinutes" />
+      <Setting name="Logging.ConnectionString" />
+      <Setting name="ACS.SymmetricSignatureKey" />
+      <Setting name="ACS.AcsHostUrl" />
+      <Setting name="ACS.RelyingPartySecurityKey" />
+      <Setting name="ACS.ServiceNamespace" />
+      <Setting name="ACS.FederationMetadataLocation" />
+      <Setting name="ACS.AudienceUri" />
+      <Setting name="ACS.RelyingPartyRealm" />
+      <Setting name="ACS.TokenDurationMinutes" />
+      <Setting name="ACS.Issuer" />
+      <Setting name="WL.LogOffUrl" />
+      <Setting name="WL.WLIDLogOffUrl" />
+      <Setting name="ApiLayer.QueueResponsePollTime" />
+      <Setting name="ApiLayer.MaxQueueResponseWaitTime" />
+      <Setting name="PersistentDictionary.CompressionThresholdBytes" />
+      <Setting name="PersistentDictionary.DefaultType" />
+      <Setting name="Dictionary.Blob.ConnectionString" />
+      <Setting name="Dictionary.Sql.ConnectionString" />
+      <Setting name="Logging.LocalResource" />
+      <Setting name="Testing.HttpHeaderClaimOverrides" />
+      <Setting name="Microsoft.Doppler.EnvironmentId" />
+      <Setting name="Microsoft.Doppler.UnprocessedDataStore.ConnectionString" />
+      <Setting name="AppNexus.IsApp" />
+      <Setting name="ApiLayer.DataService.MaxQueueResponseWaitTime" />
+    </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Website SSL" storeLocation="LocalMachine" storeName="My" />
+      <Certificate name="Intermediate CA" storeLocation="LocalMachine" storeName="CA" />
+    </Certificates>
+    <LocalResources>
+      <LocalStorage name="DiagnosticsStore" cleanOnRoleRecycle="false" sizeInMB="512" />
+    </LocalResources>
+    <Startup>
+      <Task commandLine="iisconfig.cmd" executionContext="elevated" taskType="simple">
+      </Task>
+      <!--
+      <Task commandLine="doppleragent\Bootstrap.bat" executionContext="elevated" taskType="simple">
+        <Environment>
+          <Variable name="Microsoft.Doppler.EnvironmentId">
+            <RoleInstanceValue xpath="/RoleEnvironment/CurrentInstance/ConfigurationSettings/ConfigurationSetting[@name='Microsoft.Doppler.EnvironmentId']/@value" />
+          </Variable>
+          <Variable name="Microsoft.Doppler.UnprocessedDataStore.ConnectionString">
+            <RoleInstanceValue xpath="/RoleEnvironment/CurrentInstance/ConfigurationSettings/ConfigurationSetting[@name='Microsoft.Doppler.UnprocessedDataStore.ConnectionString']/@value" />
+          </Variable>
+        </Environment>
+      </Task>
+      -->
+    </Startup>
+  </WebRole>
+  <WorkerRole name="WorkerRole" vmsize="Large">
+    <Imports>
+      <Import moduleName="Diagnostics" />
+      <Import moduleName="RemoteAccess" />
+      <Import moduleName="RemoteForwarder" />
+    </Imports>
+    <ConfigurationSettings>
+      <Setting name="Index.ConnectionString" />
+      <Setting name="Entity.ConnectionString" />
+      <Setting name="Queue.ConnectionString" />
+      <Setting name="Queue.WorkItemStoreName" />
+      <Setting name="Queue.EnqueueRetries" />
+      <Setting name="Queue.EnqueueRetryWait" />
+      <Setting name="QueueProcessor.MinQueuePollWait" />
+      <Setting name="QueueProcessor.MaxQueuePollWait" />
+      <Setting name="QueueProcessor.QueuePollBackoff" />
+      <Setting name="QueueProcessor.MaxPollBatchSize" />
+      <Setting name="Logging.FileSizeBytes" />
+      <Setting name="Logging.BlobContainer" />
+      <Setting name="Logging.ScheduledTransferPeriodMinutes" />
+      <Setting name="Logging.ConnectionString" />
+      <Setting name="Mail.SmtpHost" />
+      <Setting name="UserMail.Invitation.LinkFormat" />
+      <Setting name="Scheduler.UpdateInterval" />
+      <Setting name="WorkerRole.ThreadCheckInterval" />
+      <Setting name="ScheduledActivities.MaxCreateRequestRunTime" />
+      <Setting name="Activities.SubmitRequestRetries" />
+      <Setting name="Activities.SubmitRequestRetryWait" />
+      <Setting name="QueueProcessor.InactiveQueuePollWait" />
+      <Setting name="QueueProcessor.InactiveQueueTime" />
+      <Setting name="System.AuthUserId" />
+      <Setting name="Delivery.ReportFrequency" />
+      <Setting name="AppNexus.PostEndDateReportPeriod" />
+      <Setting name="AppNexus.RetrieveReportRetryWait" />
+      <Setting name="AppNexus.RetrieveReportRetries" />
+      <Setting name="AppNexus.Endpoint" />
+      <Setting name="AppNexus.Timeout" />
+      <Setting name="AppNexus.Username" />
+      <Setting name="AppNexus.Password" />
+      <Setting name="Delivery.CreativeUpdateFrequency" />
+      <Setting name="AppNexus.CreateSegments" />
+      <Setting name="AppNexus.Retries" />
+      <Setting name="AppNexus.RetryWait" />
+      <Setting name="Experimental" />
+      <Setting name="QueueProcessor.Categories" />
+      <Setting name="Delivery.RetrieveCampaignReportsSchedule" />
+      <Setting name="Delivery.ReportsRequestExpiry" />
+      <Setting name="DynamicAllocation.UpdateAllocationsRequestExpiry" />
+      <Setting name="DynamicAllocation.UpdateBudgetAllocationsSchedule" />
+      <Setting name="Delivery.UpdateCreativeStatusSchedule" />
+      <Setting name="AppNexus.MaxReportRequests" />
+      <Setting name="Delivery.CreativeStatusUpdateRequestExpiry" />
+      <Setting name="AppNexus.Sandbox" />
+      <Setting name="Delivery.ReportsRetrieveExpiry" />
+      <Setting name="PersistentDictionary.CompressionThresholdBytes" />
+      <Setting name="QueueProcessor.LogStatsFrequency" />
+      <Setting name="Delivery.CleanupCampaignsSchedule" />
+      <Setting name="Delivery.CleanupCampaignsRequestExpiry" />
+      <Setting name="PersistentDictionary.DefaultType" />
+      <Setting name="DynamicAllocation.ReallocationSchedule" />
+      <Setting name="Delivery.ExportDACampaignsSchedule" />
+      <Setting name="Delivery.ExportDACampaignRequestExpiry" />
+      <Setting name="Dictionary.Blob.ConnectionString" />
+      <Setting name="Dictionary.Sql.ConnectionString" />
+      <Setting name="Queue.FailedWorkItemStoreName" />
+      <Setting name="Queue.WorkItemRetentionPeriod" />
+      <Setting name="QueueProcessor.WorkItemCleanupFrequency" />
+      <Setting name="DynamicAllocation.PerMilleFees" />
+      <Setting name="DynamicAllocation.Margin" />
+      <Setting name="DynamicAllocation.DefaultEstimatedCostPerMille" />
+      <Setting name="DynamicAllocation.InitialAllocationTotalPeriodDuration" />
+      <Setting name="DynamicAllocation.InitialAllocationSinglePeriodDuration" />
+      <Setting name="DynamicAllocation.AllocationTopTier" />
+      <Setting name="DynamicAllocation.AllocationNumberofTiersToAllocateTo" />
+      <Setting name="DynamicAllocation.BudgetBuffer" />
+      <Setting name="DynamicAllocation.AllocationNumberOfNodes" />
+      <Setting name="DynamicAllocation.MaxNodesToExport" />
+      <Setting name="DynamicAllocation.UnderspendExperimentNodeCount" />
+      <Setting name="DynamicAllocation.UnderspendExperimentTier" />
+      <Setting name="DynamicAllocation.MinBudget" />
+      <Setting name="DynamicAllocation.ExportBudgetBoost" />
+      <Setting name="DynamicAllocation.LargestBudgetPercentAllowed" />
+      <Setting name="DynamicAllocation.NeutralBudgetCappingTier" />
+      <Setting name="DynamicAllocation.LineagePenalty" />
+      <Setting name="DynamicAllocation.LineagePenaltyNeutral" />
+      <Setting name="Logging.LocalResource" />
+      <Setting name="DynamicAllocation.MinimumImpressionCap" />
+      <Setting name="QueueProcessor.DrainStabilizationPeriod" />
+      <Setting name="Logging.AlertRecipients" />
+      <Setting name="Logging.MailAlerts" />
+      <Setting name="Microsoft.Doppler.EnvironmentId" />
+      <Setting name="Microsoft.Doppler.UnprocessedDataStore.ConnectionString" />
+      <Setting name="GoogleDfp.TraffickerId" />
+      <Setting name="GoogleDfp.NetworkTimezone" />
+      <Setting name="GoogleDfp.ApplicationName" />
+      <Setting name="GoogleDfp.Username" />
+      <Setting name="GoogleDfp.Password" />
+      <Setting name="GoogleDfp.NetworkId" />
+      <Setting name="GoogleDfp.ReportFrequency" />
+      <Setting name="Delivery.ExportCreativesSchedule" />
+      <Setting name="GoogleDfp.MaxReportRequests" />
+      <Setting name="DynamicAllocation.InitialMaxNumberOfNodes" />
+      <Setting name="Delivery.ExportCreativeRequestExpiry" />
+      <Setting name="DynamicAllocation.InsightThreshold" />
+      <Setting name="DynamicAllocation.PhaseOneExitPercentage" />
+      <Setting name="Delivery.DefaultNetwork" />
+      <Setting name="AppNexus.DefaultExporterVersion" />
+      <Setting name="GoogleDfp.DefaultExporterVersion" />
+      <Setting name="AppNexus.DataProviders" />
+      <Setting name="Mail.Username" />
+      <Setting name="Mail.Password" />
+      <Setting name="AppNexus.App.AppId" />
+      <Setting name="AppNexus.App.PrivateKey" />
+      <Setting name="AppNexus.App.PrivateKeyPassword" />
+      <Setting name="UserMail.Registration.Address" />
+      <Setting name="UserMail.Registration.LinkFormat" />
+      <Setting name="AppNexus.SegmentCacheExpiry" />
+      <Setting name="Mail.ApnxAppRegistration.SmtpHost" />
+      <Setting name="Mail.ApnxAppRegistration.Username" />
+      <Setting name="Mail.ApnxAppRegistration.Password" />
+      <Setting name="Mail.UserInvite.SmtpHost" />
+      <Setting name="Mail.UserInvite.Username" />
+      <Setting name="Mail.UserInvite.Password" />
+      <Setting name="Mail.LogAlerts.SmtpHost" />
+      <Setting name="Mail.LogAlerts.Username" />
+      <Setting name="Mail.LogAlerts.Password" />
+      <Setting name="AppNexus.SegmentDataCostsRequired" />
+      <Setting name="PaymentProcessor.ApiSecretKey" />
+      <Setting name="PaymentProcessor.ApiPublicKey" />
+    </ConfigurationSettings>
+    <LocalResources>
+      <LocalStorage name="DiagnosticsStore" cleanOnRoleRecycle="false" sizeInMB="512" />
+    </LocalResources>
+    <Startup>
+      <Task commandLine="postdeploy.cmd" executionContext="elevated" taskType="simple">
+        <Environment>
+          <Variable name="EMULATED">
+            <RoleInstanceValue xpath="/RoleEnvironment/Deployment/@emulated" />
+          </Variable>
+        </Environment>
+      </Task>
+      <!--
+      <Task commandLine="doppleragent\Bootstrap.bat" executionContext="elevated" taskType="simple">
+        <Environment>
+          <Variable name="Microsoft.Doppler.EnvironmentId">
+            <RoleInstanceValue xpath="/RoleEnvironment/CurrentInstance/ConfigurationSettings/ConfigurationSetting[@name='Microsoft.Doppler.EnvironmentId']/@value" />
+          </Variable>
+          <Variable name="Microsoft.Doppler.UnprocessedDataStore.ConnectionString">
+            <RoleInstanceValue xpath="/RoleEnvironment/CurrentInstance/ConfigurationSettings/ConfigurationSetting[@name='Microsoft.Doppler.UnprocessedDataStore.ConnectionString']/@value" />
+          </Variable>
+        </Environment>
+      </Task>
+      -->
+    </Startup>
+  </WorkerRole>
+</ServiceDefinition>

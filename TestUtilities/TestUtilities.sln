@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestUtilities", "TestUtilities\TestUtilities.csproj", "{9E294045-928E-49D7-8E1F-F827B6F322AB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3AFE0EEC-513A-4688-938A-10FA7BA61198}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		TestUtilities.vsmdi = TestUtilities.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestUtilitiesUnitTests", "TestUtilitiesUnitTests\TestUtilitiesUnitTests.csproj", "{C8611ABD-8799-4280-A8B5-860282481B51}"
+EndProject
+Global
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = TestUtilities.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9E294045-928E-49D7-8E1F-F827B6F322AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E294045-928E-49D7-8E1F-F827B6F322AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E294045-928E-49D7-8E1F-F827B6F322AB}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9E294045-928E-49D7-8E1F-F827B6F322AB}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9E294045-928E-49D7-8E1F-F827B6F322AB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9E294045-928E-49D7-8E1F-F827B6F322AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E294045-928E-49D7-8E1F-F827B6F322AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E294045-928E-49D7-8E1F-F827B6F322AB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{9E294045-928E-49D7-8E1F-F827B6F322AB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{9E294045-928E-49D7-8E1F-F827B6F322AB}.Release|x86.ActiveCfg = Release|Any CPU
+		{C8611ABD-8799-4280-A8B5-860282481B51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8611ABD-8799-4280-A8B5-860282481B51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8611ABD-8799-4280-A8B5-860282481B51}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C8611ABD-8799-4280-A8B5-860282481B51}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C8611ABD-8799-4280-A8B5-860282481B51}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C8611ABD-8799-4280-A8B5-860282481B51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8611ABD-8799-4280-A8B5-860282481B51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8611ABD-8799-4280-A8B5-860282481B51}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C8611ABD-8799-4280-A8B5-860282481B51}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C8611ABD-8799-4280-A8B5-860282481B51}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

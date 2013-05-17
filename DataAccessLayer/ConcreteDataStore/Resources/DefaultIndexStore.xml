@@ -1,0 +1,8 @@
+<?xml version="1.0" standalone="yes"?>
+<XmlIndexDataSet xmlns="http://tempuri.org/XmlIndexDataSet.xsd">
+  <StorageAccount>
+    <StorageAccountName>DefaultAzureStorageAccount</StorageAccountName>
+    <StorageAddress>thisisntrealyouknow</StorageAddress>
+    <StorageType>AzureTable</StorageType>
+  </StorageAccount>
+</XmlIndexDataSet>

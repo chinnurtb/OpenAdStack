@@ -1,0 +1,1201 @@
+APNXId,displayName,dataProvider,DataCost,MinCPM,PercentOfMedia,subtype
+141413,Spanish Speakers,exelate,0.5,null,null,null
+141414,Shopping:Fashion,exelate,1,null,null,null
+141415,Urban,exelate,0.5,null,null,null
+141416,Shopping:Personal Tech,exelate,1,null,null,null
+141417,Finance:Small Business,exelate,1,null,null,null
+141418,Travel,exelate,1,null,null,null
+141419,Gender:Male,exelate,0.5,null,null,Demographic
+141420,Gender:Female,exelate,0.5,null,null,Demographic
+141421,Age:18-24,exelate,0.5,null,null,Demographic
+141422,Age:25-34,exelate,0.5,null,null,Demographic
+141423,Age:35-44,exelate,0.5,null,null,Demographic
+141424,Age:45-54,exelate,0.5,null,null,Demographic
+141425,Age:55-64,exelate,0.5,null,null,Demographic
+141426,Age:65+,exelate,0.5,null,null,Demographic
+141427,Sports,exelate,0.85,null,null,null
+141428,Entertainment,exelate,0.85,null,null,null
+141429,Shopping:Music,exelate,1,null,null,null
+141430,Auto:Enthusiasts,exelate,0.85,null,null,null
+141431,Diet and Fitness,exelate,0.85,null,null,null
+141432,Singles,exelate,0.5,null,null,null
+141433,Travel:Accommodation,exelate,1,null,null,null
+141434,Travel:USA,exelate,1,null,null,null
+141435,Travel:Europe,exelate,1,null,null,null
+141436,Travel:Mexico-Caribbean-Central America,exelate,1,null,null,null
+141437,Travel:USA:Florida,exelate,1,null,null,null
+141438,Travel:USA:California,exelate,1,null,null,null
+141439,Travel:USA:Hawaii,exelate,1,null,null,null
+141440,Travel:USA:New York,exelate,1,null,null,null
+141441,Travel:USA:Nevada,exelate,1,null,null,null
+141442,Auto:Buyers,exelate,1,null,null,null
+141443,Auto:Buyers:All:New,exelate,1,null,null,null
+141444,Auto:Buyers:All:Used,exelate,1,null,null,null
+141445,Auto:Buyers:Compact,exelate,1,null,null,null
+141446,Auto:Buyers:Convertible,exelate,1,null,null,null
+141447,Auto:Buyers:Coupes,exelate,1,null,null,null
+141448,Auto:Buyers:Diesel,exelate,1,null,null,null
+141449,Auto:Buyers:Hatchback,exelate,1,null,null,null
+141450,Auto:Buyers:Hybrid,exelate,1,null,null,null
+141451,Auto:Buyers:Luxury,exelate,1,null,null,null
+141452,Auto:Buyers:Minivan,exelate,1,null,null,null
+141453,Auto:Buyers:Sedan,exelate,1,null,null,null
+141454,Auto:Buyers:Sports cars,exelate,1,null,null,null
+141455,Auto:Buyers:SUV,exelate,1,null,null,null
+141456,Auto:Buyers:Trucks,exelate,1,null,null,null
+141457,Auto:Buyers:Van,exelate,1,null,null,null
+141458,Auto:Buyers:Wagons,exelate,1,null,null,null
+141459,Casual Gaming,exelate,0.85,null,null,null
+141460,Career:Health Care Professionals,exelate,0.5,null,null,null
+141461,Hobbies,exelate,0.85,null,null,null
+141462,Home Improvement,exelate,0.85,null,null,null
+141463,Offer Seekers,exelate,0.85,null,null,null
+141464,Parenting,exelate,0.85,null,null,null
+141465,Travel:USA:California:San Francisco,exelate,1,null,null,null
+141466,Travel:USA:Florida:Disney,exelate,1,null,null,null
+141467,Travel:USA:Florida:Miami Beach,exelate,1,null,null,null
+141468,Travel:USA:Maryland:Ocean City,exelate,1,null,null,null
+141469,Travel:USA:Nevada:Las Vegas,exelate,1,null,null,null
+141470,Shopping,exelate,1,null,null,null
+141471,Entertainment:Online Streamers,exelate,0.85,null,null,null
+141472,Finance,exelate,1,null,null,null
+141473,Guys and Gear,exelate,0.85,null,null,null
+141474,Auto:Buyers:Makes-Asia,exelate,1,null,null,null
+141475,Auto:Buyers:Makes-Europe,exelate,1,null,null,null
+141476,Auto:Buyers:Makes-USA,exelate,1,null,null,null
+141477,Auto:Buyers:Make:Acura,exelate,1,null,null,null
+141478,Auto:Buyers:Make:Audi,exelate,1,null,null,null
+141479,Auto:Buyers:Make:BMW,exelate,1,null,null,null
+141480,Auto:Buyers:Make:Buick,exelate,1,null,null,null
+141481,Auto:Buyers:Make:Cadillac,exelate,1,null,null,null
+141482,Auto:Buyers:Make:Chevrolet,exelate,1,null,null,null
+141483,Auto:Buyers:Make:Chrysler,exelate,1,null,null,null
+141484,Auto:Buyers:Make:Dodge,exelate,1,null,null,null
+141485,Auto:Buyers:Make:Ford,exelate,1,null,null,null
+141486,Auto:Buyers:Make:GMC,exelate,1,null,null,null
+141487,Auto:Buyers:Make:Honda,exelate,1,null,null,null
+141488,Auto:Buyers:Make:Hummer,exelate,1,null,null,null
+141489,Auto:Buyers:Make:Hyundai,exelate,1,null,null,null
+141490,Auto:Buyers:Make:Infiniti,exelate,1,null,null,null
+141491,Auto:Buyers:Make:Isuzu,exelate,1,null,null,null
+141492,Auto:Buyers:Make:Jaguar,exelate,1,null,null,null
+141493,Auto:Buyers:Make:Jeep,exelate,1,null,null,null
+141494,Auto:Buyers:Make:Kia,exelate,1,null,null,null
+141495,Auto:Buyers:Make:Land Rover,exelate,1,null,null,null
+141496,Auto:Buyers:Make:Lexus,exelate,1,null,null,null
+141497,Auto:Buyers:Make:Lincoln,exelate,1,null,null,null
+141498,Auto:Buyers:Make:Mazda,exelate,1,null,null,null
+141499,Auto:Buyers:Make:Mercedes,exelate,1,null,null,null
+141500,Auto:Buyers:Make:Mercury,exelate,1,null,null,null
+141501,Auto:Buyers:Make:Mini,exelate,1,null,null,null
+141502,Auto:Buyers:Make:Mitsubishi,exelate,1,null,null,null
+141503,Auto:Buyers:Make:Nissan,exelate,1,null,null,null
+141504,Auto:Buyers:Make:Pontiac,exelate,1,null,null,null
+141505,Auto:Buyers:Make:Porsche,exelate,1,null,null,null
+141506,Auto:Buyers:Make:Saab,exelate,1,null,null,null
+141507,Auto:Buyers:Make:Saturn,exelate,1,null,null,null
+141508,Auto:Buyers:Make:Scion,exelate,1,null,null,null
+141509,Auto:Buyers:Make:Smart,exelate,1,null,null,null
+141510,Auto:Buyers:Make:Subaru,exelate,1,null,null,null
+141511,Auto:Buyers:Make:Suzuki,exelate,1,null,null,null
+141512,Auto:Buyers:Make:Toyota,exelate,1,null,null,null
+141513,Auto:Buyers:Make:Volvo,exelate,1,null,null,null
+141514,Auto:Buyers:Make:VW,exelate,1,null,null,null
+141515,Shopping:Babies and Kids,exelate,1,null,null,null
+141516,Shopping:Books,exelate,1,null,null,null
+141517,Shopping:Fashion:Jewelry and Watches,exelate,1,null,null,null
+141518,Shopping:Health and Beauty,exelate,1,null,null,null
+141519,Shopping:Home and Garden:Appliances,exelate,1,null,null,null
+141520,Shopping:Home and Garden:Furniture,exelate,1,null,null,null
+141521,Shopping:Musical Instruments,exelate,1,null,null,null
+141522,Shopping:Personal Tech:Cameras,exelate,1,null,null,null
+141523,Shopping:Personal Tech:Computers,exelate,1,null,null,null
+141524,Shopping:Personal Tech:Computers:Laptop,exelate,1,null,null,null
+141525,Shopping:Personal Tech:Software,exelate,1,null,null,null
+141526,Shopping:Personal Tech:TVs,exelate,1,null,null,null
+141527,Shopping:Personal Tech:Video Games,exelate,1,null,null,null
+141528,Shopping:Personal Tech:Video Games:Xbox,exelate,1,null,null,null
+141529,Shopping:Sports and Recreation,exelate,1,null,null,null
+141530,Shopping:Toys,exelate,1,null,null,null
+141531,Travel:Flights,exelate,1,null,null,null
+141532,Entertainment:Movies,exelate,1,null,null,null
+141533,Health,exelate,1,null,null,null
+141534,Career:IT Professionals,exelate,0.85,null,null,null
+141653,Asian,exelate,0.85,null,null,null
+141654,Career:Accounting and Finance,exelate,0.5,null,null,null
+141655,Career:All,exelate,0.5,null,null,null
+141656,Career:Arts  Entertainment and Gaming,exelate,0.5,null,null,null
+141657,Career:Clerical and Administrative,exelate,0.5,null,null,null
+141658,Career:Construction and Extraction,exelate,0.5,null,null,null
+141659,Career:Customer Service,exelate,0.5,null,null,null
+141660,Career:Education  Training and Library,exelate,0.5,null,null,null
+141661,Career:Engineering and Architecture,exelate,0.5,null,null,null
+141662,Career:Human Resources,exelate,0.5,null,null,null
+141663,Career:Insurance,exelate,0.5,null,null,null
+141664,Career:Legal Services,exelate,0.5,null,null,null
+141665,Career:Management and Business,exelate,0.5,null,null,null
+141666,Career:Manufacturing and Production,exelate,0.5,null,null,null
+141667,Career:Marketing and Advertising,exelate,0.5,null,null,null
+141668,Career:Media and Communication,exelate,0.5,null,null,null
+141669,Career:Merchandising  Purchasing and Retail,exelate,0.5,null,null,null
+141670,Career:Military and Government,exelate,0.5,null,null,null
+141671,Career:Personal and Home Services,exelate,0.5,null,null,null
+141672,Career:Public Relations,exelate,0.5,null,null,null
+141673,Career:Public Utilities and Services,exelate,0.5,null,null,null
+141674,Career:Real Estate and Building Maintenance,exelate,0.5,null,null,null
+141675,Career:Research,exelate,0.5,null,null,null
+141676,Career:Sales and Sales Management,exelate,0.5,null,null,null
+141677,Career:Science and Biotech,exelate,0.5,null,null,null
+141678,Career:Transportation and Logistics,exelate,0.5,null,null,null
+141679,Career:Travel  Hospitality and Restaurant,exelate,0.5,null,null,null
+141680,Income Level:$100 000 to $124 999,exelate,0.5,null,null,null
+141681,Income Level:$125 000 to $149 999,exelate,0.5,null,null,null
+141682,Income Level:$150 000 Plus,exelate,0.5,null,null,null
+141683,Income Level:$20 000 to $29 999,exelate,0.5,null,null,null
+141684,Income Level:$30 000 to $39 999,exelate,0.5,null,null,null
+141685,Income Level:$40 000 to $49 999,exelate,0.5,null,null,null
+141686,Income Level:$50 000 to $59 999,exelate,0.5,null,null,null
+141687,Income Level:$60 000 to $74 999,exelate,0.5,null,null,null
+141688,Income Level:$75 000 to $99 999,exelate,0.5,null,null,null
+141689,Income Level:Under $20 000,exelate,0.5,null,null,null
+141690,Lifestyle:Home Owners,exelate,0.5,null,null,null
+141691,Lifestyle:Renters,exelate,0.5,null,null,null
+141692,Lifestyle:Rural,exelate,0.5,null,null,null
+141693,Lifestyle:Suburban,exelate,0.5,null,null,null
+141694,Lifestyle:Suburban City,exelate,0.5,null,null,null
+141695,Lifestyle:Urban,exelate,0.5,null,null,null
+141696,Lifestyle:Urban Core,exelate,0.5,null,null,null
+141697,Lifestyle:With Children,exelate,0.5,null,null,null
+141698,Lifestyle:Without Children,exelate,0.5,null,null,null
+141699,Auto:Buyers:Make:Acura:MDX,exelate,0.5,null,null,null
+141700,Auto:Buyers:Make:Acura:TL,exelate,0.5,null,null,null
+141701,Auto:Buyers:Make:Acura:TSX,exelate,1,null,null,null
+141702,Auto:Buyers:Make:Audi:A4,exelate,1,null,null,null
+141703,Auto:Buyers:Make:BMW:3 Series,exelate,1,null,null,null
+141704,Auto:Buyers:Make:BMW:M3,exelate,1,null,null,null
+141705,Auto:Buyers:Make:BMW:M5,exelate,1,null,null,null
+141706,Auto:Buyers:Make:BMW:M6,exelate,1,null,null,null
+141707,Auto:Buyers:Make:Buick:Enclave,exelate,1,null,null,null
+141708,Auto:Buyers:Make:Buick:Regal,exelate,1,null,null,null
+141709,Auto:Buyers:Make:Buick:Terraza,exelate,1,null,null,null
+141710,Auto:Buyers:Make:Cadillac:CTS,exelate,1,null,null,null
+141711,Auto:Buyers:Make:Cadillac:Escalade,exelate,1,null,null,null
+141712,Auto:Buyers:Make:Chevrolet:Camaro,exelate,1,null,null,null
+141713,Auto:Buyers:Make:Chevrolet:Colorado,exelate,1,null,null,null
+141714,Auto:Buyers:Make:Chevrolet:Equinox,exelate,1,null,null,null
+141715,Auto:Buyers:Make:Chevrolet:Express,exelate,1,null,null,null
+141716,Auto:Buyers:Make:Chevrolet:HHR,exelate,1,null,null,null
+141717,Auto:Buyers:Make:Chevrolet:Impala,exelate,1,null,null,null
+141718,Auto:Buyers:Make:Chevrolet:Monte Carlo,exelate,1,null,null,null
+141719,Auto:Buyers:Make:Chevrolet:Silverado,exelate,1,null,null,null
+141720,Auto:Buyers:Make:Chevrolet:Tahoe,exelate,1,null,null,null
+141721,Auto:Buyers:Make:Chevrolet:Trailblazer,exelate,1,null,null,null
+141722,Auto:Buyers:Make:Chevrolet:Uplander,exelate,1,null,null,null
+141723,Auto:Buyers ~ Make:Chrysler:300,exelate,1,null,null,null
+141724,Auto:Buyers:Make:Chrysler:Aspen,exelate,1,null,null,null
+141725,Auto:Buyers ~ Make:Chrysler:Avenger,exelate,1,null,null,null
+141726,Auto:Buyers:Make:Chrysler:Crossfire,exelate,1,null,null,null
+141727,Auto:Buyers:Make:Chrysler:Pacifica,exelate,1,null,null,null
+141728,Auto:Buyers:Make:Chrysler:PT Cruiser,exelate,1,null,null,null
+141729,Auto:Buyers:Make:Chrysler:Sebring,exelate,1,null,null,null
+141730,Auto:Buyers:Make:Chrysler:Town and Coun,exelate,1,null,null,null
+141731,Auto:Buyers:Make:Dodge:Caliber,exelate,1,null,null,null
+141732,Auto:Buyers:Make:Dodge:Challenger,exelate,1,null,null,null
+141733,Auto:Buyers:Make:Dodge:Charger,exelate,1,null,null,null
+141734,Auto:Buyers:Make:Dodge:Dakota,exelate,1,null,null,null
+141735,Auto:Buyers:Make:Dodge:Durango,exelate,1,null,null,null
+141736,Auto:Buyers:Make:Dodge:Grand Caravan,exelate,1,null,null,null
+141737,Auto:Buyers:Make:Dodge:Journey,exelate,1,null,null,null
+141738,Auto:Buyers:Make:Dodge:Nitro,exelate,1,null,null,null
+141739,Auto:Buyers ~ Make:Dodge:Ram 1500,exelate,1,null,null,null
+141740,Auto:Buyers:Make:Dodge:Sprinter,exelate,1,null,null,null
+141741,Auto:Buyers:Make:Ford:Econoline,exelate,1,null,null,null
+141742,Auto:Buyers:Make:Ford:Edge,exelate,1,null,null,null
+141743,Auto:Buyers:Make:Ford:Escape,exelate,1,null,null,null
+141744,Auto:Buyers:Make:Ford:Expedition,exelate,1,null,null,null
+141745,Auto:Buyers:Make:Ford:Explorer,exelate,1,null,null,null
+141746,Auto:Buyers:Make:Ford:F Series,exelate,1,null,null,null
+141747,Auto:Buyers:Make:Ford:Focus,exelate,1,null,null,null
+141748,Auto:Buyers:Make:Ford:Mustang,exelate,1,null,null,null
+141749,Auto:Buyers:Make:Ford:Ranger,exelate,1,null,null,null
+141750,Auto:Buyers:Make:Ford:Super Duty,exelate,1,null,null,null
+141751,Auto:Buyers:Make:GMC:Envoy,exelate,1,null,null,null
+141752,Auto:Buyers:Make:GMC:Savana,exelate,1,null,null,null
+141753,Auto:Buyers:Make:Gmc:Sierra,exelate,1,null,null,null
+141754,Auto:Buyers:Make:Honda:Accord,exelate,1,null,null,null
+141755,Auto:Buyers:Make:Honda:Civic,exelate,1,null,null,null
+141756,Auto:Buyers:Make:Honda:CRV,exelate,1,null,null,null
+141757,Auto:Buyers:Make:Honda:Element,exelate,1,null,null,null
+141758,Auto:Buyers:Make:Honda:Odyssey,exelate,1,null,null,null
+141759,Auto:Buyers:Make:Honda:Pilot,exelate,1,null,null,null
+141760,Auto:Buyers:Make:Hummer:H3,exelate,1,null,null,null
+141761,Auto:Buyers:Make:Hyundai:Santa Fe,exelate,1,null,null,null
+141762,Auto:Buyers:Make:Hyundai:Tucson,exelate,1,null,null,null
+141763,Auto:Buyers:Make:Infiniti:FX35,exelate,1,null,null,null
+141764,Auto:Buyers:Make:Jeep:Commander,exelate,1,null,null,null
+141765,Auto:Buyers:Make:Jeep:Compass,exelate,1,null,null,null
+141766,Auto:Buyers:Make:Jeep:Grand Cherokee,exelate,1,null,null,null
+141767,Auto:Buyers:Make:Jeep:Liberty,exelate,1,null,null,null
+141768,Auto:Buyers:Make:Jeep:Patriot,exelate,1,null,null,null
+141769,Auto:Buyers:Make:Jeep:Wrangler,exelate,1,null,null,null
+141770,Auto:Buyers:Make:Kia:Sedona,exelate,1,null,null,null
+141771,Auto:Buyers:Make:Kia:Sorento,exelate,1,null,null,null
+141772,Auto:Buyers:Make:Kia:Sportage,exelate,1,null,null,null
+141773,Auto:Buyers:Make:Land Rover:LR3,exelate,1,null,null,null
+141774,Auto:Buyers:Make:Land Rover:Range Rover,exelate,1,null,null,null
+141775,Auto:Buyers:Make:Land-Rover:Freelander,exelate,1,null,null,null
+141776,Auto:Buyers:Make:Lexus:ES 350,exelate,1,null,null,null
+141777,Auto:Buyers ~ Make:Lexus:RX 350,exelate,1,null,null,null
+141778,Auto:Buyers:Make:Lincoln:Aviator,exelate,1,null,null,null
+141779,Auto:Buyers:Make:Lincoln:MKS,exelate,1,null,null,null
+141780,Auto:Buyers:Make:Lincoln:MKX,exelate,1,null,null,null
+141781,Auto:Buyers:Make:Lincoln:Navigator,exelate,1,null,null,null
+141782,Auto:Buyers:Make:Mazda:CX7,exelate,1,null,null,null
+141783,Auto:Buyers:Make:Mazda:CX9,exelate,1,null,null,null
+141784,Auto:Buyers:Make:Mazda:MPV,exelate,1,null,null,null
+141785,Auto:Buyers:Make:Mazda:Tribute,exelate,1,null,null,null
+141786,Auto:Buyers:Make:Mercedes:C Class,exelate,1,null,null,null
+141787,Auto:Buyers:Make:Mercury:Monterey,exelate,1,null,null,null
+141788,Auto:Buyers:Make:Mercury:Mountaineer,exelate,1,null,null,null
+141789,Auto:Buyers:Make:Mitsubishi:Montero,exelate,1,null,null,null
+141790,Auto:Buyers:Make:Mitsubishi:Outlander,exelate,1,null,null,null
+141791,Auto:Buyers:Make:Nissan:Altima,exelate,1,null,null,null
+141792,Auto:Buyers:Make:Nissan:Armada,exelate,1,null,null,null
+141793,Auto:Buyers:Make:Nissan:Frontier,exelate,1,null,null,null
+141794,Auto:Buyers:Make:Nissan:Maxima,exelate,1,null,null,null
+141795,Auto:Buyers:Make:Nissan:Murano,exelate,1,null,null,null
+141796,Auto:Buyers:Make:Nissan:Pathfinder,exelate,1,null,null,null
+141797,Auto:Buyers:Make:Nissan:Quest,exelate,1,null,null,null
+141798,Auto:Buyers:Make:Nissan:Rogue,exelate,1,null,null,null
+141799,Auto:Buyers:Make:Nissan:Sentra,exelate,1,null,null,null
+141800,Auto:Buyers:Make:Nissan:Titan,exelate,1,null,null,null
+141801,Auto:Buyers:Make:Nissan:Versa,exelate,1,null,null,null
+141802,Auto:Buyers:Make:Nissan:Xterra,exelate,1,null,null,null
+141803,Auto:Buyers:Make:Pontiac:Bonneville,exelate,1,null,null,null
+141804,Auto:Buyers:Make:Pontiac:G6,exelate,1,null,null,null
+141805,Auto:Buyers:Make:Pontiac:Grand Prix,exelate,1,null,null,null
+141806,Auto:Buyers:Make:Pontiac:Torrent,exelate,1,null,null,null
+141807,Auto:Buyers:Make:Pontiac:Vibe,exelate,1,null,null,null
+141808,Auto:Buyers:Make:Saturn:Outlook,exelate,1,null,null,null
+141809,Auto:Buyers:Make:Saturn:Relay,exelate,1,null,null,null
+141810,Auto:Buyers:Make:Saturn:Vue,exelate,1,null,null,null
+141811,Auto:Buyers:Make:Subaru:Forester,exelate,1,null,null,null
+141812,Auto:Buyers:Make:Subaru:Impreza,exelate,1,null,null,null
+141813,Auto:Buyers:Make:Subaru:Legacy,exelate,1,null,null,null
+141814,Auto:Buyers:Make:Toyota:4 Runner,exelate,1,null,null,null
+141815,Auto:Buyers:Make:Toyota:Avalon,exelate,1,null,null,null
+141816,Auto:Buyers:Make:Toyota:Camry,exelate,1,null,null,null
+141817,Auto:Buyers:Make:Toyota:Corolla,exelate,1,null,null,null
+141818,Auto:Buyers:Make:Toyota:FJ Cruiser,exelate,1,null,null,null
+141819,Auto:Buyers:Make:Toyota:Highlander,exelate,1,null,null,null
+141820,Auto:Buyers:Make:Toyota:Matrix,exelate,1,null,null,null
+141821,Auto:Buyers:Make:Toyota:Rav4,exelate,1,null,null,null
+141822,Auto:Buyers:Make:Toyota:Sequoia,exelate,1,null,null,null
+141823,Auto:Buyers:Make:Toyota:Sienna,exelate,1,null,null,null
+141824,Auto:Buyers:Make:Toyota:Tacoma,exelate,1,null,null,null
+141825,Auto:Buyers:Make:Toyota:Tundra,exelate,1,null,null,null
+141826,Auto:Buyers ~ Make:Volvo:C70/XC70,exelate,1,null,null,null
+141827,Auto:Buyers:Make:Volvo:S60,exelate,1,null,null,null
+141828,Auto:Buyers:Make:Volvo:XC90,exelate,1,null,null,null
+141829,Auto:Buyers:Make:VW:Jetta,exelate,1,null,null,null
+141830,Shopping:Auto Parts and Repair,exelate,1,null,null,null
+141831,Shopping:Business and Office Supply,exelate,1,null,null,null
+141832,Shopping:Fashion:Accessories,exelate,1,null,null,null
+141833,Shopping:Fashion:Apparel,exelate,1,null,null,null
+141834,Shopping:Fashion:Men,exelate,1,null,null,null
+141835,Shopping:Fashion:Shoes,exelate,1,null,null,null
+141836,Shopping:Fashion:Women,exelate,1,null,null,null
+141837,Shopping:Flowers and Gifts,exelate,1,null,null,null
+141838,Shopping:Home and Garden,exelate,1,null,null,null
+141839,Shopping:Home and Garden:Bed and Bath,exelate,1,null,null,null
+141840,Shopping:Home and Garden:Decor,exelate,1,null,null,null
+141841,Shopping:Home and Garden:Kitchen,exelate,1,null,null,null
+141842,Shopping:Home and Garden:Lighting,exelate,1,null,null,null
+141843,Shopping:Home and Garden:Outdoor,exelate,1,null,null,null
+141844,Shopping:Personal Tech:Apple Products,exelate,1,null,null,null
+141845,Shopping:Pets,exelate,1,null,null,null
+141846,Travel:Asia,exelate,1,null,null,null
+141847,Travel:Asia:Hong Kong,exelate,1,null,null,null
+141848,Travel:Asia:Japan,exelate,1,null,null,null
+141849,Travel:Asia:Philippines,exelate,1,null,null,null
+141850,Travel:Asia:Thailand,exelate,1,null,null,null
+141851,Travel:Australia,exelate,1,null,null,null
+141852,Travel:Canada,exelate,1,null,null,null
+141853,Travel:Car Rentals,exelate,1,null,null,null
+141854,Travel:Europe:France,exelate,1,null,null,null
+141855,Travel:Europe:Germany,exelate,1,null,null,null
+141856,Travel:Europe:Greece,exelate,1,null,null,null
+141857,Travel:Europe:Italy,exelate,1,null,null,null
+141858,Travel:Europe:Netherlands,exelate,1,null,null,null
+141859,Travel:Europe:Portugal,exelate,1,null,null,null
+141860,Travel:Europe:Spain,exelate,1,null,null,null
+141861,Travel:Europe:United kingdom,exelate,1,null,null,null
+141862,Travel:South America,exelate,1,null,null,null
+141863,Travel:USA:Alabama,exelate,1,null,null,null
+141864,Travel:USA:California:Los Angeles,exelate,1,null,null,null
+141865,Travel:USA:Colorado,exelate,1,null,null,null
+141866,Travel:USA:Maryland,exelate,1,null,null,null
+141867,Travel:USA:North Carolina,exelate,1,null,null,null
+141868,Travel:USA:South Carolina,exelate,1,null,null,null
+141869,Travel:USA:Texas,exelate,1,null,null,null
+141870,Travel:USA:Washington DC,exelate,1,null,null,null
+141871,Hobbies:Art,exelate,1,null,null,null
+141872,Hobbies:Board Games,exelate,1,null,null,null
+141873,Hobbies:Card Games,exelate,1,null,null,null
+141874,Hobbies:Comics,exelate,1,null,null,null
+141875,Hobbies:Gardening,exelate,1,null,null,null
+141876,Hobbies:Nightlife,exelate,1,null,null,null
+141877,Hobbies:Photography,exelate,1,null,null,null
+141878,Hobbies:Playing Music,exelate,0.85,null,null,null
+141879,Hobbies:Reading,exelate,0.85,null,null,null
+141880,Job Seekers,exelate,0.85,null,null,null
+141881,Pets,exelate,0.85,null,null,null
+141882,Sports:Boxing,exelate,0.85,null,null,null
+141883,Sports:College Basketball,exelate,0.85,null,null,null
+141884,Sports:College Football,exelate,0.85,null,null,null
+141885,Sports:Golf,exelate,0.85,null,null,null
+141886,Sports:MLB,exelate,0.85,null,null,null
+141887,Sports:NBA,exelate,0.85,null,null,null
+141888,Sports:NFL,exelate,0.85,null,null,null
+141889,Sports:NHL,exelate,0.85,null,null,null
+141890,Sports:Pro Wrestling,exelate,0.85,null,null,null
+141891,Sports:Tennis,exelate,0.85,null,null,null
+141892,Sports:World Football,exelate,0.85,null,null,null
+141893,Health,Peer39,null,0.05,0.15,null
+141894,Health:Diet&Fitness,Peer39,null,0.05,0.15,null
+141895,Health:Optical,Peer39,null,0.05,0.15,null
+141896,Health:Conditions&Diseases,Peer39,null,0.05,0.15,null
+141897,Home&Garden,Peer39,null,0.05,0.15,null
+141898,Home&Garden:Lawn&Garden,Peer39,null,0.05,0.15,null
+141899,Negative,Peer39,0.05,null,null,null
+141900,Negative:Terror,Peer39,0.05,null,null,null
+141901,Negative:Disasters,Peer39,0.05,null,null,null
+141902,News,Peer39,null,0.05,0.15,null
+141903,News:Weather,Peer39,null,0.05,0.15,null
+141904,News:Europe,Peer39,null,0.05,0.15,null
+141905,News:Africa&MiddleEast,Peer39,null,0.05,0.15,null
+141906,News:LatinAmerica,Peer39,null,0.05,0.15,null
+141907,Parenting&Kids:Pregnancy,Peer39,null,0.05,0.15,null
+141908,Sports:Football,Peer39,null,0.05,0.15,null
+141909,Sports:Hockey,Peer39,null,0.05,0.15,null
+141910,Food&Beverage:AlcoholicDrinks,Peer39,null,0.05,0.15,null
+141911,Internet:Recreation&Games,Peer39,null,0.05,0.15,null
+141912,Recreation&Games:Gambling,Peer39,null,0.05,0.15,null
+141913,Sports,Peer39,null,0.05,0.15,null
+141914,Recreation&Games:OutdoorRecreation,Peer39,null,0.05,0.15,null
+141915,Travel,Peer39,null,0.05,0.15,null
+141916,Travel:Air,Peer39,null,0.05,0.15,null
+141917,Sports:Baseball,Peer39,null,0.05,0.15,null
+141918,Sports:Basketball,Peer39,null,0.05,0.15,null
+141919,Sports:Boxing,Peer39,null,0.05,0.15,null
+141920,Sports:Golf,Peer39,null,0.05,0.15,null
+141921,Sports:Tennis,Peer39,null,0.05,0.15,null
+141922,Sports:Soccer,Peer39,null,0.05,0.15,null
+141923,Sports:HorseRacing,Peer39,null,0.05,0.15,null
+141924,Pets,Peer39,null,0.05,0.15,null
+141925,Sciences,Peer39,null,0.05,0.15,null
+141926,Internet,Peer39,null,0.05,0.15,null
+141927,Internet:UGC:VideoPhotoSharing,Peer39,null,0.05,0.15,null
+141928,Internet:Search&Info,Peer39,null,0.05,0.15,null
+141929,Sports:WinterSports,Peer39,null,0.05,0.15,null
+141930,Internet:UGC:SocialNetworks,Peer39,null,0.05,0.15,null
+141931,Style&Fashion,Peer39,null,0.05,0.15,null
+141932,Style&Fashion:Clothing&Accessories,Peer39,null,0.05,0.15,null
+141933,Style&Fashion:HairCare,Peer39,null,0.05,0.15,null
+141934,Style&Fashion:SkinCare,Peer39,null,0.05,0.15,null
+141935,Business,Peer39,null,0.05,0.15,null
+141936,Business:Economics,Peer39,null,0.05,0.15,null
+141937,Business:SmallBusiness,Peer39,null,0.05,0.15,null
+141938,PersonalFinance,Peer39,null,0.05,0.15,null
+141939,Technology,Peer39,null,0.05,0.15,null
+141940,Arts&Entertainment:Movies&Videos,Peer39,null,0.05,0.15,null
+141941,Arts&Entertainment:DiningOut,Peer39,null,0.05,0.15,null
+141942,Arts&Entertainment:VisualArts,Peer39,null,0.05,0.15,null
+141943,Education:College&University,Peer39,null,0.05,0.15,null
+141944,Environment:Conservation,Peer39,null,0.05,0.15,null
+141945,Environment:GlobalWarming,Peer39,null,0.05,0.15,null
+141946,Relationships,Peer39,null,0.05,0.15,null
+141947,Technology:Computers:Hardware,Peer39,null,0.05,0.15,null
+141948,Technology:HomeEntertainment,Peer39,null,0.05,0.15,null
+141949,Technology:mp3Players,Peer39,null,0.05,0.15,null
+141950,Food&Beverage:Cooking,Peer39,null,0.05,0.15,null
+141951,Health:Dental,Peer39,null,0.05,0.15,null
+141952,Health:Mental,Peer39,null,0.05,0.15,null
+141953,Health:Treatment,Peer39,null,0.05,0.15,null
+141954,Home&Garden:Cleaning&Laundry,Peer39,null,0.05,0.15,null
+141955,Negative:Mature,Peer39,0.05,null,null,null
+141956,Negative:Crime,Peer39,0.05,null,null,null
+141957,News:Politics,Peer39,null,0.05,0.15,null
+141958,News:US&Canada,Peer39,null,0.05,0.15,null
+141959,News:AsiaPacific,Peer39,null,0.05,0.15,null
+141960,News:Australia&NewZealand,Peer39,null,0.05,0.15,null
+141961,Parenting&Kids,Peer39,null,0.05,0.15,null
+141962,Parenting&Kids:Babies,Peer39,null,0.05,0.15,null
+141963,Automotive,Peer39,null,0.05,0.15,null
+141964,Automotive:Vehicles,Peer39,null,0.05,0.15,null
+141965,Automotive:Vehicles:Motorcycles,Peer39,null,0.05,0.15,null
+141966,Automotive:Maintenance,Peer39,null,0.05,0.15,null
+141967,Style&Fashion:Cosmetics,Peer39,null,0.05,0.15,null
+141968,RealEstate,Peer39,null,0.05,0.15,null
+141969,Careers,Peer39,null,0.05,0.15,null
+141970,Arts&Entertainment,Peer39,null,0.05,0.15,null
+141971,Technology:Computers,Peer39,null,0.05,0.15,null
+141972,Arts&Entertainment:Music,Peer39,null,0.05,0.15,null
+141973,Arts&Entertainment:Celebrities,Peer39,null,0.05,0.15,null
+141974,Arts&Entertainment:Books&Literature,Peer39,null,0.05,0.15,null
+141975,Education,Peer39,null,0.05,0.15,null
+141976,Environment,Peer39,null,0.05,0.15,null
+141977,Environment:Energy,Peer39,null,0.05,0.15,null
+141978,Environment:GreenLiving,Peer39,null,0.05,0.15,null
+141979,Relationships:Singles&Dating,Peer39,null,0.05,0.15,null
+141980,Technology:Computers:Software,Peer39,null,0.05,0.15,null
+141981,Technology:Mobile,Peer39,null,0.05,0.15,null
+141982,Technology:VideoGames,Peer39,null,0.05,0.15,null
+141983,Food&Beverage,Peer39,null,0.05,0.15,null
+141984,Internet:Graphics&Design,Peer39,null,0.05,0.15,null
+141985,Shopping,Peer39,null,0.05,0.15,null
+141986,Business:Corporations,Peer39,null,0.05,0.15,null
+141987,Auto:Buyers:Make:Buick:LaCross,exelate,1,null,null,null
+141988,Shopping:Mobile:Carrier:AT&T,exelate,1,null,null,null
+141989,Shopping:Mobile:Carrier:Sprint,exelate,1,null,null,null
+141990,Shopping:Mobile:Carrier:T-Mobile,exelate,1,null,null,null
+141991,Shopping:Mobile:Carrier:Verizon,exelate,1,null,null,null
+141992,Shopping:Mobile:Make:Apple,exelate,1,null,null,null
+141993,Shopping:Mobile:Make:HTC,exelate,1,null,null,null
+141994,Shopping:Mobile:Make:LG,exelate,1,null,null,null
+141995,Shopping:Mobile:Make:Motorola,exelate,1,null,null,null
+141996,Shopping:Mobile:Make:Nokia,exelate,1,null,null,null
+141997,Shopping:Mobile:Make:Palm,exelate,1,null,null,null
+141998,Shopping:Mobile:Make:RIM,exelate,1,null,null,null
+141999,Shopping:Mobile:Make:Samsung,exelate,1,null,null,null
+142000,Shopping:Mobile:Make:Sony Ericsson,exelate,1,null,null,null
+142001,Shopping:Mobile:Platform:Android,exelate,1,null,null,null
+142002,Shopping:Mobile:Platform:Blackberry,exelate,1,null,null,null
+142003,Shopping:Mobile:Platform:iPhone,exelate,1,null,null,null
+142004,Shopping:Mobile:Platform:Symbian,exelate,1,null,null,null
+142005,Shopping:Mobile:Platform:Windows,exelate,1,null,null,null
+142006,Entertainment:Music,exelate,1,null,null,null
+142007,Entertainment:TV,exelate,0.85,null,null,null
+142008,Peer39:PersonalFinance:Credit&Loans,exelate,0.85,null,null,null
+142009,Travel:Cruise,Peer39,null,0.05,0.15,null
+142010,Automotive:Manufacturers,Peer39,null,0.05,0.15,null
+142011,Automotive:Buying&Selling,Peer39,null,0.05,0.15,null
+142012,Health:Women,Peer39,null,0.05,0.15,null
+142013,Recreation&Games,Peer39,null,0.05,0.15,null
+142014,Society,Peer39,null,0.05,0.15,null
+142015,Sports:MotorSports,Peer39,null,0.05,0.15,null
+142016,Style&Fashion:BodyArt,Peer39,null,0.05,0.15,null
+142017,:Services:Arts and Entertainment,Peer39,null,0.05,0.15,null
+142018,Services:Automotive,exelate,1,null,null,null
+142019,Services:Biz   Professional Service,exelate,1,null,null,null
+142020,Services:Computers Internet,exelate,1,null,null,null
+142021,Services:Contractors  Construction,exelate,1,null,null,null
+142022,Services:Education,exelate,1,null,null,null
+142023,Services:Finance and Insurance,exelate,1,null,null,null
+142024,Services:Health Medicine,exelate,1,null,null,null
+142025,Services:Home and Garden,exelate,1,null,null,null
+142026,Services:Legal,exelate,1,null,null,null
+142027,Services:Manufacturing  Production ,exelate,1,null,null,null
+142028,Services:Other,exelate,1,null,null,null
+142029,Services:Personal Services and Care,exelate,1,null,null,null
+142030,Services:Pets,exelate,1,null,null,null
+142031,Services:Real Estate  Moving  Stora,exelate,1,null,null,null
+142032,Services:Religious Organizations,exelate,1,null,null,null
+142033,Services:Restaurants,exelate,1,null,null,null
+142034,Services:Retail Shopping,exelate,1,null,null,null
+142035,Services:Sports and Recreation,exelate,1,null,null,null
+142036,Services:Telecommunications,exelate,1,null,null,null
+142037,Services:Travel and Transportation,exelate,1,null,null,null
+142038,Negative:Profanity&HateSpeech,Peer39,0.05,null,null,null
+142039,Automotive:Insurance,Peer39,null,0.05,0.15,null
+142040,Negative:Drugs,Peer39,0.05,null,null,null
+142041,Safe from Alcohol,Peer39,0.05,null,null,null
+142042,Safe from Drugs,Peer39,0.05,null,null,null
+142043,Safe from Gambling,Peer39,0.05,null,null,null
+142044,Safe from Mature,Peer39,0.05,null,null,null
+142045,Safe from Negative News,Peer39,0.05,null,null,null
+142046,Safe from Profanity&HateSpeech,Peer39,0.05,null,null,null
+142047,Arts&Entertainment:Comics&Animation,Peer39,null,0.05,0.15,null
+142048,Internet:Torrent,Peer39,null,0.05,0.15,null
+142049,Green Living,exelate,0.85,null,null,null
+142050,Political Junkies,exelate,0.85,null,null,null
+142051,Real Estate,exelate,0.85,null,null,null
+142052,Tech:Enthusiasts,exelate,0.85,null,null,null
+142053,Safe from Torrent,Peer39,0.05,null,null,null
+142054,PersonalFinance:Taxes,Peer39,null,0.05,0.15,null
+142056,Health:SexualHealth,Peer39,null,0.05,0.15,null
+142057,Society:Holidays&Celebrations,Peer39,null,0.05,0.15,null
+142058,Travel:Theme,Peer39,null,0.05,0.15,null
+142059,Travel:Theme:Winter,Peer39,null,0.05,0.15,null
+142060,PersonalFinance:Investing:ETFs,Peer39,null,0.05,0.15,null
+142061,Bizo:Professional:Finance Professionals,exelate,1.75,null,null,null
+142062,Bizo:Professional:High Net Worth,exelate,1.75,null,null,null
+142063,Bizo:Professional:IT Professionals,exelate,1.75,null,null,null
+142064,Bizo:Professional:Small Business Owners,exelate,1.75,null,null,null
+142065,PersonalFinance:Investing:RetirementPlanning,Peer39,null,0.05,0.15,null
+142066,Health:Men,Peer39,null,0.05,0.15,null
+142496,Quality:CRE,Peer39,0.05,null,null,null
+142497,Quality:Free from AdCalls,Peer39,0.05,null,null,null
+142498,Quality:Free from UGC,Peer39,0.05,null,null,null
+142499,Internet:AdCall,Peer39,null,0.05,0.15,null
+142501,Negative:Death,Peer39,0.05,null,null,null
+142502,Internet:UGC,Peer39,null,0.05,0.15,null
+142503,Internet:ModeratedUGC,Peer39,null,0.05,0.15,null
+142504,Society:Religion&Spirituality,Peer39,null,0.05,0.15,null
+142505,Sports:WinterSports:Skiing,Peer39,null,0.05,0.15,null
+142506,Recreation&Games:Hobbies&Interests,Peer39,null,0.05,0.15,null
+142507,Negative:Accidents,Peer39,0.05,null,null,null
+142508,Internet:Apps and Toolbars,Peer39,null,0.05,0.15,null
+142509,Art,Lotame,0.75,null,null,null
+142510,Art:Books & Magazines,Lotame,0.75,null,null,null
+142511,Art:Photography,Lotame,0.75,null,null,null
+142512,Movies,Lotame,0.75,null,null,null
+142513,Movies:Action & Adventure,Lotame,0.75,null,null,null
+142514,Movies:Children & Family,Lotame,0.75,null,null,null
+142515,Movies:Comedy,Lotame,0.75,null,null,null
+142516,Movies:Drama,Lotame,0.75,null,null,null
+142517,Movies:Romance,Lotame,0.75,null,null,null
+142518,Movies:Sci-Fi,Lotame,0.75,null,null,null
+142519,Music,Lotame,0.75,null,null,null
+142520,Music:Hip Hop & Rap,Lotame,0.75,null,null,null
+142521,Music:Country,Lotame,0.75,null,null,null
+142522,Music:Pop,Lotame,0.75,null,null,null
+142523,Music:Rock,Lotame,0.75,null,null,null
+142524,Pop Cultre & Celebrity Gossip,Lotame,0.75,null,null,null
+142525,Television,Lotame,0.75,null,null,null
+142526,Television:Animation & Cartoons,Lotame,0.75,null,null,null
+142527,Television:Comedy,Lotame,0.75,null,null,null
+142528,Television:Drama,Lotame,0.75,null,null,null
+142529,Television:News,Lotame,0.75,null,null,null
+142530,Televison:Reality,Lotame,0.75,null,null,null
+142531,Video Games,Lotame,0.75,null,null,null
+142532,Video Games:Console Games,Lotame,0.75,null,null,null
+142533,Video Games:Online Games,Lotame,0.75,null,null,null
+142534,Automobiles,Lotame,0.75,null,null,null
+142535,Compact-sized Cars,Lotame,0.75,null,null,null
+142536,Full-sized Cars,Lotame,0.75,null,null,null
+142537,Luxury Cars,Lotame,0.75,null,null,null
+142538,Sports Cars,Lotame,0.75,null,null,null
+142539,Clothes Shopping,Lotame,0.75,null,null,null
+142540,Cosmetics,Lotame,0.75,null,null,null
+142541,Jewelry  Watches  & Fashion Accessories,Lotame,0.75,null,null,null
+142542,Style & Fashion,Lotame,0.75,null,null,null
+142543,Trendsetters,Lotame,0.75,null,null,null
+142544,Computers & Software,Lotame,0.75,null,null,null
+142545,Electronics & Gadgets,Lotame,0.75,null,null,null
+142546,Home Audio & Video,Lotame,0.75,null,null,null
+142547,Gender:Female,Lotame,0.75,null,null,Demographic
+142548,Gender:Male,Lotame,0.25,null,null,Demographic
+142549,Age:18-24,Lotame,0.25,null,null,Demographic
+142550,Age:25-34,Lotame,0.25,null,null,Demographic
+142551,Age:35-44,Lotame,0.25,null,null,Demographic
+142552,Age:45-49,Lotame,0.25,null,null,Demographic
+142553,Age:50-54,Lotame,0.25,null,null,Demographic
+142554,Age:55-64,Lotame,0.25,null,null,Demographic
+142555,Age:65+,Lotame,0.25,null,null,Demographic
+142556,College Students,Lotame,0.25,null,null,null
+142557,School & Education,Lotame,0.75,null,null,null
+142558,Cooking & Recipes,Lotame,0.75,null,null,null
+142559,Food & Beverages,Lotame,0.75,null,null,null
+142560,Restaurants & Dining,Lotame,0.75,null,null,null
+142561,Affluent Households,Lotame,0.75,null,null,null
+142562,Cat Lovers,Lotame,0.75,null,null,null
+142563,Dog Lovers,Lotame,0.75,null,null,null
+142564,Pet Owners,Lotame,0.75,null,null,null
+142565,Green Living,Lotame,0.75,null,null,null
+142566,Moms,Lotame,0.75,null,null,null
+142567,Parenting,Lotame,0.75,null,null,null
+142568,Party Planners,Lotame,0.75,null,null,null
+142569,Bloggers,Lotame,0.75,null,null,null
+142570,Online Dating,Lotame,0.75,null,null,null
+142571,Online Videos,Lotame,1,null,null,null
+142572,Photo/Video Uploaders,Lotame,0.75,null,null,null
+142573,Sports,Lotame,0.75,null,null,null
+142574,Sports:Baseball,Lotame,0.75,null,null,null
+142575,Sports:Basketball,Lotame,0.75,null,null,null
+142576,Sports:College Sports,Lotame,0.75,null,null,null
+142577,Sports:Fantasy Sports,Lotame,0.75,null,null,null
+142578,Sports:Football,Lotame,0.75,null,null,null
+142579,Sports:Motor Sports,Lotame,0.75,null,null,null
+142580,Sports:Soccer,Lotame,0.75,null,null,null
+142581,Sports:Water Sports,Lotame,0.75,null,null,null
+142582,Travel,Lotame,0.75,null,null,null
+142583,Travel:Domestic,Lotame,0.75,null,null,null
+142584,Travel:International,Lotame,0.75,null,null,null
+142585,Education Level:College Grad,exelate,0.5,null,null,null
+142586,Education Level:Grad Degree,exelate,0.5,null,null,null
+142587,Lifestyle:Finance,exelate,0.5,null,null,null
+142588,Lifestyle:Finance:Banking,exelate,0.5,null,null,null
+142589,Lifestyle:Finance:Brokerage Account,exelate,0.5,null,null,null
+142590,Lifestyle:Finance:Insurance,exelate,0.5,null,null,null
+142591,Lifestyle:Finance:Investment,exelate,0.5,null,null,null
+142592,Lifestyle:Finance:Taxes,exelate,0.5,null,null,null
+142593,Lifestyle:Premium Credit Card holder,exelate,0.5,null,null,null
+142594,Lifestyle:Regular Credit Card holder,exelate,0.5,null,null,null
+142595,Auto:Buyers:Off Road Vehicles,exelate,1,null,null,null
+142596,Auto:Buyers:RVs,exelate,1,null,null,null
+142597,Auto:Buyers:Make:Gmc:Yukon,exelate,1,null,null,null
+142598,Services:Arts and Entertainment:Movies,exelate,1,null,null,null
+142599,Services:Finance and Insurance:Auto Insurance,exelate,1,null,null,null
+142600,Services:Finance and Insurance:Banking,exelate,1,null,null,null
+142601,Services:Finance and Insurance:Credit Cards,exelate,1,null,null,null
+142602,Services:Finance and Insurance:Debt,exelate,1,null,null,null
+142603,Services:Finance and Insurance:Insurance,exelate,1,null,null,null
+142604,Services:Finance and Insurance:Loans,exelate,1,null,null,null
+142605,Services:Pets:Cats,exelate,1,null,null,null
+142606,Services:Pets:Dogs,exelate,1,null,null,null
+142607,Services:Restaurants:Pizza,exelate,1,null,null,null
+142608,Shopping:CPG:Beverages,exelate,1,null,null,null
+142609,Shopping:CPG:Canned Goods,exelate,1,null,null,null
+142610,Shopping:CPG:Cleaning and Laundry,exelate,1,null,null,null
+142611,Shopping:CPG:Dairy,exelate,1,null,null,null
+142612,Shopping:CPG:Ethnic Foods,exelate,1,null,null,null
+142613,Shopping:CPG:Frozen Foods,exelate,1,null,null,null
+142614,Shopping:CPG:Green Products,exelate,1,null,null,null
+142615,Shopping:CPG:Groceries,exelate,1,null,null,null
+142616,Shopping:CPG:Health and Beauty,exelate,1,null,null,null
+142617,Shopping:CPG:Infant Care,exelate,1,null,null,null
+142618,Shopping:CPG:Paper and Plastic Products,exelate,1,null,null,null
+142619,Shopping:CPG:Pet Supplies,exelate,1,null,null,null
+142620,Shopping:CPG:Snack Desserts,exelate,1,null,null,null
+142621,Shopping:Food and Wine,exelate,1,null,null,null
+142622,Shopping:Movies,exelate,1,null,null,null
+142623,Shopping:Personal Tech:Computers:ISP,exelate,1,null,null,null
+142624,Shopping:Personal Tech:Computers:Netbooks,exelate,1,null,null,null
+142625,Shopping:Pets:Cats,exelate,1,null,null,null
+142626,Shopping:Pets:Dogs,exelate,1,null,null,null
+142627,Travel:Business Travelers,exelate,1,null,null,null
+142628,Travel:Caribbean,exelate,1,null,null,null
+142629,Travel:Cruises,exelate,1,null,null,null
+142630,Travel:South Pacific,exelate,1,null,null,null
+142631,Travel:USA:Alaska,exelate,1,null,null,null
+142632,Travel:USA:Arizona,exelate,1,null,null,null
+142633,Travel:USA:Arkansas,exelate,1,null,null,null
+142634,Travel:USA:Connecticut,exelate,1,null,null,null
+142635,Travel:USA:Delaware,exelate,1,null,null,null
+142636,Travel:USA:Georgia,exelate,1,null,null,null
+142637,Travel:USA:Idaho,exelate,1,null,null,null
+142638,Travel:USA:Illinois,exelate,1,null,null,null
+142639,Travel:USA:Indiana,exelate,1,null,null,null
+142640,Travel:USA:Iowa,exelate,1,null,null,null
+142641,Travel:USA:Kansas,exelate,1,null,null,null
+142642,Travel:USA:Kentucky,exelate,1,null,null,null
+142643,Travel:USA:Louisiana,exelate,1,null,null,null
+142644,Travel:USA:Maine,exelate,1,null,null,null
+142645,Travel:USA:Massachusetts,exelate,1,null,null,null
+142646,Travel:USA:Michigan,exelate,1,null,null,null
+142647,Travel:USA:Minnesota,exelate,1,null,null,null
+142648,Travel:USA:Mississippi,exelate,1,null,null,null
+142649,Travel:USA:Missouri,exelate,1,null,null,null
+142650,Travel:USA:Montana,exelate,1,null,null,null
+142651,Travel:USA:Nebraska,exelate,1,null,null,null
+142652,Travel:USA:New Hampshire,exelate,1,null,null,null
+142653,Travel:USA:New Jersey,exelate,1,null,null,null
+142654,Travel:USA:New Mexico,exelate,1,null,null,null
+142655,Travel:USA:North Dakota,exelate,1,null,null,null
+142656,Travel:USA:Ohio,exelate,1,null,null,null
+142657,Travel:USA:Oklahoma,exelate,1,null,null,null
+142658,Travel:USA:Oregon,exelate,1,null,null,null
+142659,Travel:USA:Pennsylvania,exelate,1,null,null,null
+142660,Travel:USA:Rhode Island,exelate,1,null,null,null
+142661,Travel:USA:South Dakota,exelate,1,null,null,null
+142662,Travel:USA:Tennessee,exelate,1,null,null,null
+142663,Travel:USA:Utah,exelate,1,null,null,null
+142664,Travel:USA:Vermont,exelate,1,null,null,null
+142665,Travel:USA:Virginia,exelate,1,null,null,null
+142666,Travel:USA:Washington,exelate,1,null,null,null
+142667,Travel:USA:West Virginia,exelate,1,null,null,null
+142668,Travel:USA:Wisconsin,exelate,1,null,null,null
+142669,Travel:USA:Wyoming,exelate,1,null,null,null
+142670,Travel:Vacations Packages,exelate,1,null,null,null
+142671,Entertainment:Video Games,exelate,0.85,null,null,null
+142672,Finance:Charitable Donors,exelate,1,null,null,null
+142673,Pets:Cats,exelate,0.85,null,null,null
+142674,Pets:Dogs,exelate,0.85,null,null,null
+142675,Travel Enthusiasts,exelate,0.85,null,null,null
+142676,Business Travelers,exelate,1,null,null,null
+142677,Dads,exelate,1,null,null,null
+142678,Entertainment Seekers,exelate,1,null,null,null
+142679,Fashionistas,exelate,1,null,null,null
+142680,Female Executives,exelate,1,null,null,null
+142681,Female Purchase Decision Makers (HOH),exelate,1,null,null,null
+142682,High End HomeOwner,exelate,1,null,null,null
+142683,High Income Tech Shoppers,exelate,1,null,null,null
+142684,Jet-Setters,exelate,1,null,null,null
+142685,Kids & Coupons,exelate,1,null,null,null
+142686,Kids and Car Seats,exelate,1,null,null,null
+142687,Los Deportes,exelate,1,null,null,null
+142688,Luxury Auto Buyers,exelate,1,null,null,null
+142689,Male Purchase Decision Makers,exelate,1,null,null,null
+142690,Men in Trouble,exelate,1,null,null,null
+142691,Moms,exelate,1,null,null,null
+142692,Shopping Dads,exelate,1,null,null,null
+142693,Shopping Moms,exelate,1,null,null,null
+142694,Single Parents,exelate,1,null,null,null
+142695,Social Influencers,exelate,1,null,null,null
+142696,Sports Sweet Spot,exelate,1,null,null,null
+142697,Tech Geeks,exelate,1,null,null,null
+142698,Weekend Warriors (DIY),exelate,1,null,null,null
+142699,Young Entrepreuers,exelate,1,null,null,null
+142700,Travel:Theme:Beach,Peer39,null,0.05,0.15,null
+142945,Travel:Theme:Adventure,Peer39,null,0.05,0.15,null
+142946,Auto:Buyers:Make:Ford:Fusion,exelate,1,null,null,null
+142947,Auto:Buyers:Make:Ford:Taurus,exelate,1,null,null,null
+142948,Shopping:Mobile,exelate,0.5,null,null,null
+142949,Travel:Middle East,exelate,1,null,null,null
+142950,Events:All,exelate,0.85,null,null,null
+142951,Events:Anniversary,exelate,0.85,null,null,null
+142952,Events:Arts and Science,exelate,0.85,null,null,null
+142953,Events:Baby Shower,exelate,0.85,null,null,null
+142954,Events:Birthdays,exelate,0.85,null,null,null
+142955,Events:Business and Networking,exelate,0.85,null,null,null
+142956,Events:Charity  Fundraisers,exelate,0.85,null,null,null
+142957,Events:Entertainment Nightlife,exelate,0.85,null,null,null
+142958,Events:Food and Wine,exelate,0.85,null,null,null
+142959,Events:Gift Giving Holidays,exelate,0.85,null,null,null
+142960,Events:National Holidays,exelate,0.85,null,null,null
+142961,Events:Parents and Kids,exelate,0.85,null,null,null
+142962,Events:Pets,exelate,0.85,null,null,null
+142963,Events:Religious,exelate,0.85,null,null,null
+142964,Events:Sports and Recreation,exelate,0.85,null,null,null
+142965,Events:Trips and Getaways,exelate,0.85,null,null,null
+142966,Events:Wedding and Engagement,exelate,0.85,null,null,null
+142967,Hobbies:Food and Wine,exelate,0.5,null,null,null
+142968,Automotive:Manufacturers:BMW,Peer39,null,0.05,0.15,null
+142969,Automotive:Manufacturers:Dodge,Peer39,null,0.05,0.15,null
+142970,Automotive:Manufacturers:Ford,Peer39,null,0.05,0.15,null
+142971,Automotive:Manufacturers:Honda,Peer39,null,0.05,0.15,null
+142972,Automotive:Manufacturers:Mercedes-Benz,Peer39,null,0.05,0.15,null
+142973,Automotive:Manufacturers:Mitsubishi,Peer39,null,0.05,0.15,null
+142974,Automotive:Manufacturers:Nissan,Peer39,null,0.05,0.15,null
+142975,Automotive:Manufacturers:Subaru,Peer39,null,0.05,0.15,null
+142976,Automotive:Manufacturers:Toyota,Peer39,null,0.05,0.15,null
+142977,Automotive:Manufacturers:Volkswagen,Peer39,null,0.05,0.15,null
+142978,Lifestyle:Finance:Insurance:Auto,exelate,0.5,null,null,null
+142979,Lifestyle:Finance:Insurance:Health,exelate,0.5,null,null,null
+142980,Lifestyle:Finance:Insurance:Life,exelate,0.5,null,null,null
+142981,Auto:Buyers:Motorcycle,exelate,1,null,null,null
+142982,Quality:Free from Unmoderated UGC,Peer39,0.05,null,null,null
+142983,Quality:Free from Apps&Toolbars,Peer39,0.05,null,null,null
+142984,Society:Law&Ethics,Peer39,null,0.05,0.15,null
+142985,PersonalFinance:Investing:Stocks,Peer39,null,0.05,0.15,null
+142986,Sport Utility Vehicles (SUVs),Lotame,0.75,null,null,null
+142987,Motorcycles,Lotame,0.75,null,null,null
+142988,Sports:Golf,Lotame,0.75,null,null,null
+142989,Sports:Hockey,Lotame,0.75,null,null,null
+142990,Video Games:Handheld Games,Lotame,0.75,null,null,null
+142991,Social Media Users,Lotame,0.75,null,null,null
+142992,Mobile Phones,Lotame,0.75,null,null,null
+142993,Finance:Personal Finance,Lotame,0.75,null,null,null
+143125,Age:40-49 and Income of $150K+,exelate,0.5,null,null,null
+143126,Age:50-59 and Income of $150K+,exelate,0.5,null,null,null
+143127,Age:60+ and Income of $150K+,exelate,0.5,null,null,null
+143128,Auto:Buyers:All:New:Budget $0-$19K,exelate,1,null,null,null
+143129,Auto:Buyers:All:New:Budget $20K-$29K,exelate,1,null,null,null
+143130,Auto:Buyers:All:New:Budget $30K-$39K,exelate,1,null,null,null
+143131,Auto:Buyers:All:New:Budget $40K-$49K,exelate,1,null,null,null
+143132,Auto:Buyers:All:New:Budget $50K-$74K,exelate,1,null,null,null
+143133,Auto:Buyers:All:New:Budget $75K+,exelate,1,null,null,null
+143134,Auto:Buyers:Crossover,exelate,1,null,null,null
+143135,Auto:Buyers:Current Vehicle Age 0-3 years,exelate,1,null,null,null
+143136,Auto:Buyers:Current Vehicle Age 4-5 years,exelate,1,null,null,null
+143137,Auto:Buyers:Current Vehicle Age 6+ years,exelate,1,null,null,null
+143138,Auto:Buyers:Manufacturers-US:Chrysler,exelate,1,null,null,null
+143139,Auto:Buyers:Manufacturers-US:Ford,exelate,1,null,null,null
+143140,Auto:Buyers:Manufacturers-US:GM,exelate,1,null,null,null
+143141,Auto:Buyers:Make:Acura:RDX,exelate,1,null,null,null
+143142,Auto:Buyers:Make:Acura:RL,exelate,1,null,null,null
+143143,Auto:Buyers:Make:Acura:ZDX,exelate,1,null,null,null
+143144,Auto:Buyers:Make:Aston Martin,exelate,1,null,null,null
+143145,Auto:Buyers:Make:Aston Martin:DB Models,exelate,1,null,null,null
+143146,Auto:Buyers:Make:Aston Martin:Rapide,exelate,1,null,null,null
+143147,Auto:Buyers:Make:Aston Martin:Vantage,exelate,1,null,null,null
+143148,Auto:Buyers:Make:Audi:A3,exelate,1,null,null,null
+143149,Auto:Buyers:Make:Audi:A5,exelate,1,null,null,null
+143150,Auto:Buyers:Make:Audi:A6,exelate,1,null,null,null
+143151,Auto:Buyers:Make:Audi:A8,exelate,1,null,null,null
+143152,Auto:Buyers:Make:Audi:R8,exelate,1,null,null,null
+143153,Auto:Buyers:Make:Audi:TT,exelate,1,null,null,null
+143154,Auto:Buyers:Make:Bentley,exelate,1,null,null,null
+143155,Auto:Buyers:Make:BMW:1 Series,exelate,1,null,null,null
+143156,Auto:Buyers:Make:BMW:5 Series,exelate,1,null,null,null
+143157,Auto:Buyers:Make:BMW:6 Series,exelate,1,null,null,null
+143158,Auto:Buyers:Make:BMW:7 Series,exelate,1,null,null,null
+143159,Auto:Buyers:Make:BMW:Z4,exelate,1,null,null,null
+143160,Auto:Buyers:Make:Buick:Lucerne,exelate,1,null,null,null
+143161,Auto:Buyers:Make:Cadillac:DTS,exelate,1,null,null,null
+143162,Auto:Buyers:Make:Cadillac:SRX,exelate,1,null,null,null
+143163,Auto:Buyers:Make:Cadillac:STS,exelate,1,null,null,null
+143164,Auto:Buyers:Make:Chevrolet:Aveo,exelate,1,null,null,null
+143165,Auto:Buyers:Make:Chevrolet:Cobalt,exelate,1,null,null,null
+143166,Auto:Buyers:Make:Chevrolet:Corvette,exelate,1,null,null,null
+143167,Auto:Buyers:Make:Chevrolet:Cruze,exelate,1,null,null,null
+143168,Auto:Buyers:Make:Chevrolet:Malibu,exelate,1,null,null,null
+143169,Auto:Buyers:Make:Chevrolet:Traverse,exelate,1,null,null,null
+143170,Auto:Buyers:Make:Chevrolet:Volt,exelate,1,null,null,null
+143171,Auto:Buyers:Make:Chrysler:200,exelate,1,null,null,null
+143172,Auto:Buyers:Make:Daewoo,exelate,1,null,null,null
+143173,Auto:Buyers:Make:Dodge:Avenger,exelate,1,null,null,null
+143174,Auto:Buyers:Make:Dodge:Viper,exelate,1,null,null,null
+143175,Auto:Buyers:Make:Eagle,exelate,1,null,null,null
+143176,Auto:Buyers:Make:Ferrari,exelate,1,null,null,null
+143177,Auto:Buyers:Make:Ferrari:599 GTB Fiorano,exelate,1,null,null,null
+143178,Auto:Buyers:Make:Ferrari:612 Scaglietti,exelate,1,null,null,null
+143179,Auto:Buyers:Make:Ferrari:California,exelate,1,null,null,null
+143180,Auto:Buyers:Make:Fiat,exelate,1,null,null,null
+143181,Auto:Buyers:Make:Ford:Fiesta,exelate,1,null,null,null
+143182,Auto:Buyers:Make:Ford:Flex,exelate,1,null,null,null
+143183,Auto:Buyers:Make:Geo,exelate,1,null,null,null
+143184,Auto:Buyers:Make:GMC:Acadia,exelate,1,null,null,null
+143185,Auto:Buyers:Make:GMC:Canyon,exelate,1,null,null,null
+143186,Auto:Buyers:Make:GMC:Terrain,exelate,1,null,null,null
+143187,Auto:Buyers:Make:Honda:CRZ,exelate,1,null,null,null
+143188,Auto:Buyers:Make:Honda:Fit,exelate,1,null,null,null
+143189,Auto:Buyers:Make:Honda:Insight,exelate,1,null,null,null
+143190,Auto:Buyers:Make:Honda:Ridgeline,exelate,1,null,null,null
+143191,Auto:Buyers:Make:Hyundai:Accent,exelate,1,null,null,null
+143192,Auto:Buyers:Make:Hyundai:Azera,exelate,1,null,null,null
+143193,Auto:Buyers:Make:Hyundai:Elantra,exelate,1,null,null,null
+143194,Auto:Buyers:Make:Hyundai:Genesis,exelate,1,null,null,null
+143195,Auto:Buyers:Make:Hyundai:Sonata,exelate,1,null,null,null
+143196,Auto:Buyers:Make:Hyundai:Veracruz,exelate,1,null,null,null
+143197,Auto:Buyers:Make:Infiniti:EX35,exelate,1,null,null,null
+143198,Auto:Buyers:Make:Infiniti:FX50,exelate,1,null,null,null
+143199,Auto:Buyers:Make:Infiniti:QX56,exelate,1,null,null,null
+143200,Auto:Buyers:Make:Jaguar:XF,exelate,1,null,null,null
+143201,Auto:Buyers:Make:Jaguar:XJ,exelate,1,null,null,null
+143202,Auto:Buyers:Make:Jaguar:XK,exelate,1,null,null,null
+143203,Auto:Buyers:Make:Kia:Amanti,exelate,1,null,null,null
+143204,Auto:Buyers:Make:Kia:Forte,exelate,1,null,null,null
+143205,Auto:Buyers:Make:Kia:Optima,exelate,1,null,null,null
+143206,Auto:Buyers:Make:Kia:Rio,exelate,1,null,null,null
+143207,Auto:Buyers:Make:Kia:Soul,exelate,1,null,null,null
+143208,Auto:Buyers:Make:Lamborghini,exelate,1,null,null,null
+143209,Auto:Buyers:Make:Lamborghini:Gallardo,exelate,1,null,null,null
+143210,Auto:Buyers:Make:Lamborghini:Murcielago,exelate,1,null,null,null
+143211,Auto:Buyers:Make:Land Rover:LR2,exelate,1,null,null,null
+143212,Auto:Buyers:Make:Land Rover:LR4,exelate,1,null,null,null
+143213,Auto:Buyers:Make:Lexus:CT200h,exelate,1,null,null,null
+143214,Auto:Buyers:Make:Lexus:GS,exelate,1,null,null,null
+143215,Auto:Buyers:Make:Lexus:GX,exelate,1,null,null,null
+143216,Auto:Buyers:Make:Lexus:HS 250h,exelate,1,null,null,null
+143217,Auto:Buyers:Make:Lexus:IS,exelate,1,null,null,null
+143218,Auto:Buyers:Make:Lexus:IS F,exelate,1,null,null,null
+143219,Auto:Buyers:Make:Lexus:LS,exelate,1,null,null,null
+143220,Auto:Buyers:Make:Lexus:LX 570,exelate,1,null,null,null
+143221,Auto:Buyers:Make:Lincoln:MKT,exelate,1,null,null,null
+143222,Auto:Buyers:Make:Lincoln:MKZ,exelate,1,null,null,null
+143223,Auto:Buyers:Make:Lincoln:Town Car,exelate,1,null,null,null
+143224,Auto:Buyers:Make:Lotus,exelate,1,null,null,null
+143225,Auto:Buyers:Make:Lotus:Elise,exelate,1,null,null,null
+143226,Auto:Buyers:Make:Lotus:Evora,exelate,1,null,null,null
+143227,Auto:Buyers:Make:Lotus:Exige,exelate,1,null,null,null
+143228,Auto:Buyers:Make:Maserati,exelate,1,null,null,null
+143229,Auto:Buyers:Make:Maserati:GranTurismo,exelate,1,null,null,null
+143230,Auto:Buyers:Make:Maybach,exelate,1,null,null,null
+143231,Auto:Buyers:Make:Maybach:Maybach 57,exelate,1,null,null,null
+143232,Auto:Buyers:Make:Maybach:Maybach 62,exelate,1,null,null,null
+143233,Auto:Buyers:Make:Mazda:2,exelate,1,null,null,null
+143234,Auto:Buyers:Make:Mazda:3,exelate,1,null,null,null
+143235,Auto:Buyers:Make:Mazda:5,exelate,1,null,null,null
+143236,Auto:Buyers:Make:Mazda:6,exelate,1,null,null,null
+143237,Auto:Buyers:Make:Mazda:RX8,exelate,1,null,null,null
+143238,Auto:Buyers:Make:Mercedes:CL Class,exelate,1,null,null,null
+143239,Auto:Buyers:Make:Mercedes:CLS Class,exelate,1,null,null,null
+143240,Auto:Buyers:Make:Mercedes:E Class,exelate,1,null,null,null
+143241,Auto:Buyers:Make:Mercedes:G Class,exelate,1,null,null,null
+143242,Auto:Buyers:Make:Mercedes:GL Class,exelate,1,null,null,null
+143243,Auto:Buyers:Make:Mercedes:GLK Class,exelate,1,null,null,null
+143244,Auto:Buyers:Make:Mercedes:M Class,exelate,1,null,null,null
+143245,Auto:Buyers:Make:Mercedes:R Class,exelate,1,null,null,null
+143246,Auto:Buyers:Make:Mercedes:S Class,exelate,1,null,null,null
+143247,Auto:Buyers:Make:Mercedes:SL Class,exelate,1,null,null,null
+143248,Auto:Buyers:Make:Mercedes:SLK Class,exelate,1,null,null,null
+143249,Auto:Buyers:Make:Mercedes:SLS Class,exelate,1,null,null,null
+143250,Auto:Buyers:Make:Mercedes:Sprinter,exelate,1,null,null,null
+143251,Auto:Buyers:Make:Mercury:Mariner,exelate,1,null,null,null
+143252,Auto:Buyers:Make:Mercury:Marquis,exelate,1,null,null,null
+143253,Auto:Buyers:Make:Mercury:Milan,exelate,1,null,null,null
+143254,Auto:Buyers:Make:Mini:Cooper,exelate,1,null,null,null
+143255,Auto:Buyers:Make:Mini:Cooper S,exelate,1,null,null,null
+143256,Auto:Buyers:Make:Mitsubishi:Eclipse,exelate,1,null,null,null
+143257,Auto:Buyers:Make:Mitsubishi:Endeavor,exelate,1,null,null,null
+143258,Auto:Buyers:Make:Mitsubishi:Galant,exelate,1,null,null,null
+143259,Auto:Buyers:Make:Mitsubishi:Lancer,exelate,1,null,null,null
+143260,Auto:Buyers:Make:Nissan:Cube,exelate,1,null,null,null
+143261,Auto:Buyers:Make:Nissan:GT-R,exelate,1,null,null,null
+143262,Auto:Buyers:Make:Nissan:Juke,exelate,1,null,null,null
+143263,Auto:Buyers:Make:Nissan:Leaf,exelate,1,null,null,null
+143264,Auto:Buyers:Make:Nissan:NV,exelate,1,null,null,null
+143265,Auto:Buyers:Make:Oldsmobile,exelate,1,null,null,null
+143266,Auto:Buyers:Make:Panoz,exelate,1,null,null,null
+143267,Auto:Buyers:Make:Plymouth,exelate,1,null,null,null
+143268,Auto:Buyers:Make:Porsche:911,exelate,1,null,null,null
+143269,Auto:Buyers:Make:Porsche:boxster,exelate,1,null,null,null
+143270,Auto:Buyers:Make:Porsche:Cayenne,exelate,1,null,null,null
+143271,Auto:Buyers:Make:Porsche:Panamera,exelate,1,null,null,null
+143272,Auto:Buyers:Make:Ram,exelate,1,null,null,null
+143273,Auto:Buyers:Make:Rolls Royce,exelate,1,null,null,null
+143274,Auto:Buyers:Make:Rolls Royce:Ghost,exelate,1,null,null,null
+143275,Auto:Buyers:Make:Rolls Royce:Phantom,exelate,1,null,null,null
+143276,Auto:Buyers:Make:Saab:9-3,exelate,1,null,null,null
+143277,Auto:Buyers:Make:Saab:9-5,exelate,1,null,null,null
+143278,Auto:Buyers:Make:scion:tC,exelate,1,null,null,null
+143279,Auto:Buyers:Make:scion:xB,exelate,1,null,null,null
+143280,Auto:Buyers:Make:scion:xD,exelate,1,null,null,null
+143281,Auto:Buyers:Make:Smart:fortwo,exelate,1,null,null,null
+143282,Auto:Buyers:Make:Subaru:Outback,exelate,1,null,null,null
+143283,Auto:Buyers:Make:Subaru:Tribeca,exelate,1,null,null,null
+143284,Auto:Buyers:Make:Suzuki:Equator,exelate,1,null,null,null
+143285,Auto:Buyers:Make:Suzuki:Grand Vitara,exelate,1,null,null,null
+143286,Auto:Buyers:Make:Suzuki:Kizashi,exelate,1,null,null,null
+143287,Auto:Buyers:Make:Suzuki:SX4,exelate,1,null,null,null
+143288,Auto:Buyers:Make:Tesla,exelate,1,null,null,null
+143289,Auto:Buyers:Make:Tesla:Roadster,exelate,1,null,null,null
+143290,Auto:Buyers:Make:Toyota:Land Cruiser,exelate,1,null,null,null
+143291,Auto:Buyers:Make:Toyota:Prius,exelate,1,null,null,null
+143292,Auto:Buyers:Make:Toyota:Venza,exelate,1,null,null,null
+143293,Auto:Buyers:Make:Toyota:Yaris,exelate,1,null,null,null
+143294,Auto:Buyers:Make:Volvo:C30,exelate,1,null,null,null
+143295,Auto:Buyers:Make:Volvo:C70,exelate,1,null,null,null
+143296,Auto:Buyers:Make:Volvo:S40,exelate,1,null,null,null
+143297,Auto:Buyers:Make:Volvo:S80,exelate,1,null,null,null
+143298,Auto:Buyers:Make:Volvo:V50,exelate,1,null,null,null
+143299,Auto:Buyers:Make:Volvo:V70,exelate,1,null,null,null
+143300,Auto:Buyers:Make:VW:Beetle,exelate,1,null,null,null
+143301,Auto:Buyers:Make:VW:CC,exelate,1,null,null,null
+143302,Auto:Buyers:Make:VW:Eos,exelate,1,null,null,null
+143303,Auto:Buyers:Make:VW:Golf,exelate,1,null,null,null
+143304,Auto:Buyers:Make:VW:GTI,exelate,1,null,null,null
+143305,Auto:Buyers:Make:VW:Passat,exelate,1,null,null,null
+143306,Auto:Buyers:Make:VW:Routan,exelate,1,null,null,null
+143307,Auto:Buyers:Make:VW:Tiguan,exelate,1,null,null,null
+143308,Auto:Buyers:Make:VW:Touareg,exelate,1,null,null,null
+143309,Shopping:CPG,exelate,1,null,null,null
+143310,Healthy Living:Health & Fitness,Lotame,0.75,null,null,null
+143312,PersonalFinance:Investing:Forex,Peer39,null,0.05,0.15,null
+143314,Healthy Living:Dieting & Weight Loss,Lotame,0.75,null,null,null
+143315,News:Government & Politics,Lotame,0.75,null,null,null
+143316,News:News & Current Events,Lotame,0.75,null,null,null
+143317,Demo:Hispanics or Spanish Speakers,Lotame,0.75,null,null,null
+143319,Career:Research:C Level Executive,exelate,0.5,null,null,null
+143320,Lifestyle:Net Worth:$1 000 000 +,exelate,0.5,null,null,null
+143321,Lifestyle:Net Worth:$100 000 to $149 999,exelate,0.5,null,null,null
+143322,Lifestyle:Net Worth:$150 000 to $249 999,exelate,0.5,null,null,null
+143323,Lifestyle:Net Worth:$2 500 to $24 999,exelate,0.5,null,null,null
+143324,Lifestyle:Net Worth:$25 000 to $49 999,exelate,0.5,null,null,null
+143325,Lifestyle:Net Worth:$250 000 to $374 999,exelate,0.5,null,null,null
+143326,Lifestyle:Net Worth:$375 000 to $499 999,exelate,0.5,null,null,null
+143327,Lifestyle:Net Worth:$50 000 to $74 999,exelate,0.5,null,null,null
+143328,Lifestyle:Net Worth:$500 000 to $749 999,exelate,0.5,null,null,null
+143329,Lifestyle:Net Worth:$75 000 to $99 999,exelate,0.5,null,null,null
+143330,Lifestyle:Net Worth:$750 000 to $999 999,exelate,0.5,null,null,null
+143331,Lifestyle:Net Worth:-$2 499 to $2 499,exelate,0.5,null,null,null
+143332,Lifestyle:Net Worth:-$20 000 to -$2 500,exelate,0.5,null,null,null
+143333,Lifestyle:Net Worth:Less than -$20 000,exelate,0.5,null,null,null
+143334,Auto:Buyers:Make:BMW:X Series,exelate,1,null,null,null
+143335,Auto:Buyers:Make:Lexus:SC430,exelate,1,null,null,null
+143336,Auto:Buyers:Make:VW:sportwagen,exelate,1,null,null,null
+143337,Services:Finance and Insurance:Auto Warranty,exelate,1,null,null,null
+143338,Services:Finance and Insurance:Mortgages,exelate,1,null,null,null
+143339,Shopping:CPG:Cereal,exelate,1,null,null,null
+143340,Shopping:Retail:Apparel,exelate,1,null,null,null
+143341,Shopping:Retail:Auto Parts Stores,exelate,1,null,null,null
+143342,Shopping:Retail:Children Stores,exelate,1,null,null,null
+143343,Shopping:Retail:Department Stores,exelate,1,null,null,null
+143344,Shopping:Retail:Drug Stores,exelate,1,null,null,null
+143345,Shopping:Retail:Electronics,exelate,1,null,null,null
+143346,Shopping:Retail:Fast Food,exelate,1,null,null,null
+143347,Shopping:Retail:Grocery Stores,exelate,1,null,null,null
+143348,Shopping:Retail:Home Improvement,exelate,1,null,null,null
+143349,Shopping:Retail:Mega Stores,exelate,1,null,null,null
+143350,Shopping:Retail:Pet Stores,exelate,1,null,null,null
+143351,Shopping:Retail:Shoes,exelate,1,null,null,null
+143352,Shopping:Retail:Sporting Goods,exelate,1,null,null,null
+143353,Travel:USA:Colorado:Vail and Keystone,exelate,1,null,null,null
+143354,Reference,exelate,0.85,null,null,null
+143355,Reference:Quotes,exelate,0.85,null,null,null
+143359,Lifestyle:Smoker,exelate,0.5,null,null,null
+143360,Auto:Buyers:Make:Ford:SportTrac,exelate,1,null,null,null
+143361,Shopping:Home and Garden:Furniture:Mattresse,exelate,1,null,null,null
+143362,Shopping:Personal Tech:Computers:eReaders,exelate,1,null,null,null
+143363,Shopping:Retail,exelate,1,null,null,null
+143395,PersonalFinance:Credit&Loans:Home,Peer39,null,0.05,0.15,null
+143396,Food&Beverage:Baking,Peer39,null,0.05,0.15,null
+143397,Advanced Demo:Declared Parents,Lotame,0.75,null,null,Demographic
+143398,Advanced Demo:Declared Dads,Lotame,0.75,null,null,Demographic
+143399,Advanced Demo:Level of Education:High School Degree,Lotame,0.75,null,null,Demographic
+143400,Advanced Demo:Level of Education:Some College,Lotame,0.75,null,null,Demographic
+143401,Advanced Demo:Level of Education:College Degree,Lotame,0.75,null,null,Demographic
+143402,Advanced Demo:Level of Education:Advanced Degree,Lotame,0.75,null,null,Demographic
+143403,Advanced Demo:Relationship Status:Divorced,Lotame,0.75,null,null,Demographic
+143404,Advanced Demo:Relationship Status:Engaged,Lotame,0.75,null,null,Demographic
+143405,Advanced Demo:Relationship Status:In a Relationship,Lotame,0.75,null,null,Demographic
+143406,Advanced Demo:Relationship Status:Single,Lotame,0.75,null,null,Demographic
+143407,Advanced Demo:Relationship Status:Married,Lotame,0.75,null,null,Demographic
+143408,Advanced Demo:Relationship Status:Widowed,Lotame,0.75,null,null,Demographic
+143409,Advanced Demo:HHI,Lotame,0.75,null,null,Demographic
+143410,Advanced Demo:HHI $25k:$59k,Lotame,0.75,null,null,Demographic
+143411,Advanced Demo:HHI $60k:$74k,Lotame,0.75,null,null,Demographic
+143412,Advanced Demo:HHI $75k:$99k,Lotame,0.75,null,null,Demographic
+143413,Advanced Demo:HHI $100k +,Lotame,0.75,null,null,Demographic
+143414,Advanced Demo:Primary Residence:Apartment,Lotame,0.75,null,null,Demographic
+143415,Advanced Demo:Primary Residence:Condo,Lotame,0.75,null,null,Demographic
+143416,Advanced Demo:Primary Residence:Single-Family House,Lotame,0.75,null,null,Demographic
+143417,Advanced Demo:Primary Residence:Vacation Home,Lotame,0.75,null,null,Demographic
+143418,Advanced Demo:Time at Primary Residence -,Lotame,0.75,null,null,Demographic
+143419,Advanced Demo:Time at Primary Residence:3-5 Years,Lotame,0.75,null,null,Demographic
+143420,Advanced Demo:Time at Primary Residence:6-10 Years,Lotame,0.75,null,null,Demographic
+143421,Advanced Demo:Time at Primary Residence:10+ Years,Lotame,0.75,null,null,Demographic
+143422,Advanced Demo:Primary Residence:Owns,Lotame,0.75,null,null,Demographic
+143423,Advanced Demo:Primary Residence:Rents,Lotame,0.75,null,null,Demographic
+143424,Online Communities:Influencers:Commenters,Lotame,0.75,null,null,null
+143425,Online Communities:Content Sharers,Lotame,0.75,null,null,null
+143426,Online Communities:Influencers,Lotame,0.75,null,null,null
+143431,Income Level:$75 000 Plus,exelate,0.5,null,null,null
+143432,Lifestyle:Getting Married,exelate,0.5,null,null,null
+143433,Auto:Buyers:2 doors,exelate,1,null,null,null
+143434,Auto:Buyers:Commercial,exelate,1,null,null,null
+143435,Auto:Buyers:Make:Alfa Romeo,exelate,1,null,null,null
+143436,Auto:Buyers:Make:Alfa Romeo:147,exelate,1,null,null,null
+143437,Auto:Buyers:Make:Alfa Romeo:156 SW,exelate,1,null,null,null
+143438,Auto:Buyers:Make:Alfa Romeo:159,exelate,1,null,null,null
+143439,Auto:Buyers:Make:Alfa Romeo:166,exelate,1,null,null,null
+143440,Auto:Buyers:Make:Alfa Romeo:8C,exelate,1,null,null,null
+143441,Auto:Buyers:Make:Alfa Romeo:Brera,exelate,1,null,null,null
+143442,Auto:Buyers:Make:Alfa Romeo:Giulietta,exelate,1,null,null,null
+143443,Auto:Buyers:Make:Alfa Romeo:GT,exelate,1,null,null,null
+143444,Auto:Buyers:Make:Alfa Romeo:MiTo,exelate,1,null,null,null
+143445,Auto:Buyers:Make:Alfa Romeo:Spider,exelate,1,null,null,null
+143446,Auto:Buyers:Make:Ariel,exelate,1,null,null,null
+143447,Auto:Buyers:Make:Ariel:Atom,exelate,1,null,null,null
+143448,Auto:Buyers:Make:Artega,exelate,1,null,null,null
+143449,Auto:Buyers:Make:Artega:GT,exelate,1,null,null,null
+143450,Auto:Buyers:Make:Audi:A7,exelate,1,null,null,null
+143451,Auto:Buyers:Make:Audi:Q,exelate,1,null,null,null
+143452,Auto:Buyers:Make:Audi:Q5,exelate,1,null,null,null
+143453,Auto:Buyers:Make:Audi:Q7,exelate,1,null,null,null
+143454,Auto:Buyers:Make:Audi:S,exelate,1,null,null,null
+143455,Auto:Buyers:Make:Audi:S4,exelate,1,null,null,null
+143456,Auto:Buyers:Make:Audi:S5,exelate,1,null,null,null
+143457,Auto:Buyers:Make:Audi:S6,exelate,1,null,null,null
+143458,Auto:Buyers:Make:Audi:TTS,exelate,1,null,null,null
+143459,Auto:Buyers:Make:Bentley:Azure,exelate,1,null,null,null
+143460,Auto:Buyers:Make:Bentley:Brooklands,exelate,1,null,null,null
+143461,Auto:Buyers:Make:Bentley:Continental,exelate,1,null,null,null
+143462,Auto:Buyers:Make:Bentley:Continental Flying,exelate,1,null,null,null
+143463,Auto:Buyers:Make:Bentley:Continental GT,exelate,1,null,null,null
+143464,Auto:Buyers:Make:Bentley:Continental GTC,exelate,1,null,null,null
+143465,Auto:Buyers:Make:Bentley:Continental Supersp,exelate,1,null,null,null
+143466,Auto:Buyers:Make:Bentley:Mulsanne,exelate,1,null,null,null
+143467,Auto:Buyers:Make:BMW:Alpina B7,exelate,1,null,null,null
+143468,Auto:Buyers:Make:Bugatti,exelate,1,null,null,null
+143469,Auto:Buyers:Make:Bugatti:Veyron,exelate,1,null,null,null
+143470,Auto:Buyers:Make:Buick:LaCross,exelate,1,null,null,null
+143471,Auto:Buyers:Make:Chevrolet:Avanlanche,exelate,1,null,null,null
+143472,Auto:Buyers:Make:Chevrolet:Suburban,exelate,1,null,null,null
+143473,Auto:Buyers ~ Make:Chrysler:300,exelate,1,null,null,null
+143474,Auto:Buyers:Make:Citroen,exelate,1,null,null,null
+143475,Auto:Buyers:Make:Dacia,exelate,1,null,null,null
+143476,Auto:Buyers:Make:Daihatsu,exelate,1,null,null,null
+143477,Auto:Buyers:Make:Ferrari:458 Italia,exelate,1,null,null,null
+143478,Auto:Buyers:Make:Ferrari:575,exelate,1,null,null,null
+143479,Auto:Buyers:Make:Fiat:500,exelate,1,null,null,null
+143480,Auto:Buyers:Make:Fisker:Karma,exelate,1,null,null,null
+143481,Auto:Buyers:Make:Fiskers,exelate,1,null,null,null
+143482,Auto:Buyers:Make:Ford:E series,exelate,1,null,null,null
+143483,Auto:Buyers:Make:Ford:Shelby GT500,exelate,1,null,null,null
+143484,Auto:Buyers:Make:Gumpert,exelate,1,null,null,null
+143485,Auto:Buyers:Make:Hummer:H2,exelate,1,null,null,null
+143486,Auto:Buyers:Make:Hyundai:Equus,exelate,1,null,null,null
+143487,Auto:Buyers:Make:Infiniti:EX,exelate,1,null,null,null
+143488,Auto:Buyers:Make:Infiniti:EX37,exelate,1,null,null,null
+143489,Auto:Buyers:Make:Infiniti:FX,exelate,1,null,null,null
+143490,Auto:Buyers:Make:Infiniti:G25,exelate,1,null,null,null
+143491,Auto:Buyers:Make:Infiniti:G25x,exelate,1,null,null,null
+143492,Auto:Buyers:Make:Infiniti:G37,exelate,1,null,null,null
+143493,Auto:Buyers:Make:Infiniti:G37x,exelate,1,null,null,null
+143494,Auto:Buyers:Make:Infiniti:M,exelate,1,null,null,null
+143495,Auto:Buyers:Make:Infiniti:M35,exelate,1,null,null,null
+143496,Auto:Buyers:Make:Infiniti:M35x,exelate,1,null,null,null
+143497,Auto:Buyers:Make:Infiniti:M37,exelate,1,null,null,null
+143498,Auto:Buyers:Make:Infiniti:M37x,exelate,1,null,null,null
+143499,Auto:Buyers:Make:Infiniti:M45,exelate,1,null,null,null
+143500,Auto:Buyers:Make:Infiniti:M45x,exelate,1,null,null,null
+143501,Auto:Buyers:Make:Infiniti:M56,exelate,1,null,null,null
+143502,Auto:Buyers:Make:Infiniti:M56x,exelate,1,null,null,null
+143503,Auto:Buyers:Make:KTM,exelate,1,null,null,null
+143504,Auto:Buyers:Make:Lada,exelate,1,null,null,null
+143505,Auto:Buyers:Make:Lancia,exelate,1,null,null,null
+143506,Auto:Buyers:Make:Maserati:Quattroporte,exelate,1,null,null,null
+143507,Auto:Buyers:Make:Maybach:Landaulet,exelate,1,null,null,null
+143508,Auto:Buyers:Make:Mazda:MX- Miata,exelate,1,null,null,null
+143509,Auto:Buyers:Make:Mercedes:Sprinter van,exelate,1,null,null,null
+143510,Auto:Buyers:Make:Mercedes:Sprinter wagon,exelate,1,null,null,null
+143511,Auto:Buyers:Make:Mini:Cooper Clubman,exelate,1,null,null,null
+143512,Auto:Buyers:Make:Mini:Cooper Countryman,exelate,1,null,null,null
+143513,Auto:Buyers:Make:Mini:John Cooperworks,exelate,1,null,null,null
+143514,Auto:Buyers:Make:Nissan:370Z,exelate,1,null,null,null
+143515,Auto:Buyers:Make:Opel,exelate,1,null,null,null
+143516,Auto:Buyers:Make:Pagani,exelate,1,null,null,null
+143517,Auto:Buyers:Make:Peugeot,exelate,1,null,null,null
+143518,Auto:Buyers:Make:Porsche:Cayman,exelate,1,null,null,null
+143519,Auto:Buyers:Make:Renault,exelate,1,null,null,null
+143520,Auto:Buyers:Make:Saab:9-4,exelate,1,null,null,null
+143521,Auto:Buyers:Make:Seat,exelate,1,null,null,null
+143522,Auto:Buyers:Make:Skoda,exelate,1,null,null,null
+143523,Auto:Buyers:Make:SsangYong,exelate,1,null,null,null
+143524,Auto:Buyers:Make:TranStar Racing,exelate,1,null,null,null
+143525,Auto:Buyers:Make:Volvo:S30,exelate,1,null,null,null
+143526,Auto:Buyers:Make:Volvo:V60,exelate,1,null,null,null
+143527,Auto:Buyers:Make:Volvo:XC60,exelate,1,null,null,null
+143528,Auto:Buyers:Make:VW:XC60,exelate,1,null,null,null
+143529,Auto:Buyers:Make:Wiesmann,exelate,1,null,null,null
+143530,Travel:Africa,exelate,1,null,null,null
+143531,Travel:Canada:British Columbia:Vancouver,exelate,1,null,null,null
+143532,Travel:Canada:Ontario:Toronto,exelate,1,null,null,null
+143533,Travel:Canada:Quebec:Montreal,exelate,1,null,null,null
+143534,Travel:USA:Michigan:Sault Sainte Marie,exelate,1,null,null,null
+143535,Travel:USA:Ohio:Toledo,exelate,1,null,null,null
+143536,Travel:USA:Oklahoma:Tulsa,exelate,1,null,null,null
+143537,Travel:USA:Pennsylvania:Mechanicsburg,exelate,1,null,null,null
+143538,Travel:USA:Pennsylvania:Sharon,exelate,1,null,null,null
+143539,Travel:USA:Texas:Dallas,exelate,1,null,null,null
+143540,Travel:USA:Texas:Houston,exelate,1,null,null,null
+143541,Entertainment:Humor,exelate,0.85,null,null,null
+143542,Entertainment:Twitter,exelate,0.85,null,null,null
+143543,Events:Wedding  Engagement,exelate,0.85,null,null,null
+143544,Health Providers,exelate,0.85,null,null,null
+143545,Offline:Uniques,exelate,1,null,null,null
+143548,Male Mid-Life Crisis,exelate,1,null,null,null
+143549,SBO Shoppers,exelate,1,null,null,null
+143550,Language:Spanish,Peer39,null,0.05,0.15,null
+143551,Language:French,Peer39,null,0.05,0.15,null
+143552,Language:Portuguese,Peer39,null,0.05,0.15,null
+143553,Language:German,Peer39,null,0.05,0.15,null
+143554,Language:Italian,Peer39,null,0.05,0.15,null
+143555,Language:Dutch,Peer39,null,0.05,0.15,null
+143556,Food&Beverage:HealthyEating,Peer39,null,0.05,0.15,null
+143557,PersonalFinance:Credit&Loans:Automotive,Peer39,null,0.05,0.15,null
+143558,Home&Garden:Decorating,Peer39,null,0.05,0.15,null
+143559,News:Commuting,Peer39,null,0.05,0.15,null
+143560,News:Transportation,Peer39,null,0.05,0.15,null
+143561,News:Government,Peer39,null,0.05,0.15,null
+143572,Shopping:Coupons,Peer39,null,0.05,0.15,null
+143574,Shopping:Back to School,exelate,0.85,null,null,null
+143575,Shopping:Fashion:Shoes:Sneakers:New Balanc,exelate,0.85,null,null,null
+143576,Shopping:Fashion:Shoes:Sneakers:Nike,exelate,0.85,null,null,null
+143577,Shopping:Back to School,exelate,1,null,null,null
+143578,Shopping:Fashion:Shoes:Sneakers,exelate,1,null,null,null
+143579,Shopping:Fashion:Shoes:Sneakers:Adidas,exelate,1,null,null,null
+143580,Shopping:Fashion:Shoes:Sneakers:New Balanc,exelate,1,null,null,null
+143581,Shopping:Fashion:Shoes:Sneakers:Nike,exelate,1,null,null,null
+143582,Shopping:Fashion:Shoes:Sneakers:Vans,exelate,1,null,null,null
+143583,Fashion and Style,exelate,0.85,null,null,null
+143584,PersonalFinance:Credit&Loans:Education,Peer39,null,0.05,0.15,null
+143595,Negative:9/11,Peer39,0.05,null,null,null
+143596,Safe from 9/11,Peer39,0.05,null,null,null
+143597,Food&Beverage:Recipes,Peer39,null,0.05,0.15,null
+143598,Internet:Maps,Peer39,null,0.05,0.15,null
+143599,News:Local,Peer39,null,0.05,0.15,null
+143600,Technology:Apple,Peer39,null,0.05,0.15,null
