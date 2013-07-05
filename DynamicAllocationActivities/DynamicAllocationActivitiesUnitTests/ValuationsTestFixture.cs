@@ -1,6 +1,18 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="ValuationsTestFixture.cs" company="Rare Crowds Inc">
-//     Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -334,13 +346,13 @@ namespace DynamicAllocationActivitiesUnitTests
             var dac = new DynamicAllocationCampaign(this.repositoryStub, this.companyEntity, this.campaignEntity);
 
             // We don't expect save to be called
-            IList<EntityProperty> savedProperties = null;
-            this.SetupSaveCampaignStub(c => savedProperties = c.ToList(), null);
+            CampaignEntity savedCampaign = null;
+            this.SetupSaveCampaignStub((c, e) => { savedCampaign = e; });
 
             var cache = new ValuationsCache(this.repositoryStub);
             var actualValuations = cache.GetValuations(dac);
 
-            Assert.IsNull(savedProperties);
+            Assert.IsNull(savedCampaign);
             Assert.AreEqual(expectedFingerprint, this.campaignEntity.TryGetPropertyByName<string>(daName.ValuationInputsFingerprint, null));
             AssertCachedValuations(cachedValuations, actualValuations, true);
         }
@@ -357,17 +369,16 @@ namespace DynamicAllocationActivitiesUnitTests
 
             var dac = new DynamicAllocationCampaign(this.repositoryStub, this.companyEntity, this.campaignEntity);
 
-            // Capture saved properties
-            IList<EntityProperty> savedProperties = null;
-            var expectedEntityFilter = new RepositoryEntityFilter(true, true, true, true);
-            this.SetupSaveCampaignStub(c => savedProperties = c.ToList(), expectedEntityFilter);
+            // Capture saved campaign
+            CampaignEntity savedCampaign = null;
+            this.SetupSaveCampaignStub((c, e) => { savedCampaign = e; });
 
             var cache = new ValuationsCache(this.repositoryStub);
             var actualValuations = cache.GetValuations(dac);
 
-            Assert.AreNotEqual(originalFingerprint, (string)savedProperties.Single(p => p.Name == daName.ValuationInputsFingerprint));
-            Assert.AreEqual(expectedFingerprint, (string)savedProperties.Single(p => p.Name == daName.ValuationInputsFingerprint));
-            Assert.IsNotNull((string)savedProperties.Single(p => p.Name == daName.CachedValuations));
+            Assert.AreNotEqual(originalFingerprint, savedCampaign.GetPropertyByName<string>(daName.ValuationInputsFingerprint));
+            Assert.AreEqual(expectedFingerprint, savedCampaign.GetPropertyByName<string>(daName.ValuationInputsFingerprint));
+            Assert.IsNotNull(savedCampaign.GetPropertyByName<string>(daName.CachedValuations));
             AssertCachedValuations(cachedValuations, actualValuations, false);
             AssertCachedValuations(ExpectedCachedValuations, actualValuations, true);
         }
@@ -385,8 +396,8 @@ namespace DynamicAllocationActivitiesUnitTests
             var cache = new ValuationsCache(this.repositoryStub);
             var actualValuations = cache.GetValuations(dac, true);
 
-            this.repositoryStub.AssertWasNotCalled(f => f.TryUpdateEntity(
-                Arg<RequestContext>.Is.Anything, Arg<EntityId>.Is.Anything, Arg<IEnumerable<EntityProperty>>.Is.Anything));
+            this.repositoryStub.AssertWasNotCalled(f => f.SaveEntity(
+                Arg<RequestContext>.Is.Anything, Arg<IEntity>.Is.Anything));
             AssertCachedValuations(cachedValuations, actualValuations, false);
         }
 
@@ -397,9 +408,8 @@ namespace DynamicAllocationActivitiesUnitTests
             var dac = new DynamicAllocationCampaign(this.repositoryStub, this.companyEntity, this.campaignEntity);
 
             // Capture saved campaign
-            IList<EntityProperty> savedProperties = null;
-            var expectedEntityFilter = new RepositoryEntityFilter(true, true, true, true);
-            this.SetupSaveCampaignStub(c => savedProperties = c.ToList(), expectedEntityFilter);
+            CampaignEntity savedCampaign = null;
+            this.SetupSaveCampaignStub((c, e) => { savedCampaign = e; });
 
             // Cached values shouldn't be there to begin with
             Assert.IsNull(this.campaignEntity.TryGetPropertyByName<string>(daName.ValuationInputsFingerprint, null));
@@ -411,8 +421,8 @@ namespace DynamicAllocationActivitiesUnitTests
             var cache = new ValuationsCache(this.repositoryStub);
             var actualValuations = cache.GetValuations(dac);
 
-            Assert.AreEqual(valuationInputsFingerprint, (string)savedProperties.Single(p => p.Name == daName.ValuationInputsFingerprint));
-            Assert.IsNotNull((string)savedProperties.Single(p => p.Name == daName.CachedValuations));
+            Assert.AreEqual(valuationInputsFingerprint, savedCampaign.GetPropertyByName<string>(daName.ValuationInputsFingerprint));
+            Assert.IsNotNull(savedCampaign.GetPropertyByName<string>(daName.CachedValuations));
             AssertCachedValuations(ExpectedCachedValuations, actualValuations, true);
         }
 
@@ -426,9 +436,8 @@ namespace DynamicAllocationActivitiesUnitTests
             var dac = new DynamicAllocationCampaign(this.repositoryStub, this.companyEntity, this.campaignEntity);
 
             // Capture saved campaign
-            IList<EntityProperty> savedProperties = null;
-            var expectedEntityFilter = new RepositoryEntityFilter(true, true, true, true);
-            this.SetupSaveCampaignStub(c => savedProperties = c.ToList(), expectedEntityFilter);
+            CampaignEntity savedCampaign = null;
+            this.SetupSaveCampaignStub((c, e) => { savedCampaign = e; });
 
             // Cached values shouldn't be there to begin with but flag set
             var valuationInputsFingerprint = this.GetValuationInputsFingerprintFromInputs();
@@ -438,8 +447,8 @@ namespace DynamicAllocationActivitiesUnitTests
             var cache = new ValuationsCache(this.repositoryStub);
             var actualValuations = cache.GetValuations(dac);
 
-            Assert.AreEqual(valuationInputsFingerprint, (string)savedProperties.Single(p => p.Name == daName.ValuationInputsFingerprint));
-            Assert.IsNotNull((string)savedProperties.Single(p => p.Name == daName.CachedValuations));
+            Assert.AreEqual(valuationInputsFingerprint, savedCampaign.GetPropertyByName<string>(daName.ValuationInputsFingerprint));
+            Assert.IsNotNull(savedCampaign.GetPropertyByName<string>(daName.CachedValuations));
             AssertCachedValuations(ExpectedCachedValuations, actualValuations, true);
         }
 
@@ -468,9 +477,8 @@ namespace DynamicAllocationActivitiesUnitTests
             var dac = new DynamicAllocationCampaign(this.repositoryStub, this.companyEntity, this.campaignEntity);
 
             // Capture saved campaign
-            IList<EntityProperty> savedProperties = null;
-            var expectedEntityFilter = new RepositoryEntityFilter(true, true, true, true);
-            this.SetupSaveCampaignStub(c => savedProperties = c.ToList(), expectedEntityFilter);
+            CampaignEntity savedCampaign = null;
+            this.SetupSaveCampaignStub((c, e) => { savedCampaign = e; });
 
             var valuationInputsFingerprint = this.GetValuationInputsFingerprintFromInputs();
             Assert.IsNotNull(valuationInputsFingerprint);
@@ -478,9 +486,8 @@ namespace DynamicAllocationActivitiesUnitTests
             var cache = new ValuationsCache(this.repositoryStub);
             var actualValuations = cache.GetValuations(dac);
 
-            Assert.AreEqual(valuationInputsFingerprint, (string)savedProperties.Single(p => p.Name == daName.ValuationInputsFingerprint));
-            Assert.IsNotNull((string)savedProperties.Single(p => p.Name == daName.CachedValuations));
-            Assert.AreNotEqual(bogusCachedValuationsJson, (string)savedProperties.Single(p => p.Name == daName.CachedValuations));
+            Assert.AreEqual(valuationInputsFingerprint, savedCampaign.GetPropertyByName<string>(daName.ValuationInputsFingerprint));
+            Assert.AreNotEqual(bogusCachedValuationsJson, savedCampaign.GetPropertyByName<string>(daName.CachedValuations));
             AssertCachedValuations(ExpectedCachedValuations, actualValuations, true);
         }
 
@@ -491,9 +498,7 @@ namespace DynamicAllocationActivitiesUnitTests
             var dac = new DynamicAllocationCampaign(this.repositoryStub, this.companyEntity, this.campaignEntity);
 
             // Set up save stub to fail
-            IList<EntityProperty> savedProperties = null;
-            var expectedEntityFilter = new RepositoryEntityFilter(true, true, true, true);
-            this.SetupSaveCampaignStub(c => savedProperties = c.ToList(), expectedEntityFilter, false);
+            this.SetupSaveCampaignStub((c, e) => { }, false);
 
             var valuationInputsFingerprint = this.GetValuationInputsFingerprintFromInputs();
             Assert.IsNotNull(valuationInputsFingerprint);
@@ -505,8 +510,9 @@ namespace DynamicAllocationActivitiesUnitTests
             AssertCachedValuations(ExpectedCachedValuations, actualValuations, true);
 
             // Save should have been called with the cached valuations even if it failed
-            Assert.AreEqual(valuationInputsFingerprint, (string)savedProperties.Single(p => p.Name == daName.ValuationInputsFingerprint));
-            Assert.IsNotNull((string)savedProperties.Single(p => p.Name == daName.CachedValuations));
+            this.repositoryStub.AssertWasCalled(f => f.SaveEntity(
+                Arg<RequestContext>.Is.Anything,
+                Arg<IEntity>.Matches(e => e.GetPropertyByName<string>(daName.CachedValuations) != null)));
         }
 
         /// <summary>Successful save of cached valuations.</summary>
@@ -516,16 +522,26 @@ namespace DynamicAllocationActivitiesUnitTests
             var dac = new DynamicAllocationCampaign(this.repositoryStub, this.companyEntity, this.campaignEntity);
 
             // Capture saved campaign
-            IList<EntityProperty> savedProperties = null;
-            var expectedEntityFilter = new RepositoryEntityFilter(true, true, true, true);
-            this.SetupSaveCampaignStub(c => savedProperties = c.ToList(), expectedEntityFilter);
+            CampaignEntity savedCampaign = null;
+            RequestContext saveContext = null;
+            this.SetupSaveCampaignStub((c, e) => { saveContext = c; savedCampaign = e; });
 
             var cache = new ValuationsCache(this.repositoryStub);
             Assert.IsTrue(cache.SaveCachedValuations(
                 dac, "ValuationsJson", "valuationInputsFingerprint"));
+            Assert.AreEqual("valuationInputsFingerprint", savedCampaign.GetPropertyByName<string>(daName.ValuationInputsFingerprint));
+            Assert.AreEqual("ValuationsJson", savedCampaign.GetPropertyByName<string>(daName.CachedValuations));
 
-            Assert.AreEqual("valuationInputsFingerprint", (string)savedProperties.Single(p => p.Name == daName.ValuationInputsFingerprint));
-            Assert.AreEqual("ValuationsJson", (string)savedProperties.Single(p => p.Name == daName.CachedValuations));
+            var actualEntityFilter = saveContext.EntityFilter;
+            var propertyNameFilter = saveContext.EntityFilter.GetPropertyNameFilter().ToList();
+            var associationNameFilter = saveContext.EntityFilter.GetAssociationNameFilter().ToList();
+            Assert.IsFalse(associationNameFilter.Any());
+            Assert.IsFalse(actualEntityFilter.IncludeAssociations);
+            Assert.IsTrue(actualEntityFilter.IncludeExtendedProperties);
+            Assert.IsTrue(actualEntityFilter.IncludeSystemProperties);
+            Assert.AreEqual(2, propertyNameFilter.Count);
+            Assert.IsTrue(propertyNameFilter.Contains(daName.CachedValuations));
+            Assert.IsTrue(propertyNameFilter.Contains(daName.ValuationInputsFingerprint));
         }
 
         /// <summary>Failed save of cached valuations.</summary>
@@ -535,8 +551,7 @@ namespace DynamicAllocationActivitiesUnitTests
             var dac = new DynamicAllocationCampaign(this.repositoryStub, this.companyEntity, this.campaignEntity);
 
             // Set up save stub to fail
-            var expectedEntityFilter = new RepositoryEntityFilter(true, true, true, true);
-            this.SetupSaveCampaignStub(c => { }, expectedEntityFilter, false);
+            this.SetupSaveCampaignStub((c, e) => { }, false);
 
             var cache = new ValuationsCache(this.repositoryStub);
             Assert.IsFalse(cache.SaveCachedValuations(
@@ -686,16 +701,13 @@ namespace DynamicAllocationActivitiesUnitTests
         }
 
         /// <summary>Setup a save campaign stub that captures the saved campaign.</summary>
-        /// <param name="captureCampaign">delegate to capture campaign being saved.</param>
-        /// <param name="expectedEntityFilter">The entity filter for the call.</param>
+        /// <param name="captureArgs">delegate to capture campaign and context used for save.</param>
         /// <param name="saveSucceeds">True if the save should return a success result.</param>
         private void SetupSaveCampaignStub(
-            Action<IEnumerable<EntityProperty>> captureCampaign,
-            RepositoryEntityFilter expectedEntityFilter,
+            Action<RequestContext, CampaignEntity> captureArgs,
             bool saveSucceeds = true)
         {
-            RepositoryStubUtilities.SetupTryUpdateEntityStub(
-                this.repositoryStub, expectedEntityFilter, this.campaignEntity.ExternalEntityId, captureCampaign, !saveSucceeds);
+            RepositoryStubUtilities.SetupSaveEntityStub(this.repositoryStub, captureArgs, !saveSucceeds);
         }
 
         /// <summary>Set up cached valuations.</summary>

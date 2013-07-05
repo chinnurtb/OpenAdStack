@@ -1,6 +1,18 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="StorageKeyFactoryFixture.cs" company="Emerging Media Group">
-//   Copyright Emerging Media Group. All rights reserved.
+// <copyright file="StorageKeyFactoryFixture.cs" company="Rare Crowds Inc">
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -65,12 +77,12 @@ namespace ConcreteDataStoreUnitTests
 
             // Create key rule stub to return partition
             this.keyRule = MockRepository.GenerateStub<IKeyRule>();
-            this.keyRule.Stub(f => f.GenerateKeyField(Arg<IRawEntity>.Is.Anything)).Return(this.partitionValue);
+            this.keyRule.Stub(f => f.GenerateKeyField(Arg<IEntity>.Is.Anything)).Return(this.partitionValue);
 
             // Create key rule factory stub to return key rule
             this.keyRuleFactory = MockRepository.GenerateStub<IKeyRuleFactory>();
             this.keyRuleFactory.Stub(
-                f => f.GetKeyRule(Arg<IRawEntity>.Is.Anything, Arg<string>.Is.Anything, Arg<string>.Is.Anything))
+                f => f.GetKeyRule(Arg<IEntity>.Is.Anything, Arg<string>.Is.Anything, Arg<string>.Is.Anything))
                 .Return(this.keyRule);
 
             this.azureStorageKey = new AzureStorageKey(this.expectedStorageAccountName, this.tableName, this.partition, this.rowId);
@@ -183,7 +195,7 @@ namespace ConcreteDataStoreUnitTests
         /// <summary>Build a raw entity with the base interface members needed by these tests populated</summary>
         /// <typeparam name="T">Concrete IEntity</typeparam>
         /// <returns>IEntity derived entity</returns>
-        private IRawEntity BuildNewEntity<T>() where T : IRawEntity, new()
+        private IEntity BuildNewEntity<T>() where T : IEntity, new()
         {
             var entity = new T
             {

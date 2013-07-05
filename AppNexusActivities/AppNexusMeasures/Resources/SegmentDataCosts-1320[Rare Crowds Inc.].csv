@@ -12,7 +12,7 @@ APNXId,displayName,dataProvider,DataCost,MinCPM,PercentOfMedia,member_id,provide
 39267,Career:Sales and Sales Management,exelate,0.5,,,39,exelate,360,Demographic
 79428,Chapstick chpst id 4466,Lotame,,,,422,,,
 80017,Medical Business Pros id 4535,Lotame,,,,422,,,
-81213,Cigar Lovers,,,,,796,,,
+81213,Cigar Lovers,DNU,,,,796,,,Old
 85033,Bizo:Professional:Finance Professionals,exelate,1.5,,,39,exelate,,interest
 85035,Bizo:Professional:IT Professionals,exelate,1.5,,,39,exelate,,interest
 85036,Bizo:Professional:Small Business Owners,exelate,1.5,,,39,exelate,,interest
@@ -15701,14 +15701,14 @@ APNXId,displayName,dataProvider,DataCost,MinCPM,PercentOfMedia,member_id,provide
 256116,Branded Data:TruSignal:Underbanked Consumers,BlueKai,1.5,,,1262,,bk_155205,BlueKai - TruSignal
 256117,Branded Data:TruSignal:Underbanked Consumers:High Propensity Audience,BlueKai,1.5,,,1262,,bk_155206,BlueKai - TruSignal
 256118,Branded Data:TruSignal:Underbanked Consumers:Targeted Brand Campaign,BlueKai,1.5,,,1262,,bk_155207,BlueKai - TruSignal
-274072,Bizo:Core:CS:Fortune 500,exelate,3,,,39,exelate,154,old
-274073,Bizo:Core:CS:Large,exelate,3,,,39,exelate,155,old
-274074,Bizo:Core:CS:Medium,exelate,3,,,39,exelate,156,old
-274075,Bizo:Core:CS:Micro,exelate,3,,,39,exelate,157,old
-274076,Bizo:Core:CS:Small,exelate,3,,,39,exelate,158,old
-274077,Bizo:Core:CS:XLarge,exelate,3,,,39,exelate,159,old
-274085,Bizo:Core:FA:Marketing,exelate,3,,,39,exelate,170,old
-274117,Bizo:Core:SEN:Executives,exelate,3,,,39,exelate,207,old
+274072,Bizo:Core:CS:Fortune 500,exelate,3,,,39,exelate,154,Old
+274073,Bizo:Core:CS:Large,exelate,3,,,39,exelate,155,Old
+274074,Bizo:Core:CS:Medium,exelate,3,,,39,exelate,156,Old
+274075,Bizo:Core:CS:Micro,exelate,3,,,39,exelate,157,Old
+274076,Bizo:Core:CS:Small,exelate,3,,,39,exelate,158,Old
+274077,Bizo:Core:CS:XLarge,exelate,3,,,39,exelate,159,Old
+274085,Bizo:Core:FA:Marketing,exelate,3,,,39,exelate,170,Old
+274117,Bizo:Core:SEN:Executives,exelate,3,,,39,exelate,207,Old
 290307,In-Market:Retail:Sports Equipment & Outdoor Gear:Brands:Alpinestars,BlueKai,0.77,,,1262,,bk_159743,BlueKai
 290308,In-Market:Retail:Sports Equipment & Outdoor Gear:Brands:Arc'teryx,BlueKai,0.77,,,1262,,bk_159742,BlueKai
 290309,In-Market:Retail:Sports Equipment & Outdoor Gear:Brands:Castelli,BlueKai,0.77,,,1262,,bk_159739,BlueKai
@@ -16076,21 +16076,21 @@ APNXId,displayName,dataProvider,DataCost,MinCPM,PercentOfMedia,member_id,provide
 290685,Interest:Autos:Makes & Models:Abarth :Punto Evo,BlueKai,1.13,,,1262,,bk_160032,BlueKai
 290686,Interest:Autos:Makes & Models:Aston Martin:V12 Vantage,BlueKai,1.13,,,1262,,bk_160034,BlueKai
 290687,Interest:Autos:Makes & Models:Aston Martin:V8 Vantage,BlueKai,1.13,,,1262,,bk_160033,BlueKai
-294321,In-Market,DNU,,,,1262,,bk_3,old
-294322,Branded Data,DNU,,,,1262,,bk_24148,old
-294323,A/B Test Groups,DNU,,,,1262,,bk_38836,old
-294324,A/B Test Groups:Group 01,DNU,,,,1262,,bk_38838,old
-294325,A/B Test Groups:Group 02,DNU,,,,1262,,bk_38840,old
-294326,A/B Test Groups:Group 03,DNU,,,,1262,,bk_38847,old
-294327,A/B Test Groups:Group 04,DNU,,,,1262,,bk_38841,old
-294328,A/B Test Groups:Group 05,DNU,,,,1262,,bk_38837,old
-294329,A/B Test Groups:Group 06,DNU,,,,1262,,bk_38846,old
-294330,A/B Test Groups:Group 07,DNU,,,,1262,,bk_38845,old
-294331,A/B Test Groups:Group 08,DNU,,,,1262,,bk_38839,old
-294332,A/B Test Groups:Group 09,DNU,,,,1262,,bk_38844,old
-294333,A/B Test Groups:Group 10,DNU,,,,1262,,bk_38842,old
-294334,A/B Test Groups:Group 11,DNU,,,,1262,,bk_38843,old
-294335,A/B Test Groups:Group 12,DNU,,,,1262,,bk_38848,old
+294321,In-Market,DNU,,,,1262,,bk_3,Old
+294322,Branded Data,DNU,,,,1262,,bk_24148,Old
+294323,A/B Test Groups,DNU,,,,1262,,bk_38836,Old
+294324,A/B Test Groups:Group 01,DNU,,,,1262,,bk_38838,Old
+294325,A/B Test Groups:Group 02,DNU,,,,1262,,bk_38840,Old
+294326,A/B Test Groups:Group 03,DNU,,,,1262,,bk_38847,Old
+294327,A/B Test Groups:Group 04,DNU,,,,1262,,bk_38841,Old
+294328,A/B Test Groups:Group 05,DNU,,,,1262,,bk_38837,Old
+294329,A/B Test Groups:Group 06,DNU,,,,1262,,bk_38846,Old
+294330,A/B Test Groups:Group 07,DNU,,,,1262,,bk_38845,Old
+294331,A/B Test Groups:Group 08,DNU,,,,1262,,bk_38839,Old
+294332,A/B Test Groups:Group 09,DNU,,,,1262,,bk_38844,Old
+294333,A/B Test Groups:Group 10,DNU,,,,1262,,bk_38842,Old
+294334,A/B Test Groups:Group 11,DNU,,,,1262,,bk_38843,Old
+294335,A/B Test Groups:Group 12,DNU,,,,1262,,bk_38848,Old
 301848,Mitt Romney:Store,Lotame,,,,422,,,
 306499,Tommy Thompson:TGT Attending,Lotame,,,,422,,,
 329514,Persuasion:Women 35-55,Lotame,,,,422,,,
@@ -16484,6 +16484,9 @@ APNXId,displayName,dataProvider,DataCost,MinCPM,PercentOfMedia,member_id,provide
 361963,Branded Data:MasterCard:Top Tier Spender:Professional:Likely to Be a Financial Advisor,BlueKai,1.6,,,1262,,bk_177920,BlueKai - MasterCard
 361964,Branded Data:MasterCard:Top Tier Spender:Retail:Online Dating Communities,BlueKai,1.6,,,1262,,bk_179211,BlueKai - MasterCard
 361965,Branded Data:DataLogix:DLX Seasonal:Summer Seasonal:Summer Olympics Followers,BlueKai,1,,,1262,,bk_177013,BlueKai - DataLogix
+361966,In-Market > Autos > AddThis Auto Intenders > Make > Fisker (BlueKai),BlueKai,1.71,,,1262,,bk_177768,
+361967,In-Market > Autos > AddThis Auto Intenders > Make > Pontiac (BlueKai),BlueKai,1.71,,,1262,,bk_177769,
+361968,In-Market > Autos > AddThis Auto Intenders > Make > Tesla (BlueKai),BlueKai,1.71,,,1262,,bk_177770,
 361969,In-Market:Autos:Makes & Models:Abarth,DNU,1.71,,,1262,,bk_177068,Old
 361970,In-Market:Autos:Makes & Models:Abarth:500,DNU,1.71,,,1262,,bk_177072,Old
 361971,In-Market:Autos:Makes & Models:Abarth:500C,DNU,1.71,,,1262,,bk_177071,Old
@@ -16508,8 +16511,8 @@ APNXId,displayName,dataProvider,DataCost,MinCPM,PercentOfMedia,member_id,provide
 361990,Interest:Autos:Makes & Models:Vauxhall Motors:Corsa,BlueKai,1.13,,,1262,,bk_177099,BlueKai
 361991,Interest:Autos:Makes & Models:Vauxhall Motors:Vectra,BlueKai,1.13,,,1262,,bk_177100,BlueKai
 362220,Interest:Autos:Makes & Models:Vauxhall Motors:Zafira,BlueKai,1.13,,,1262,,bk_177101,BlueKai
-371068,Cookied General Voters:IL17,Lotame,,,,422,,,
-381976,Testing123,Lotame,,,,422,,,
+371068,Cookied General Voters:IL17,Lotame,,,,422,,,Old
+381976,Testing123,Lotame,,,,422,,,Old
 388435,Branded Data:AdAdvisor:Personal Finance:Charitable Contributions,BlueKai,1,,,1262,,bk_137056,BlueKai - TARGUSinfo
 388436,Branded Data:AdAdvisor:Personal Finance:Investments,BlueKai,1,,,1262,,bk_137060,BlueKai - TARGUSinfo
 388437,Branded Data:AdAdvisor:Personal Finance:Tax Preparation,BlueKai,1,,,1262,,bk_137062,BlueKai - TARGUSinfo
@@ -16620,7 +16623,7 @@ APNXId,displayName,dataProvider,DataCost,MinCPM,PercentOfMedia,member_id,provide
 388558,Branded Data:IXI:Telecommunications/Wireless & Cable/Satellite (Voice. Video & Data):Voice. Video & Data,BlueKai,1,,,1262,,bk_182620,BlueKai - IXI
 388559,Branded Data:IXI:Household Income (HHI),BlueKai,1,,,1262,,bk_182621,BlueKai - IXI
 388572,Branded Data:MasterCard:Top Tier Spender:Seasonal:Black Friday / Cyber Monday Brick and Mortar Spender,DNU,1.6,,,1262,,bk_180065,Old
-396595,Branded Data:IXI,DNU,,,,1262,,bk_119779,old
+396595,Branded Data:IXI,DNU,,,,1262,,bk_119779,Old
 396596,Branded Data:IXI:Auto,BlueKai,1,,,1262,,bk_132852,Branded Data - IXI
 396597,Branded Data:IXI:Auto:Domestic Luxury Vehicle Owners,BlueKai,1,,,1262,,bk_132859,Branded Data - IXI
 396598,Branded Data:IXI:Auto:Domestic Vehicle Owners,BlueKai,1,,,1262,,bk_132856,Branded Data - IXI
@@ -17978,36 +17981,1305 @@ APNXId,displayName,dataProvider,DataCost,MinCPM,PercentOfMedia,member_id,provide
 464148,Branded Data:Lotame:Technology:Android Users:Travel,BlueKai,1.6,,,1262,,bk_196113,Branded Data - Lotame
 464149,Branded Data:Lotame:Technology:Android Users:TV,BlueKai,1.6,,,1262,,bk_196114,Branded Data - Lotame
 464150,Branded Data:Lotame:Technology:Android Users:Video Games,BlueKai,1.6,,,1262,,bk_196118,Branded Data - Lotame
-468492,Lotame Unite American Idol,Lotame,,,,422,,,
-469490,Lotame Unite Imagine Dragons,Lotame,,,,422,,,
-471799,123,Lotame,,,,422,,,
-471871,123,Lotame,,,,422,,,
-475659,Lotame Unite Lana Del Rey,Lotame,,,,422,,,
-485377,Lotame Unite Carly Rae,Lotame,,,,422,,,
-485380,Lotame Unite Cimorelli,Lotame,,,,422,,,
-485381,Lotame Unite Eva Simons,Lotame,,,,422,,,
-485383,Lotame Unite Neon Trees:Fame Is Dead,Lotame,,,,422,,,
-485385,Lotame Unite Fergie,Lotame,,,,422,,,
-485386,Lotame Unite Greyson Chance,Lotame,,,,422,,,
-485387,Lotame Unite James Morrison,Lotame,,,,422,,,
-485388,Lotame Unite Justin Bieber,Lotame,,,,422,,,
-485391,Lotame Unite Lady Gaga,Lotame,,,,422,,,
-485392,Lotame Unite Lifehouse,Lotame,,,,422,,,
-485393,Lotame Unite Ellie Goulding,Lotame,,,,422,,,
-485394,Lotame Unite LMFAO,Lotame,,,,422,,,
-485395,Lotame Unite Nicole Scherzinger,Lotame,,,,422,,,
-485397,Lotame Unite Owl City,Lotame,,,,422,,,
-485398,Lotame Unite Pia Toscano,Lotame,,,,422,,,
-485399,Lotame Unite Snow Patrol,Lotame,,,,422,,,
-503498,Behavioral:Web Design & Digital Art,Lotame,,0.75,,422,,,
-515042,Lotame Unite Eminem:Site Only,Lotame,,,,422,,,
-515043,Lotame Unite Eminem:Bravado,Lotame,,,,422,,,
-516508,Lotame Unite Skylar Grey Affinities,Lotame,,,,422,,,
-516518,Lotame Unite Lifehouse Affinities,Lotame,,,,422,,,
-590586,Lotame Unite Imagine Dragons plus Affinities,Lotame,,,,422,,,
-590624,BTSSegment,Lotame,,,,422,,,
-590689,Lotame Unite Imagine Dragons plus Affinities 2,Lotame,,,,422,,,
-590820,Branded Data:IXI:Small Business:Industry:Non-Profit,DNU,,,,1262,,bk_198557,old
-603407,CCI Test Real Estate Audience,Lotame,,,,422,,,
-606651,Lotame Unite One Republic,Lotame,,,,422,,,
-606663,Lotame Unite One Republic Affinities,Lotame,,,,422,,,
+468492,Lotame Unite American Idol,Lotame,,,,422,,,Old
+469490,Lotame Unite Imagine Dragons,Lotame,,,,422,,,Old
+471799,123,Lotame,,,,422,,,Old
+471871,123,Lotame,,,,422,,,Old
+475659,Lotame Unite Lana Del Rey,Lotame,,,,422,,,Old
+485377,Lotame Unite Carly Rae,Lotame,,,,422,,,Old
+485380,Lotame Unite Cimorelli,Lotame,,,,422,,,Old
+485381,Lotame Unite Eva Simons,Lotame,,,,422,,,Old
+485383,Lotame Unite Neon Trees:Fame Is Dead,Lotame,,,,422,,,Old
+485385,Lotame Unite Fergie,Lotame,,,,422,,,Old
+485386,Lotame Unite Greyson Chance,Lotame,,,,422,,,Old
+485387,Lotame Unite James Morrison,Lotame,,,,422,,,Old
+485388,Lotame Unite Justin Bieber,Lotame,,,,422,,,Old
+485391,Lotame Unite Lady Gaga,Lotame,,,,422,,,Old
+485392,Lotame Unite Lifehouse,Lotame,,,,422,,,Old
+485393,Lotame Unite Ellie Goulding,Lotame,,,,422,,,Old
+485394,Lotame Unite LMFAO,Lotame,,,,422,,,Old
+485395,Lotame Unite Nicole Scherzinger,Lotame,,,,422,,,Old
+485397,Lotame Unite Owl City,Lotame,,,,422,,,Old
+485398,Lotame Unite Pia Toscano,Lotame,,,,422,,,Old
+485399,Lotame Unite Snow Patrol,Lotame,,,,422,,,Old
+503498,Behavioral:Web Design & Digital Art,Lotame,,0.75,,422,,,Old
+515042,Lotame Unite Eminem:Site Only,Lotame,,,,422,,,Old
+515043,Lotame Unite Eminem:Bravado,Lotame,,,,422,,,Old
+516508,Lotame Unite Skylar Grey Affinities,Lotame,,,,422,,,Old
+516518,Lotame Unite Lifehouse Affinities,Lotame,,,,422,,,Old
+590586,Lotame Unite Imagine Dragons plus Affinities,Lotame,,,,422,,,Old
+590624,BTSSegment,Lotame,,,,422,,,Old
+590689,Lotame Unite Imagine Dragons plus Affinities 2,Lotame,,,,422,,,Old
+590820,Branded Data:IXI:Small Business:Industry:Non-Profit,DNU,,,,1262,,bk_198557,Old
+603407,CCI Test Real Estate Audience,Lotame,,,,422,,,Old
+606651,Lotame Unite One Republic,Lotame,,,,422,,,Old
+606663,Lotame Unite One Republic Affinities,Lotame,,,,422,,,Old
+624095, Branded Data > DataLogix > DLX CPG > Beverage Buyers > Coffee > K-Cup                                                                                                                                                                                     ,BlueKai,1,,,1262,,bk_202208,
+638340,Interest:Hobbies:Auto Shows,BlueKai,1.13,,,1262,,bk_199172,Branded Data - Experian
+638341,Branded Data:Experian:Presence of Children:Yes:Age: 0-3,BlueKai,1,,,1263,,bk_198924,Branded Data - Experian
+638342,Branded Data:Experian:Presence of Children:Yes:Age: 4-6,BlueKai,1,,,1264,,bk_198925,Branded Data - Experian
+638343,Branded Data:Experian:Presence of Children:Yes:Age: 7-9,BlueKai,1,,,1265,,bk_198926,Branded Data - Experian
+638344,Branded Data:Experian:Presence of Children:Yes:Age: 10-12,BlueKai,1,,,1266,,bk_198927,Branded Data - Experian
+638345,Branded Data:Experian:Presence of Children:Yes:Age: 13-15,BlueKai,1,,,1267,,bk_198928,Branded Data - Experian
+638346,Branded Data:Experian:Presence of Children:Yes:Age: 16-18,BlueKai,1,,,1268,,bk_198929,Branded Data - Experian
+638347,Branded Data:TruSignal:Interest Model: Autos,BlueKai,1,,,1269,,bk_198945,Branded Data - TruSignal
+638348,Branded Data:TruSignal:Interest Model: Financial Services,BlueKai,0.75,,,1270,,bk_198946,Branded Data - TruSignal
+638349,Branded Data:TruSignal:Interest Model: Lifestyle,BlueKai,0.75,,,1271,,bk_198947,Branded Data - TruSignal
+638350,Branded Data:TruSignal:Interest Model: Online Games & Quizzes,BlueKai,0.75,,,1272,,bk_198948,Branded Data - TruSignal
+638351,Branded Data:TruSignal:Interest Model: Autos:Midsized Cars,BlueKai,1,,,1273,,bk_198949,Branded Data - TruSignal
+638352,Branded Data:TruSignal:Interest Model: Autos:Hatchbacks,BlueKai,1,,,1274,,bk_198950,Branded Data - TruSignal
+638353,Branded Data:TruSignal:Interest Model: Autos:Luxury Cars,BlueKai,1,,,1275,,bk_198951,Branded Data - TruSignal
+638354,Branded Data:TruSignal:Interest Model: Financial Services:Credit Cards,BlueKai,0.75,,,1276,,bk_198952,Branded Data - TruSignal
+638355,Branded Data:TruSignal:Interest Model: Financial Services:Reward Credit Cards,BlueKai,0.75,,,1277,,bk_198953,Branded Data - TruSignal
+638356,Branded Data:TruSignal:Interest Model: Lifestyle:Health Living,BlueKai,0.75,,,1278,,bk_198954,Branded Data - TruSignal
+638357,In-Market:Autos:Makes & Models:Mazda:CX-5,BlueKai,1.71,,,1279,,bk_200876,
+638358,Interest:Autos:Makes & Models:Mazda:CX-5,BlueKai,1.13,,,1280,,bk_200877,
+638359,Branded Data:DataLogix:DLX Seasonal:Spring Seasonal:Spring Apparel Buyers,BlueKai,1,,,1281,,bk_202196,Branded Data - DataLogix
+638360,Branded Data:DataLogix:DLX Lifestyles:DIYers,BlueKai,1,,,1282,,bk_202197,Branded Data - DataLogix
+638361,Branded Data:DataLogix:DLX CPG:Bakery Buyers,BlueKai,1,,,1283,,bk_202199,Branded Data - DataLogix
+638362,Branded Data:DataLogix:DLX CPG:Condiments & Dressings Buyers,BlueKai,1,,,1284,,bk_202200,Branded Data - DataLogix
+638363,Branded Data:DataLogix:DLX CPG:Condiments & Dressings Buyers:Condiments,BlueKai,1,,,1285,,bk_202201,Branded Data - DataLogix
+638364,Branded Data:DataLogix:DLX CPG:Condiments & Dressings Buyers:Salad Dressings,BlueKai,1,,,1286,,bk_202202,Branded Data - DataLogix
+638365,Branded Data:DataLogix:DLX CPG:Sweets & Snack Buyers:Peanut Butter & Jelly,BlueKai,1,,,1287,,bk_202203,Branded Data - DataLogix
+638366,Branded Data:DataLogix:DLX CPG:Sweets & Snack Buyers:Crackers,BlueKai,1,,,1288,,bk_202204,Branded Data - DataLogix
+638367,Branded Data:DataLogix:DLX CPG:Meat & Seafood Buyers,BlueKai,1,,,1289,,bk_202205,Branded Data - DataLogix
+638368,Branded Data:DataLogix:DLX CPG:Meat & Seafood Buyers:Meat,BlueKai,1,,,1290,,bk_202206,Branded Data - DataLogix
+638369,Branded Data:DataLogix:DLX CPG:Meat & Seafood Buyers:Seafood,BlueKai,1,,,1291,,bk_202207,Branded Data - DataLogix
+638370,Branded Data:Alliant:Composite Segments:Me Time,BlueKai,1.25,,,1292,,bk_209214,Branded Data - Alliant
+638371,Branded Data:Alliant:Composite Segments:News Hounds,BlueKai,1.25,,,1293,,bk_209213,Branded Data - Alliant
+638372,Branded Data:Alliant:Entertainment & Pastimes:Puzzles & Games,BlueKai,1.25,,,1294,,bk_209215,Branded Data - Alliant
+638373,Branded Data:Alliant:Health & Wellbeing:Weight Loss,BlueKai,1.25,,,1295,,bk_209218,Branded Data - Alliant
+638374,Branded Data:DataLogix:DLX Auto powered by Polk:Near Market,BlueKai,1.25,,,1296,,bk_203319,Branded Data - DataLogix
+638375,Branded Data:DataLogix:DLX Auto powered by Polk:Near Market:Near Market: Alternative Fuel,BlueKai,1.25,,,1297,,bk_203321,Branded Data - DataLogix
+638376,Branded Data:DataLogix:DLX Auto powered by Polk:Near Market:Near Market: Crossover,BlueKai,1.25,,,1298,,bk_203322,Branded Data - DataLogix
+638377,Branded Data:DataLogix:DLX Auto powered by Polk:Near Market:Near Market: Entry/Economy/Compact,BlueKai,1.25,,,1299,,bk_203326,Branded Data - DataLogix
+638378,Branded Data:DataLogix:DLX Auto powered by Polk:Near Market:Near Market: Full-size Sedan,BlueKai,1.25,,,1300,,bk_203323,Branded Data - DataLogix
+638379,Branded Data:DataLogix:DLX Auto powered by Polk:Near Market:Near Market: Full-size SUV,BlueKai,1.25,,,1301,,bk_203327,Branded Data - DataLogix
+638380,Branded Data:DataLogix:DLX Auto powered by Polk:Near Market:Near Market: Luxury Sedan,BlueKai,1.25,,,1302,,bk_203328,Branded Data - DataLogix
+638381,Branded Data:DataLogix:DLX Auto powered by Polk:Near Market:Near Market: Luxury SUV,BlueKai,1.25,,,1303,,bk_203324,Branded Data - DataLogix
+638382,Branded Data:DataLogix:DLX Auto powered by Polk:Near Market:Near Market: Midsize Car,BlueKai,1.25,,,1304,,bk_203329,Branded Data - DataLogix
+638383,Branded Data:DataLogix:DLX Auto powered by Polk:Near Market:Near Market: Minivan,BlueKai,1.25,,,1305,,bk_203330,Branded Data - DataLogix
+638384,Branded Data:DataLogix:DLX Auto powered by Polk:Near Market:Near Market: New,BlueKai,1.25,,,1306,,bk_203331,Branded Data - DataLogix
+638385,Branded Data:DataLogix:DLX Auto powered by Polk:Near Market:Near Market: Pickup Truck,BlueKai,1.25,,,1307,,bk_203325,Branded Data - DataLogix
+638386,Branded Data:DataLogix:DLX Auto powered by Polk:Near Market:Near Market: Small/Mid-size SUV,BlueKai,1.25,,,1308,,bk_203332,Branded Data - DataLogix
+638387,Branded Data:DataLogix:DLX Auto powered by Polk:Near Market:Near Market: Sports Car/Convertible,BlueKai,1.25,,,1309,,bk_203320,Branded Data - DataLogix
+638388,Branded Data:IXI:Student Loans,BlueKai,1.25,,,1310,,bk_203796,Branded Data - IXI
+638389,Branded Data:IXI:Student Loans:Likely Student Loan Consolidation Target,BlueKai,1.25,,,1311,,bk_203800,Branded Data - IXI
+638390,Branded Data:IXI:Student Loans:Likely Student Loan Target,BlueKai,1.25,,,1312,,bk_203799,Branded Data - IXI
+638391,Branded Data:MasterCard:Top Tier Spender:Indexes,BlueKai,1.75,,,1313,,bk_209206,Branded Data - Mastercard
+638392,Branded Data:Webbula,BlueKai,1,,,1314,,bk_203556,Branded Data - Webbula
+638393,Branded Data:Webbula:Currently Seeking,BlueKai,1,,,1315,,bk_203906,Branded Data - Webbula
+638394,Branded Data:Webbula:Currently Seeking:Collectibles,BlueKai,1,,,1316,,bk_203911,Branded Data - Webbula
+638395,Branded Data:Webbula:Currently Seeking:Collectibles:Antiques,BlueKai,1,,,1317,,bk_203915,Branded Data - Webbula
+638396,Branded Data:Webbula:Currently Seeking:Collectibles:Art,BlueKai,1,,,1318,,bk_203917,Branded Data - Webbula
+638397,Branded Data:Webbula:Currently Seeking:Collectibles:Coins,BlueKai,1,,,1319,,bk_203918,Branded Data - Webbula
+638398,Branded Data:Webbula:Currently Seeking:Collectibles:Sports Memorabelia ,BlueKai,1,,,1320,,bk_203919,Branded Data - Webbula
+638399,Branded Data:Webbula:Currently Seeking:Collectibles:Stamps,BlueKai,1,,,1321,,bk_203920,Branded Data - Webbula
+638400,Branded Data:Webbula:Currently Seeking:Financial Products,BlueKai,1,,,1322,,bk_203936,Branded Data - Webbula
+638401,Branded Data:Webbula:Currently Seeking:Financial Products:Credit Cards,BlueKai,1,,,1323,,bk_203942,Branded Data - Webbula
+638402,Branded Data:Webbula:Currently Seeking:Financial Products:Insurance,BlueKai,1,,,1324,,bk_203947,Branded Data - Webbula
+638403,Branded Data:Webbula:Currently Seeking:Financial Products:Insurance:Auto,BlueKai,1,,,1325,,bk_203948,Branded Data - Webbula
+638404,Branded Data:Webbula:Currently Seeking:Financial Products:Insurance:Health,BlueKai,1,,,1326,,bk_203949,Branded Data - Webbula
+638405,Branded Data:Webbula:Currently Seeking:Financial Products:Insurance:Life,BlueKai,1,,,1327,,bk_203950,Branded Data - Webbula
+638406,Branded Data:Webbula:Currently Seeking:Financial Products:Investments,BlueKai,1,,,1328,,bk_203956,Branded Data - Webbula
+638407,Branded Data:Webbula:Currently Seeking:Financial Products:Loans,BlueKai,1,,,1329,,bk_203957,Branded Data - Webbula
+638408,Branded Data:Webbula:Currently Seeking:Financial Products:Loans:Adjustable Rate Mortgage (ARM),BlueKai,1,,,1330,,bk_203958,Branded Data - Webbula
+638409,Branded Data:Webbula:Currently Seeking:Financial Products:Loans:Fixed Rate Mortgage,BlueKai,1,,,1331,,bk_203960,Branded Data - Webbula
+638410,Branded Data:Webbula:Currently Seeking:Housing,BlueKai,1,,,1332,,bk_203964,Branded Data - Webbula
+638411,Branded Data:Webbula:Currently Seeking:Retail,BlueKai,1,,,1333,,bk_203965,Branded Data - Webbula
+638412,Branded Data:Webbula:Currently Seeking:Retail:Apparel,BlueKai,1,,,1334,,bk_203973,Branded Data - Webbula
+638413,Branded Data:Webbula:Currently Seeking:Retail:Apparel:Accessories,BlueKai,1,,,1335,,bk_203984,Branded Data - Webbula
+638414,Branded Data:Webbula:Currently Seeking:Retail:Apparel:Big & Tall,BlueKai,1,,,1336,,bk_203985,Branded Data - Webbula
+638415,Branded Data:Webbula:Currently Seeking:Retail:Apparel:Petite,BlueKai,1,,,1337,,bk_204397,Branded Data - Webbula
+638416,Branded Data:Webbula:Currently Seeking:Retail:Apparel:Young Men's,BlueKai,1,,,1338,,bk_203986,Branded Data - Webbula
+638417,Branded Data:Webbula:Currently Seeking:Retail:Apparel:Young Women's,BlueKai,1,,,1339,,bk_203987,Branded Data - Webbula
+638418,Branded Data:Webbula:Currently Seeking:Retail:Automotive Parts & Accessories,BlueKai,1,,,1340,,bk_203975,Branded Data - Webbula
+638419,Branded Data:Webbula:Currently Seeking:Retail:Babies & Kids,BlueKai,1,,,1341,,bk_203976,Branded Data - Webbula
+638420,Branded Data:Webbula:Demographic,BlueKai,0.57,,,1342,,bk_203557,Branded Data - Webbula
+638421,Branded Data:Webbula:Demographic:Age,BlueKai,0.57,,,1343,,bk_203558,Branded Data - Webbula
+638422,Branded Data:Webbula:Demographic:Age:18-24,BlueKai,0.57,,,1344,,bk_203559,Branded Data - Webbula
+638423,Branded Data:Webbula:Demographic:Age:25-34,BlueKai,0.57,,,1345,,bk_203560,Branded Data - Webbula
+638424,Branded Data:Webbula:Demographic:Age:35-44,BlueKai,0.57,,,1346,,bk_203561,Branded Data - Webbula
+638425,Branded Data:Webbula:Demographic:Age:45-54,BlueKai,0.57,,,1347,,bk_203562,Branded Data - Webbula
+638426,Branded Data:Webbula:Demographic:Age:55-64,BlueKai,0.57,,,1348,,bk_203563,Branded Data - Webbula
+638427,Branded Data:Webbula:Demographic:Age:65-74,BlueKai,0.57,,,1349,,bk_203564,Branded Data - Webbula
+638428,Branded Data:Webbula:Demographic:Age:75+,BlueKai,0.57,,,1350,,bk_203565,Branded Data - Webbula
+638429,Branded Data:Webbula:Demographic:Education,BlueKai,0.57,,,1351,,bk_203566,Branded Data - Webbula
+638430,Branded Data:Webbula:Demographic:Education:Graduate Degree,BlueKai,0.57,,,1352,,bk_203568,Branded Data - Webbula
+638431,Branded Data:Webbula:Demographic:Education:High School Diploma,BlueKai,0.57,,,1353,,bk_203569,Branded Data - Webbula
+638432,Branded Data:Webbula:Demographic:Education:Undergraduate Degree,BlueKai,0.57,,,1354,,bk_203570,Branded Data - Webbula
+638433,Branded Data:Webbula:Demographic:Education:Vocational/Technical School,BlueKai,0.57,,,1355,,bk_203571,Branded Data - Webbula
+638434,Branded Data:Webbula:Demographic:Employment,BlueKai,0.57,,,1356,,bk_203572,Branded Data - Webbula
+638435,Branded Data:Webbula:Demographic:Employment:Business Owner,BlueKai,0.57,,,1357,,bk_203573,Branded Data - Webbula
+638436,Branded Data:Webbula:Demographic:Employment:Business Owner:Accountant,BlueKai,0.57,,,1358,,bk_203574,Branded Data - Webbula
+638437,Branded Data:Webbula:Demographic:Employment:Business Owner:Builder,BlueKai,0.57,,,1359,,bk_203575,Branded Data - Webbula
+638438,Branded Data:Webbula:Demographic:Employment:Business Owner:Contractor,BlueKai,0.57,,,1360,,bk_203576,Branded Data - Webbula
+638439,Branded Data:Webbula:Demographic:Employment:Business Owner:Dealer/Retailer/Storekeeper,BlueKai,0.57,,,1361,,bk_203577,Branded Data - Webbula
+638440,Branded Data:Webbula:Demographic:Employment:Business Owner:Distributor/Wholesaler,BlueKai,0.57,,,1362,,bk_203578,Branded Data - Webbula
+638441,Branded Data:Webbula:Demographic:Employment:Business Owner:Funeral Director,BlueKai,0.57,,,1363,,bk_203579,Branded Data - Webbula
+638442,Branded Data:Webbula:Demographic:Employment:Business Owner:Maker/Manufacturer,BlueKai,0.57,,,1364,,bk_203580,Branded Data - Webbula
+638443,Branded Data:Webbula:Demographic:Employment:Business Owner:Owner,BlueKai,0.57,,,1365,,bk_203581,Branded Data - Webbula
+638444,Branded Data:Webbula:Demographic:Employment:Business Owner:Partner,BlueKai,0.57,,,1366,,bk_203582,Branded Data - Webbula
+638445,Branded Data:Webbula:Demographic:Employment:Occupation,BlueKai,0.57,,,1367,,bk_203587,Branded Data - Webbula
+638446,Branded Data:Webbula:Demographic:Employment:Occupation:White Collar/Non-Manual:Administrative/Managerial,BlueKai,0.57,,,1368,,bk_203588,Branded Data - Webbula
+638447,Branded Data:Webbula:Demographic:Employment:Occupation:White Collar/Non-Manual,BlueKai,0.57,,,1369,,bk_203589,Branded Data - Webbula
+638448,Branded Data:Webbula:Demographic:Employment:Occupation:Blue Collar/Manual Worker,BlueKai,0.57,,,1370,,bk_203590,Branded Data - Webbula
+638449,Branded Data:Webbula:Demographic:Employment:Occupation:Education/Instruction,BlueKai,0.57,,,1371,,bk_203591,Branded Data - Webbula
+638450,Branded Data:Webbula:Demographic:Employment:Occupation:Blue Collar/Manual Worker:Farmer,BlueKai,0.57,,,1372,,bk_203592,Branded Data - Webbula
+638451,Branded Data:Webbula:Demographic:Employment:Occupation:White Collar/Non-Manual:Financial Professionals,BlueKai,0.57,,,1373,,bk_203593,Branded Data - Webbula
+638452,Branded Data:Webbula:Demographic:Employment:Occupation:Homemaker,BlueKai,0.57,,,1374,,bk_203594,Branded Data - Webbula
+638453,Branded Data:Webbula:Demographic:Employment:Occupation:Professional/Technical:Lawyer,BlueKai,0.57,,,1375,,bk_203595,Branded Data - Webbula
+638454,Branded Data:Webbula:Demographic:Employment:Occupation:Health Care,BlueKai,0.57,,,1376,,bk_203596,Branded Data - Webbula
+638455,Branded Data:Webbula:Demographic:Employment:Occupation:Military,BlueKai,0.57,,,1377,,bk_203597,Branded Data - Webbula
+638456,Branded Data:Webbula:Demographic:Employment:Occupation:Professional/Technical,BlueKai,0.57,,,1378,,bk_203598,Branded Data - Webbula
+638457,Branded Data:Webbula:Demographic:Employment:Occupation:Religious,BlueKai,0.57,,,1379,,bk_203599,Branded Data - Webbula
+638458,Branded Data:Webbula:Demographic:Employment:Occupation:White Collar/Non-Manual:Sales,BlueKai,0.57,,,1380,,bk_203600,Branded Data - Webbula
+638459,Branded Data:Webbula:Demographic:Employment:Occupation:Professional/Technical:Web Professional,BlueKai,0.57,,,1381,,bk_203601,Branded Data - Webbula
+638460,Branded Data:Webbula:Demographic:Employment:Status,BlueKai,0.57,,,1382,,bk_203602,Branded Data - Webbula
+638461,Branded Data:Webbula:Demographic:Employment:Status:Entreprenuer,BlueKai,0.57,,,1383,,bk_203603,Branded Data - Webbula
+638462,Branded Data:Webbula:Demographic:Employment:Status:Job Seekers,BlueKai,0.57,,,1384,,bk_203604,Branded Data - Webbula
+638463,Branded Data:Webbula:Demographic:Employment:Status:Retired,BlueKai,0.57,,,1385,,bk_203605,Branded Data - Webbula
+638464,Branded Data:Webbula:Demographic:Employment:Status:Self-Employed,BlueKai,0.57,,,1386,,bk_203606,Branded Data - Webbula
+638465,Branded Data:Webbula:Demographic:Employment:Status:Student,BlueKai,0.57,,,1387,,bk_203607,Branded Data - Webbula
+638466,Branded Data:Webbula:Demographic:Family Composition,BlueKai,0.57,,,1388,,bk_203608,Branded Data - Webbula
+638467,Branded Data:Webbula:Demographic:Family Composition:Children in Household,BlueKai,0.57,,,1389,,bk_203609,Branded Data - Webbula
+638468,Branded Data:Webbula:Demographic:Family Composition:Children in Household:No,BlueKai,0.57,,,1390,,bk_203610,Branded Data - Webbula
+638469,Branded Data:Webbula:Demographic:Family Composition:Children in Household:Yes,BlueKai,0.57,,,1391,,bk_203611,Branded Data - Webbula
+638470,Branded Data:Webbula:Demographic:Family Composition:Children in Household:Yes:Age of Children,BlueKai,0.57,,,1392,,bk_203789,Branded Data - Webbula
+638471,Branded Data:Webbula:Demographic:Family Composition:Children in Household:Yes:Age of Children:0-2 years,BlueKai,0.57,,,1393,,bk_203790,Branded Data - Webbula
+638472,Branded Data:Webbula:Demographic:Family Composition:Children in Household:Yes:Age of Children:11-15 years,BlueKai,0.57,,,1394,,bk_203793,Branded Data - Webbula
+638473,Branded Data:Webbula:Demographic:Family Composition:Children in Household:Yes:Age of Children:16-17  years,BlueKai,0.57,,,1395,,bk_203794,Branded Data - Webbula
+638474,Branded Data:Webbula:Demographic:Family Composition:Children in Household:Yes:Age of Children:3-5 years,BlueKai,0.57,,,1396,,bk_203791,Branded Data - Webbula
+638475,Branded Data:Webbula:Demographic:Family Composition:Children in Household:Yes:Age of Children:6-10 years,BlueKai,0.57,,,1397,,bk_203792,Branded Data - Webbula
+638476,Branded Data:Webbula:Demographic:Family Composition:Children in Household:Yes:Gender of Children,BlueKai,0.57,,,1398,,bk_203795,Branded Data - Webbula
+638477,Branded Data:Webbula:Demographic:Family Composition:Children in Household:Yes:Gender of Children:Female,BlueKai,0.57,,,1399,,bk_203797,Branded Data - Webbula
+638478,Branded Data:Webbula:Demographic:Family Composition:Children in Household:Yes:Gender of Children:Male,BlueKai,0.57,,,1400,,bk_203798,Branded Data - Webbula
+638479,Branded Data:Webbula:Demographic:Family Composition:Children in Household:Yes:Number of Children,BlueKai,0.57,,,1401,,bk_203612,Branded Data - Webbula
+638480,Branded Data:Webbula:Demographic:Family Composition:Children in Household:Yes:Number of Children:1,BlueKai,0.57,,,1402,,bk_203614,Branded Data - Webbula
+638481,Branded Data:Webbula:Demographic:Family Composition:Children in Household:Yes:Number of Children:2,BlueKai,0.57,,,1403,,bk_203615,Branded Data - Webbula
+638482,Branded Data:Webbula:Demographic:Family Composition:Children in Household:Yes:Number of Children:3,BlueKai,0.57,,,1404,,bk_203616,Branded Data - Webbula
+638483,Branded Data:Webbula:Demographic:Family Composition:Children in Household:Yes:Number of Children:4,BlueKai,0.57,,,1405,,bk_203617,Branded Data - Webbula
+638484,Branded Data:Webbula:Demographic:Family Composition:Children in Household:Yes:Number of Children:5,BlueKai,0.57,,,1406,,bk_203618,Branded Data - Webbula
+638485,Branded Data:Webbula:Demographic:Family Composition:Children in Household:Yes:Number of Children:6,BlueKai,0.57,,,1407,,bk_203619,Branded Data - Webbula
+638486,Branded Data:Webbula:Demographic:Family Composition:Children in Household:Yes:Number of Children:7,BlueKai,0.57,,,1408,,bk_203620,Branded Data - Webbula
+638487,Branded Data:Webbula:Demographic:Family Composition:Children in Household:Yes:Number of Children:8,BlueKai,0.57,,,1409,,bk_203801,Branded Data - Webbula
+638488,Branded Data:Webbula:Demographic:Family Composition:Generations in Household,BlueKai,0.57,,,1410,,bk_203621,Branded Data - Webbula
+638489,Branded Data:Webbula:Demographic:Family Composition:Generations in Household:1,BlueKai,0.57,,,1411,,bk_203622,Branded Data - Webbula
+638490,Branded Data:Webbula:Demographic:Family Composition:Generations in Household:2,BlueKai,0.57,,,1412,,bk_203623,Branded Data - Webbula
+638491,Branded Data:Webbula:Demographic:Family Composition:Generations in Household:3,BlueKai,0.57,,,1413,,bk_203624,Branded Data - Webbula
+638492,Branded Data:Webbula:Demographic:Family Composition:Household Size,BlueKai,0.57,,,1414,,bk_203632,Branded Data - Webbula
+638493,Branded Data:Webbula:Demographic:Family Composition:Household Size:1,BlueKai,0.57,,,1415,,bk_203633,Branded Data - Webbula
+638494,Branded Data:Webbula:Demographic:Family Composition:Household Size:2,BlueKai,0.57,,,1416,,bk_203634,Branded Data - Webbula
+638495,Branded Data:Webbula:Demographic:Family Composition:Household Size:3,BlueKai,0.57,,,1417,,bk_203635,Branded Data - Webbula
+638496,Branded Data:Webbula:Demographic:Family Composition:Household Size:4,BlueKai,0.57,,,1418,,bk_203636,Branded Data - Webbula
+638497,Branded Data:Webbula:Demographic:Family Composition:Household Size:5,BlueKai,0.57,,,1419,,bk_203637,Branded Data - Webbula
+638498,Branded Data:Webbula:Demographic:Family Composition:Household Size:6,BlueKai,0.57,,,1420,,bk_203638,Branded Data - Webbula
+638499,Branded Data:Webbula:Demographic:Family Composition:Household Size:7,BlueKai,0.57,,,1421,,bk_203639,Branded Data - Webbula
+638500,Branded Data:Webbula:Demographic:Family Composition:Household Size:8,BlueKai,0.57,,,1422,,bk_203640,Branded Data - Webbula
+638501,Branded Data:Webbula:Demographic:Family Composition:Household Size:9,BlueKai,0.57,,,1423,,bk_203641,Branded Data - Webbula
+638502,Branded Data:Webbula:Demographic:Family Composition:Roles,BlueKai,0.57,,,1424,,bk_203625,Branded Data - Webbula
+638503,Branded Data:Webbula:Demographic:Family Composition:Roles:Grandchildren,BlueKai,0.57,,,1425,,bk_203626,Branded Data - Webbula
+638504,Branded Data:Webbula:Demographic:Family Composition:Roles:Parent,BlueKai,0.57,,,1426,,bk_203627,Branded Data - Webbula
+638505,Branded Data:Webbula:Demographic:Family Composition:Roles:Senior,BlueKai,0.57,,,1427,,bk_203628,Branded Data - Webbula
+638506,Branded Data:Webbula:Demographic:Family Composition:Roles:Single Parent,BlueKai,0.57,,,1428,,bk_203629,Branded Data - Webbula
+638507,Branded Data:Webbula:Demographic:Family Composition:Roles:Working Woman,BlueKai,0.57,,,1429,,bk_203630,Branded Data - Webbula
+638508,Branded Data:Webbula:Demographic:Financial Attributes,BlueKai,0.57,,,1430,,bk_203642,Branded Data - Webbula
+638509,Branded Data:Webbula:Demographic:Financial Attributes:Credit Card Holders,BlueKai,0.57,,,1431,,bk_203643,Branded Data - Webbula
+638510,Branded Data:Webbula:Demographic:Financial Attributes:Credit Card Holders:American Express,BlueKai,0.57,,,1432,,bk_203647,Branded Data - Webbula
+638511,Branded Data:Webbula:Demographic:Financial Attributes:Credit Card Holders:American Express Gold Premium,BlueKai,0.57,,,1433,,bk_203648,Branded Data - Webbula
+638512,Branded Data:Webbula:Demographic:Financial Attributes:Credit Card Holders:Bank Card,BlueKai,0.57,,,1434,,bk_203649,Branded Data - Webbula
+638513,Branded Data:Webbula:Demographic:Financial Attributes:Credit Card Holders:DinersClub,BlueKai,0.57,,,1435,,bk_203650,Branded Data - Webbula
+638514,Branded Data:Webbula:Demographic:Financial Attributes:Credit Card Holders:Discover,BlueKai,0.57,,,1436,,bk_203651,Branded Data - Webbula
+638515,Branded Data:Webbula:Demographic:Financial Attributes:Credit Card Holders:MasterCard,BlueKai,0.57,,,1437,,bk_203655,Branded Data - Webbula
+638516,Branded Data:Webbula:Demographic:Financial Attributes:Credit Card Holders:Premium,BlueKai,0.57,,,1438,,bk_203656,Branded Data - Webbula
+638517,Branded Data:Webbula:Demographic:Financial Attributes:Credit Card Holders:Premium Discover,BlueKai,0.57,,,1439,,bk_204408,Branded Data - Webbula
+638518,Branded Data:Webbula:Demographic:Financial Attributes:Credit Card Holders:Premium MasterCard,BlueKai,0.57,,,1440,,bk_204409,Branded Data - Webbula
+638519,Branded Data:Webbula:Demographic:Financial Attributes:Credit Card Holders:Premium Retail/Gas Card Holders,BlueKai,0.57,,,1441,,bk_203657,Branded Data - Webbula
+638520,Branded Data:Webbula:Demographic:Financial Attributes:Credit Card Holders:Premium Visa,BlueKai,0.57,,,1442,,bk_204410,Branded Data - Webbula
+638521,Branded Data:Webbula:Demographic:Financial Attributes:Credit Card Holders:Retail/Gas Card,BlueKai,0.57,,,1443,,bk_203658,Branded Data - Webbula
+638522,Branded Data:Webbula:Demographic:Financial Attributes:Credit Card Holders:Travel/Entertainment Card,BlueKai,0.57,,,1444,,bk_203659,Branded Data - Webbula
+638523,Branded Data:Webbula:Demographic:Financial Attributes:Credit Card Holders:Visa,BlueKai,0.57,,,1445,,bk_203660,Branded Data - Webbula
+638524,Branded Data:Webbula:Demographic:Financial Attributes:Dependants,BlueKai,0.57,,,1446,,bk_203644,Branded Data - Webbula
+638525,Branded Data:Webbula:Demographic:Financial Attributes:Dependants:1,BlueKai,0.57,,,1447,,bk_203661,Branded Data - Webbula
+638526,Branded Data:Webbula:Demographic:Financial Attributes:Dependants:2,BlueKai,0.57,,,1448,,bk_203662,Branded Data - Webbula
+638527,Branded Data:Webbula:Demographic:Financial Attributes:Dependants:3,BlueKai,0.57,,,1449,,bk_203663,Branded Data - Webbula
+638528,Branded Data:Webbula:Demographic:Financial Attributes:Dependants:4,BlueKai,0.57,,,1450,,bk_203664,Branded Data - Webbula
+638529,Branded Data:Webbula:Demographic:Financial Attributes:Dependants:5,BlueKai,0.57,,,1451,,bk_203665,Branded Data - Webbula
+638530,Branded Data:Webbula:Demographic:Financial Attributes:Dependants:6,BlueKai,0.57,,,1452,,bk_203666,Branded Data - Webbula
+638531,Branded Data:Webbula:Demographic:Financial Attributes:Dependants:7,BlueKai,0.57,,,1453,,bk_203667,Branded Data - Webbula
+638532,Branded Data:Webbula:Demographic:Financial Attributes:Income,BlueKai,0.57,,,1454,,bk_203645,Branded Data - Webbula
+638533,Branded Data:Webbula:Demographic:Financial Attributes:Income:$1.000.000 - $1.999.999,BlueKai,0.57,,,1455,,bk_203679,Branded Data - Webbula
+638534,Branded Data:Webbula:Demographic:Financial Attributes:Income:$100.000 - $149.999,BlueKai,0.57,,,1456,,bk_203673,Branded Data - Webbula
+638535,Branded Data:Webbula:Demographic:Financial Attributes:Income:$150.000 - $199.999,BlueKai,0.57,,,1457,,bk_203674,Branded Data - Webbula
+638536,Branded Data:Webbula:Demographic:Financial Attributes:Income:$2.000.000+,BlueKai,0.57,,,1458,,bk_203680,Branded Data - Webbula
+638537,Branded Data:Webbula:Demographic:Financial Attributes:Income:$20.000 - $39.999,BlueKai,0.57,,,1459,,bk_203669,Branded Data - Webbula
+638538,Branded Data:Webbula:Demographic:Financial Attributes:Income:$200.000 - $299.999,BlueKai,0.57,,,1460,,bk_203675,Branded Data - Webbula
+638539,Branded Data:Webbula:Demographic:Financial Attributes:Income:$300.000 - $399.999,BlueKai,0.57,,,1461,,bk_203676,Branded Data - Webbula
+638540,Branded Data:Webbula:Demographic:Financial Attributes:Income:$40.000 - $59.999,BlueKai,0.57,,,1462,,bk_203670,Branded Data - Webbula
+638541,Branded Data:Webbula:Demographic:Financial Attributes:Income:$400.000 - $499.999,BlueKai,0.57,,,1463,,bk_203677,Branded Data - Webbula
+638542,Branded Data:Webbula:Demographic:Financial Attributes:Income:$500.000 - $999.999,BlueKai,0.57,,,1464,,bk_203678,Branded Data - Webbula
+638543,Branded Data:Webbula:Demographic:Financial Attributes:Income:$60.000 - $74.999,BlueKai,0.57,,,1465,,bk_203671,Branded Data - Webbula
+638544,Branded Data:Webbula:Demographic:Financial Attributes:Income:$75.000 - $99.999,BlueKai,0.57,,,1466,,bk_203672,Branded Data - Webbula
+638545,Branded Data:Webbula:Demographic:Financial Attributes:Income:Under $20.000,BlueKai,0.57,,,1467,,bk_203668,Branded Data - Webbula
+638546,Branded Data:Webbula:Demographic:Financial Attributes:Loans,BlueKai,0.57,,,1468,,bk_203819,Branded Data - Webbula
+638547,Branded Data:Webbula:Demographic:Financial Attributes:Loans:Debt Consolidation,BlueKai,0.57,,,1469,,bk_203820,Branded Data - Webbula
+638548,Branded Data:Webbula:Demographic:Financial Attributes:Loans:Mortgage Holder,BlueKai,0.57,,,1470,,bk_203821,Branded Data - Webbula
+638549,Branded Data:Webbula:Demographic:Financial Attributes:Loans:Refinance,BlueKai,0.57,,,1471,,bk_203822,Branded Data - Webbula
+638551,Branded Data:Webbula:Demographic:Financial Attributes:Loans:Mortgage Holder:Mortgage Term,BlueKai,0.57,,,1472,,bk_203823,Branded Data - Webbula
+638552,Branded Data:Webbula:Demographic:Financial Attributes:Loans:Mortgage Holder:Mortgage Term:Adjustable,BlueKai,0.57,,,1473,,bk_203824,Branded Data - Webbula
+638553,Branded Data:Webbula:Demographic:Financial Attributes:Loans:Mortgage Holder:Mortgage Term:Adjustable:10/1 ARM,BlueKai,0.57,,,1474,,bk_203826,Branded Data - Webbula
+638554,Branded Data:Webbula:Demographic:Financial Attributes:Loans:Mortgage Holder:Mortgage Term:Adjustable:3/1 ARM,BlueKai,0.57,,,1475,,bk_203827,Branded Data - Webbula
+638555,Branded Data:Webbula:Demographic:Financial Attributes:Loans:Mortgage Holder:Mortgage Term:Adjustable:5/1 ARM,BlueKai,0.57,,,1476,,bk_203828,Branded Data - Webbula
+638556,Branded Data:Webbula:Demographic:Financial Attributes:Loans:Mortgage Holder:Mortgage Term:Adjustable:7/1 ARM,BlueKai,0.57,,,1477,,bk_203829,Branded Data - Webbula
+638557,Branded Data:Webbula:Demographic:Financial Attributes:Loans:Mortgage Holder:Mortgage Term:Fixed,BlueKai,0.57,,,1478,,bk_203825,Branded Data - Webbula
+638558,Branded Data:Webbula:Demographic:Financial Attributes:Loans:Mortgage Holder:Mortgage Term:Fixed:10 Year Fixed,BlueKai,0.57,,,1479,,bk_203830,Branded Data - Webbula
+638559,Branded Data:Webbula:Demographic:Financial Attributes:Loans:Mortgage Holder:Mortgage Term:Fixed:15 Year Fixed,BlueKai,0.57,,,1480,,bk_203831,Branded Data - Webbula
+638560,Branded Data:Webbula:Demographic:Financial Attributes:Loans:Mortgage Holder:Mortgage Term:Fixed:30 Year Fixed,BlueKai,0.57,,,1481,,bk_203832,Branded Data - Webbula
+638561,Branded Data:Webbula:Demographic:Financial Attributes:Net Worth,BlueKai,0.57,,,1482,,bk_203646,Branded Data - Webbula
+638562,Branded Data:Webbula:Demographic:Financial Attributes:Net Worth:$1 - $4.999,BlueKai,0.57,,,1483,,bk_203682,Branded Data - Webbula
+638563,Branded Data:Webbula:Demographic:Financial Attributes:Net Worth:$10.000 - $24.999,BlueKai,0.57,,,1484,,bk_203684,Branded Data - Webbula
+638564,Branded Data:Webbula:Demographic:Financial Attributes:Net Worth:$100.000 - $249.999,BlueKai,0.57,,,1485,,bk_203687,Branded Data - Webbula
+638565,Branded Data:Webbula:Demographic:Financial Attributes:Net Worth:$25.000 - $49.999,BlueKai,0.57,,,1486,,bk_203685,Branded Data - Webbula
+638566,Branded Data:Webbula:Demographic:Financial Attributes:Net Worth:$250.000 - $499.999,BlueKai,0.57,,,1487,,bk_203688,Branded Data - Webbula
+638567,Branded Data:Webbula:Demographic:Financial Attributes:Net Worth:$5.000 - $9.999,BlueKai,0.57,,,1488,,bk_203683,Branded Data - Webbula
+638568,Branded Data:Webbula:Demographic:Financial Attributes:Net Worth:$50.000 - $99.999,BlueKai,0.57,,,1489,,bk_203686,Branded Data - Webbula
+638569,Branded Data:Webbula:Demographic:Financial Attributes:Net Worth:$500.000+,BlueKai,0.57,,,1490,,bk_203689,Branded Data - Webbula
+638570,Branded Data:Webbula:Demographic:Financial Attributes:Net Worth:Less than $1,BlueKai,0.57,,,1491,,bk_203681,Branded Data - Webbula
+638571,Branded Data:Webbula:Demographic:Financial Attributes:Residential Properties Owned,BlueKai,0.75,,,1492,,bk_209942,Branded Data - Webbula
+638572,Branded Data:Webbula:Demographic:Financial Attributes:Residential Properties Owned:1,BlueKai,0.75,,,1493,,bk_209943,Branded Data - Webbula
+638573,Branded Data:Webbula:Demographic:Financial Attributes:Residential Properties Owned:10+,BlueKai,0.75,,,1494,,bk_209951,Branded Data - Webbula
+638574,Branded Data:Webbula:Demographic:Financial Attributes:Residential Properties Owned:2,BlueKai,0.75,,,1495,,bk_209952,Branded Data - Webbula
+638575,Branded Data:Webbula:Demographic:Financial Attributes:Residential Properties Owned:3,BlueKai,0.75,,,1496,,bk_209944,Branded Data - Webbula
+638576,Branded Data:Webbula:Demographic:Financial Attributes:Residential Properties Owned:4,BlueKai,0.75,,,1497,,bk_209945,Branded Data - Webbula
+638577,Branded Data:Webbula:Demographic:Financial Attributes:Residential Properties Owned:5,BlueKai,0.75,,,1498,,bk_209946,Branded Data - Webbula
+638578,Branded Data:Webbula:Demographic:Financial Attributes:Residential Properties Owned:6,BlueKai,0.75,,,1499,,bk_209947,Branded Data - Webbula
+638579,Branded Data:Webbula:Demographic:Financial Attributes:Residential Properties Owned:7,BlueKai,0.75,,,1500,,bk_209948,Branded Data - Webbula
+638580,Branded Data:Webbula:Demographic:Financial Attributes:Residential Properties Owned:8,BlueKai,0.75,,,1501,,bk_209949,Branded Data - Webbula
+638581,Branded Data:Webbula:Demographic:Financial Attributes:Residential Properties Owned:9,BlueKai,0.75,,,1502,,bk_209950,Branded Data - Webbula
+638582,Branded Data:Webbula:Demographic:Gender,BlueKai,0.57,,,1503,,bk_203690,Branded Data - Webbula
+638583,Branded Data:Webbula:Demographic:Gender:Female,BlueKai,0.57,,,1504,,bk_203691,Branded Data - Webbula
+638584,Branded Data:Webbula:Demographic:Gender:Male,BlueKai,0.57,,,1505,,bk_203692,Branded Data - Webbula
+638585,Branded Data:Webbula:Demographic:Housing Attributes,BlueKai,0.57,,,1506,,bk_203693,Branded Data - Webbula
+638586,Branded Data:Webbula:Demographic:Housing Attributes:Home Market Value,BlueKai,0.57,,,1507,,bk_203694,Branded Data - Webbula
+638587,Branded Data:Webbula:Demographic:Housing Attributes:Home Market Value:$1.000 - $24.999,BlueKai,0.57,,,1508,,bk_203695,Branded Data - Webbula
+638588,Branded Data:Webbula:Demographic:Housing Attributes:Home Market Value:$1.000.000+,BlueKai,0.57,,,1509,,bk_203713,Branded Data - Webbula
+638589,Branded Data:Webbula:Demographic:Housing Attributes:Home Market Value:$100.000 - $124.999,BlueKai,0.57,,,1510,,bk_203699,Branded Data - Webbula
+638590,Branded Data:Webbula:Demographic:Housing Attributes:Home Market Value:$125.000 - $149.999,BlueKai,0.57,,,1511,,bk_203700,Branded Data - Webbula
+638591,Branded Data:Webbula:Demographic:Housing Attributes:Home Market Value:$150.000 - $174.999,BlueKai,0.57,,,1512,,bk_203701,Branded Data - Webbula
+638592,Branded Data:Webbula:Demographic:Housing Attributes:Home Market Value:$175.000 - $199.999,BlueKai,0.57,,,1513,,bk_203702,Branded Data - Webbula
+638593,Branded Data:Webbula:Demographic:Housing Attributes:Home Market Value:$200.000 - $224.999,BlueKai,0.57,,,1514,,bk_203703,Branded Data - Webbula
+638594,Branded Data:Webbula:Demographic:Housing Attributes:Home Market Value:$225.000 - $249.999,BlueKai,0.57,,,1515,,bk_203704,Branded Data - Webbula
+638595,Branded Data:Webbula:Demographic:Housing Attributes:Home Market Value:$25.000 - $49.999,BlueKai,0.57,,,1516,,bk_203696,Branded Data - Webbula
+638596,Branded Data:Webbula:Demographic:Housing Attributes:Home Market Value:$250.000 - $274.999,BlueKai,0.57,,,1517,,bk_203705,Branded Data - Webbula
+638597,Branded Data:Webbula:Demographic:Housing Attributes:Home Market Value:$275.000 - $299.999,BlueKai,0.57,,,1518,,bk_203706,Branded Data - Webbula
+638598,Branded Data:Webbula:Demographic:Housing Attributes:Home Market Value:$300.000 - $349.999,BlueKai,0.57,,,1519,,bk_203707,Branded Data - Webbula
+638599,Branded Data:Webbula:Demographic:Housing Attributes:Home Market Value:$350.000 - $399.999,BlueKai,0.57,,,1520,,bk_203708,Branded Data - Webbula
+638600,Branded Data:Webbula:Demographic:Housing Attributes:Home Market Value:$400.000 - $449.999,BlueKai,0.57,,,1521,,bk_203709,Branded Data - Webbula
+638601,Branded Data:Webbula:Demographic:Housing Attributes:Home Market Value:$450.000 - $499.999,BlueKai,0.57,,,1522,,bk_203710,Branded Data - Webbula
+638602,Branded Data:Webbula:Demographic:Housing Attributes:Home Market Value:$50.000 - $74.999,BlueKai,0.57,,,1523,,bk_203697,Branded Data - Webbula
+638603,Branded Data:Webbula:Demographic:Housing Attributes:Home Market Value:$500.000 - $749.999,BlueKai,0.57,,,1524,,bk_203711,Branded Data - Webbula
+638604,Branded Data:Webbula:Demographic:Housing Attributes:Home Market Value:$75.000 - $99.999,BlueKai,0.57,,,1525,,bk_203698,Branded Data - Webbula
+638605,Branded Data:Webbula:Demographic:Housing Attributes:Home Market Value:$750.000 - $999.999,BlueKai,0.57,,,1526,,bk_203712,Branded Data - Webbula
+638606,Branded Data:Webbula:Demographic:Housing Attributes:Home Ownership,BlueKai,0.57,,,1527,,bk_203720,Branded Data - Webbula
+638607,Branded Data:Webbula:Demographic:Housing Attributes:Home Ownership:Owner,BlueKai,0.57,,,1528,,bk_203721,Branded Data - Webbula
+638608,Branded Data:Webbula:Demographic:Housing Attributes:Home Ownership:Owner:Highly Likely,BlueKai,0.57,,,1529,,bk_203722,Branded Data - Webbula
+638609,Branded Data:Webbula:Demographic:Housing Attributes:Home Ownership:Owner:Probable,BlueKai,0.57,,,1530,,bk_203723,Branded Data - Webbula
+638610,Branded Data:Webbula:Demographic:Housing Attributes:Home Ownership:Owner:Verified,BlueKai,0.57,,,1531,,bk_203724,Branded Data - Webbula
+638611,Branded Data:Webbula:Demographic:Housing Attributes:Home Ownership:Renter,BlueKai,0.57,,,1532,,bk_203725,Branded Data - Webbula
+638612,Branded Data:Webbula:Demographic:Housing Attributes:Length of Residence,BlueKai,0.57,,,1533,,bk_203726,Branded Data - Webbula
+638613,Branded Data:Webbula:Demographic:Housing Attributes:Length of Residence:1 year,BlueKai,0.57,,,1534,,bk_203727,Branded Data - Webbula
+638614,Branded Data:Webbula:Demographic:Housing Attributes:Length of Residence:10 years,BlueKai,0.57,,,1535,,bk_203736,Branded Data - Webbula
+638615,Branded Data:Webbula:Demographic:Housing Attributes:Length of Residence:11 years,BlueKai,0.57,,,1536,,bk_203737,Branded Data - Webbula
+638616,Branded Data:Webbula:Demographic:Housing Attributes:Length of Residence:12 years,BlueKai,0.57,,,1537,,bk_203738,Branded Data - Webbula
+638617,Branded Data:Webbula:Demographic:Housing Attributes:Length of Residence:13 years,BlueKai,0.57,,,1538,,bk_203739,Branded Data - Webbula
+638618,Branded Data:Webbula:Demographic:Housing Attributes:Length of Residence:14 years,BlueKai,0.57,,,1539,,bk_203740,Branded Data - Webbula
+638619,Branded Data:Webbula:Demographic:Housing Attributes:Length of Residence:15 years,BlueKai,0.57,,,1540,,bk_203741,Branded Data - Webbula
+638620,Branded Data:Webbula:Demographic:Housing Attributes:Length of Residence:2 years,BlueKai,0.57,,,1541,,bk_203728,Branded Data - Webbula
+638621,Branded Data:Webbula:Demographic:Housing Attributes:Length of Residence:3 years,BlueKai,0.57,,,1542,,bk_203729,Branded Data - Webbula
+638622,Branded Data:Webbula:Demographic:Housing Attributes:Length of Residence:4 years,BlueKai,0.57,,,1543,,bk_203730,Branded Data - Webbula
+638623,Branded Data:Webbula:Demographic:Housing Attributes:Length of Residence:5 years,BlueKai,0.57,,,1544,,bk_203731,Branded Data - Webbula
+638624,Branded Data:Webbula:Demographic:Housing Attributes:Length of Residence:6 years,BlueKai,0.57,,,1545,,bk_203732,Branded Data - Webbula
+638625,Branded Data:Webbula:Demographic:Housing Attributes:Length of Residence:7 years,BlueKai,0.57,,,1546,,bk_203733,Branded Data - Webbula
+638626,Branded Data:Webbula:Demographic:Housing Attributes:Length of Residence:8 years,BlueKai,0.57,,,1547,,bk_203734,Branded Data - Webbula
+638627,Branded Data:Webbula:Demographic:Housing Attributes:Length of Residence:9 years,BlueKai,0.57,,,1548,,bk_203735,Branded Data - Webbula
+638628,Branded Data:Webbula:Demographic:Housing Attributes:Type,BlueKai,0.57,,,1549,,bk_203742,Branded Data - Webbula
+638629,Branded Data:Webbula:Demographic:Housing Attributes:Type:Primary Residence,BlueKai,0.57,,,1550,,bk_203743,Branded Data - Webbula
+638630,Branded Data:Webbula:Demographic:Housing Attributes:Type:Single Family Home,BlueKai,0.57,,,1551,,bk_203744,Branded Data - Webbula
+638631,Branded Data:Webbula:Demographic:Language,BlueKai,0.57,,,1552,,bk_203745,Branded Data - Webbula
+638632,Branded Data:Webbula:Demographic:Language:Arabic,BlueKai,0.57,,,1553,,bk_203746,Branded Data - Webbula
+638633,Branded Data:Webbula:Demographic:Language:Chinese,BlueKai,0.57,,,1554,,bk_203747,Branded Data - Webbula
+638634,Branded Data:Webbula:Demographic:Language:French,BlueKai,0.57,,,1555,,bk_203749,Branded Data - Webbula
+638635,Branded Data:Webbula:Demographic:Language:German,BlueKai,0.57,,,1556,,bk_203750,Branded Data - Webbula
+638636,Branded Data:Webbula:Demographic:Language:Greek,BlueKai,0.57,,,1557,,bk_203751,Branded Data - Webbula
+638637,Branded Data:Webbula:Demographic:Language:Hebrew,BlueKai,0.57,,,1558,,bk_203752,Branded Data - Webbula
+638638,Branded Data:Webbula:Demographic:Language:Hindi,BlueKai,0.57,,,1559,,bk_203753,Branded Data - Webbula
+638639,Branded Data:Webbula:Demographic:Language:Italian,BlueKai,0.57,,,1560,,bk_203754,Branded Data - Webbula
+638640,Branded Data:Webbula:Demographic:Language:Japanese,BlueKai,0.57,,,1561,,bk_203755,Branded Data - Webbula
+638641,Branded Data:Webbula:Demographic:Language:Korean,BlueKai,0.57,,,1562,,bk_203756,Branded Data - Webbula
+638642,Branded Data:Webbula:Demographic:Language:Pashtu,BlueKai,0.57,,,1563,,bk_203757,Branded Data - Webbula
+638643,Branded Data:Webbula:Demographic:Language:Polish,BlueKai,0.57,,,1564,,bk_203758,Branded Data - Webbula
+638644,Branded Data:Webbula:Demographic:Language:Portuguese,BlueKai,0.57,,,1565,,bk_203759,Branded Data - Webbula
+638645,Branded Data:Webbula:Demographic:Language:Russian,BlueKai,0.57,,,1566,,bk_203760,Branded Data - Webbula
+638646,Branded Data:Webbula:Demographic:Language:Spanish,BlueKai,0.57,,,1567,,bk_203761,Branded Data - Webbula
+638647,Branded Data:Webbula:Demographic:Marital Status,BlueKai,0.57,,,1568,,bk_203762,Branded Data - Webbula
+638648,Branded Data:Webbula:Demographic:Marital Status:Married,BlueKai,0.57,,,1569,,bk_203763,Branded Data - Webbula
+638649,Branded Data:Webbula:Demographic:Marital Status:Separated,BlueKai,0.57,,,1570,,bk_203764,Branded Data - Webbula
+638650,Branded Data:Webbula:Demographic:Marital Status:Single,BlueKai,0.57,,,1571,,bk_203765,Branded Data - Webbula
+638651,Branded Data:Webbula:Demographic:Military Status,BlueKai,0.57,,,1572,,bk_203766,Branded Data - Webbula
+638652,Branded Data:Webbula:Demographic:Military Status:Current Military,BlueKai,0.57,,,1573,,bk_203767,Branded Data - Webbula
+638653,Branded Data:Webbula:Demographic:Military Status:Veteran in Household,BlueKai,0.57,,,1574,,bk_203768,Branded Data - Webbula
+638654,Branded Data:Webbula:Demographic:Registered Voters,BlueKai,0.57,,,1575,,bk_203769,Branded Data - Webbula
+638655,Branded Data:Webbula:Historical Buyer Of,BlueKai,1,,,1576,,bk_204003,Branded Data - Webbula
+638656,Branded Data:Webbula:Historical Buyer Of:Air Travel,BlueKai,1,,,1577,,bk_204004,Branded Data - Webbula
+638657,Branded Data:Webbula:Historical Buyer Of:Autos,BlueKai,1,,,1578,,bk_204005,Branded Data - Webbula
+638658,Branded Data:Webbula:Historical Buyer Of:Autos:Auto Leaser,BlueKai,1,,,1579,,bk_204006,Branded Data - Webbula
+638659,Branded Data:Webbula:Historical Buyer Of:Autos:Auto Owner,BlueKai,1,,,1580,,bk_204008,Branded Data - Webbula
+638660,Branded Data:Webbula:Historical Buyer Of:Autos:Classes,BlueKai,1,,,1581,,bk_204151,Branded Data - Webbula
+638661,Branded Data:Webbula:Historical Buyer Of:Autos:Classes:Convertibles,BlueKai,1,,,1582,,bk_204154,Branded Data - Webbula
+638662,Branded Data:Webbula:Historical Buyer Of:Autos:Classes:Coupes,BlueKai,1,,,1583,,bk_204166,Branded Data - Webbula
+638663,Branded Data:Webbula:Historical Buyer Of:Autos:Classes:Crossovers,BlueKai,1,,,1584,,bk_204167,Branded Data - Webbula
+638664,Branded Data:Webbula:Historical Buyer Of:Autos:Classes:Economy Cars,BlueKai,1,,,1585,,bk_204168,Branded Data - Webbula
+638665,Branded Data:Webbula:Historical Buyer Of:Autos:Classes:Full-Size Cars,BlueKai,1,,,1586,,bk_204169,Branded Data - Webbula
+638666,Branded Data:Webbula:Historical Buyer Of:Autos:Classes:Hardtop,BlueKai,1,,,1587,,bk_204170,Branded Data - Webbula
+638667,Branded Data:Webbula:Historical Buyer Of:Autos:Classes:Hatchback,BlueKai,1,,,1588,,bk_204171,Branded Data - Webbula
+638668,Branded Data:Webbula:Historical Buyer Of:Autos:Classes:Liftback,BlueKai,1,,,1589,,bk_204172,Branded Data - Webbula
+638669,Branded Data:Webbula:Historical Buyer Of:Autos:Classes:Low Speed Vehicle,BlueKai,1,,,1590,,bk_204173,Branded Data - Webbula
+638670,Branded Data:Webbula:Historical Buyer Of:Autos:Classes:Luxury,BlueKai,1,,,1591,,bk_204174,Branded Data - Webbula
+638671,Branded Data:Webbula:Historical Buyer Of:Autos:Classes:Midsize,BlueKai,1,,,1592,,bk_204175,Branded Data - Webbula
+638672,Branded Data:Webbula:Historical Buyer Of:Autos:Classes:Minivan,BlueKai,1,,,1593,,bk_204155,Branded Data - Webbula
+638673,Branded Data:Webbula:Historical Buyer Of:Autos:Classes:Roadster,BlueKai,1,,,1594,,bk_204157,Branded Data - Webbula
+638674,Branded Data:Webbula:Historical Buyer Of:Autos:Classes:Sedan,BlueKai,1,,,1595,,bk_204159,Branded Data - Webbula
+638675,Branded Data:Webbula:Historical Buyer Of:Autos:Classes:Sports Car,BlueKai,1,,,1596,,bk_204161,Branded Data - Webbula
+638676,Branded Data:Webbula:Historical Buyer Of:Autos:Classes:SUV,BlueKai,1,,,1597,,bk_204162,Branded Data - Webbula
+638677,Branded Data:Webbula:Historical Buyer Of:Autos:Classes:Truck,BlueKai,1,,,1598,,bk_204163,Branded Data - Webbula
+638678,Branded Data:Webbula:Historical Buyer Of:Autos:Classes:Van,BlueKai,1,,,1599,,bk_204164,Branded Data - Webbula
+638679,Branded Data:Webbula:Historical Buyer Of:Autos:Classes:Wagon,BlueKai,1,,,1600,,bk_204165,Branded Data - Webbula
+638680,Branded Data:Webbula:Historical Buyer Of:Autos:Fuel Type,BlueKai,1,,,1601,,bk_204176,Branded Data - Webbula
+638681,Branded Data:Webbula:Historical Buyer Of:Autos:Fuel Type:Diesel,BlueKai,1,,,1602,,bk_204177,Branded Data - Webbula
+638682,Branded Data:Webbula:Historical Buyer Of:Autos:Fuel Type:Electric,BlueKai,1,,,1603,,bk_204178,Branded Data - Webbula
+638683,Branded Data:Webbula:Historical Buyer Of:Autos:Fuel Type:Flexible Fuel,BlueKai,1,,,1604,,bk_204179,Branded Data - Webbula
+638684,Branded Data:Webbula:Historical Buyer Of:Autos:Fuel Type:Gasoline,BlueKai,1,,,1605,,bk_204180,Branded Data - Webbula
+638685,Branded Data:Webbula:Historical Buyer Of:Autos:Fuel Type:Hybrid,BlueKai,1,,,1606,,bk_204181,Branded Data - Webbula
+638686,Branded Data:Webbula:Historical Buyer Of:Autos:Fuel Type:Natural Gas/Propane,BlueKai,1,,,1607,,bk_204182,Branded Data - Webbula
+638687,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer,BlueKai,1,,,1608,,bk_204183,Branded Data - Webbula
+638688,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Acura,BlueKai,1,,,1609,,bk_209906,Branded Data - Webbula
+638689,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:American Motors,BlueKai,1,,,1610,,bk_209907,Branded Data - Webbula
+638690,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Antique,BlueKai,1,,,1611,,bk_204184,Branded Data - Webbula
+638691,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Audi,BlueKai,1,,,1612,,bk_209908,Branded Data - Webbula
+638692,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:BMW,BlueKai,1,,,1613,,bk_209909,Branded Data - Webbula
+638693,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Buick,BlueKai,1,,,1614,,bk_209910,Branded Data - Webbula
+638694,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Cadillac,BlueKai,1,,,1615,,bk_209911,Branded Data - Webbula
+638695,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Chevrolet,BlueKai,1,,,1616,,bk_209912,Branded Data - Webbula
+638696,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Chrysler,BlueKai,1,,,1617,,bk_204186,Branded Data - Webbula
+638697,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Daewoo,BlueKai,1,,,1618,,bk_209913,Branded Data - Webbula
+638698,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Dodge,BlueKai,1,,,1619,,bk_209914,Branded Data - Webbula
+638699,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Ford,BlueKai,1,,,1620,,bk_204187,Branded Data - Webbula
+638700,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:General Motors,BlueKai,1,,,1621,,bk_204188,Branded Data - Webbula
+638701,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:High End Imports,BlueKai,1,,,1622,,bk_204189,Branded Data - Webbula
+638702,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Honda,BlueKai,1,,,1623,,bk_209915,Branded Data - Webbula
+638703,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Hyundai,BlueKai,1,,,1624,,bk_209916,Branded Data - Webbula
+638704,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Infiniti,BlueKai,1,,,1625,,bk_209917,Branded Data - Webbula
+638705,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Isuzu,BlueKai,1,,,1626,,bk_209918,Branded Data - Webbula
+638706,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Jaguar,BlueKai,1,,,1627,,bk_209919,Branded Data - Webbula
+638707,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Jeep,BlueKai,1,,,1628,,bk_209920,Branded Data - Webbula
+638708,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Kia,BlueKai,1,,,1629,,bk_209921,Branded Data - Webbula
+638709,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Landrover,BlueKai,1,,,1630,,bk_209922,Branded Data - Webbula
+638710,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Lexus,BlueKai,1,,,1631,,bk_209923,Branded Data - Webbula
+638711,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Lincoln,BlueKai,1,,,1632,,bk_209924,Branded Data - Webbula
+638712,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Low End Imports,BlueKai,1,,,1633,,bk_204190,Branded Data - Webbula
+638713,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Mazda,BlueKai,1,,,1634,,bk_209925,Branded Data - Webbula
+638714,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Mercedes Benz,BlueKai,1,,,1635,,bk_209926,Branded Data - Webbula
+638715,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Mercury,BlueKai,1,,,1636,,bk_209927,Branded Data - Webbula
+638716,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Mini,BlueKai,1,,,1637,,bk_209928,Branded Data - Webbula
+638717,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Mitsubishi,BlueKai,1,,,1638,,bk_209929,Branded Data - Webbula
+638718,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Nissan,BlueKai,1,,,1639,,bk_209930,Branded Data - Webbula
+638719,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Oldsmobile,BlueKai,1,,,1640,,bk_209931,Branded Data - Webbula
+638720,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Plymouth,BlueKai,1,,,1641,,bk_209932,Branded Data - Webbula
+638721,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Pontiac,BlueKai,1,,,1642,,bk_209933,Branded Data - Webbula
+638722,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Saab,BlueKai,1,,,1643,,bk_209934,Branded Data - Webbula
+638723,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Saturn,BlueKai,1,,,1644,,bk_209935,Branded Data - Webbula
+638724,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Scion,BlueKai,1,,,1645,,bk_209936,Branded Data - Webbula
+638725,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Subaru,BlueKai,1,,,1646,,bk_209937,Branded Data - Webbula
+638726,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Suzuki,BlueKai,1,,,1647,,bk_209938,Branded Data - Webbula
+638727,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Toyota,BlueKai,1,,,1648,,bk_209939,Branded Data - Webbula
+638728,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Volkswagen,BlueKai,1,,,1649,,bk_209940,Branded Data - Webbula
+638729,Branded Data:Webbula:Historical Buyer Of:Autos:Manufacturer:Volvo,BlueKai,1,,,1650,,bk_209941,Branded Data - Webbula
+638730,Branded Data:Webbula:Historical Buyer Of:Charitable Donations,BlueKai,1,,,1651,,bk_204016,Branded Data - Webbula
+638731,Branded Data:Webbula:Historical Buyer Of:Charitable Donations:Animal Welfare,BlueKai,1,,,1652,,bk_204022,Branded Data - Webbula
+638732,Branded Data:Webbula:Historical Buyer Of:Charitable Donations:Arts & Culture,BlueKai,1,,,1653,,bk_204023,Branded Data - Webbula
+638733,Branded Data:Webbula:Historical Buyer Of:Charitable Donations:Children's Interests,BlueKai,1,,,1654,,bk_204024,Branded Data - Webbula
+638734,Branded Data:Webbula:Historical Buyer Of:Charitable Donations:Community,BlueKai,1,,,1655,,bk_204025,Branded Data - Webbula
+638735,Branded Data:Webbula:Historical Buyer Of:Charitable Donations:Environment,BlueKai,1,,,1656,,bk_204026,Branded Data - Webbula
+638736,Branded Data:Webbula:Historical Buyer Of:Charitable Donations:Health,BlueKai,1,,,1657,,bk_204028,Branded Data - Webbula
+638737,Branded Data:Webbula:Historical Buyer Of:Charitable Donations:Humanitarian,BlueKai,1,,,1658,,bk_204030,Branded Data - Webbula
+638738,Branded Data:Webbula:Historical Buyer Of:Charitable Donations:Intl Aid,BlueKai,1,,,1659,,bk_204032,Branded Data - Webbula
+638739,Branded Data:Webbula:Historical Buyer Of:Charitable Donations:Political,BlueKai,1,,,1660,,bk_204034,Branded Data - Webbula
+638740,Branded Data:Webbula:Historical Buyer Of:Charitable Donations:Veterans,BlueKai,1,,,1661,,bk_204036,Branded Data - Webbula
+638741,Branded Data:Webbula:Historical Buyer Of:Health & Beauty Products,BlueKai,1,,,1662,,bk_204046,Branded Data - Webbula
+638742,Branded Data:Webbula:Historical Buyer Of:Internet Service Provider  Type,BlueKai,1,,,1663,,bk_204047,Branded Data - Webbula
+638743,Branded Data:Webbula:Historical Buyer Of:Internet Service Provider  Type:Bad,BlueKai,1,,,1664,,bk_204048,Branded Data - Webbula
+638744,Branded Data:Webbula:Historical Buyer Of:Internet Service Provider  Type:Cable,BlueKai,1,,,1665,,bk_204049,Branded Data - Webbula
+638745,Branded Data:Webbula:Historical Buyer Of:Internet Service Provider  Type:Dailup,BlueKai,1,,,1666,,bk_204050,Branded Data - Webbula
+638746,Branded Data:Webbula:Historical Buyer Of:Internet Service Provider  Type:Dedicated,BlueKai,1,,,1667,,bk_204051,Branded Data - Webbula
+638747,Branded Data:Webbula:Historical Buyer Of:Internet Service Provider  Type:DSL,BlueKai,1,,,1668,,bk_204052,Branded Data - Webbula
+638748,Branded Data:Webbula:Historical Buyer Of:Internet Service Provider  Type:Fiber,BlueKai,1,,,1669,,bk_204053,Branded Data - Webbula
+638749,Branded Data:Webbula:Historical Buyer Of:Internet Service Provider  Type:ISDN,BlueKai,1,,,1670,,bk_204054,Branded Data - Webbula
+638750,Branded Data:Webbula:Historical Buyer Of:Internet Service Provider  Type:Satellite,BlueKai,1,,,1671,,bk_204055,Branded Data - Webbula
+638751,Branded Data:Webbula:Historical Buyer Of:Internet Service Provider  Type:Wireless,BlueKai,1,,,1672,,bk_204056,Branded Data - Webbula
+638752,Branded Data:Webbula:Historical Buyer Of:Mail Order Purchases,BlueKai,1,,,1673,,bk_204097,Branded Data - Webbula
+638753,Branded Data:Webbula:Historical Buyer Of:Online Purchases,BlueKai,1,,,1674,,bk_204105,Branded Data - Webbula
+638754,Branded Data:Webbula:Historical Buyer Of:Other Vehicles,BlueKai,1,,,1675,,bk_204438,Branded Data - Webbula
+638755,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Boats,BlueKai,1,,,1676,,bk_204439,Branded Data - Webbula
+638756,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Boats: Fuel Type,BlueKai,1,,,1677,,bk_204250,Branded Data - Webbula
+638757,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Boats: Fuel Type:Diesel,BlueKai,1,,,1678,,bk_204251,Branded Data - Webbula
+638758,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Boats: Fuel Type:Gasoline,BlueKai,1,,,1679,,bk_204252,Branded Data - Webbula
+638759,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Boats: Propulsion,BlueKai,1,,,1680,,bk_204253,Branded Data - Webbula
+638760,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Boats: Propulsion:Inboard,BlueKai,1,,,1681,,bk_204254,Branded Data - Webbula
+638761,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Boats: Propulsion:Inboard/Outboard,BlueKai,1,,,1682,,bk_204255,Branded Data - Webbula
+638762,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Boats: Propulsion:Jet,BlueKai,1,,,1683,,bk_204256,Branded Data - Webbula
+638763,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Boats: Propulsion:Outboard,BlueKai,1,,,1684,,bk_204257,Branded Data - Webbula
+638764,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Boats: Propulsion:Sail,BlueKai,1,,,1685,,bk_204258,Branded Data - Webbula
+638765,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Boats: Propulsion:Steam,BlueKai,1,,,1686,,bk_204259,Branded Data - Webbula
+638766,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Motorcycles,BlueKai,1,,,1687,,bk_209953,Branded Data - Webbula
+638767,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Motorcycles:Manufacturer,BlueKai,1,,,1688,,bk_209954,Branded Data - Webbula
+638768,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Motorcycles:Manufacturer:BMW,BlueKai,1,,,1689,,bk_209955,Branded Data - Webbula
+638769,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Motorcycles:Manufacturer:Buell,BlueKai,1,,,1690,,bk_209964,Branded Data - Webbula
+638770,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Motorcycles:Manufacturer:Ducati,BlueKai,1,,,1691,,bk_209965,Branded Data - Webbula
+638771,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Motorcycles:Manufacturer:Harley Davidson,BlueKai,1,,,1692,,bk_209966,Branded Data - Webbula
+638772,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Motorcycles:Manufacturer:Honda,BlueKai,1,,,1693,,bk_209956,Branded Data - Webbula
+638773,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Motorcycles:Manufacturer:Kawasaki,BlueKai,1,,,1694,,bk_209957,Branded Data - Webbula
+638774,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Motorcycles:Manufacturer:Polaris,BlueKai,1,,,1695,,bk_209958,Branded Data - Webbula
+638775,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Motorcycles:Manufacturer:Suzuki,BlueKai,1,,,1696,,bk_209959,Branded Data - Webbula
+638776,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Motorcycles:Manufacturer:Triumph,BlueKai,1,,,1697,,bk_209960,Branded Data - Webbula
+638777,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Motorcycles:Manufacturer:Vespa,BlueKai,1,,,1698,,bk_209961,Branded Data - Webbula
+638778,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Motorcycles:Manufacturer:Victory,BlueKai,1,,,1699,,bk_209962,Branded Data - Webbula
+638779,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Motorcycles:Manufacturer:Yamaha,BlueKai,1,,,1700,,bk_209963,Branded Data - Webbula
+638780,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Motorcycles:Styles,BlueKai,1,,,1701,,bk_204261,Branded Data - Webbula
+638781,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Motorcycles:Styles:All Terrain Vehicle,BlueKai,1,,,1702,,bk_204262,Branded Data - Webbula
+638782,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Motorcycles:Styles:Crotch Rocket,BlueKai,1,,,1703,,bk_204263,Branded Data - Webbula
+638783,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Motorcycles:Styles:Dirt Bike,BlueKai,1,,,1704,,bk_204264,Branded Data - Webbula
+638784,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Motorcycles:Styles:Go Kart,BlueKai,1,,,1705,,bk_204265,Branded Data - Webbula
+638785,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Motorcycles:Styles:Mini Bike,BlueKai,1,,,1706,,bk_204266,Branded Data - Webbula
+638786,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Motorcycles:Styles:Moped,BlueKai,1,,,1707,,bk_204267,Branded Data - Webbula
+638787,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Motorcycles:Styles:Motor Scooter,BlueKai,1,,,1708,,bk_204268,Branded Data - Webbula
+638788,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Motorcycles:Styles:Motorcycle,BlueKai,1,,,1709,,bk_204269,Branded Data - Webbula
+638789,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Motorcycles:Styles:Motorized Bike,BlueKai,1,,,1710,,bk_204270,Branded Data - Webbula
+638790,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Motorcycles:Styles:Racing Bike,BlueKai,1,,,1711,,bk_204271,Branded Data - Webbula
+638791,Branded Data:Webbula:Historical Buyer Of:Other Vehicles:Motorcycles:Styles:Snowmobile,BlueKai,1,,,1712,,bk_204272,Branded Data - Webbula
+638792,Branded Data:Webbula:Historical Buyer Of:Retail,BlueKai,1,,,1713,,bk_204057,Branded Data - Webbula
+638793,Branded Data:Webbula:Historical Buyer Of:Retail:Apparel,BlueKai,1,,,1714,,bk_204058,Branded Data - Webbula
+638794,Branded Data:Webbula:Historical Buyer Of:Retail:Apparel:Men's,BlueKai,1,,,1715,,bk_204059,Branded Data - Webbula
+638795,Branded Data:Webbula:Historical Buyer Of:Retail:Apparel:Shoes,BlueKai,1,,,1716,,bk_204060,Branded Data - Webbula
+638796,Branded Data:Webbula:Historical Buyer Of:Retail:Apparel:Women's,BlueKai,1,,,1717,,bk_204061,Branded Data - Webbula
+638797,Branded Data:Webbula:Historical Buyer Of:Retail:Computers,BlueKai,1,,,1718,,bk_204071,Branded Data - Webbula
+638798,Branded Data:Webbula:Historical Buyer Of:Retail:Entertainment,BlueKai,1,,,1719,,bk_204076,Branded Data - Webbula
+638799,Branded Data:Webbula:Historical Buyer Of:Retail:Entertainment:DVDs,BlueKai,1,,,1720,,bk_204077,Branded Data - Webbula
+638800,Branded Data:Webbula:Historical Buyer Of:Retail:Entertainment:Music,BlueKai,1,,,1721,,bk_204078,Branded Data - Webbula
+638801,Branded Data:Webbula:Historical Buyer Of:Retail:Gift Cards,BlueKai,1,,,1722,,bk_204087,Branded Data - Webbula
+638802,Branded Data:Webbula:Historical Buyer Of:Retail:Home & Garden,BlueKai,1,,,1723,,bk_204093,Branded Data - Webbula
+638803,Branded Data:Webbula:Historical Buyer Of:Retail:Home & Garden:Appliances,BlueKai,1,,,1724,,bk_204094,Branded Data - Webbula
+638804,Branded Data:Webbula:Historical Buyer Of:Retail:Home & Garden:Home Improvement,BlueKai,1,,,1725,,bk_204095,Branded Data - Webbula
+638805,Branded Data:Webbula:Passionate About,BlueKai,1,,,1726,,bk_204110,Branded Data - Webbula
+638806,Branded Data:Webbula:Passionate About:Arts & Entertainment,BlueKai,1,,,1727,,bk_204111,Branded Data - Webbula
+638807,Branded Data:Webbula:Passionate About:Arts & Entertainment:Celebrities,BlueKai,1,,,1728,,bk_204113,Branded Data - Webbula
+638808,Branded Data:Webbula:Passionate About:Arts & Entertainment:Film & Television,BlueKai,1,,,1729,,bk_204115,Branded Data - Webbula
+638809,Branded Data:Webbula:Passionate About:Arts & Entertainment:Games,BlueKai,1,,,1730,,bk_204116,Branded Data - Webbula
+638810,Branded Data:Webbula:Passionate About:Arts & Entertainment:Music,BlueKai,1,,,1731,,bk_204118,Branded Data - Webbula
+638811,Branded Data:Webbula:Passionate About:Arts & Entertainment:Performing Arts,BlueKai,1,,,1732,,bk_204123,Branded Data - Webbula
+638812,Branded Data:Webbula:Passionate About:Arts & Entertainment:Photography,BlueKai,1,,,1733,,bk_204124,Branded Data - Webbula
+638813,Branded Data:Webbula:Passionate About:Arts & Entertainment:Reading,BlueKai,1,,,1734,,bk_204127,Branded Data - Webbula
+638814,Branded Data:Webbula:Passionate About:Arts & Entertainment:Reading:Astrology,BlueKai,1,,,1735,,bk_204129,Branded Data - Webbula
+638815,Branded Data:Webbula:Passionate About:Arts & Entertainment:Reading:Audio Books,BlueKai,1,,,1736,,bk_204130,Branded Data - Webbula
+638816,Branded Data:Webbula:Passionate About:Arts & Entertainment:Reading:Business,BlueKai,1,,,1737,,bk_204132,Branded Data - Webbula
+638817,Branded Data:Webbula:Passionate About:Arts & Entertainment:Reading:Health,BlueKai,1,,,1738,,bk_204133,Branded Data - Webbula
+638818,Branded Data:Webbula:Passionate About:Arts & Entertainment:Reading:Inspirational,BlueKai,1,,,1739,,bk_204134,Branded Data - Webbula
+638819,Branded Data:Webbula:Passionate About:Arts & Entertainment:Reading:Magazines,BlueKai,1,,,1740,,bk_204135,Branded Data - Webbula
+638820,Branded Data:Webbula:Passionate About:Arts & Entertainment:Reading:Military History,BlueKai,1,,,1741,,bk_204137,Branded Data - Webbula
+638821,Branded Data:Webbula:Passionate About:Arts & Entertainment:Reading:News,BlueKai,1,,,1742,,bk_204138,Branded Data - Webbula
+638822,Branded Data:Webbula:Passionate About:Arts & Entertainment:Reading:Science Fiction,BlueKai,1,,,1743,,bk_204139,Branded Data - Webbula
+638823,Branded Data:Webbula:Passionate About:Arts & Entertainment:Sweepstakes & Contests,BlueKai,1,,,1744,,bk_204144,Branded Data - Webbula
+638824,Branded Data:Webbula:Passionate About:Business & Finance,BlueKai,1,,,1745,,bk_204191,Branded Data - Webbula
+638825,Branded Data:Webbula:Passionate About:Business & Finance:Business Opportunities/Franchises,BlueKai,1,,,1746,,bk_204192,Branded Data - Webbula
+638826,Branded Data:Webbula:Passionate About:Business & Finance:Insurance,BlueKai,1,,,1747,,bk_204193,Branded Data - Webbula
+638827,Branded Data:Webbula:Passionate About:Business & Finance:Investing,BlueKai,1,,,1748,,bk_204194,Branded Data - Webbula
+638828,Branded Data:Webbula:Passionate About:Business & Finance:Investing:Foreign Investments,BlueKai,1,,,1749,,bk_204195,Branded Data - Webbula
+638829,Branded Data:Webbula:Passionate About:Business & Finance:Investing:Stocks,BlueKai,1,,,1750,,bk_204196,Branded Data - Webbula
+638830,Branded Data:Webbula:Passionate About:Business & Finance:Personal Finance,BlueKai,1,,,1751,,bk_204198,Branded Data - Webbula
+638831,Branded Data:Webbula:Passionate About:Business & Finance:Real Estate,BlueKai,1,,,1752,,bk_204199,Branded Data - Webbula
+638832,Branded Data:Webbula:Passionate About:Education,BlueKai,1,,,1753,,bk_204200,Branded Data - Webbula
+638833,Branded Data:Webbula:Passionate About:Education:Career Improvement,BlueKai,1,,,1754,,bk_204201,Branded Data - Webbula
+638834,Branded Data:Webbula:Passionate About:Education:Online,BlueKai,1,,,1755,,bk_204202,Branded Data - Webbula
+638835,Branded Data:Webbula:Passionate About:Electronics,BlueKai,1,,,1756,,bk_204203,Branded Data - Webbula
+638836,Branded Data:Webbula:Passionate About:Electronics:Computers,BlueKai,1,,,1757,,bk_204204,Branded Data - Webbula
+638837,Branded Data:Webbula:Passionate About:Electronics:Home Audio,BlueKai,1,,,1758,,bk_204205,Branded Data - Webbula
+638838,Branded Data:Webbula:Passionate About:Food & Drink,BlueKai,1,,,1759,,bk_204206,Branded Data - Webbula
+638839,Branded Data:Webbula:Passionate About:Food & Drink:Cooking,BlueKai,1,,,1760,,bk_204207,Branded Data - Webbula
+638840,Branded Data:Webbula:Passionate About:Food & Drink:Gourmet,BlueKai,1,,,1761,,bk_204208,Branded Data - Webbula
+638841,Branded Data:Webbula:Passionate About:Food & Drink:Natural Foods,BlueKai,1,,,1762,,bk_204209,Branded Data - Webbula
+638842,Branded Data:Webbula:Passionate About:Food & Drink:Vegetarianism,BlueKai,1,,,1763,,bk_204210,Branded Data - Webbula
+638843,Branded Data:Webbula:Passionate About:Health & Beauty,BlueKai,1,,,1764,,bk_204211,Branded Data - Webbula
+638844,Branded Data:Webbula:Passionate About:Health & Beauty:Beauty Products,BlueKai,1,,,1765,,bk_204212,Branded Data - Webbula
+638845,Branded Data:Webbula:Passionate About:Health & Beauty:Fitness,BlueKai,1,,,1766,,bk_204213,Branded Data - Webbula
+638846,Branded Data:Webbula:Passionate About:Health & Beauty:Fitness:Aerobics,BlueKai,1,,,1767,,bk_204214,Branded Data - Webbula
+638847,Branded Data:Webbula:Passionate About:Health & Beauty:Fitness:Running,BlueKai,1,,,1768,,bk_204215,Branded Data - Webbula
+638848,Branded Data:Webbula:Passionate About:Health & Beauty:Fitness:Walking,BlueKai,1,,,1769,,bk_204216,Branded Data - Webbula
+638849,Branded Data:Webbula:Passionate About:Health & Beauty:Weight Loss,BlueKai,1,,,1770,,bk_204217,Branded Data - Webbula
+638850,Branded Data:Webbula:Passionate About:Hobbies,BlueKai,1,,,1771,,bk_204218,Branded Data - Webbula
+638851,Branded Data:Webbula:Passionate About:Hobbies:Auto Work,BlueKai,1,,,1772,,bk_204219,Branded Data - Webbula
+638852,Branded Data:Webbula:Passionate About:Hobbies:Collecting,BlueKai,1,,,1773,,bk_204220,Branded Data - Webbula
+638853,Branded Data:Webbula:Passionate About:Hobbies:Collecting:Antiques,BlueKai,1,,,1774,,bk_204225,Branded Data - Webbula
+638854,Branded Data:Webbula:Passionate About:Hobbies:Collecting:Military Memorabilia,BlueKai,1,,,1775,,bk_204226,Branded Data - Webbula
+638855,Branded Data:Webbula:Passionate About:Hobbies:Crafts,BlueKai,1,,,1776,,bk_204221,Branded Data - Webbula
+638856,Branded Data:Webbula:Passionate About:Hobbies:Photography,BlueKai,1,,,1777,,bk_204222,Branded Data - Webbula
+638857,Branded Data:Webbula:Passionate About:Hobbies:Sewing,BlueKai,1,,,1778,,bk_204223,Branded Data - Webbula
+638858,Branded Data:Webbula:Passionate About:Hobbies:Woodworking,BlueKai,1,,,1779,,bk_204224,Branded Data - Webbula
+638859,Branded Data:Webbula:Passionate About:Home & Garden,BlueKai,1,,,1780,,bk_204227,Branded Data - Webbula
+638860,Branded Data:Webbula:Passionate About:Home & Garden:Decorating,BlueKai,1,,,1781,,bk_204228,Branded Data - Webbula
+638861,Branded Data:Webbula:Passionate About:Home & Garden:Gardening,BlueKai,1,,,1782,,bk_204229,Branded Data - Webbula
+638862,Branded Data:Webbula:Passionate About:Home & Garden:Home Improvement,BlueKai,1,,,1783,,bk_204230,Branded Data - Webbula
+638863,Branded Data:Webbula:Passionate About:Home & Garden:Plants & Flowers,BlueKai,1,,,1784,,bk_204231,Branded Data - Webbula
+638864,Branded Data:Webbula:Passionate About:Internet & Online Activities,BlueKai,1,,,1785,,bk_204232,Branded Data - Webbula
+638865,Branded Data:Webbula:Passionate About:Internet & Online Activities:Auctions,BlueKai,1,,,1786,,bk_204233,Branded Data - Webbula
+638866,Branded Data:Webbula:Passionate About:Internet & Online Activities:Email,BlueKai,1,,,1787,,bk_204234,Branded Data - Webbula
+638867,Branded Data:Webbula:Passionate About:Internet & Online Activities:ISPs,BlueKai,1,,,1788,,bk_204235,Branded Data - Webbula
+638868,Branded Data:Webbula:Passionate About:Internet & Online Activities:News,BlueKai,1,,,1789,,bk_204236,Branded Data - Webbula
+638869,Branded Data:Webbula:Passionate About:Internet & Online Activities:Online Dating,BlueKai,1,,,1790,,bk_204237,Branded Data - Webbula
+638871,Branded Data:Webbula:Passionate About:Internet & Online Activities:Social Networking,BlueKai,1,,,1791,,bk_204238,Branded Data - Webbula
+638872,Branded Data:Webbula:Passionate About:Internet & Online Activities:Streaming,BlueKai,1,,,1792,,bk_204239,Branded Data - Webbula
+638873,Branded Data:Webbula:Passionate About:Lifestyles,BlueKai,1,,,1793,,bk_204240,Branded Data - Webbula
+638874,Branded Data:Webbula:Passionate About:Lifestyles:Broader Living,BlueKai,1,,,1794,,bk_204241,Branded Data - Webbula
+638875,Branded Data:Webbula:Passionate About:Lifestyles:Common Life,BlueKai,1,,,1795,,bk_204242,Branded Data - Webbula
+638876,Branded Data:Webbula:Passionate About:Lifestyles:Highbrow,BlueKai,1,,,1796,,bk_204243,Branded Data - Webbula
+638877,Branded Data:Webbula:Passionate About:Lifestyles:Professionals,BlueKai,1,,,1797,,bk_204244,Branded Data - Webbula
+638878,Branded Data:Webbula:Passionate About:Lifestyles:Self-Improvement,BlueKai,1,,,1798,,bk_204245,Branded Data - Webbula
+638879,Branded Data:Webbula:Passionate About:Lifestyles:Upscale,BlueKai,1,,,1799,,bk_204246,Branded Data - Webbula
+638880,Branded Data:Webbula:Passionate About:Outdoor Activities,BlueKai,1,,,1800,,bk_204273,Branded Data - Webbula
+638881,Branded Data:Webbula:Passionate About:Outdoor Activities:Camping,BlueKai,1,,,1801,,bk_204274,Branded Data - Webbula
+638882,Branded Data:Webbula:Passionate About:Outdoor Activities:Fishing,BlueKai,1,,,1802,,bk_204275,Branded Data - Webbula
+638883,Branded Data:Webbula:Passionate About:Outdoor Activities:Golf,BlueKai,1,,,1803,,bk_204276,Branded Data - Webbula
+638884,Branded Data:Webbula:Passionate About:Outdoor Activities:Hunting,BlueKai,1,,,1804,,bk_204277,Branded Data - Webbula
+638885,Branded Data:Webbula:Passionate About:Outdoor Activities:Skiing,BlueKai,1,,,1805,,bk_204278,Branded Data - Webbula
+638886,Branded Data:Webbula:Passionate About:Pets,BlueKai,1,,,1806,,bk_204279,Branded Data - Webbula
+638887,Branded Data:Webbula:Passionate About:Pets:Cats,BlueKai,1,,,1807,,bk_204280,Branded Data - Webbula
+638888,Branded Data:Webbula:Passionate About:Pets:Dogs,BlueKai,1,,,1808,,bk_204281,Branded Data - Webbula
+638889,Branded Data:Webbula:Passionate About:Pets:Horses,BlueKai,1,,,1809,,bk_204282,Branded Data - Webbula
+638890,Branded Data:Webbula:Passionate About:Politics,BlueKai,1,,,1810,,bk_204283,Branded Data - Webbula
+638891,Branded Data:Webbula:Passionate About:Science,BlueKai,1,,,1811,,bk_204287,Branded Data - Webbula
+638892,Branded Data:Webbula:Passionate About:Science:Astronomy,BlueKai,1,,,1812,,bk_204288,Branded Data - Webbula
+638893,Branded Data:Webbula:Passionate About:Science:Weather,BlueKai,1,,,1813,,bk_204289,Branded Data - Webbula
+638894,Branded Data:Webbula:Passionate About:Shopping,BlueKai,1,,,1814,,bk_204290,Branded Data - Webbula
+638895,Branded Data:Webbula:Passionate About:Shopping:Coupons,BlueKai,1,,,1815,,bk_204291,Branded Data - Webbula
+638896,Branded Data:Webbula:Passionate About:Shopping:Deals,BlueKai,1,,,1816,,bk_204292,Branded Data - Webbula
+638897,Branded Data:Webbula:Passionate About:Shopping:Fashion,BlueKai,1,,,1817,,bk_204293,Branded Data - Webbula
+638898,Branded Data:Webbula:Passionate About:Sports,BlueKai,1,,,1818,,bk_204294,Branded Data - Webbula
+638899,Branded Data:Webbula:Passionate About:Sports:Baseball,BlueKai,1,,,1819,,bk_204296,Branded Data - Webbula
+638900,Branded Data:Webbula:Passionate About:Sports:Basketball,BlueKai,1,,,1820,,bk_204298,Branded Data - Webbula
+638901,Branded Data:Webbula:Passionate About:Sports:Football,BlueKai,1,,,1821,,bk_204300,Branded Data - Webbula
+638902,Branded Data:Webbula:Passionate About:Sports:Hockey,BlueKai,1,,,1822,,bk_204302,Branded Data - Webbula
+638903,Branded Data:Webbula:Passionate About:Sports:Motor Sports,BlueKai,1,,,1823,,bk_204304,Branded Data - Webbula
+638904,Branded Data:Webbula:Passionate About:Sports:Scuba Diving,BlueKai,1,,,1824,,bk_204306,Branded Data - Webbula
+638905,Branded Data:Webbula:Passionate About:Sports:Soccer,BlueKai,1,,,1825,,bk_204308,Branded Data - Webbula
+638906,Branded Data:Webbula:Passionate About:Sports:Tennis,BlueKai,1,,,1826,,bk_204310,Branded Data - Webbula
+638907,Branded Data:Webbula:Passionate About:Travel,BlueKai,1,,,1827,,bk_204337,Branded Data - Webbula
+638908,Branded Data:Webbula:Passionate About:Travel:Cruises,BlueKai,1,,,1828,,bk_204338,Branded Data - Webbula
+638909,Branded Data:Webbula:Passionate About:Travel:Hotels,BlueKai,1,,,1829,,bk_204339,Branded Data - Webbula
+638910,Branded Data:Webbula:Passionate About:Travel:Intl,BlueKai,1,,,1830,,bk_204340,Branded Data - Webbula
+638911,Branded Data:Webbula:Passionate About:Travel:USA,BlueKai,1,,,1831,,bk_204343,Branded Data - Webbula
+638912,Branded Data:Webbula:Passionate About:Vehicles,BlueKai,1,,,1832,,bk_204247,Branded Data - Webbula
+638913,Branded Data:Webbula:Passionate About:Vehicles:Airplanes,BlueKai,1,,,1833,,bk_204248,Branded Data - Webbula
+638914,Branded Data:Webbula:Passionate About:Vehicles:Boats,BlueKai,1,,,1834,,bk_204249,Branded Data - Webbula
+638915,Branded Data:Webbula:Passionate About:Vehicles:Motorcycles,BlueKai,1,,,1835,,bk_204260,Branded Data - Webbula
+638916,Branded Data:Webbula:Passionate About:Video Games,BlueKai,1,,,1836,,bk_204353,Branded Data - Webbula
+638917,In-Market:Services:Real Estate:Real Estate Services:Moving Services,BlueKai,0.9,,,1837,,bk_208423,
+638918,Branded Data:Datacratic:Model: In-Market Autos (High Quality),BlueKai,0.65,,,1838,,bk_198930,Branded Data - Datacratic
+638919,Branded Data:Datacratic:Model: In-Market Autos (High Quality):Model: In-Market Autos (Top 0.09%),BlueKai,0.65,,,1839,,bk_198931,Branded Data - Datacratic
+638920,Branded Data:Datacratic:Model: In-Market Autos (High Quality):Model: In-Market Autos (Top 0.10% - 0.19%),BlueKai,0.65,,,1840,,bk_198932,Branded Data - Datacratic
+638921,Branded Data:Datacratic:Model: In-Market Autos (High Quality):Model: In-Market Autos (Top 0.20% - 0.49%),BlueKai,0.65,,,1841,,bk_198933,Branded Data - Datacratic
+638922,Branded Data:Datacratic:Model: In-Market Autos (High Quality):Model: In-Market Autos (Top 0.50% - 0.99%),BlueKai,0.65,,,1842,,bk_198934,Branded Data - Datacratic
+638923,Branded Data:Datacratic:Model: In-Market Autos (High Quality):Model: In-Market Autos (Top 1% - 1.99%),BlueKai,0.65,,,1843,,bk_198935,Branded Data - Datacratic
+638924,Branded Data:Datacratic:Model: In-Market Autos (High Quality):Model: In-Market Autos (Top 2% - 4.99%),BlueKai,0.65,,,1844,,bk_198936,Branded Data - Datacratic
+638925,Branded Data:Datacratic:Model: In-Market Autos (High Quality):Model: In-Market Autos (Top 5% - 10%),BlueKai,0.65,,,1845,,bk_198937,Branded Data - Datacratic
+695191,Branded Data:Colligent Affinity Target (BlueKai),BlueKai,0.9,,,1262,,bk_209184,
+695192,Branded Data:Colligent Affinity Target:Brands (BlueKai),BlueKai,0.9,,,1262,,bk_214772,
+695193,Branded Data:Colligent Affinity Target:Brands:Apparel & Accessories (BlueKai),BlueKai,0.9,,,1262,,bk_214773,
+695467,Branded Data:Colligent Affinity Target:Brands:Apparel & Accessories:Breitling (BlueKai),BlueKai,0.9,,,1262,,bk_214774,
+695468,Branded Data:Colligent Affinity Target:Brands:Apparel & Accessories:Fiorelli (BlueKai),BlueKai,0.9,,,1262,,bk_214775,
+695469,Branded Data:Colligent Affinity Target:Brands:Apparel & Accessories:Hugo Boss (BlueKai),BlueKai,0.9,,,1262,,bk_214776,
+695470,Branded Data:Colligent Affinity Target:Brands:Apparel & Accessories:IWC Watches (BlueKai),BlueKai,0.9,,,1262,,bk_214777,
+695471,Branded Data:Colligent Affinity Target:Brands:Apparel & Accessories:Tag Heuer (BlueKai),BlueKai,0.9,,,1262,,bk_214778,
+695472,Branded Data:Colligent Affinity Target:Brands:Automotive (BlueKai),BlueKai,0.9,,,1262,,bk_214779,
+695473,Branded Data:Colligent Affinity Target:Brands:Automotive:Acura (BlueKai),BlueKai,0.9,,,1262,,bk_214780,
+695474,Branded Data:Colligent Affinity Target:Brands:Automotive:Alfa Romeo (BlueKai),BlueKai,0.9,,,1262,,bk_214781,
+695475,Branded Data:Colligent Affinity Target:Brands:Automotive:Aston Martin (BlueKai),BlueKai,0.9,,,1262,,bk_214782,
+695476,Branded Data:Colligent Affinity Target:Brands:Automotive:Audi (BlueKai),BlueKai,0.9,,,1262,,bk_214783,
+695477,Branded Data:Colligent Affinity Target:Brands:Automotive:Bentley Motors (BlueKai),BlueKai,0.9,,,1262,,bk_214784,
+695478,Branded Data:Colligent Affinity Target:Brands:Automotive:BMW Global (BlueKai),BlueKai,0.9,,,1262,,bk_214785,
+695479,Branded Data:Colligent Affinity Target:Brands:Automotive:Buick (BlueKai),BlueKai,0.9,,,1262,,bk_214786,
+695480,Branded Data:Colligent Affinity Target:Brands:Automotive:Chevrolet (BlueKai),BlueKai,0.9,,,1262,,bk_214787,
+695481,Branded Data:Colligent Affinity Target:Brands:Automotive:Citroen (BlueKai),BlueKai,0.9,,,1262,,bk_214788,
+695482,Branded Data:Colligent Affinity Target:Brands:Automotive:Dodge (BlueKai),BlueKai,0.9,,,1262,,bk_214789,
+695483,Branded Data:Colligent Affinity Target:Brands:Automotive:Dodge Challenger (BlueKai),BlueKai,0.9,,,1262,,bk_214790,
+695484,Branded Data:Colligent Affinity Target:Brands:Automotive:Dodge Ram (BlueKai),BlueKai,0.9,,,1262,,bk_214791,
+695485,Branded Data:Colligent Affinity Target:Brands:Automotive:Fiat (BlueKai),BlueKai,0.9,,,1262,,bk_214792,
+695486,Branded Data:Colligent Affinity Target:Brands:Automotive:Ford (BlueKai),BlueKai,0.9,,,1262,,bk_214793,
+695487,Branded Data:Colligent Affinity Target:Brands:Automotive:Ford Edge (BlueKai),BlueKai,0.9,,,1262,,bk_214794,
+695488,Branded Data:Colligent Affinity Target:Brands:Automotive:Ford Explorer (BlueKai),BlueKai,0.9,,,1262,,bk_214795,
+695489,Branded Data:Colligent Affinity Target:Brands:Automotive:Ford Fiesta (BlueKai),BlueKai,0.9,,,1262,,bk_214796,
+695490,Branded Data:Colligent Affinity Target:Brands:Automotive:Ford Focus (BlueKai),BlueKai,0.9,,,1262,,bk_214797,
+695491,Branded Data:Colligent Affinity Target:Brands:Automotive:Ford Fusion (BlueKai),BlueKai,0.9,,,1262,,bk_214798,
+695492,Branded Data:Colligent Affinity Target:Brands:Automotive:Ford Taurus (BlueKai),BlueKai,0.9,,,1262,,bk_214799,
+695493,Branded Data:Colligent Affinity Target:Brands:Automotive:General Motors (BlueKai),BlueKai,0.9,,,1262,,bk_214800,
+695494,Branded Data:Colligent Affinity Target:Brands:Automotive:GMC (BlueKai),BlueKai,0.9,,,1262,,bk_214801,
+695495,Branded Data:Colligent Affinity Target:Brands:Automotive:Honda (BlueKai),BlueKai,0.9,,,1262,,bk_214802,
+695496,Branded Data:Colligent Affinity Target:Brands:Automotive:Honda Accord (BlueKai),BlueKai,0.9,,,1262,,bk_214803,
+695497,Branded Data:Colligent Affinity Target:Brands:Automotive:Honda Civic (BlueKai),BlueKai,0.9,,,1262,,bk_214804,
+695498,Branded Data:Colligent Affinity Target:Brands:Automotive:Honda S2000 (BlueKai),BlueKai,0.9,,,1262,,bk_214805,
+695499,Branded Data:Colligent Affinity Target:Brands:Automotive:Hyundai (BlueKai),BlueKai,0.9,,,1262,,bk_214806,
+695500,Branded Data:Colligent Affinity Target:Brands:Automotive:Jeep (BlueKai),BlueKai,0.9,,,1262,,bk_214807,
+695501,Branded Data:Colligent Affinity Target:Brands:Automotive:Kia (BlueKai),BlueKai,0.9,,,1262,,bk_214808,
+695503,Branded Data:Colligent Affinity Target:Brands:Automotive:Kia Rio (BlueKai),BlueKai,0.9,,,1262,,bk_214809,
+695504,Branded Data:Colligent Affinity Target:Brands:Automotive:Kia Sorento (BlueKai),BlueKai,0.9,,,1262,,bk_214810,
+695505,Branded Data:Colligent Affinity Target:Brands:Automotive:Kia Sportage (BlueKai),BlueKai,0.9,,,1262,,bk_214811,
+695506,Branded Data:Colligent Affinity Target:Brands:Automotive:Land Rover Global (BlueKai),BlueKai,0.9,,,1262,,bk_214812,
+695507,Branded Data:Colligent Affinity Target:Brands:Automotive:Maserati (BlueKai),BlueKai,0.9,,,1262,,bk_214813,
+695508,Branded Data:Colligent Affinity Target:Brands:Automotive:Mercedes-AMG (BlueKai),BlueKai,0.9,,,1262,,bk_214814,
+695509,Branded Data:Colligent Affinity Target:Brands:Automotive:Mitsubishi (BlueKai),BlueKai,0.9,,,1262,,bk_214815,
+695510,Branded Data:Colligent Affinity Target:Brands:Automotive:Nissan (BlueKai),BlueKai,0.9,,,1262,,bk_214816,
+695511,Branded Data:Colligent Affinity Target:Brands:Automotive:Nissan LEAF (BlueKai),BlueKai,0.9,,,1262,,bk_214817,
+695512,Branded Data:Colligent Affinity Target:Brands:Automotive:Pagani (BlueKai),BlueKai,0.9,,,1262,,bk_214818,
+695513,Branded Data:Colligent Affinity Target:Brands:Automotive:Peugeot (BlueKai),BlueKai,0.9,,,1262,,bk_214819,
+695514,Branded Data:Colligent Affinity Target:Brands:Automotive:Porsche (BlueKai),BlueKai,0.9,,,1262,,bk_214820,
+695515,Branded Data:Colligent Affinity Target:Brands:Automotive:Porsche Cayenne (BlueKai),BlueKai,0.9,,,1262,,bk_214821,
+695516,Branded Data:Colligent Affinity Target:Brands:Automotive:Rolls-Royce (BlueKai),BlueKai,0.9,,,1262,,bk_214822,
+695517,Branded Data:Colligent Affinity Target:Brands:Automotive:Scion (BlueKai),BlueKai,0.9,,,1262,,bk_214823,
+695518,Branded Data:Colligent Affinity Target:Brands:Automotive:Scion xB (BlueKai),BlueKai,0.9,,,1262,,bk_214824,
+695519,Branded Data:Colligent Affinity Target:Brands:Automotive:Smart Car USA (BlueKai),BlueKai,0.9,,,1262,,bk_214825,
+695520,Branded Data:Colligent Affinity Target:Brands:Automotive:Subaru Impreza (BlueKai),BlueKai,0.9,,,1262,,bk_214826,
+695521,Branded Data:Colligent Affinity Target:Brands:Automotive:Subaru Impreza WRX STI (BlueKai),BlueKai,0.9,,,1262,,bk_214827,
+695522,Branded Data:Colligent Affinity Target:Brands:Automotive:Toyota (BlueKai),BlueKai,0.9,,,1262,,bk_214828,
+695523,Branded Data:Colligent Affinity Target:Brands:Automotive:Toyota MR2 (BlueKai),BlueKai,0.9,,,1262,,bk_214829,
+695524,Branded Data:Colligent Affinity Target:Brands:Automotive:Toyota RAV4 (BlueKai),BlueKai,0.9,,,1262,,bk_214830,
+695525,Branded Data:Colligent Affinity Target:Brands:Automotive:Toyota Sienna (BlueKai),BlueKai,0.9,,,1262,,bk_214831,
+695526,Branded Data:Colligent Affinity Target:Brands:Automotive:Toyota Tundra (BlueKai),BlueKai,0.9,,,1262,,bk_214832,
+695527,Branded Data:Colligent Affinity Target:Brands:Automotive:Vauxhall Motors (BlueKai),BlueKai,0.9,,,1262,,bk_214833,
+695528,Branded Data:Colligent Affinity Target:Brands:Automotive:Volkswagen Golf (BlueKai),BlueKai,0.9,,,1262,,bk_214834,
+695529,Branded Data:Colligent Affinity Target:Brands:Automotive:Volkswagen GTI (BlueKai),BlueKai,0.9,,,1262,,bk_214835,
+695530,Branded Data:Colligent Affinity Target:Brands:Automotive:Volkswagen Jetta (BlueKai),BlueKai,0.9,,,1262,,bk_214836,
+695531,Branded Data:Colligent Affinity Target:Brands:Automotive:Volkswagen Tiguan (BlueKai),BlueKai,0.9,,,1262,,bk_214837,
+695532,Branded Data:Colligent Affinity Target:Brands:Automotive:Volkswagen Touareg (BlueKai),BlueKai,0.9,,,1262,,bk_214838,
+695533,Branded Data:Colligent Affinity Target:Brands:Automotive:Volvo (BlueKai),BlueKai,0.9,,,1262,,bk_214839,
+695534,Branded Data:Colligent Affinity Target:Brands:Beauty & Cosmetics (BlueKai),BlueKai,0.9,,,1262,,bk_214840,
+695535,Branded Data:Colligent Affinity Target:Brands:Beauty & Cosmetics:Thierry Mugler (BlueKai),BlueKai,0.9,,,1262,,bk_214841,
+695536,Branded Data:Colligent Affinity Target:Brands:Consumer Product (BlueKai),BlueKai,0.9,,,1262,,bk_214842,
+695537,Branded Data:Colligent Affinity Target:Brands:Consumer Product:Castrol (BlueKai),BlueKai,0.9,,,1262,,bk_214843,
+695538,Branded Data:Colligent Affinity Target:Brands:Consumer Product:Cosworth (BlueKai),BlueKai,0.9,,,1262,,bk_214844,
+695539,Branded Data:Colligent Affinity Target:Brands:Consumer Product:Craftsman (BlueKai),BlueKai,0.9,,,1262,,bk_214845,
+695540,Branded Data:Colligent Affinity Target:Brands:Consumer Product:Hot Wheels (BlueKai),BlueKai,0.9,,,1262,,bk_214846,
+695541,Branded Data:Colligent Affinity Target:Brands:Consumer Product:Mopar Parts (BlueKai),BlueKai,0.9,,,1262,,bk_214847,
+695542,Branded Data:Colligent Affinity Target:Brands:Consumer Product:Oral-B UK (BlueKai),BlueKai,0.9,,,1262,,bk_214848,
+695543,Branded Data:Colligent Affinity Target:Brands:Consumer Product:Solarcity (BlueKai),BlueKai,0.9,,,1262,,bk_214849,
+695544,Branded Data:Colligent Affinity Target:Brands:Consumer Product:Sunbrella (BlueKai),BlueKai,0.9,,,1262,,bk_214850,
+695545,Branded Data:Colligent Affinity Target:Brands:Electronics (BlueKai),BlueKai,0.9,,,1262,,bk_214851,
+695546,Branded Data:Colligent Affinity Target:Brands:Electronics:Audiovox (BlueKai),BlueKai,0.9,,,1262,,bk_214852,
+695547,Branded Data:Colligent Affinity Target:Brands:Electronics:Blackberry Z10 (BlueKai),BlueKai,0.9,,,1262,,bk_214853,
+695548,Branded Data:Colligent Affinity Target:Brands:Electronics:Hewlett-Packard (HP) (BlueKai),BlueKai,0.9,,,1262,,bk_214854,
+695549,Branded Data:Colligent Affinity Target:Brands:Electronics:Lenovo (BlueKai),BlueKai,0.9,,,1262,,bk_214855,
+695550,Branded Data:Colligent Affinity Target:Brands:Electronics:Lenovo IdeaPad (BlueKai),BlueKai,0.9,,,1262,,bk_214856,
+695551,Branded Data:Colligent Affinity Target:Brands:Electronics:Motorola (BlueKai),BlueKai,0.9,,,1262,,bk_214857,
+695552,Branded Data:Colligent Affinity Target:Brands:Electronics:Nokia Italy (BlueKai),BlueKai,0.9,,,1262,,bk_214858,
+695553,Branded Data:Colligent Affinity Target:Brands:Electronics:OnStar (BlueKai),BlueKai,0.9,,,1262,,bk_214859,
+695554,Branded Data:Colligent Affinity Target:Brands:Electronics:Palm Pixi (BlueKai),BlueKai,0.9,,,1262,,bk_214860,
+695555,Branded Data:Colligent Affinity Target:Brands:Electronics:Samsung (BlueKai),BlueKai,0.9,,,1262,,bk_214861,
+695556,Branded Data:Colligent Affinity Target:Brands:Electronics:Scosche (BlueKai),BlueKai,0.9,,,1262,,bk_214862,
+695557,Branded Data:Colligent Affinity Target:Brands:Electronics:Sony (BlueKai),BlueKai,0.9,,,1262,,bk_214863,
+695558,Branded Data:Colligent Affinity Target:Brands:Electronics:Sony Electronics (BlueKai),BlueKai,0.9,,,1262,,bk_214864,
+695559,Branded Data:Colligent Affinity Target:Brands:Hotels & Resorts (BlueKai),BlueKai,0.9,,,1262,,bk_214865,
+695560,Branded Data:Colligent Affinity Target:Brands:Hotels & Resorts:Ferrari World Abu Dhabi (BlueKai),BlueKai,0.9,,,1262,,bk_214866,
+695561,Branded Data:Colligent Affinity Target:Brands:Industrial (BlueKai),BlueKai,0.9,,,1262,,bk_214867,
+695562,Branded Data:Colligent Affinity Target:Brands:Industrial:Airbus (BlueKai),BlueKai,0.9,,,1262,,bk_214868,
+695563,Branded Data:Colligent Affinity Target:Brands:Organizations (BlueKai),BlueKai,0.9,,,1262,,bk_214869,
+695564,Branded Data:Colligent Affinity Target:Brands:Organizations:NASIOC (BlueKai),BlueKai,0.9,,,1262,,bk_214870,
+695565,Branded Data:Colligent Affinity Target:Brands:Restaurant (BlueKai),BlueKai,0.9,,,1262,,bk_214871,
+695566,Branded Data:Colligent Affinity Target:Brands:Restaurant:Tim Hortons (BlueKai),BlueKai,0.9,,,1262,,bk_214872,
+695567,Branded Data:Colligent Affinity Target:Brands:Retail (BlueKai),BlueKai,0.9,,,1262,,bk_214873,
+695568,Branded Data:Colligent Affinity Target:Brands:Retail:Autonation (BlueKai),BlueKai,0.9,,,1262,,bk_214874,
+695569,Branded Data:Colligent Affinity Target:Brands:Retail:eBay Motors (BlueKai),BlueKai,0.9,,,1262,,bk_214875,
+695570,Branded Data:Colligent Affinity Target:Brands:Retail:Staples (BlueKai),BlueKai,0.9,,,1262,,bk_214878,
+695571,Branded Data:Colligent Affinity Target:Brands:Retail:Summit (BlueKai),BlueKai,0.9,,,1262,,bk_214879,
+695572,Branded Data:Colligent Affinity Target:Brands:Retail:Yahoo! Shopping (BlueKai),BlueKai,0.9,,,1262,,bk_214880,
+695573,Branded Data:Colligent Affinity Target:Brands:Sporting Goods (BlueKai),BlueKai,0.9,,,1262,,bk_214881,
+695574,Branded Data:Colligent Affinity Target:Brands:Sporting Goods:Burton (BlueKai),BlueKai,0.9,,,1262,,bk_214882,
+695575,Branded Data:Colligent Affinity Target:Brands:Technology Product/Service (BlueKai),BlueKai,0.9,,,1262,,bk_214883,
+695576,Branded Data:Colligent Affinity Target:Brands:Technology Product/Service:Microsoft (BlueKai),BlueKai,0.9,,,1262,,bk_214884,
+695577,Branded Data:Colligent Affinity Target:Brands:Theatre & Performing Art (BlueKai),BlueKai,0.9,,,1262,,bk_214885,
+695578,Branded Data:Colligent Affinity Target:Brands:Theatre & Performing Art:Vans Warped Tour (BlueKai),BlueKai,0.9,,,1262,,bk_214886,
+695579,Branded Data:Colligent Affinity Target:Celebrities (BlueKai),BlueKai,0.9,,,1262,,bk_214887,
+695580,Branded Data:Colligent Affinity Target:Celebrities:Actors (BlueKai),BlueKai,0.9,,,1262,,bk_214888,
+695581,Branded Data:Colligent Affinity Target:Celebrities:Actors:Aaron Sorkin (BlueKai),BlueKai,0.9,,,1262,,bk_214889,
+695582,Branded Data:Colligent Affinity Target:Celebrities:Actors:Angelina Jolie (BlueKai),BlueKai,0.9,,,1262,,bk_214890,
+695583,Branded Data:Colligent Affinity Target:Celebrities:Actors:Arnold Schwarzenegger (BlueKai),BlueKai,0.9,,,1262,,bk_214891,
+695584,Branded Data:Colligent Affinity Target:Celebrities:Actors:Christopher Plummer (BlueKai),BlueKai,0.9,,,1262,,bk_214892,
+695585,Branded Data:Colligent Affinity Target:Celebrities:Actors:George Clooney (BlueKai),BlueKai,0.9,,,1262,,bk_214893,
+695586,Branded Data:Colligent Affinity Target:Celebrities:Actors:Idris Elba (BlueKai),BlueKai,0.9,,,1262,,bk_214894,
+695587,Branded Data:Colligent Affinity Target:Celebrities:Actors:Jessica Chastain (BlueKai),BlueKai,0.9,,,1262,,bk_214895,
+695588,Branded Data:Colligent Affinity Target:Celebrities:Actors:Kenneth Branagh (BlueKai),BlueKai,0.9,,,1262,,bk_214896,
+695589,Branded Data:Colligent Affinity Target:Celebrities:Actors:Lee Min Ho (BlueKai),BlueKai,0.9,,,1262,,bk_214897,
+695590,Branded Data:Colligent Affinity Target:Celebrities:Actors:Martin Scorsese (BlueKai),BlueKai,0.9,,,1262,,bk_214898,
+695591,Branded Data:Colligent Affinity Target:Celebrities:Actors:Melissa Mccarthy (BlueKai),BlueKai,0.9,,,1262,,bk_214899,
+695592,Branded Data:Colligent Affinity Target:Celebrities:Actors:Sean Penn (BlueKai),BlueKai,0.9,,,1262,,bk_214900,
+695593,Branded Data:Colligent Affinity Target:Celebrities:Athletes (BlueKai),BlueKai,0.9,,,1262,,bk_214901,
+695594,Branded Data:Colligent Affinity Target:Celebrities:Athletes:Aj Allmendinger (BlueKai),BlueKai,0.9,,,1262,,bk_214902,
+695595,Branded Data:Colligent Affinity Target:Celebrities:Athletes:Anthony Wayne Stewart (BlueKai),BlueKai,0.9,,,1262,,bk_214903,
+695596,Branded Data:Colligent Affinity Target:Celebrities:Athletes:Blake Griffin (BlueKai),BlueKai,0.9,,,1262,,bk_214904,
+695597,Branded Data:Colligent Affinity Target:Celebrities:Athletes:Brad Keselowski (BlueKai),BlueKai,0.9,,,1262,,bk_214905,
+695598,Branded Data:Colligent Affinity Target:Celebrities:Athletes:Bucky Lasek (BlueKai),BlueKai,0.9,,,1262,,bk_214906,
+695599,Branded Data:Colligent Affinity Target:Celebrities:Athletes:Chris Camozzi (BlueKai),BlueKai,0.9,,,1262,,bk_214907,
+695600,Branded Data:Colligent Affinity Target:Celebrities:Athletes:Chris Paul (BlueKai),BlueKai,0.9,,,1262,,bk_214908,
+695601,Branded Data:Colligent Affinity Target:Celebrities:Athletes:Danica Patrick (BlueKai),BlueKai,0.9,,,1262,,bk_214909,
+695602,Branded Data:Colligent Affinity Target:Celebrities:Athletes:Dashon Goldson (BlueKai),BlueKai,0.9,,,1262,,bk_214910,
+695603,Branded Data:Colligent Affinity Target:Celebrities:Athletes:Felix Jones (BlueKai),BlueKai,0.9,,,1262,,bk_214911,
+695604,Branded Data:Colligent Affinity Target:Celebrities:Athletes:Giorgio Chiellini (BlueKai),BlueKai,0.9,,,1262,,bk_214912,
+695605,Branded Data:Colligent Affinity Target:Celebrities:Athletes:Gleison Tibau (BlueKai),BlueKai,0.9,,,1262,,bk_214913,
+695606,Branded Data:Colligent Affinity Target:Celebrities:Athletes:Greg Biffle (BlueKai),BlueKai,0.9,,,1262,,bk_214914,
+695607,Branded Data:Colligent Affinity Target:Celebrities:Athletes:Heikki Kovalainen (BlueKai),BlueKai,0.9,,,1262,,bk_214915,
+695608,Branded Data:Colligent Affinity Target:Celebrities:Athletes:Jeff Gordon (BlueKai),BlueKai,0.9,,,1262,,bk_214916,
+695609,Branded Data:Colligent Affinity Target:Celebrities:Athletes:Jenson Button (BlueKai),BlueKai,0.9,,,1262,,bk_214917,
+695610,Branded Data:Colligent Affinity Target:Celebrities:Athletes:Kurt Busch (BlueKai),BlueKai,0.9,,,1262,,bk_214918,
+695611,Branded Data:Colligent Affinity Target:Celebrities:Athletes:Kyle Busch (BlueKai),BlueKai,0.9,,,1262,,bk_214919,
+695612,Branded Data:Colligent Affinity Target:Celebrities:Athletes:Laure Manaudou (BlueKai),BlueKai,0.9,,,1262,,bk_214920,
+695613,Branded Data:Colligent Affinity Target:Celebrities:Athletes:Lewis Hamilton (BlueKai),BlueKai,0.9,,,1262,,bk_214921,
+695614,Branded Data:Colligent Affinity Target:Celebrities:Athletes:Maria Sharapova (BlueKai),BlueKai,0.9,,,1262,,bk_214922,
+695615,Branded Data:Colligent Affinity Target:Celebrities:Athletes:Mark Webber (BlueKai),BlueKai,0.9,,,1262,,bk_214923,
+695616,Branded Data:Colligent Affinity Target:Celebrities:Athletes:Martin Truex Jr. (BlueKai),BlueKai,0.9,,,1262,,bk_214924,
+695617,Branded Data:Colligent Affinity Target:Celebrities:Athletes:Nico Rosberg (BlueKai),BlueKai,0.9,,,1262,,bk_214925,
+695618,Branded Data:Colligent Affinity Target:Celebrities:Athletes:Roger Federer (BlueKai),BlueKai,0.9,,,1262,,bk_214926,
+695619,Branded Data:Colligent Affinity Target:Celebrities:Athletes:Travis Pastrana (BlueKai),BlueKai,0.9,,,1262,,bk_214927,
+695620,Branded Data:Colligent Affinity Target:Celebrities:Comedians (BlueKai),BlueKai,0.9,,,1262,,bk_214928,
+695621,Branded Data:Colligent Affinity Target:Celebrities:Comedians:Gabriel Iglesias (BlueKai),BlueKai,0.9,,,1262,,bk_214929,
+695622,Branded Data:Colligent Affinity Target:Celebrities:Comedians:Jerry Seinfeld (BlueKai),BlueKai,0.9,,,1262,,bk_214930,
+695623,Branded Data:Colligent Affinity Target:Celebrities:Comedians:Larry The Cable Guy (BlueKai),BlueKai,0.9,,,1262,,bk_214931,
+695624,Branded Data:Colligent Affinity Target:Celebrities:Comedians:Rob Delaney (BlueKai),BlueKai,0.9,,,1262,,bk_214932,
+695625,Branded Data:Colligent Affinity Target:Celebrities:Executives (BlueKai),BlueKai,0.9,,,1262,,bk_214933,
+695626,Branded Data:Colligent Affinity Target:Celebrities:Executives:Chris Sacca (BlueKai),BlueKai,0.9,,,1262,,bk_214934,
+695627,Branded Data:Colligent Affinity Target:Celebrities:Executives:Evan Williams (BlueKai),BlueKai,0.9,,,1262,,bk_214935,
+695628,Branded Data:Colligent Affinity Target:Celebrities:Executives:Masayoshi Son (BlueKai),BlueKai,0.9,,,1262,,bk_214936,
+695629,Branded Data:Colligent Affinity Target:Celebrities:Executives:Mitt Romney (BlueKai),BlueKai,0.9,,,1262,,bk_214937,
+695630,Branded Data:Colligent Affinity Target:Celebrities:Internet Personalities (BlueKai),BlueKai,0.9,,,1262,,bk_214938,
+695631,Branded Data:Colligent Affinity Target:Celebrities:Internet Personalities:iJustine (Justine Ezarik) (BlueKai),BlueKai,0.9,,,1262,,bk_214939,
+695632,Branded Data:Colligent Affinity Target:Celebrities:Models (BlueKai),BlueKai,0.9,,,1262,,bk_214940,
+695633,Branded Data:Colligent Affinity Target:Celebrities:Models:Ivanka Trump (BlueKai),BlueKai,0.9,,,1262,,bk_214941,
+695634,Branded Data:Colligent Affinity Target:Celebrities:Models:Naomi Campbell (BlueKai),BlueKai,0.9,,,1262,,bk_214942,
+695635,Branded Data:Colligent Affinity Target:Celebrities:TV Personalities (BlueKai),BlueKai,0.9,,,1262,,bk_214943,
+695636,Branded Data:Colligent Affinity Target:Celebrities:TV Personalities:Andrew Levy (BlueKai),BlueKai,0.9,,,1262,,bk_214944,
+695637,Branded Data:Colligent Affinity Target:Celebrities:TV Personalities:Chris Hayes (BlueKai),BlueKai,0.9,,,1262,,bk_214945,
+695638,Branded Data:Colligent Affinity Target:Celebrities:TV Personalities:Emeril Lagasse (BlueKai),BlueKai,0.9,,,1262,,bk_214946,
+695639,Branded Data:Colligent Affinity Target:Celebrities:TV Personalities:Graham Elliot (BlueKai),BlueKai,0.9,,,1262,,bk_214947,
+695640,Branded Data:Colligent Affinity Target:Celebrities:TV Personalities:Jay Leno (BlueKai),BlueKai,0.9,,,1262,,bk_214948,
+695641,Branded Data:Colligent Affinity Target:Celebrities:TV Personalities:Jeremy Clarkson (BlueKai),BlueKai,0.9,,,1262,,bk_214949,
+695642,Branded Data:Colligent Affinity Target:Celebrities:TV Personalities:Katie Couric (BlueKai),BlueKai,0.9,,,1262,,bk_214950,
+695643,Branded Data:Colligent Affinity Target:Celebrities:TV Personalities:Martha Stewart (BlueKai),BlueKai,0.9,,,1262,,bk_214951,
+695644,Branded Data:Colligent Affinity Target:Celebrities:TV Personalities:Oprah Winfrey (BlueKai),BlueKai,0.9,,,1262,,bk_214952,
+695645,Branded Data:Colligent Affinity Target:Celebrities:TV Personalities:Rachel Maddow (BlueKai),BlueKai,0.9,,,1262,,bk_214953,
+695646,Branded Data:Colligent Affinity Target:Celebrities:TV Personalities:Rutledge Wood (BlueKai),BlueKai,0.9,,,1262,,bk_214954,
+695647,Branded Data:Colligent Affinity Target:Celebrities:TV Personalities:The Stig (BlueKai),BlueKai,0.9,,,1262,,bk_214955,
+695648,Branded Data:Colligent Affinity Target:Celebrities:Visual Artists (BlueKai),BlueKai,0.9,,,1262,,bk_214956,
+695649,Branded Data:Colligent Affinity Target:Celebrities:Visual Artists:Marc Dorcel (BlueKai),BlueKai,0.9,,,1262,,bk_214957,
+695650,Branded Data:Colligent Affinity Target:Celebrities:Visual Artists:Stella Mccartney (BlueKai),BlueKai,0.9,,,1262,,bk_214958,
+695651,Branded Data:Colligent Affinity Target:Celebrities:Writers (BlueKai),BlueKai,0.9,,,1262,,bk_214959,
+695652,Branded Data:Colligent Affinity Target:Celebrities:Writers:Ana Marie Cox (BlueKai),BlueKai,0.9,,,1262,,bk_214960,
+695653,Branded Data:Colligent Affinity Target:Celebrities:Writers:Chris Cleave (BlueKai),BlueKai,0.9,,,1262,,bk_214961,
+695654,Branded Data:Colligent Affinity Target:Celebrities:Writers:David Pogue (BlueKai),BlueKai,0.9,,,1262,,bk_214962,
+695655,Branded Data:Colligent Affinity Target:Celebrities:Writers:John Hodgman (BlueKai),BlueKai,0.9,,,1262,,bk_214963,
+695656,Branded Data:Colligent Affinity Target:Celebrities:Writers:Sarah Lacy (BlueKai),BlueKai,0.9,,,1262,,bk_214964,
+695657,Branded Data:Colligent Affinity Target:Celebrities:Writers:Sarah Perez (BlueKai),BlueKai,0.9,,,1262,,bk_214965,
+695658,Branded Data:Colligent Affinity Target:Digital (BlueKai),BlueKai,0.9,,,1262,,bk_214966,
+695659,Branded Data:Colligent Affinity Target:Digital:Automotive (BlueKai),BlueKai,0.9,,,1262,,bk_214967,
+695660,Branded Data:Colligent Affinity Target:Digital:Automotive:5.0 Mustang (BlueKai),BlueKai,0.9,,,1262,,bk_214968,
+695661,Branded Data:Colligent Affinity Target:Digital:Automotive:Autocar (BlueKai),BlueKai,0.9,,,1262,,bk_214969,
+695662,Branded Data:Colligent Affinity Target:Digital:Automotive:Automobile (BlueKai),BlueKai,0.9,,,1262,,bk_214970,
+695663,Branded Data:Colligent Affinity Target:Digital:Automotive:Autoweek (BlueKai),BlueKai,0.9,,,1262,,bk_214971,
+695664,Branded Data:Colligent Affinity Target:Digital:Automotive:Car And Driver (BlueKai),BlueKai,0.9,,,1262,,bk_214972,
+695665,Branded Data:Colligent Affinity Target:Digital:Automotive:DSPORT (BlueKai),BlueKai,0.9,,,1262,,bk_214973,
+695666,Branded Data:Colligent Affinity Target:Digital:Automotive:Dupont Registry (BlueKai),BlueKai,0.9,,,1262,,bk_214976,
+695667,Branded Data:Colligent Affinity Target:Digital:Automotive:Honda Tuning (BlueKai),BlueKai,0.9,,,1262,,bk_214977,
+695668,Branded Data:Colligent Affinity Target:Digital:Automotive:Land Line Magazine (BlueKai),BlueKai,0.9,,,1262,,bk_214978,
+695669,Branded Data:Colligent Affinity Target:Digital:Automotive:Motor Trend (BlueKai),BlueKai,0.9,,,1262,,bk_214979,
+695670,Branded Data:Colligent Affinity Target:Digital:Automotive:Road & Track (BlueKai),BlueKai,0.9,,,1262,,bk_214980,
+695671,Branded Data:Colligent Affinity Target:Digital:Automotive:Truckers News Magazine (BlueKai),BlueKai,0.9,,,1262,,bk_214981,
+695672,Branded Data:Colligent Affinity Target:Digital:Business (BlueKai),BlueKai,0.9,,,1262,,bk_214982,
+695673,Branded Data:Colligent Affinity Target:Digital:Business:Forbes (BlueKai),BlueKai,0.9,,,1262,,bk_214983,
+695674,Branded Data:Colligent Affinity Target:Digital:Media (BlueKai),BlueKai,0.9,,,1262,,bk_214984,
+695675,Branded Data:Colligent Affinity Target:Digital:Media:Absolutepunk.Net (BlueKai),BlueKai,0.9,,,1262,,bk_214985,
+695676,Branded Data:Colligent Affinity Target:Digital:Media:Autoblog (BlueKai),BlueKai,0.9,,,1262,,bk_214986,
+695677,Branded Data:Colligent Affinity Target:Digital:Media:Detik (BlueKai),BlueKai,0.9,,,1262,,bk_214987,
+695678,Branded Data:Colligent Affinity Target:Digital:Media:GTspirit.com (BlueKai),BlueKai,0.9,,,1262,,bk_214988,
+695679,Branded Data:Colligent Affinity Target:Digital:Media:Killerstartups (BlueKai),BlueKai,0.9,,,1262,,bk_214989,
+695680,Branded Data:Colligent Affinity Target:Digital:Media:Motor Authority (BlueKai),BlueKai,0.9,,,1262,,bk_214990,
+695681,Branded Data:Colligent Affinity Target:Digital:Media:Political Wire (BlueKai),BlueKai,0.9,,,1262,,bk_214991,
+695682,Branded Data:Colligent Affinity Target:Digital:Men (BlueKai),BlueKai,0.9,,,1262,,bk_214992,
+695683,Branded Data:Colligent Affinity Target:Digital:Men:Loaded (BlueKai),BlueKai,0.9,,,1262,,bk_214993,
+695684,Branded Data:Colligent Affinity Target:Digital:Music (BlueKai),BlueKai,0.9,,,1262,,bk_214994,
+695685,Branded Data:Colligent Affinity Target:Digital:Music:Alternative Press (BlueKai),BlueKai,0.9,,,1262,,bk_214995,
+695686,Branded Data:Colligent Affinity Target:Digital:Portals (BlueKai),BlueKai,0.9,,,1262,,bk_214996,
+695687,Branded Data:Colligent Affinity Target:Digital:Portals:Edmunds.com (BlueKai),BlueKai,0.9,,,1262,,bk_214997,
+695688,Branded Data:Colligent Affinity Target:Digital:Portals:Mobile.bg (BlueKai),BlueKai,0.9,,,1262,,bk_215000,
+695689,Branded Data:Colligent Affinity Target:Digital:Portals:Paypal (BlueKai),BlueKai,0.9,,,1262,,bk_215001,
+695690,Branded Data:Colligent Affinity Target:Digital:Portals:Pistonheads (BlueKai),BlueKai,0.9,,,1262,,bk_215002,
+695691,Branded Data:Colligent Affinity Target:Digital:Portals:Shutterfly (BlueKai),BlueKai,0.9,,,1262,,bk_215003,
+695692,Branded Data:Colligent Affinity Target:Digital:Science & Technology (BlueKai),BlueKai,0.9,,,1262,,bk_215004,
+695693,Branded Data:Colligent Affinity Target:Digital:Science & Technology:How It Works (BlueKai),BlueKai,0.9,,,1262,,bk_215005,
+695694,Branded Data:Colligent Affinity Target:Digital:Social Networking (BlueKai),BlueKai,0.9,,,1262,,bk_215006,
+695695,Branded Data:Colligent Affinity Target:Digital:Social Networking:BikerOrNot (BlueKai),BlueKai,0.9,,,1262,,bk_215007,
+695696,Branded Data:Colligent Affinity Target:Music (BlueKai),BlueKai,0.9,,,1262,,bk_215008,
+695697,Branded Data:Colligent Affinity Target:Music:Alternative (BlueKai),BlueKai,0.9,,,1262,,bk_215009,
+695698,Branded Data:Colligent Affinity Target:Music:Alternative:Coldplay (BlueKai),BlueKai,0.9,,,1262,,bk_215010,
+695699,Branded Data:Colligent Affinity Target:Music:Alternative:Kottonmouth Kings (BlueKai),BlueKai,0.9,,,1262,,bk_215011,
+695700,Branded Data:Colligent Affinity Target:Music:Alternative:Lostprophets (BlueKai),BlueKai,0.9,,,1262,,bk_215012,
+695701,Branded Data:Colligent Affinity Target:Music:Alternative:Radiohead (BlueKai),BlueKai,0.9,,,1262,,bk_215013,
+695702,Branded Data:Colligent Affinity Target:Music:Alternative:Sleigh Bells (BlueKai),BlueKai,0.9,,,1262,,bk_215014,
+695703,Branded Data:Colligent Affinity Target:Music:Alternative:Smile Empty Soul (BlueKai),BlueKai,0.9,,,1262,,bk_215015,
+695704,Branded Data:Colligent Affinity Target:Music:Alternative:Taking Back Sunday (BlueKai),BlueKai,0.9,,,1262,,bk_215016,
+695705,Branded Data:Colligent Affinity Target:Music:Comedy (BlueKai),BlueKai,0.9,,,1262,,bk_215017,
+695706,Branded Data:Colligent Affinity Target:Music:Comedy:Weird Al Yankovic (BlueKai),BlueKai,0.9,,,1262,,bk_215018,
+695707,Branded Data:Colligent Affinity Target:Music:Country (BlueKai),BlueKai,0.9,,,1262,,bk_215019,
+695708,Branded Data:Colligent Affinity Target:Music:Country:Alan Jackson (BlueKai),BlueKai,0.9,,,1262,,bk_215020,
+695709,Branded Data:Colligent Affinity Target:Music:Country:Charlie Daniels (BlueKai),BlueKai,0.9,,,1262,,bk_215021,
+695710,Branded Data:Colligent Affinity Target:Music:Country:Colt Ford (BlueKai),BlueKai,0.9,,,1262,,bk_215022,
+695711,Branded Data:Colligent Affinity Target:Music:Country:Eric Church (BlueKai),BlueKai,0.9,,,1262,,bk_215023,
+695712,Branded Data:Colligent Affinity Target:Music:Country:Hank Williams Jr. (BlueKai),BlueKai,0.9,,,1262,,bk_215024,
+695713,Branded Data:Colligent Affinity Target:Music:Country:Toby Keith (BlueKai),BlueKai,0.9,,,1262,,bk_215025,
+695714,Branded Data:Colligent Affinity Target:Music:Country:Willie Nelson (BlueKai),BlueKai,0.9,,,1262,,bk_215026,
+695715,Branded Data:Colligent Affinity Target:Music:Country:Zac Brown Band (BlueKai),BlueKai,0.9,,,1262,,bk_215027,
+695716,Branded Data:Colligent Affinity Target:Music:Dance (BlueKai),BlueKai,0.9,,,1262,,bk_215028,
+695717,Branded Data:Colligent Affinity Target:Music:Dance:David Guetta (BlueKai),BlueKai,0.9,,,1262,,bk_215029,
+695718,Branded Data:Colligent Affinity Target:Music:Dance:Deadmau5 (BlueKai),BlueKai,0.9,,,1262,,bk_215030,
+695719,Branded Data:Colligent Affinity Target:Music:Dance:Morgan Page (BlueKai),BlueKai,0.9,,,1262,,bk_215031,
+695720,Branded Data:Colligent Affinity Target:Music:Electronic (BlueKai),BlueKai,0.9,,,1262,,bk_215032,
+695721,Branded Data:Colligent Affinity Target:Music:Electronic:A-Trak (BlueKai),BlueKai,0.9,,,1262,,bk_215033,
+695722,Branded Data:Colligent Affinity Target:Music:Electronic:Example (BlueKai),BlueKai,0.9,,,1262,,bk_215034,
+695723,Branded Data:Colligent Affinity Target:Music:Electronic:Flosstradamus (BlueKai),BlueKai,0.9,,,1262,,bk_215035,
+695724,Branded Data:Colligent Affinity Target:Music:Electronic:Stromae (BlueKai),BlueKai,0.9,,,1262,,bk_215036,
+695725,Branded Data:Colligent Affinity Target:Music:Electronic:Tiesto (BlueKai),BlueKai,0.9,,,1262,,bk_215037,
+695726,Branded Data:Colligent Affinity Target:Music:Hip Hop/Rap (BlueKai),BlueKai,0.9,,,1262,,bk_215038,
+695727,Branded Data:Colligent Affinity Target:Music:Hip Hop/Rap:2 Chainz (BlueKai),BlueKai,0.9,,,1262,,bk_215039,
+695728,Branded Data:Colligent Affinity Target:Music:Hip Hop/Rap:Beastie Boys (BlueKai),BlueKai,0.9,,,1262,,bk_215040,
+695729,Branded Data:Colligent Affinity Target:Music:Hip Hop/Rap:Black Point (BlueKai),BlueKai,0.9,,,1262,,bk_215041,
+695730,Branded Data:Colligent Affinity Target:Music:Hip Hop/Rap:Bun B (BlueKai),BlueKai,0.9,,,1262,,bk_215042,
+695731,Branded Data:Colligent Affinity Target:Music:Hip Hop/Rap:Chamillionaire (BlueKai),BlueKai,0.9,,,1262,,bk_215043,
+695732,Branded Data:Colligent Affinity Target:Music:Hip Hop/Rap:Dr. Dre (BlueKai),BlueKai,0.9,,,1262,,bk_215044,
+695733,Branded Data:Colligent Affinity Target:Music:Hip Hop/Rap:Insane Clown Posse (BlueKai),BlueKai,0.9,,,1262,,bk_215045,
+695734,Branded Data:Colligent Affinity Target:Music:Hip Hop/Rap:Kanye West (BlueKai),BlueKai,0.9,,,1262,,bk_215046,
+695735,Branded Data:Colligent Affinity Target:Music:Hip Hop/Rap:Kendrick Lamar (BlueKai),BlueKai,0.9,,,1262,,bk_215047,
+695736,Branded Data:Colligent Affinity Target:Music:Hip Hop/Rap:Kid Rock (BlueKai),BlueKai,0.9,,,1262,,bk_215048,
+695737,Branded Data:Colligent Affinity Target:Music:Hip Hop/Rap:Ludacris (BlueKai),BlueKai,0.9,,,1262,,bk_215049,
+695738,Branded Data:Colligent Affinity Target:Music:Hip Hop/Rap:MC Hammer (BlueKai),BlueKai,0.9,,,1262,,bk_215050,
+695739,Branded Data:Colligent Affinity Target:Music:Hip Hop/Rap:Nappy Roots (BlueKai),BlueKai,0.9,,,1262,,bk_215051,
+695740,Branded Data:Colligent Affinity Target:Music:Hip Hop/Rap:Questlove (BlueKai),BlueKai,0.9,,,1262,,bk_215052,
+695741,Branded Data:Colligent Affinity Target:Music:Hip Hop/Rap:Rick Ross (BlueKai),BlueKai,0.9,,,1262,,bk_215053,
+695742,Branded Data:Colligent Affinity Target:Music:Hip Hop/Rap:Skepta (BlueKai),BlueKai,0.9,,,1262,,bk_215054,
+695743,Branded Data:Colligent Affinity Target:Music:Hip Hop/Rap:Slim Thug (BlueKai),BlueKai,0.9,,,1262,,bk_215055,
+695744,Branded Data:Colligent Affinity Target:Music:Hip Hop/Rap:Swizz Beatz (BlueKai),BlueKai,0.9,,,1262,,bk_215056,
+695745,Branded Data:Colligent Affinity Target:Music:Hip Hop/Rap:Tyler The Creator (BlueKai),BlueKai,0.9,,,1262,,bk_215057,
+695746,Branded Data:Colligent Affinity Target:Music:Hip Hop/Rap:Wyclef Jean (BlueKai),BlueKai,0.9,,,1262,,bk_215058,
+695747,Branded Data:Colligent Affinity Target:Music:Hip Hop/Rap:Xzibit (BlueKai),BlueKai,0.9,,,1262,,bk_215059,
+695748,Branded Data:Colligent Affinity Target:Music:Hip Hop/Rap:Yung Berg (BlueKai),BlueKai,0.9,,,1262,,bk_215060,
+695749,Branded Data:Colligent Affinity Target:Music:Pop (BlueKai),BlueKai,0.9,,,1262,,bk_215061,
+695750,Branded Data:Colligent Affinity Target:Music:Pop:Jennifer Lopez (BlueKai),BlueKai,0.9,,,1262,,bk_215062,
+695751,Branded Data:Colligent Affinity Target:Music:Pop:Lana Del Rey (BlueKai),BlueKai,0.9,,,1262,,bk_215063,
+695752,Branded Data:Colligent Affinity Target:Music:Pop:Paula Abdul (BlueKai),BlueKai,0.9,,,1262,,bk_215064,
+695753,Branded Data:Colligent Affinity Target:Music:Pop:Rihanna (BlueKai),BlueKai,0.9,,,1262,,bk_215065,
+695754,Branded Data:Colligent Affinity Target:Music:Pop:Robbie Williams (BlueKai),BlueKai,0.9,,,1262,,bk_215066,
+695755,Branded Data:Colligent Affinity Target:Music:Pop:Will Young (BlueKai),BlueKai,0.9,,,1262,,bk_215067,
+695756,Branded Data:Colligent Affinity Target:Music:R&B/Soul (BlueKai),BlueKai,0.9,,,1262,,bk_215068,
+695757,Branded Data:Colligent Affinity Target:Music:R&B/Soul:Anthony Hamilton (BlueKai),BlueKai,0.9,,,1262,,bk_215069,
+695758,Branded Data:Colligent Affinity Target:Music:R&B/Soul:Jennifer Hudson (BlueKai),BlueKai,0.9,,,1262,,bk_215070,
+695759,Branded Data:Colligent Affinity Target:Music:R&B/Soul:Keith Sweat (BlueKai),BlueKai,0.9,,,1262,,bk_215071,
+695760,Branded Data:Colligent Affinity Target:Music:R&B/Soul:Mary J. Blige (BlueKai),BlueKai,0.9,,,1262,,bk_215072,
+695761,Branded Data:Colligent Affinity Target:Music:R&B/Soul:Mya (BlueKai),BlueKai,0.9,,,1262,,bk_215073,
+695762,Branded Data:Colligent Affinity Target:Music:R&B/Soul:Stefano Langone (BlueKai),BlueKai,0.9,,,1262,,bk_215074,
+695763,Branded Data:Colligent Affinity Target:Music:Rock (BlueKai),BlueKai,0.9,,,1262,,bk_215075,
+695764,Branded Data:Colligent Affinity Target:Music:Rock:Bruce Springsteen (BlueKai),BlueKai,0.9,,,1262,,bk_215076,
+695765,Branded Data:Colligent Affinity Target:Music:Rock:Kiss (BlueKai),BlueKai,0.9,,,1262,,bk_215077,
+695766,Branded Data:Colligent Affinity Target:Music:Rock:Of Mice & Men (BlueKai),BlueKai,0.9,,,1262,,bk_215078,
+695767,Branded Data:Colligent Affinity Target:Music:Rock:Phish (BlueKai),BlueKai,0.9,,,1262,,bk_215079,
+695768,Branded Data:Colligent Affinity Target:Music:Rock:Queen (BlueKai),BlueKai,0.9,,,1262,,bk_215080,
+695769,Branded Data:Colligent Affinity Target:Music:Rock:Slayer (BlueKai),BlueKai,0.9,,,1262,,bk_215081,
+695770,Branded Data:Colligent Affinity Target:Music:Rock:Subsonica (BlueKai),BlueKai,0.9,,,1262,,bk_215082,
+695771,Branded Data:Colligent Affinity Target:Music:Rock:Ted Nugent (BlueKai),BlueKai,0.9,,,1262,,bk_215083,
+695772,Branded Data:Colligent Affinity Target:Music:Rock:U2 (BlueKai),BlueKai,0.9,,,1262,,bk_215084,
+695773,Branded Data:Colligent Affinity Target:Music:Singer/Songwriter (BlueKai),BlueKai,0.9,,,1262,,bk_215085,
+695774,Branded Data:Colligent Affinity Target:Music:Singer/Songwriter:Katie Melua (BlueKai),BlueKai,0.9,,,1262,,bk_215086,
+695775,Branded Data:Colligent Affinity Target:Music:Singer/Songwriter:Skylar Grey (BlueKai),BlueKai,0.9,,,1262,,bk_215087,
+695776,Branded Data:Colligent Affinity Target:Music:Tropical (BlueKai),BlueKai,0.9,,,1262,,bk_215088,
+695777,Branded Data:Colligent Affinity Target:Music:Tropical:Oscar D'Leon (BlueKai),BlueKai,0.9,,,1262,,bk_215089,
+695778,Branded Data:Colligent Affinity Target:Music:Urban/Reggaeton (BlueKai),BlueKai,0.9,,,1262,,bk_215090,
+695779,Branded Data:Colligent Affinity Target:Music:Urban/Reggaeton:Vakero (BlueKai),BlueKai,0.9,,,1262,,bk_215091,
+695780,Branded Data:Colligent Affinity Target:Music:World (BlueKai),BlueKai,0.9,,,1262,,bk_215092,
+695781,Branded Data:Colligent Affinity Target:Music:World:Inti Illimani (BlueKai),BlueKai,0.9,,,1262,,bk_215093,
+695782,Branded Data:Colligent Affinity Target:Sports (BlueKai),BlueKai,0.9,,,1262,,bk_215094,
+695783,Branded Data:Colligent Affinity Target:Sports:Athletics (BlueKai),BlueKai,0.9,,,1262,,bk_215095,
+695784,Branded Data:Colligent Affinity Target:Sports:Athletics:Special Olympics (BlueKai),BlueKai,0.9,,,1262,,bk_215096,
+695785,Branded Data:Colligent Affinity Target:Sports:Auto Racing (BlueKai),BlueKai,0.9,,,1262,,bk_215097,
+695786,Branded Data:Colligent Affinity Target:Sports:Auto Racing:American Le Mans Series (BlueKai),BlueKai,0.9,,,1262,,bk_215098,
+695787,Branded Data:Colligent Affinity Target:Sports:Auto Racing:Formula One (BlueKai),BlueKai,0.9,,,1262,,bk_215099,
+695788,Branded Data:Colligent Affinity Target:Sports:Auto Racing:Indy Racing League (BlueKai),BlueKai,0.9,,,1262,,bk_215100,
+695789,Branded Data:Colligent Affinity Target:Sports:Auto Racing:MotoGP (BlueKai),BlueKai,0.9,,,1262,,bk_215101,
+695790,Branded Data:Colligent Affinity Target:Sports:Auto Racing:NASCAR (BlueKai),BlueKai,0.9,,,1262,,bk_215102,
+695791,Branded Data:Colligent Affinity Target:Sports:Auto Racing:NASCAR Nationwide Series (BlueKai),BlueKai,0.9,,,1262,,bk_215103,
+695792,Branded Data:Colligent Affinity Target:Sports:Auto Racing:NHRA (BlueKai),BlueKai,0.9,,,1262,,bk_215104,
+695793,Branded Data:Colligent Affinity Target:Sports:Auto Racing:Red Bull Racing (BlueKai),BlueKai,0.9,,,1262,,bk_215105,
+695794,Branded Data:Colligent Affinity Target:Sports:Intl Athletics (BlueKai),BlueKai,0.9,,,1262,,bk_215106,
+695795,Branded Data:Colligent Affinity Target:Sports:Intl Athletics:U.S. Olympic Team (BlueKai),BlueKai,0.9,,,1262,,bk_215107,
+695796,Branded Data:Colligent Affinity Target:Sports:Intl Soccer (BlueKai),BlueKai,0.9,,,1262,,bk_215108,
+695797,Branded Data:Colligent Affinity Target:Sports:Intl Soccer:Borussia M'Gladbach (BlueKai),BlueKai,0.9,,,1262,,bk_215109,
+695798,Branded Data:Colligent Affinity Target:Sports:Intl Soccer:Sheffield Wednesday (BlueKai),BlueKai,0.9,,,1262,,bk_215110,
+695799,Branded Data:Colligent Affinity Target:Sports:NBA Basketball (BlueKai),BlueKai,0.9,,,1262,,bk_215111,
+695800,Branded Data:Colligent Affinity Target:Sports:NBA Basketball:NBA (BlueKai),BlueKai,0.9,,,1262,,bk_215112,
+695801,Branded Data:Colligent Affinity Target:Sports:NCAA Athletics (BlueKai),BlueKai,0.9,,,1262,,bk_215113,
+695802,Branded Data:Colligent Affinity Target:Sports:NCAA Athletics:NCAA (BlueKai),BlueKai,0.9,,,1262,,bk_215114,
+695803,Branded Data:Colligent Affinity Target:Sports:NFL Football (BlueKai),BlueKai,0.9,,,1262,,bk_215115,
+695804,Branded Data:Colligent Affinity Target:Sports:NFL Football:Cincinnati Bengals (BlueKai),BlueKai,0.9,,,1262,,bk_215116,
+695805,Branded Data:Colligent Affinity Target:Sports:NFL Football:Dallas Cowboys (BlueKai),BlueKai,0.9,,,1262,,bk_215117,
+695806,Branded Data:Colligent Affinity Target:Sports:NFL Football:NFL (BlueKai),BlueKai,0.9,,,1262,,bk_215118,
+695807,Branded Data:Colligent Affinity Target:Sports:NFL Football:San Francisco 49ers (BlueKai),BlueKai,0.9,,,1262,,bk_215119,
+695808,Branded Data:Colligent Affinity Target:Sports:NFL Football:Super Bowl (BlueKai),BlueKai,0.9,,,1262,,bk_215120,
+695809,Branded Data:Colligent Affinity Target:Sports:Professional Tennis (BlueKai),BlueKai,0.9,,,1262,,bk_215121,
+695810,Branded Data:Colligent Affinity Target:Sports:Professional Tennis:Wimbledon (BlueKai),BlueKai,0.9,,,1262,,bk_215122,
+695811,Branded Data:Colligent Affinity Target:Sports:WNBA Basketball (BlueKai),BlueKai,0.9,,,1262,,bk_215123,
+695812,Branded Data:Colligent Affinity Target:Sports:WNBA Basketball:WNBA (BlueKai),BlueKai,0.9,,,1262,,bk_215124,
+695813,Branded Data:Colligent Affinity Target:TV (BlueKai),BlueKai,0.9,,,1262,,bk_215125,
+695814,Branded Data:Colligent Affinity Target:TV:BBC 2 (BlueKai),BlueKai,0.9,,,1262,,bk_215126,
+695815,Branded Data:Colligent Affinity Target:TV:BBC World News (BlueKai),BlueKai,0.9,,,1262,,bk_215127,
+695816,Branded Data:Colligent Affinity Target:TV:CBS (BlueKai),BlueKai,0.9,,,1262,,bk_215128,
+695817,Branded Data:Colligent Affinity Target:TV:CNBC (BlueKai),BlueKai,0.9,,,1262,,bk_215129,
+695818,Branded Data:Colligent Affinity Target:TV:CNN (BlueKai),BlueKai,0.9,,,1262,,bk_215130,
+695819,Branded Data:Colligent Affinity Target:TV:Comedy Central (BlueKai),BlueKai,0.9,,,1262,,bk_215131,
+695820,Branded Data:Colligent Affinity Target:TV:Discovery (BlueKai),BlueKai,0.9,,,1262,,bk_215132,
+695821,Branded Data:Colligent Affinity Target:TV:ESPN (BlueKai),BlueKai,0.9,,,1262,,bk_215133,
+695822,Branded Data:Colligent Affinity Target:TV:Fox News (BlueKai),BlueKai,0.9,,,1262,,bk_215134,
+695823,Branded Data:Colligent Affinity Target:TV:History (BlueKai),BlueKai,0.9,,,1262,,bk_215135,
+695824,Branded Data:Colligent Affinity Target:TV:ITV (BlueKai),BlueKai,0.9,,,1262,,bk_215136,
+695825,Branded Data:Colligent Affinity Target:TV:MTV (BlueKai),BlueKai,0.9,,,1262,,bk_215137,
+695826,Branded Data:Colligent Affinity Target:TV:NBC (BlueKai),BlueKai,0.9,,,1262,,bk_215138,
+695827,Branded Data:Colligent Affinity Target:TV:NFL Network (BlueKai),BlueKai,0.9,,,1262,,bk_215139,
+695828,Branded Data:Colligent Affinity Target:TV:Outdoor Channel (BlueKai),BlueKai,0.9,,,1262,,bk_215140,
+695829,Branded Data:Colligent Affinity Target:TV:PBS (BlueKai),BlueKai,0.9,,,1262,,bk_215141,
+695830,Branded Data:Colligent Affinity Target:TV:Sky Sports (BlueKai),BlueKai,0.9,,,1262,,bk_215142,
+695831,Branded Data:Colligent Affinity Target:TV:Speed (BlueKai),BlueKai,0.9,,,1262,,bk_215143,
+695832,Branded Data:Colligent Affinity Target:TV:Spike (BlueKai),BlueKai,0.9,,,1262,,bk_215144,
+695833,Branded Data:Colligent Affinity Target:TV:Syndicated (BlueKai),BlueKai,0.9,,,1262,,bk_215145,
+695834,Branded Data:MasterCard:Frequent Transactor (BlueKai),BlueKai,1.75,,,1262,,bk_199036,
+695835,Branded Data:MasterCard:Frequent Transactor:Automotive (BlueKai),BlueKai,1.75,,,1262,,bk_199037,
+695836,Branded Data:MasterCard:Frequent Transactor:Automotive:Automotive Retail & Accessories (BlueKai),BlueKai,1.75,,,1262,,bk_199047,
+695837,Branded Data:MasterCard:Frequent Transactor:Automotive:New & Pre Owned Vehicle Sales (BlueKai),BlueKai,1.75,,,1262,,bk_199046,
+695838,Branded Data:MasterCard:Frequent Transactor:Entertainment (BlueKai),BlueKai,1.75,,,1262,,bk_199038,
+695839,Branded Data:MasterCard:Frequent Transactor:Entertainment:Concert Tickets & General Box Office (BlueKai),BlueKai,1.75,,,1262,,bk_199048,
+695840,Branded Data:MasterCard:Frequent Transactor:Entertainment:Movies (BlueKai),BlueKai,1.75,,,1262,,bk_199049,
+695841,Branded Data:MasterCard:Frequent Transactor:Entertainment:Professional Sports (BlueKai),BlueKai,1.75,,,1262,,bk_199050,
+695842,Branded Data:MasterCard:Frequent Transactor:Entertainment:Theme Parks (BlueKai),BlueKai,1.75,,,1262,,bk_199051,
+695843,Branded Data:MasterCard:Frequent Transactor:Grocery & Drug Stores (BlueKai),BlueKai,1.75,,,1262,,bk_199039,
+695844,Branded Data:MasterCard:Frequent Transactor:Grocery & Drug Stores:Drug Stores (BlueKai),BlueKai,1.75,,,1262,,bk_199052,
+695845,Branded Data:MasterCard:Frequent Transactor:Grocery & Drug Stores:Grocery Stores (BlueKai),BlueKai,1.75,,,1262,,bk_199053,
+695846,Branded Data:MasterCard:Frequent Transactor:Hotel (BlueKai),BlueKai,1.75,,,1262,,bk_199040,
+695847,Branded Data:MasterCard:Frequent Transactor:Hotel:Hotel / Motel (BlueKai),BlueKai,1.75,,,1262,,bk_199054,
+695848,Branded Data:MasterCard:Frequent Transactor:Hotel:Upscale Hotel / Resort (BlueKai),BlueKai,1.75,,,1262,,bk_199055,
+695849,Branded Data:MasterCard:Frequent Transactor:Restaurant (BlueKai),BlueKai,1.75,,,1262,,bk_199042,
+695850,Branded Data:MasterCard:Frequent Transactor:Restaurant:Fine Dining (BlueKai),BlueKai,1.75,,,1262,,bk_199057,
+695851,Branded Data:MasterCard:Frequent Transactor:Restaurant:Mid-Range Restaurants / Non-Quick Serve (BlueKai),BlueKai,1.75,,,1262,,bk_199058,
+695852,Branded Data:MasterCard:Frequent Transactor:Restaurant:Quick Serve Restaurants (BlueKai),BlueKai,1.75,,,1262,,bk_199059,
+695853,Branded Data:MasterCard:Frequent Transactor:Retail (BlueKai),BlueKai,1.75,,,1262,,bk_199043,
+695854,Branded Data:MasterCard:Frequent Transactor:Retail:Camera & Photography (BlueKai),BlueKai,1.75,,,1262,,bk_199060,
+695855,Branded Data:MasterCard:Frequent Transactor:Retail:Children's Apparel (BlueKai),BlueKai,1.75,,,1262,,bk_199061,
+695856,Branded Data:MasterCard:Frequent Transactor:Retail:Computer & Software Sales (BlueKai),BlueKai,1.75,,,1262,,bk_199062,
+695857,Branded Data:MasterCard:Frequent Transactor:Retail:Consumer Electronics. Appliances & Accessories (BlueKai),BlueKai,1.75,,,1262,,bk_199063,
+695858,Branded Data:MasterCard:Frequent Transactor:Retail:Delivery Services (BlueKai),BlueKai,1.75,,,1262,,bk_199064,
+695859,Branded Data:MasterCard:Frequent Transactor:Retail:Department Stores (BlueKai),BlueKai,1.75,,,1262,,bk_199065,
+695860,Branded Data:MasterCard:Frequent Transactor:Retail:Discount Department Store (BlueKai),BlueKai,1.75,,,1262,,bk_199066,
+695861,Branded Data:MasterCard:Frequent Transactor:Retail:Family Apparel (BlueKai),BlueKai,1.75,,,1262,,bk_199067,
+695862,Branded Data:MasterCard:Frequent Transactor:Retail:Gift Stores (BlueKai),BlueKai,1.75,,,1262,,bk_199068,
+695863,Branded Data:MasterCard:Frequent Transactor:Retail:Home Furnishing & Accessories (BlueKai),BlueKai,1.75,,,1262,,bk_199069,
+695864,Branded Data:MasterCard:Frequent Transactor:Retail:Home Improvement (BlueKai),BlueKai,1.75,,,1262,,bk_199070,
+695865,Branded Data:MasterCard:Frequent Transactor:Retail:Luxury Men's Apparel (BlueKai),BlueKai,1.75,,,1262,,bk_199071,
+695866,Branded Data:MasterCard:Frequent Transactor:Retail:Luxury Retailers (BlueKai),BlueKai,1.75,,,1262,,bk_199072,
+695867,Branded Data:MasterCard:Frequent Transactor:Retail:Luxury Travel (BlueKai),BlueKai,1.75,,,1262,,bk_199073,
+695868,Branded Data:MasterCard:Frequent Transactor:Retail:Luxury Women's Apparel (BlueKai),BlueKai,1.75,,,1262,,bk_199074,
+695869,Branded Data:MasterCard:Frequent Transactor:Retail:Mega Stores (BlueKai),BlueKai,1.75,,,1262,,bk_199075,
+695870,Branded Data:MasterCard:Frequent Transactor:Retail:Men’s Apparel (BlueKai),BlueKai,1.75,,,1262,,bk_199076,
+695871,Branded Data:MasterCard:Frequent Transactor:Retail:Office Supplies (BlueKai),BlueKai,1.75,,,1262,,bk_199077,
+695872,Branded Data:MasterCard:Frequent Transactor:Retail:Online Dating Communities (BlueKai),BlueKai,1.75,,,1262,,bk_199078,
+695873,Branded Data:MasterCard:Frequent Transactor:Retail:Sports Apparel & Equipment (BlueKai),BlueKai,1.75,,,1262,,bk_199082,
+695874,Branded Data:MasterCard:Frequent Transactor:Retail:Women's Apparel (BlueKai),BlueKai,1.75,,,1262,,bk_199083,
+695875,Branded Data:MasterCard:Frequent Transactor:Telco / Cable (BlueKai),BlueKai,1.75,,,1262,,bk_199044,
+695876,Branded Data:MasterCard:Frequent Transactor:Telco / Cable:Cable TV & Internet (BlueKai),BlueKai,1.75,,,1262,,bk_199085,
+695877,Branded Data:MasterCard:Frequent Transactor:Telco / Cable:Cellular / Wireless Devices (BlueKai),BlueKai,1.75,,,1262,,bk_199086,
+695878,Branded Data:MasterCard:Frequent Transactor:Travel (BlueKai),BlueKai,1.75,,,1262,,bk_199045,
+695879,Branded Data:MasterCard:Frequent Transactor:Travel:Cruise Travel (BlueKai),BlueKai,1.75,,,1262,,bk_199089,
+695880,Branded Data:MasterCard:Frequent Transactor:Travel:Domestic Air Travel (BlueKai),BlueKai,1.75,,,1262,,bk_199090,
+695881,Branded Data:MasterCard:Frequent Transactor:Travel:Intl Air Travel (BlueKai),BlueKai,1.75,,,1262,,bk_199091,
+699704,Branded Data > AdAdvisor > Television > Any Pay/Premium Channel (BlueKai),BlueKai,1,,,1262,,bk_222523,
+699709,Branded Data > AdAdvisor > Personal Finance > Tax Preparation > Turbo Tax (Offline) (BlueKai),BlueKai,1,,,1262,,bk_222520,
+699710,Branded Data > AdAdvisor > Personal Finance > Tax Preparation > Turbo Tax (Online) (BlueKai),BlueKai,1,,,1262,,bk_222519,
+699711,Branded Data > AdAdvisor > Life Events > Important Life Events > Expect to Change Jobs (BlueKai),BlueKai,1,,,1262,,bk_221298,
+699712,Branded Data > AdAdvisor > Life Events > Important Life Events > Expect to Refinance Home (BlueKai),BlueKai,1,,,1262,,bk_221297,
+699713,Branded Data > AdAdvisor > Life Events > Important Life Events > Expect to Buy First Home (BlueKai),BlueKai,1,,,1262,,bk_221296,
+699714,Branded Data > AdAdvisor > Home/Garden/Sporting Goods > Owns Workshop Equipment (BlueKai),BlueKai,1,,,1262,,bk_221295,
+699715,Branded Data > AdAdvisor > Food/Drug > Wears Disposable Contact Lenses (BlueKai),BlueKai,1,,,1262,,bk_221294,
+699716,Branded Data > AdAdvisor > Food/Drug > Uses Hair Coloring Products (BlueKai),BlueKai,1,,,1262,,bk_221293,
+699717,Branded Data > AdAdvisor > Food/Drug > Uses Toothbrushes (Power) (BlueKai),BlueKai,1,,,1262,,bk_221292,
+699718,Branded Data > AdAdvisor > Food/Drug > Uses Toothbrushes (Manual) (BlueKai),BlueKai,1,,,1262,,bk_221291,
+699719,Branded Data > AdAdvisor > Food/Drug > Uses Electric & Battery Shavers (BlueKai),BlueKai,1,,,1262,,bk_221290,
+699720,Branded Data > AdAdvisor > Food/Drug > Uses Disposable Razors/Shavers (BlueKai),BlueKai,1,,,1262,,bk_221289,
+699721,Branded Data > AdAdvisor > Food/Drug (BlueKai),BlueKai,1,,,1262,,bk_221288,
+699722,Branded Data > AdAdvisor > Travel > Not Enrolled in Frequent Flyer Program (BlueKai),BlueKai,1,,,1262,,bk_221287,
+699723,Branded Data > AdAdvisor > Travel > Currently Enrolled in Frequent Flyer Program (BlueKai),BlueKai,1,,,1262,,bk_221286,
+699724,Branded Data > AdAdvisor > Travel (BlueKai),BlueKai,1,,,1262,,bk_221285,
+699725,Branded Data > AdAdvisor > Entertainment/Leisure > Events > Movies (BlueKai),BlueKai,1,,,1262,,bk_221260,
+699726,Branded Data > AdAdvisor > Entertainment/Leisure > Events > Country Concerts (BlueKai),BlueKai,1,,,1262,,bk_221259,
+699727,Branded Data > AdAdvisor > Entertainment/Leisure > Events > Rock/Pop Concerts (BlueKai),BlueKai,1,,,1262,,bk_221258,
+699728,Branded Data > AdAdvisor > Entertainment/Leisure > Events > R&B/Hip-Hop/Rap Concerts (BlueKai),BlueKai,1,,,1262,,bk_221257,
+699729,Branded Data > AdAdvisor > Entertainment/Leisure > Events (BlueKai),BlueKai,1,,,1262,,bk_221256,
+699731,Branded Data > AdAdvisor > Computers / Electronics / Telecom > Mobile Plan Type > Business/Corporate Plan (BlueKai),BlueKai,1,,,1262,,bk_221253,
+699732,Branded Data > AdAdvisor > Computers / Electronics / Telecom > Plays Online Video Games (BlueKai),BlueKai,1,,,1262,,bk_221248,
+699733,Branded Data > AdAdvisor > Computers / Electronics / Telecom > Video Games Buyer (BlueKai),BlueKai,1,,,1262,,bk_221247,
+699734,Branded Data > AdAdvisor > Television > Satellite Dish (BlueKai),BlueKai,1,,,1262,,bk_221233,
+699735,Branded Data > AdAdvisor > Television > Subscribes to Digital Cable (BlueKai),BlueKai,1,,,1262,,bk_221232,
+699736,Branded Data > AdAdvisor > Television > Does Not Subscribe to Cable/Satellite TV (BlueKai),BlueKai,1,,,1262,,bk_221231,
+699737,Branded Data > AdAdvisor > Television > Cable TV Subscribers (BlueKai),BlueKai,1,,,1262,,bk_221230,
+699738,Branded Data > AdAdvisor > Television (BlueKai),BlueKai,1,,,1262,,bk_221229,
+699739,Branded Data > AdAdvisor > Entertainment/Leisure > Dining Out > Family Restaurants (BlueKai),BlueKai,1,,,1262,,bk_221228,
+699740,Branded Data > AdAdvisor > Entertainment/Leisure > Dining Out > Fast Food (BlueKai),BlueKai,1,,,1262,,bk_221227,
+699741,Branded Data > AdAdvisor > Entertainment/Leisure > Dining Out (BlueKai),BlueKai,1,,,1262,,bk_221226,
+699742,Branded Data > AdAdvisor > Entertainment/Leisure > Cooking for Fun (BlueKai),BlueKai,1,,,1262,,bk_221225,
+699743,Branded Data > AdAdvisor > Entertainment/Leisure > Photography (BlueKai),BlueKai,1,,,1262,,bk_221224,
+699744,Branded Data > AdAdvisor > Entertainment/Leisure > Go to Bars/Nightclubs/Dancing (BlueKai),BlueKai,1,,,1262,,bk_221223,
+699745,Branded Data > AdAdvisor > Entertainment/Leisure > Dining Out > Not Fast Food (BlueKai),BlueKai,1,,,1262,,bk_221222,
+699746,Branded Data > AdAdvisor > Entertainment/Leisure > Fantasy Sports Leagues (BlueKai),BlueKai,1,,,1262,,bk_221221,
+699747,Branded Data > AdAdvisor > Home/Garden/Sporting Goods > Non-Kitchen Remodel in Next Year (BlueKai),BlueKai,1,,,1262,,bk_221191,
+699748,Branded Data > AdAdvisor > Home/Garden/Sporting Goods > Kitchen Remodel in Next Year (BlueKai),BlueKai,1,,,1262,,bk_221190,
+699749,Branded Data > AdAdvisor > Home/Garden/Sporting Goods (BlueKai),BlueKai,1,,,1262,,bk_221188,
+699750,Branded Data > AdAdvisor > Entertainment/Leisure > Physical Fitness Program at Home (BlueKai),BlueKai,1,,,1262,,bk_221187,
+699751,Branded Data > AdAdvisor > Entertainment/Leisure > Physical Fitness Program - Regular Participant Last 12 Months (BlueKai),BlueKai,1,,,1262,,bk_221186,
+699752,Branded Data > AdAdvisor > Entertainment/Leisure > Yoga (BlueKai),BlueKai,1,,,1262,,bk_221185,
+699753,Branded Data > AdAdvisor > Entertainment/Leisure > Weight Training (BlueKai),BlueKai,1,,,1262,,bk_221184,
+699755,Branded Data > AdAdvisor > Entertainment/Leisure > Cardio Machine (BlueKai),BlueKai,1,,,1262,,bk_221183,
+699756,Branded Data > AdAdvisor > Entertainment/Leisure > Swimming (BlueKai),BlueKai,1,,,1262,,bk_221182,
+699757,Branded Data > AdAdvisor > Entertainment/Leisure > Jogging/Running (BlueKai),BlueKai,1,,,1262,,bk_221181,
+699758,Branded Data > AdAdvisor > Entertainment/Leisure > Golf (BlueKai),BlueKai,1,,,1262,,bk_221180,
+699759,Branded Data > AdAdvisor > Entertainment/Leisure > Fresh Water Fish (BlueKai),BlueKai,1,,,1262,,bk_221179,
+699760,Branded Data > AdAdvisor > Entertainment/Leisure > Fitness Walk (BlueKai),BlueKai,1,,,1262,,bk_221178,
+699761,Branded Data > AdAdvisor > Entertainment/Leisure > Camping Trips (BlueKai),BlueKai,1,,,1262,,bk_221177,
+699762,Branded Data > AdAdvisor > Entertainment/Leisure > Bowling (BlueKai),BlueKai,1,,,1262,,bk_221176,
+699763,Branded Data > AdAdvisor > Entertainment/Leisure > Billiards/Pool (BlueKai),BlueKai,1,,,1262,,bk_221175,
+699764,Branded Data > AdAdvisor > Entertainment/Leisure > Stationary Bike (BlueKai),BlueKai,1,,,1262,,bk_221174,
+699765,Branded Data > AdAdvisor > Entertainment/Leisure > Bike - Mountain/Road (BlueKai),BlueKai,1,,,1262,,bk_221173,
+699766,Branded Data > AdAdvisor > Entertainment/Leisure > Basketball (BlueKai),BlueKai,1,,,1262,,bk_221172,
+699767,Branded Data > AdAdvisor > Entertainment/Leisure > Aerobics (BlueKai),BlueKai,1,,,1262,,bk_221171,
+699768,Branded Data > AdAdvisor > Entertainment/Leisure (BlueKai),BlueKai,1,,,1262,,bk_221170,
+699769,Branded Data > AdAdvisor > Demographics > Employment Status > Employed by Others > Not Work at Home (BlueKai),BlueKai,0.5,,,1262,,bk_221169,
+699770,Branded Data > AdAdvisor > Demographics > Employment Status > Employed by Others > Work for Local. State or Federal Government (BlueKai),BlueKai,0.5,,,1262,,bk_221168,
+699771,Branded Data > AdAdvisor > Demographics > Employment Status > Employed by Others > Work for Private School/Institution (BlueKai),BlueKai,0.5,,,1262,,bk_221167,
+699772,Branded Data > AdAdvisor > Demographics > Employment Status > Employed by Others > Work for Private Company (BlueKai),BlueKai,0.5,,,1262,,bk_221166,
+699773,Branded Data > AdAdvisor > Demographics > Employment Status > Employed by Others (BlueKai),BlueKai,0.5,,,1262,,bk_221165,
+699774,Branded Data > AdAdvisor > Demographics > Employment Status > Currently Self-Employed > Self-Employed & Work outside of Home (BlueKai),BlueKai,0.5,,,1262,,bk_221164,
+699775,Branded Data > AdAdvisor > Demographics > Home Ownership > Rented Apartment (BlueKai),BlueKai,0.5,,,1262,,bk_221163,
+699777,Branded Data > AdAdvisor > Automotive > Vehicle Type > Any Hybrid (BlueKai),BlueKai,1,,,1262,,bk_221162,
+699778,Branded Data > AdAdvisor > Automotive > Number of Total Vehicles in Household > 4+ (BlueKai),BlueKai,1,,,1262,,bk_221161,
+699779,Branded Data > AdAdvisor > Automotive > Number of Total Vehicles in Household > 3 (BlueKai),BlueKai,1,,,1262,,bk_221160,
+699780,Branded Data > AdAdvisor > Automotive > Number of Total Vehicles in Household > 2 (BlueKai),BlueKai,1,,,1262,,bk_221159,
+699781,Branded Data > AdAdvisor > Automotive > Number of Total Vehicles in Household > 1 (BlueKai),BlueKai,1,,,1262,,bk_221158,
+699782,Branded Data > AdAdvisor > Automotive > Number of Total Vehicles in Household (BlueKai),BlueKai,1,,,1262,,bk_221157,
+699783,Branded Data > AdAdvisor > Automotive > Vehicle Type > Foreign - Any Luxury (BlueKai),BlueKai,1,,,1262,,bk_221154,
+699784,Branded Data > Lotame > Advanced Demographics > Job Seekers > Healthcare (BlueKai),BlueKai,1.25,,,1262,,bk_219724,
+699785,Branded Data > Lotame > Advanced Demographics > Job Seekers > Telecommunication (BlueKai),BlueKai,1.25,,,1262,,bk_219723,
+699786,Branded Data > Lotame > Advanced Demographics > Job Seekers (BlueKai),BlueKai,1.25,,,1262,,bk_219722,
+699787,Branded Data > Lotame > Offline Home Improvement > Job Cost > $1.000+ (BlueKai),BlueKai,1.25,,,1262,,bk_219721,
+699788,Branded Data > Lotame > Offline Home Improvement > Job Cost > $5.000+ (BlueKai),BlueKai,1.25,,,1262,,bk_219720,
+699789,Branded Data > Lotame > Offline Home Improvement > Job Cost > $2.500+ (BlueKai),BlueKai,1.25,,,1262,,bk_219719,
+699790,Branded Data > Lotame > Offline Home Improvement > Job Cost > $0 - $1.000 (BlueKai),BlueKai,1.25,,,1262,,bk_219718,
+699791,Branded Data > Lotame > Offline Home Improvement > Job Cost (BlueKai),BlueKai,1.25,,,1262,,bk_219717,
+699792,Branded Data > Lotame > Offline Home Improvement > In Market Improvement (BlueKai),BlueKai,1.25,,,1262,,bk_219716,
+699793,Branded Data > Lotame > Offline Home Improvement > Security System (BlueKai),BlueKai,1.25,,,1262,,bk_219715,
+699794,Branded Data > Lotame > Offline Home Improvement > Solar Installment (BlueKai),BlueKai,1.25,,,1262,,bk_219714,
+699795,Branded Data > Lotame > Offline Home Improvement > Demolition Work (BlueKai),BlueKai,1.25,,,1262,,bk_219713,
+699796,Branded Data > Lotame > Offline Home Improvement > Updated Plumbing (BlueKai),BlueKai,1.25,,,1262,,bk_219712,
+699797,Branded Data > Lotame > Offline Home Improvement > HVAC - Mechanical (BlueKai),BlueKai,1.25,,,1262,,bk_219711,
+699798,Branded Data > Lotame > Offline Home Improvement > Electrical (BlueKai),BlueKai,1.25,,,1262,,bk_219710,
+699799,Branded Data > Lotame > Offline Home Improvement > New Roof (BlueKai),BlueKai,1.25,,,1262,,bk_219709,
+699800,Branded Data > Lotame > Offline Home Improvement > Repaired Last 5 Years (BlueKai),BlueKai,1.25,,,1262,,bk_219708,
+699801,Branded Data > Lotame > Offline Home Improvement > New Pool Past 5 Years (BlueKai),BlueKai,1.25,,,1262,,bk_219707,
+699802,Branded Data > Lotame > Offline Home Improvement > Property Built Past 12 Months (BlueKai),BlueKai,1.25,,,1262,,bk_219706,
+699803,Branded Data > Lotame > Offline Home Improvement > Property Addition Remodel Alteration Past 2 Years (BlueKai),BlueKai,1.25,,,1262,,bk_219705,
+699804,Branded Data > Lotame > Offline Home Improvement (BlueKai),BlueKai,1.25,,,1262,,bk_219700,
+699805,Branded Data > Lotame > Travel > US Only Business Travel (BlueKai),BlueKai,1.25,,,1262,,bk_219699,
+699806,Branded Data > Lotame > Charitable Donors (BlueKai),BlueKai,1.25,,,1262,,bk_219698,
+699807,Branded Data > Lotame > Automobiles > Domestic Chevrolet (BlueKai),BlueKai,1.25,,,1262,,bk_219697,
+699808,Branded Data > Lotame > Automobiles > Foreign (BlueKai),BlueKai,1.25,,,1262,,bk_219696,
+699809,Branded Data > Lotame > Automobiles > Domestic (BlueKai),BlueKai,1.25,,,1262,,bk_219695,
+699810,Branded Data > Lotame > Style. Fashion & Clothing > Cosmetics Luxury Shoppers (BlueKai),BlueKai,1.25,,,1262,,bk_219694,
+699811,Branded Data > Lotame > Online Shoppers (BlueKai),BlueKai,1.25,,,1262,,bk_219693,
+699812,Branded Data > Lotame > Style. Fashion & Clothing > Women's Clothing Shoppers (BlueKai),BlueKai,1.25,,,1262,,bk_219692,
+699813,Branded Data > Lotame > Style. Fashion & Clothing > Women's Clothing Luxury Shoppers (BlueKai),BlueKai,1.25,,,1262,,bk_219691,
+699814,Branded Data > Lotame > Style. Fashion & Clothing > Men's Clothing Shoppers (BlueKai),BlueKai,1.25,,,1262,,bk_219690,
+699815,Branded Data > Lotame > Style. Fashion & Clothing > Men's Clothing Luxury Shoppers (BlueKai),BlueKai,1.25,,,1262,,bk_219689,
+699817,Branded Data > Lotame > Style. Fashion & Clothing > Children's Clothing Shoppers (BlueKai),BlueKai,1.25,,,1262,,bk_219688,
+699818,Branded Data > Lotame > Online Shoppers > Online Shoppers (BlueKai),BlueKai,1.25,,,1262,,bk_219687,
+699819,Branded Data > Lotame > Online Shoppers > Online Shoppers Luxury (BlueKai),BlueKai,1.25,,,1262,,bk_219686,
+699820,Branded Data > TruSignal > Interest Model: Travel > Air Travel (BlueKai),BlueKai,0.75,,,1262,,bk_219268,
+699821,Branded Data > TruSignal > Interest Model: Autos > Sport Utility Vehicles (BlueKai),BlueKai,1,,,1262,,bk_219218,
+699822,Branded Data > TruSignal > Interest Model: Autos > Electric & Hybrid (BlueKai),BlueKai,1,,,1262,,bk_219216,
+699823,Branded Data > TruSignal > Interest Model: Autos > Full Size Auto (BlueKai),BlueKai,1,,,1262,,bk_219215,
+699824,Branded Data > DataLogix > DLX Lifestyles > Indie Women (BlueKai),BlueKai,1,,,1262,,bk_217230,
+699825,Branded Data > DataLogix > DLX TV > TV Categories > Premium Channels (BlueKai),BlueKai,1,,,1262,,bk_217229,
+699826,Branded Data > DataLogix > DLX TV > Viewership > Heavy Viewers (BlueKai),BlueKai,1,,,1262,,bk_217228,
+699827,Branded Data > DataLogix > DLX TV > Viewership > Light Viewers (BlueKai),BlueKai,1,,,1262,,bk_217227,
+699828,Branded Data > DataLogix > DLX TV > Viewership (BlueKai),BlueKai,1,,,1262,,bk_217226,
+699829,Branded Data > DataLogix > DLX TV > Dayparts (BlueKai),BlueKai,1,,,1262,,bk_217225,
+699830,Branded Data > DataLogix > DLX TV > TV Categories (BlueKai),BlueKai,1,,,1262,,bk_217224,
+699831,Branded Data > Arcametrics > Toys & Hobbies > Collectibles > Behave-alikes Tier 2 (BlueKai),BlueKai,,,,1262,,bk_210361,
+699832,Branded Data > Arcametrics > Toys & Hobbies > Hobbies > Behave-alikes Tier 2 (BlueKai),BlueKai,,,,1262,,bk_210360,
+699833,Branded Data > Arcametrics > Toys & Hobbies > Toys > Behave-alikes Tier 2 (BlueKai),BlueKai,,,,1262,,bk_210359,
+699834,Branded Data > Arcametrics > Sporting Goods > Hunting > Behave-alikes Tier 2 (BlueKai),BlueKai,,,,1262,,bk_210358,
+699835,Branded Data > Arcametrics > Pets > Pet Supplies > Behave-alikes Tier 2 (BlueKai),BlueKai,,,,1262,,bk_210357,
+699836,Branded Data > Arcametrics > Office Supplies & Products > Office Supplies > Behave-alikes Tier 2 (BlueKai),BlueKai,,,,1262,,bk_210356,
+699837,Branded Data > Arcametrics > Lawn & Backyard Leisure > Gardening > Behave-alikes Tier 2 (BlueKai),BlueKai,,,,1262,,bk_210355,
+699838,Branded Data > Arcametrics > Kitchen & Appliances > Vacuums & Cleaning Equipment > Behave-alikes Tier 2 (BlueKai),BlueKai,,,,1262,,bk_210354,
+699839,Branded Data > Arcametrics > Kitchen & Appliances > Kitchen & Cooking > Behave-alikes Tier 2 (BlueKai),BlueKai,,,,1262,,bk_210353,
+699840,Branded Data > Arcametrics > Jewelry & Gifts > Jewelry > Behave-alikes Tier 2 (BlueKai),BlueKai,,,,1262,,bk_210352,
+699841,Branded Data > Arcametrics > Jewelry & Gifts > Specialty Gifts > Behave-alikes Tier 2 (BlueKai),BlueKai,,,,1262,,bk_210351,
+699842,Branded Data > Arcametrics > Jewelry & Gifts > Gourmet Food Gifts > Behave-alikes Tier 2 (BlueKai),BlueKai,,,,1262,,bk_210350,
+699843,Branded Data > Arcametrics > Home Furnishing & Improvement > Tools > Behave-alikes Tier 2 (BlueKai),BlueKai,,,,1262,,bk_210349,
+699844,Branded Data > Arcametrics > Home Furnishing & Improvement > Home Improvement > Behave-alikes Tier 2 (BlueKai),BlueKai,,,,1262,,bk_210348,
+699845,Branded Data > Arcametrics > Home Furnishing & Improvement > Furniture > Behave-alikes Tier 2 (BlueKai),BlueKai,,,,1262,,bk_210347,
+699846,Branded Data > Arcametrics > Home Furnishing & Improvement > Home Furnishing > Behave-alikes Tier 2 (BlueKai),BlueKai,,,,1262,,bk_210346,
+699847,Branded Data > Arcametrics > Health. Beauty & Fitness > Health & Wellness > Behave-alikes Tier 2 (BlueKai),BlueKai,,,,1262,,bk_210345,
+699848,Branded Data > Arcametrics > Health. Beauty & Fitness > Vitamins & Supplements > Behave-alikes Tier 2 (BlueKai),BlueKai,,,,1262,,bk_210344,
+699849,Branded Data > Arcametrics > Health. Beauty & Fitness > Fitness > Behave-alikes Tier 2 (BlueKai),BlueKai,,,,1262,,bk_210343,
+699850,Branded Data > Arcametrics > Health. Beauty & Fitness > Beauty Products > Behave-alikes Tier 2 (BlueKai),BlueKai,,,,1262,,bk_210342,
+699851,Branded Data > Arcametrics > Consumer Electronics > Computers > Behave-alikes Tier 2 (BlueKai),BlueKai,,,,1262,,bk_210341,
+699852,Branded Data > Arcametrics > Consumer Electronics > Cameras & Accessories > Behave-alikes Tier 2 (BlueKai),BlueKai,,,,1262,,bk_210340,
+699853,Branded Data > Arcametrics > Auto Aftermarket > Automobile Accessories > Behave-alikes Tier 2 (BlueKai),BlueKai,,,,1262,,bk_210339,
+699854,Branded Data > Arcametrics > Apparel & Accessories > Athletic Apparel > Behave-alikes Tier 2 (BlueKai),BlueKai,,,,1262,,bk_210338,
+699855,Branded Data > Arcametrics > Apparel & Accessories > Accessories > Behave-alikes Tier 2 (BlueKai),BlueKai,,,,1262,,bk_210337,
+699856,Branded Data > Arcametrics > Toys & Hobbies > Collectibles > Behave-alikes Tier 1 (BlueKai),BlueKai,,,,1262,,bk_210336,
+699857,Branded Data > Arcametrics > Toys & Hobbies > Hobbies > Behave-alikes Tier 1 (BlueKai),BlueKai,,,,1262,,bk_210335,
+699858,Branded Data > Arcametrics > Toys & Hobbies > Toys > Behave-alikes Tier 1 (BlueKai),BlueKai,,,,1262,,bk_210334,
+699859,Branded Data > Arcametrics > Sporting Goods > Hunting > Behave-alikes Tier 1 (BlueKai),BlueKai,,,,1262,,bk_210333,
+699860,Branded Data > Arcametrics > Pets > Pet Supplies > Behave-alikes Tier 1 (BlueKai),BlueKai,,,,1262,,bk_210332,
+699861,Branded Data > Arcametrics > Office Supplies & Products > Office Supplies > Behave-alikes Tier 1 (BlueKai),BlueKai,,,,1262,,bk_210331,
+699862,Branded Data > Arcametrics > Lawn & Backyard Leisure > Gardening > Behave-alikes Tier 1 (BlueKai),BlueKai,,,,1262,,bk_210330,
+699863,Branded Data > Arcametrics > Kitchen & Appliances > Vacuums & Cleaning Equipment > Behave-alikes Tier 1 (BlueKai),BlueKai,,,,1262,,bk_210329,
+699864,Branded Data > Arcametrics > Kitchen & Appliances > Kitchen & Cooking > Behave-alikes Tier 1 (BlueKai),BlueKai,,,,1262,,bk_210328,
+699865,Branded Data > Arcametrics > Jewelry & Gifts > Jewelry > Behave-alikes Tier 1 (BlueKai),BlueKai,,,,1262,,bk_210327,
+699866,Branded Data > Arcametrics > Jewelry & Gifts > Specialty Gifts > Behave-alikes Tier 1 (BlueKai),BlueKai,,,,1262,,bk_210326,
+699867,Branded Data > Arcametrics > Jewelry & Gifts > Gourmet Food Gifts > Behave-alikes Tier 1 (BlueKai),BlueKai,,,,1262,,bk_210325,
+699868,Branded Data > Arcametrics > Home Furnishing & Improvement > Tools > Behave-alikes Tier 1 (BlueKai),BlueKai,,,,1262,,bk_210324,
+699869,Branded Data > Arcametrics > Home Furnishing & Improvement > Home Improvement > Behave-alikes Tier 1 (BlueKai),BlueKai,,,,1262,,bk_210323,
+699870,Branded Data > Arcametrics > Home Furnishing & Improvement > Furniture > Behave-alikes Tier 1 (BlueKai),BlueKai,,,,1262,,bk_210322,
+699871,Branded Data > Arcametrics > Home Furnishing & Improvement > Home Furnishing > Behave-alikes Tier 1 (BlueKai),BlueKai,,,,1262,,bk_210321,
+699872,Branded Data > Arcametrics > Health. Beauty & Fitness > Health & Wellness > Behave-alikes Tier 1 (BlueKai),BlueKai,,,,1262,,bk_210320,
+699873,Branded Data > Arcametrics > Health. Beauty & Fitness > Vitamins & Supplements > Behave-alikes Tier 1 (BlueKai),BlueKai,,,,1262,,bk_210319,
+699874,Branded Data > Arcametrics > Health. Beauty & Fitness > Fitness > Behave-alikes Tier 1 (BlueKai),BlueKai,,,,1262,,bk_210318,
+699875,Branded Data > Arcametrics > Health. Beauty & Fitness > Beauty Products > Behave-alikes Tier 1 (BlueKai),BlueKai,,,,1262,,bk_210317,
+699876,Branded Data > Arcametrics > Consumer Electronics > Computers > Behave-alikes Tier 1 (BlueKai),BlueKai,,,,1262,,bk_210316,
+699877,Branded Data > Arcametrics > Consumer Electronics > Cameras & Accessories > Behave-alikes Tier 1 (BlueKai),BlueKai,,,,1262,,bk_210315,
+699878,Branded Data > Arcametrics > Auto Aftermarket > Automobile Accessories > Behave-alikes Tier 1 (BlueKai),BlueKai,,,,1262,,bk_210314,
+699879,Branded Data > Arcametrics > Apparel & Accessories > Athletic Apparel > Behave-alikes Tier 1 (BlueKai),BlueKai,,,,1262,,bk_210313,
+699880,Branded Data > Arcametrics > Apparel & Accessories > Accessories > Behave-alikes Tier 1 (BlueKai),BlueKai,,,,1262,,bk_210312,
+699881,Branded Data > Arcametrics > Toys & Hobbies > Collectibles > Category Buyers (BlueKai),BlueKai,,,,1262,,bk_210311,
+699882,Branded Data > Arcametrics > Toys & Hobbies > Hobbies > Category Buyers (BlueKai),BlueKai,,,,1262,,bk_210310,
+699883,Branded Data > Arcametrics > Toys & Hobbies > Toys > Category Buyers (BlueKai),BlueKai,,,,1262,,bk_210309,
+699884,Branded Data > Arcametrics > Sporting Goods > Hunting > Category Buyers (BlueKai),BlueKai,,,,1262,,bk_210308,
+699885,Branded Data > Arcametrics > Pets > Pet Supplies > Category Buyers (BlueKai),BlueKai,,,,1262,,bk_210307,
+699886,Branded Data > Arcametrics > Office Supplies & Products > Office Supplies > Category Buyers (BlueKai),BlueKai,,,,1262,,bk_210306,
+699887,Branded Data > Arcametrics > Lawn & Backyard Leisure > Gardening > Category Buyers (BlueKai),BlueKai,,,,1262,,bk_210305,
+699888,Branded Data > Arcametrics > Kitchen & Appliances > Vacuums & Cleaning Equipment > Category Buyers (BlueKai),BlueKai,,,,1262,,bk_210304,
+699889,Branded Data > Arcametrics > Kitchen & Appliances > Kitchen & Cooking > Category Buyers (BlueKai),BlueKai,,,,1262,,bk_210303,
+699890,Branded Data > Arcametrics > Jewelry & Gifts > Jewelry > Category Buyers (BlueKai),BlueKai,,,,1262,,bk_210302,
+699891,Branded Data > Arcametrics > Jewelry & Gifts > Specialty Gifts > Category Buyers (BlueKai),BlueKai,,,,1262,,bk_210301,
+699892,Branded Data > Arcametrics > Jewelry & Gifts > Gourmet Food Gifts > Category Buyers (BlueKai),BlueKai,,,,1262,,bk_210300,
+699893,Branded Data > Arcametrics > Home Furnishing & Improvement > Tools > Category Buyers (BlueKai),BlueKai,,,,1262,,bk_210299,
+699894,Branded Data > Arcametrics > Home Furnishing & Improvement > Home Improvement > Category Buyers (BlueKai),BlueKai,,,,1262,,bk_210298,
+699895,Branded Data > Arcametrics > Home Furnishing & Improvement > Furniture > Category Buyers (BlueKai),BlueKai,,,,1262,,bk_210297,
+699896,Branded Data > Arcametrics > Home Furnishing & Improvement > Home Furnishing > Category Buyers (BlueKai),BlueKai,,,,1262,,bk_210296,
+699897,Branded Data > Arcametrics > Health. Beauty & Fitness > Health & Wellness > Category Buyers (BlueKai),BlueKai,,,,1262,,bk_210295,
+699898,Branded Data > Arcametrics > Health. Beauty & Fitness > Vitamins & Supplements > Category Buyers (BlueKai),BlueKai,,,,1262,,bk_210294,
+699899,Branded Data > Arcametrics > Health. Beauty & Fitness > Fitness > Category Buyers (BlueKai),BlueKai,,,,1262,,bk_210293,
+699900,Branded Data > Arcametrics > Health. Beauty & Fitness > Beauty Products > Category Buyers (BlueKai),BlueKai,,,,1262,,bk_210292,
+699901,Branded Data > Arcametrics > Consumer Electronics > Computers > Category Buyers (BlueKai),BlueKai,,,,1262,,bk_210291,
+699902,Branded Data > Arcametrics > Consumer Electronics > Cameras & Accessories > Category Buyers (BlueKai),BlueKai,,,,1262,,bk_210290,
+699903,Branded Data > Arcametrics > Auto Aftermarket > Automobile Accessories > Category Buyers (BlueKai),BlueKai,,,,1262,,bk_210289,
+699904,Branded Data > Arcametrics > Apparel & Accessories > Athletic Apparel > Category Buyers (BlueKai),BlueKai,,,,1262,,bk_210288,
+699905,Branded Data > Arcametrics > Apparel & Accessories > Accessories > Category Buyers (BlueKai),BlueKai,,,,1262,,bk_210287,
+699906,Branded Data > Arcametrics > Toys & Hobbies > Collectibles (BlueKai),BlueKai,,,,1262,,bk_210286,
+699907,Branded Data > Arcametrics > Toys & Hobbies > Hobbies (BlueKai),BlueKai,,,,1262,,bk_210285,
+699908,Branded Data > Arcametrics > Toys & Hobbies > Toys (BlueKai),BlueKai,,,,1262,,bk_210284,
+699909,Branded Data > Arcametrics > Sporting Goods > Hunting (BlueKai),BlueKai,,,,1262,,bk_210283,
+699910,Branded Data > Arcametrics > Pets > Pet Supplies (BlueKai),BlueKai,,,,1262,,bk_210282,
+699911,Branded Data > Arcametrics > Office Supplies & Products > Office Supplies (BlueKai),BlueKai,,,,1262,,bk_210281,
+699912,Branded Data > Arcametrics > Lawn & Backyard Leisure > Gardening (BlueKai),BlueKai,,,,1262,,bk_210280,
+699913,Branded Data > Arcametrics > Kitchen & Appliances > Vacuums & Cleaning Equipment (BlueKai),BlueKai,,,,1262,,bk_210279,
+699914,Branded Data > Arcametrics > Kitchen & Appliances > Kitchen & Cooking (BlueKai),BlueKai,,,,1262,,bk_210278,
+699915,Branded Data > Arcametrics > Jewelry & Gifts > Jewelry (BlueKai),BlueKai,,,,1262,,bk_210277,
+699916,Branded Data > Arcametrics > Jewelry & Gifts > Specialty Gifts (BlueKai),BlueKai,,,,1262,,bk_210276,
+699917,Branded Data > Arcametrics > Jewelry & Gifts > Gourmet Food Gifts (BlueKai),BlueKai,,,,1262,,bk_210275,
+699918,Branded Data > Arcametrics > Home Furnishing & Improvement > Tools (BlueKai),BlueKai,,,,1262,,bk_210274,
+699919,Branded Data > Arcametrics > Home Furnishing & Improvement > Home Improvement (BlueKai),BlueKai,,,,1262,,bk_210273,
+699920,Branded Data > Arcametrics > Home Furnishing & Improvement > Furniture (BlueKai),BlueKai,,,,1262,,bk_210272,
+699921,Branded Data > Arcametrics > Home Furnishing & Improvement > Home Furnishing (BlueKai),BlueKai,,,,1262,,bk_210271,
+699922,Branded Data > Arcametrics > Health. Beauty & Fitness > Health & Wellness (BlueKai),BlueKai,,,,1262,,bk_210270,
+699923,Branded Data > Arcametrics > Health. Beauty & Fitness > Vitamins & Supplements (BlueKai),BlueKai,,,,1262,,bk_210269,
+699925,Branded Data > Arcametrics > Health. Beauty & Fitness > Fitness (BlueKai),BlueKai,,,,1262,,bk_210268,
+699926,Branded Data > Arcametrics > Health. Beauty & Fitness > Beauty Products (BlueKai),BlueKai,,,,1262,,bk_210267,
+699928,Branded Data > Arcametrics > Consumer Electronics > Computers (BlueKai),BlueKai,,,,1262,,bk_210266,
+699930,Branded Data > Arcametrics > Consumer Electronics > Cameras & Accessories (BlueKai),BlueKai,,,,1262,,bk_210265,
+699932,Branded Data > Arcametrics > Auto Aftermarket > Automobile Accessories (BlueKai),BlueKai,,,,1262,,bk_210264,
+699933,Branded Data > Arcametrics > Apparel & Accessories > Athletic Apparel (BlueKai),BlueKai,,,,1262,,bk_210263,
+699935,Branded Data > Arcametrics > Apparel & Accessories > Accessories (BlueKai),BlueKai,,,,1262,,bk_210262,
+699937,Branded Data > Arcametrics > Toys & Hobbies (BlueKai),BlueKai,,,,1262,,bk_210258,
+699939,Branded Data > Arcametrics > Sporting Goods (BlueKai),BlueKai,,,,1262,,bk_210257,
+699940,Branded Data > Arcametrics > Pets (BlueKai),BlueKai,,,,1262,,bk_210256,
+699941,Branded Data > Arcametrics > Office Supplies & Products (BlueKai),BlueKai,,,,1262,,bk_210255,
+699942,Branded Data > Arcametrics > Lawn & Backyard Leisure (BlueKai),BlueKai,,,,1262,,bk_210254,
+699943,Branded Data > Arcametrics > Kitchen & Appliances (BlueKai),BlueKai,,,,1262,,bk_210253,
+699944,Branded Data > Arcametrics > Jewelry & Gifts (BlueKai),BlueKai,,,,1262,,bk_210252,
+699945,Branded Data > Arcametrics > Home Furnishing & Improvement (BlueKai),BlueKai,,,,1262,,bk_210251,
+699946,Branded Data > Arcametrics > Health. Beauty & Fitness (BlueKai),BlueKai,,,,1262,,bk_210250,
+699947,Branded Data > Arcametrics > Consumer Electronics (BlueKai),BlueKai,,,,1262,,bk_210249,
+699948,Branded Data > Arcametrics > Auto Aftermarket (BlueKai),BlueKai,,,,1262,,bk_210248,
+699949,Branded Data > Arcametrics > Apparel & Accessories (BlueKai),BlueKai,,,,1262,,bk_210247,
+699950,Branded Data > Arcametrics (BlueKai),BlueKai,,,,1262,,bk_210246,
+711358,Branded Data > Acxiom (BlueKai),BlueKai,1.5,,,1262,,bk_150555,
+711359,Branded Data > Acxiom > Demographic (BlueKai),BlueKai,0.75,,,1262,,bk_150556,
+711360,Branded Data > Acxiom > Demographic > Age (BlueKai),BlueKai,0.75,,,1262,,bk_150559,
+711361,Branded Data > Acxiom > Demographic > Age > 18-21 (BlueKai),BlueKai,0.75,,,1262,,bk_150568,
+711362,Branded Data > Acxiom > Demographic > Age > 22-25 (BlueKai),BlueKai,0.75,,,1262,,bk_150569,
+711363,Branded Data > Acxiom > Demographic > Age > 36-45 (BlueKai),BlueKai,0.75,,,1262,,bk_150571,
+711364,Branded Data > Acxiom > Demographic > Age > 46-55 (BlueKai),BlueKai,0.75,,,1262,,bk_150572,
+711365,Branded Data > Acxiom > Demographic > Age > 55-65 (BlueKai),BlueKai,0.75,,,1262,,bk_150573,
+711366,Branded Data > Acxiom > Demographic > Age > 66-75 (BlueKai),BlueKai,0.75,,,1262,,bk_150574,
+711367,Branded Data > Acxiom > Demographic > Age > 76+ (BlueKai),BlueKai,0.75,,,1262,,bk_150575,
+711370,Branded Data > Acxiom > Demographic > Dwelling Type (BlueKai),BlueKai,0.75,,,1262,,bk_150562,
+711372,Branded Data > Acxiom > Demographic > Dwelling Type > Multiple Family Dwelling Unit (BlueKai),BlueKai,0.75,,,1262,,bk_150582,
+711373,Branded Data > Acxiom > Demographic > Dwelling Type > Single Family Dwelling Unit (BlueKai),BlueKai,0.75,,,1262,,bk_150583,
+711374,Branded Data > Acxiom > Demographic > Education (BlueKai),BlueKai,0.75,,,1262,,bk_150563,
+711375,Branded Data > Acxiom > Demographic > Education > Attended Vocational/Technicacu(BlueKai),BlueKai,0.75,,,1262,,bk_150587,
+711376,Branded Data > Acxiom > Demographic > Education > Completed College (BlueKai),BlueKai,0.75,,,1262,,bk_150585,
+711377,Branded Data > Acxiom > Demographic > Education > Completed Graduate School (BlueKai),BlueKai,0.75,,,1262,,bk_150586,
+711378,Branded Data > Acxiom > Demographic > Education > Completed High School (BlueKai),BlueKai,0.75,,,1262,,bk_150584,
+711379,Branded Data > Acxiom > Demographic > Gender (BlueKai),BlueKai,0.75,,,1262,,bk_150565,
+711380,Branded Data > Acxiom > Demographic > Gender > Female (BlueKai),BlueKai,0.75,,,1262,,bk_150598,
+711381,Branded Data > Acxiom > Demographic > Gender > Male (BlueKai),BlueKai,0.75,,,1262,,bk_150597,
+711382,Branded Data > Acxiom > Demographic > Home Owner / Renter (BlueKai),BlueKai,0.75,,,1262,,bk_150601,
+711383,Branded Data > Acxiom > Demographic > Household Size (BlueKai),BlueKai,0.75,,,1262,,bk_150602,
+711384,Branded Data > Acxiom > Demographic > Household Size > 1 (BlueKai),BlueKai,0.75,,,1262,,bk_150633,
+711385,Branded Data > Acxiom > Demographic > Household Size > 2 (BlueKai),BlueKai,0.75,,,1262,,bk_150634,
+711387,Branded Data > Acxiom > Demographic > Household Size > 3 (BlueKai),BlueKai,0.75,,,1262,,bk_150635,
+711388,Branded Data > Acxiom > Demographic > Length of Residence (BlueKai),BlueKai,0.75,,,1262,,bk_150603,
+711389,Branded Data > Acxiom > Demographic > Length of Residence > 1-3 Years (BlueKai),BlueKai,0.75,,,1262,,bk_150639,
+711390,Branded Data > Acxiom > Demographic > Length of Residence > 4-6 Years (BlueKai),BlueKai,0.75,,,1262,,bk_150640,
+711391,Branded Data > Acxiom > Demographic > Length of Residence > 7+ Years (BlueKai),BlueKai,0.75,,,1262,,bk_150641,
+711392,Branded Data > Acxiom > Demographic > Length of Residence > Less than 1 Year (BlueKai),BlueKai,0.75,,,1262,,bk_150638,
+711393,Branded Data > Acxiom > Demographic > Marital Status (BlueKai),BlueKai,0.75,,,1262,,bk_150604,
+711394,Branded Data > Acxiom > Demographic > Marital Status > Married (BlueKai),BlueKai,0.75,,,1262,,bk_150642,
+711395,Branded Data > Acxiom > Demographic > Marital Status > Single (BlueKai),BlueKai,0.75,,,1262,,bk_150643,
+711396,Branded Data > Acxiom > Demographic > Number of Adults > 1 (BlueKai),BlueKai,0.75,,,1262,,bk_150655,

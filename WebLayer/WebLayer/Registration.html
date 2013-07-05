@@ -17,7 +17,7 @@
             this.Register = function () {
                 validate();
                 var user = getUserFromForm();
-                new $RCAjax($RCAPI.URI.ApnxUserRegister, JSON.stringify(user), 'POST', null, null, false, null, routePostErrors);
+                new $RCAjax($RCAPI.URI.ApnxUserRegister, JSON.stringify(user), 'POST', null, null, false, registrationSent, routePostErrors);
             };
 
             function getUserFromForm() {
@@ -57,7 +57,7 @@
             regForm.attachEvent("onButtonClick", regInstance.Register);
 
             function registrationSent() {
-                alert('Registration sent.');
+                document.location = "RegistrationThankYou.html";
             }
 
             function routePostErrors(data, errorType, errorText) {

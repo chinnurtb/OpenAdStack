@@ -1,6 +1,18 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="GetBudgetAllocationsActivity.cs" company="Rare Crowds Inc">
-//  Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 // -----------------------------------------------------------------------
 
@@ -238,10 +250,13 @@ namespace DynamicAllocationActivities
             // Find the next, future reallocation time based upon the the
             // campaign start date time of day and the reallocation schedule.
             var campaignStartTime = campaignStartDate.TimeOfDay;
-            var nextReallocation = now.Date + campaignStartTime;
             var scheduleEntry = 0;
+            var nextReallocation = now.Date + campaignStartTime;
             while (true)
             {
+                // Get the next reallocation on the schedule
+                nextReallocation = nextReallocation.Date + campaignStartTime + ReallocationSchedule[scheduleEntry];
+
                 // Check if the time slot key for nextReallocation is in the future.
                 var nowTimesSlotKey = Scheduler.GetTimeSlotKey(now);
                 var nextReallocationTimeSlotKey = Scheduler.GetTimeSlotKey(nextReallocation);
@@ -251,21 +266,11 @@ namespace DynamicAllocationActivities
                     return nextReallocation;
                 }
 
-                // Get the next reallocation per the schedule
-                if (++scheduleEntry < ReallocationSchedule.Length)
+                // Go to the next schedule entry
+                if ((scheduleEntry = (scheduleEntry + 1) % ReallocationSchedule.Length) == 0)
                 {
-                    nextReallocation =
-                        nextReallocation.Date +
-                        campaignStartTime +
-                        ReallocationSchedule[scheduleEntry];
-                }
-                else
-                {
-                    // No more reallocations this day. Go to the next day.
-                    scheduleEntry = 0;
-                    nextReallocation =
-                        nextReallocation.Date.AddDays(1) +
-                        campaignStartTime;
+                    // Rolled over to the next day
+                    nextReallocation = nextReallocation.Date.AddDays(1) + campaignStartTime;
                 }
             }
         }

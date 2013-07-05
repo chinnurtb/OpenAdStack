@@ -100,6 +100,7 @@
     <Content Include="BaseValuations.html" />
     <Content Include="Budget.html" />
     <None Include="ReportDeliverySA.html" />
+    <Content Include="RegistrationThankYou.html" />
     <Content Include="images\padlock-closed.png" />
     <Content Include="images\padlock-open.png" />
     <Content Include="Registration.html" />

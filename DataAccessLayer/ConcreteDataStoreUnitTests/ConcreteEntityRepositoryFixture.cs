@@ -1,6 +1,18 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ConcreteEntityRepositoryFixture.cs" company="Emerging Media Group">
-//   Copyright Emerging Media Group. All rights reserved.
+// <copyright file="ConcreteEntityRepositoryFixture.cs" company="Rare Crowds Inc">
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -47,6 +59,48 @@ namespace ConcreteDataStoreUnitTests
 
         /// <summary>IBlobStore for testing.</summary>
         private IBlobStore blobStore;
+
+        /// <summary>Partner Id for testing.</summary>
+        private EntityId partnerEntityId = new EntityId();
+
+        /// <summary>target Id for testing.</summary>
+        private EntityId targetId1 = new EntityId();
+        
+        /// <summary>target Id for testing.</summary>
+        private EntityId targetId2 = new EntityId();
+        
+        /// <summary>target Id for testing.</summary>
+        private EntityId targetId3 = new EntityId();
+
+        /// <summary>target Id for testing.</summary>
+        private EntityId targetIdRemoved = new EntityId();
+
+        /// <summary>property name for testing.</summary>
+        private string propertyName = "SomeName1";
+
+        /// <summary>property name for testing.</summary>
+        private string propertyNameRemoved1 = "SomeName2";
+
+        /// <summary>extended property name for testing.</summary>
+        private string extPropertyName = "ExtSomeName";
+
+        /// <summary>property value for testing.</summary>
+        private string propertyValue = "somevalue";
+
+        /// <summary>new property value for testing.</summary>
+        private string newPropertyValue = "somenewvalue";
+
+        /// <summary>association name for testing.</summary>
+        private string assoc1Name = "assoc1";
+
+        /// <summary>association name for testing.</summary>
+        private string assocNameRemoved = "assocRemoved";
+
+        /// <summary>association name for testing.</summary>
+        private string assocNameCollRemoved = "assocCollRemoved";
+
+        /// <summary>association name for testing.</summary>
+        private string assoc2Name = "assoc2";
 
         /// <summary>Per-test initialization</summary>
         [TestInitialize]
@@ -136,7 +190,7 @@ namespace ConcreteDataStoreUnitTests
         public void SaveEntityReadOnlyProperties()
         {
             // Build entity and set up stubs
-            IRawEntity savedEntity = null;
+            IEntity savedEntity = null;
             var entity = this.SetupExistingEntityStubs(TestEntityBuilder.BuildPartnerEntity(), true, e => savedEntity = e);
 
             // Capture the original create date and current last modified date
@@ -193,7 +247,7 @@ namespace ConcreteDataStoreUnitTests
             // Assert that the entity passed to data store is derived from the wrapped entity
             this.entityStore.AssertWasCalled(f => f.SaveEntity(
                 Arg<RequestContext>.Is.Anything,
-                Arg<IRawEntity>.Matches(e => e.ExternalEntityId == entity.ExternalEntityId 
+                Arg<IEntity>.Matches(e => e.ExternalEntityId == entity.ExternalEntityId 
                     && !ReferenceEquals(entity, e)),
                 Arg<bool>.Is.Equal(false)));
         }
@@ -211,7 +265,7 @@ namespace ConcreteDataStoreUnitTests
             
             // BuildNewStorageKey should not be called for entity2
             this.storageKeyFactory.AssertWasNotCalled(f => f.BuildNewStorageKey(
-                Arg<string>.Is.Anything, Arg<EntityId>.Is.Anything, Arg<IRawEntity>.Is.Equal(entity2.ExternalEntityId)));
+                Arg<string>.Is.Anything, Arg<EntityId>.Is.Anything, Arg<IEntity>.Is.Equal(entity2.ExternalEntityId)));
             
             // Entity and index should be updated for both of them but only entity1 should have isUpdate=true
             this.AssertSaveNewEntity(entity1);
@@ -252,10 +306,269 @@ namespace ConcreteDataStoreUnitTests
             catch (DataAccessException)
             {
                 this.entityStore.AssertWasCalled(
-                    f => f.SaveEntity(Arg<RequestContext>.Is.Anything, Arg<IRawEntity>.Is.Anything, Arg<bool>.Is.Anything));
+                    f => f.SaveEntity(Arg<RequestContext>.Is.Anything, Arg<IEntity>.Is.Anything, Arg<bool>.Is.Anything));
                 this.indexStore.AssertWasNotCalled(
-                    f => f.SaveEntity(Arg<IRawEntity>.Is.Anything, Arg<bool>.Is.Anything));
+                    f => f.SaveEntity(Arg<IEntity>.Is.Anything, Arg<bool>.Is.Anything));
             }
+        }
+
+        /// <summary>Merge entity on initial save.</summary>
+        [TestMethod]
+        public void MergeEntitiesNew()
+        {
+            IEntity incomingRawEntity;
+            IEntity dummy;
+            this.SetupMergeEntities(out incomingRawEntity, out dummy);
+            
+            // Default context with no filter
+            var context = this.requestContext;
+
+            // New target entity (did not exist)
+            var targetMergeEntity = new Entity();
+            var newKey = new AzureStorageKey("acc", "tab", "par", new EntityId());
+            
+            var concreteRepository = (ConcreteEntityRepository)this.entityRepository;
+            concreteRepository.MergeEntities(context, newKey, false, targetMergeEntity, incomingRawEntity);
+
+            Assert.AreSame(newKey, targetMergeEntity.Key);
+            Assert.AreEqual(incomingRawEntity.ExternalEntityId, targetMergeEntity.ExternalEntityId);
+            Assert.AreEqual(0, (int)targetMergeEntity.LocalVersion);
+            Assert.AreEqual(this.newPropertyValue, targetMergeEntity.GetPropertyByName<string>(this.propertyName));
+            Assert.AreEqual(this.newPropertyValue, targetMergeEntity.GetPropertyByName<string>(this.extPropertyName));
+            Assert.AreEqual(PropertyFilter.Extended, targetMergeEntity.GetEntityPropertyByName(this.extPropertyName).Filter);
+            Assert.AreEqual(this.targetId1, targetMergeEntity.GetAssociationByName(this.assoc1Name).TargetEntityId);
+            Assert.AreEqual(2, targetMergeEntity.GetAssociationsByName(this.assoc2Name).Count);
+            Assert.IsTrue(targetMergeEntity.GetAssociationsByName(this.assoc2Name).Any(a => a.TargetEntityId == this.targetId2));
+            Assert.IsTrue(targetMergeEntity.GetAssociationsByName(this.assoc2Name).Any(a => a.TargetEntityId == this.targetId3));
+        }
+
+        /// <summary>Merge entity on update.</summary>
+        [TestMethod]
+        public void MergeEntitiesUpdateWithPropertyFilter()
+        {
+            IEntity incomingRawEntity;
+            IEntity targetMergeEntity;
+            this.SetupMergeEntities(out incomingRawEntity, out targetMergeEntity);
+
+            // EntityFilter with extended properties filtered out
+            var context = this.requestContext;
+            context.EntityFilter = new RepositoryEntityFilter(true, false, false, true);
+
+            // New target entity (did not exist)
+            var newKey = new AzureStorageKey("acc", "tab", "par", new EntityId());
+
+            var concreteRepository = (ConcreteEntityRepository)this.entityRepository;
+            concreteRepository.MergeEntities(context, newKey, true, targetMergeEntity, incomingRawEntity);
+
+            Assert.AreSame(newKey, targetMergeEntity.Key);
+            Assert.AreEqual(incomingRawEntity.ExternalEntityId, targetMergeEntity.ExternalEntityId);
+            Assert.AreEqual(1, (int)targetMergeEntity.LocalVersion);
+            Assert.AreEqual(this.newPropertyValue, targetMergeEntity.GetPropertyByName<string>(this.propertyName));
+
+            // Removed property should not be there
+            Assert.AreEqual(null, targetMergeEntity.TryGetPropertyByName<string>(this.propertyNameRemoved1, null));
+
+            // extended property should be unchanged because of filters
+            Assert.AreEqual(this.propertyValue, targetMergeEntity.GetPropertyByName<string>(this.extPropertyName));
+            Assert.AreEqual(PropertyFilter.Extended, targetMergeEntity.GetEntityPropertyByName(this.extPropertyName).Filter);
+            Assert.AreEqual(this.targetId1, targetMergeEntity.GetAssociationByName(this.assoc1Name).TargetEntityId);
+            Assert.AreEqual(2, targetMergeEntity.GetAssociationsByName(this.assoc2Name).Count);
+            Assert.IsTrue(targetMergeEntity.GetAssociationsByName(this.assoc2Name).Any(a => a.TargetEntityId == this.targetId2));
+            Assert.IsTrue(targetMergeEntity.GetAssociationsByName(this.assoc2Name).Any(a => a.TargetEntityId == this.targetId3));
+        }
+
+        /// <summary>Merge entity on update with name filters.</summary>
+        [TestMethod]
+        public void MergeEntitiesUpdateWithNameFilters()
+        {
+            IEntity incomingRawEntity;
+            IEntity targetMergeEntity;
+            this.SetupMergeEntities(out incomingRawEntity, out targetMergeEntity);
+
+            // EntityFilter with extended properties filtered and name filters
+            var context = this.requestContext;
+            context.EntityFilter = new RepositoryEntityFilter(true, false, false, true);
+            context.EntityFilter.AddPropertyNameFilter(new List<string> { this.propertyName, this.extPropertyName });
+            context.EntityFilter.AddAssociationNameFilter(new List<string> { this.assoc2Name });
+
+            // New target entity (did not exist)
+            var newKey = new AzureStorageKey("acc", "tab", "par", new EntityId());
+
+            var concreteRepository = (ConcreteEntityRepository)this.entityRepository;
+
+            // Remove the association from target of merge to check we ignore it because of the filter
+            targetMergeEntity.RemoveAssociationsByName(this.assoc1Name);
+
+            // Assert items updated in incoming entity are as expected in target of merge to begin with
+            Assert.AreEqual(this.newPropertyValue, incomingRawEntity.GetPropertyByName<string>(this.propertyName));
+            Assert.AreEqual(this.propertyValue, targetMergeEntity.GetPropertyByName<string>(this.propertyName));
+            Assert.AreEqual(this.propertyValue, targetMergeEntity.GetPropertyByName<string>(this.extPropertyName));
+
+            Assert.AreEqual(2, incomingRawEntity.GetAssociationsByName(this.assoc2Name).Count);
+            Assert.AreEqual(0, targetMergeEntity.GetAssociationsByName(this.assoc2Name).Count);
+
+            Assert.AreEqual(this.targetId1, incomingRawEntity.TryGetAssociationByName(this.assoc1Name).TargetEntityId);
+            Assert.AreEqual(null, targetMergeEntity.TryGetAssociationByName(this.assoc1Name));
+            
+            concreteRepository.MergeEntities(context, newKey, true, targetMergeEntity, incomingRawEntity);
+
+            // Name-filtered property gets updated value
+            Assert.AreEqual(this.newPropertyValue, targetMergeEntity.GetPropertyByName<string>(this.propertyName));
+
+            // extended property should be unchanged since it is excluded from the merge by
+            // the property filter even though it has a named filter
+            Assert.AreEqual(this.propertyValue, targetMergeEntity.GetPropertyByName<string>(this.extPropertyName));
+            Assert.AreEqual(PropertyFilter.Extended, targetMergeEntity.GetEntityPropertyByName(this.extPropertyName).Filter);
+
+            // Name-filtered association added in merge
+            Assert.AreEqual(2, targetMergeEntity.GetAssociationsByName(this.assoc2Name).Count());
+
+            // Non-Name-filtered association was not added
+            Assert.AreEqual(null, targetMergeEntity.TryGetAssociationByName(this.assoc1Name));
+        }
+
+        /// <summary>Merge entity on update with name filters and removes.</summary>
+        [TestMethod]
+        public void MergeEntitiesUpdateWithNameFiltersRemove()
+        {
+            IEntity incomingRawEntity;
+            IEntity targetMergeEntity;
+            this.SetupMergeEntities(out incomingRawEntity, out targetMergeEntity);
+            
+            // EntityFilter with extended properties filtered and name filters
+            var context = this.requestContext;
+            context.EntityFilter = new RepositoryEntityFilter(true, false, false, true);
+            context.EntityFilter.AddPropertyNameFilter(new List<string> { this.propertyNameRemoved1 });
+            context.EntityFilter.AddAssociationNameFilter(new List<string> { this.assocNameRemoved, this.assocNameCollRemoved });
+
+            // New target entity (did not exist)
+            var newKey = new AzureStorageKey("acc", "tab", "par", new EntityId());
+
+            var concreteRepository = (ConcreteEntityRepository)this.entityRepository;
+
+            // Remove from incoming updated entity to make sure it's ignored by filter
+            incomingRawEntity.RemovePropertyByName(this.propertyName);
+            incomingRawEntity.RemoveAssociationsByName(this.assoc1Name);
+
+            // Assert items removed in incoming entity are present in target of merge to begin with
+            Assert.AreEqual(null, incomingRawEntity.TryGetPropertyByName<string>(this.propertyNameRemoved1, null));
+            Assert.AreEqual(this.propertyValue, targetMergeEntity.GetPropertyByName<string>(this.propertyNameRemoved1));
+
+            Assert.AreEqual(null, incomingRawEntity.TryGetPropertyByName<string>(this.propertyName, null));
+            Assert.AreEqual(this.propertyValue, targetMergeEntity.GetPropertyByName<string>(this.propertyName));
+
+            Assert.AreEqual(null, incomingRawEntity.TryGetAssociationByName(this.assocNameRemoved));
+            Assert.AreEqual(this.targetIdRemoved, targetMergeEntity.GetAssociationByName(this.assocNameRemoved).TargetEntityId);
+
+            Assert.AreEqual(0, incomingRawEntity.GetAssociationsByName(this.assocNameCollRemoved).Count);
+            Assert.AreEqual(2, targetMergeEntity.GetAssociationsByName(this.assocNameCollRemoved).Count);
+            
+            Assert.AreEqual(null, incomingRawEntity.TryGetAssociationByName(this.assoc1Name));
+            Assert.AreEqual(this.targetId1, targetMergeEntity.GetAssociationByName(this.assoc1Name).TargetEntityId);
+            
+            concreteRepository.MergeEntities(context, newKey, true, targetMergeEntity, incomingRawEntity);
+
+            // Name-filtered property removed
+            Assert.AreEqual(null, targetMergeEntity.TryGetPropertyByName<string>(this.propertyNameRemoved1, null));
+
+            // Non-Name-filtered property was not removed (update ignored)
+            Assert.AreEqual(this.propertyValue, targetMergeEntity.GetPropertyByName<string>(this.propertyName));
+
+            // Name-filtered association removed
+            Assert.AreEqual(null, targetMergeEntity.TryGetAssociationByName(this.assocNameRemoved));
+
+            // Name-filtered association collection removed
+            Assert.AreEqual(0, targetMergeEntity.GetAssociationsByName(this.assocNameCollRemoved).Count);
+
+            // Non-Name-filtered association was not removed (update ignored)
+            Assert.AreEqual(this.targetId1, targetMergeEntity.GetAssociationByName(this.assoc1Name).TargetEntityId);
+        }
+
+        /// <summary>Merge entity on update with force overwrite.</summary>
+        [TestMethod]
+        public void MergeEntitiesUpdateForceOverwrite()
+        {
+            IEntity incomingRawEntity;
+            IEntity targetMergeEntity;
+            this.SetupMergeEntities(out incomingRawEntity, out targetMergeEntity);
+
+            // EntityFilter with extended properties filtered and name filters and verify they are ignored
+            // because of ForceOverwrite
+            var context = this.requestContext;
+            context.EntityFilter = new RepositoryEntityFilter(true, false, false, false);
+            context.EntityFilter.AddPropertyNameFilter(new List<string> { this.propertyNameRemoved1 });
+            context.EntityFilter.AddAssociationNameFilter(new List<string> { this.assocNameRemoved });
+            context.ForceOverwrite = true;
+
+            // New target entity (did not exist)
+            var newKey = new AzureStorageKey("acc", "tab", "par", new EntityId());
+
+            var concreteRepository = (ConcreteEntityRepository)this.entityRepository;
+            concreteRepository.MergeEntities(context, newKey, true, targetMergeEntity, incomingRawEntity);
+
+            // Assert we have what is included in the incoming entity regardless of filters
+            Assert.AreEqual(this.newPropertyValue, targetMergeEntity.GetPropertyByName<string>(this.propertyName));
+            Assert.AreEqual(this.newPropertyValue, targetMergeEntity.GetPropertyByName<string>(this.extPropertyName));
+            Assert.AreEqual(this.targetId1, targetMergeEntity.GetAssociationByName(this.assoc1Name).TargetEntityId);
+            Assert.AreEqual(2, targetMergeEntity.GetAssociationsByName(this.assoc2Name).Count);
+            Assert.IsTrue(targetMergeEntity.GetAssociationsByName(this.assoc2Name).Any(a => a.TargetEntityId == this.targetId2));
+            Assert.IsTrue(targetMergeEntity.GetAssociationsByName(this.assoc2Name).Any(a => a.TargetEntityId == this.targetId3));
+        }
+
+        /// <summary>Merge entity on update with heavy properties.</summary>
+        [TestMethod]
+        public void MergeEntitiesUpdateWithHeavyProperties()
+        {
+            IEntity incomingRawEntity;
+            IEntity targetMergeEntity;
+            this.SetupMergeEntities(out incomingRawEntity, out targetMergeEntity);
+
+            var modifiedBlobPropertyValue = new string('$', 5000);
+            var blobPropertyName = "BigString";
+            var modifiedBlobProperty = new EntityProperty(blobPropertyName, modifiedBlobPropertyValue);
+            modifiedBlobProperty.IsBlobRef = true;
+
+            var blobProperty = new EntityProperty
+            {
+                Name = "BigString",
+                Filter = PropertyFilter.Default,
+                IsBlobRef = true,
+                Value = "{\"ContainerName\":\"container\",\"BlobId\":\"123\",\"StorageAccountName\":\"account\",\"VersionTimestamp\":null,\"LocalVersion\":0}"
+            };
+
+            var blobBytes = new byte[] { 0x01 };
+            var blobEntity = new BlobPropertyEntity(new EntityId(), blobBytes);
+            blobEntity.BlobPropertyType = "String";
+            this.blobStore.Stub(f => f.GetBlobByKey(Arg<IStorageKey>.Is.Anything)).Return(blobEntity);
+
+            targetMergeEntity.SetEntityProperty(blobProperty);
+            incomingRawEntity.SetEntityProperty(modifiedBlobProperty);
+
+            // EntityFilter with extended properties filtered and name filters and verify they are ignored
+            // because of ForceOverwrite
+            var context = this.requestContext;
+            context.EntityFilter = new RepositoryEntityFilter(true, false, false, false);
+            context.EntityFilter.AddPropertyNameFilter(new List<string> { blobPropertyName });
+
+            // New target entity (did not exist)
+            var newKey = new AzureStorageKey("acc", "tab", "par", new EntityId());
+
+            var concreteRepository = (ConcreteEntityRepository)this.entityRepository;
+            concreteRepository.MergeEntities(context, newKey, true, targetMergeEntity, incomingRawEntity);
+
+            Assert.AreEqual(modifiedBlobPropertyValue, targetMergeEntity.GetPropertyByName<string>(blobPropertyName));
+
+            // Set blob property in incoming blob that has not been modified from original
+            // and make sure it comes back as blob ref instead of reflated. This will
+            // prevent us from creating a new blob unnecessarily.
+            this.SetupMergeEntities(out incomingRawEntity, out targetMergeEntity);
+            modifiedBlobProperty = new EntityProperty(blobPropertyName, System.Text.Encoding.Unicode.GetString(blobEntity.BlobBytes));
+            targetMergeEntity.SetEntityProperty(blobProperty);
+            incomingRawEntity.SetEntityProperty(modifiedBlobProperty);
+
+            concreteRepository.MergeEntities(context, newKey, true, targetMergeEntity, incomingRawEntity);
+
+            Assert.AreEqual((string)blobProperty.Value, targetMergeEntity.GetPropertyByName<string>(blobPropertyName));
         }
 
         /// <summary>Test that we can get a single entity by external id.</summary>
@@ -266,7 +579,7 @@ namespace ConcreteDataStoreUnitTests
             var entity = this.SetupExistingEntityStubs(TestEntityBuilder.BuildPartnerEntity());
 
             // Call the repository get single method
-            var resultEntity = (EntityWrapperBase)this.entityRepository.GetEntity(this.requestContext, entity.ExternalEntityId);
+            var resultEntity = this.entityRepository.GetEntity(this.requestContext, entity.ExternalEntityId);
 
             Assert.AreEqual(entity.ExternalEntityId, resultEntity.ExternalEntityId);
         }
@@ -282,7 +595,7 @@ namespace ConcreteDataStoreUnitTests
 
             // Call the repository get single method
             var context = new RequestContext { EntityFilter = new RepositoryEntityFilter(true, true, false, true) };
-            var resultEntity = (EntityWrapperBase)this.entityRepository.GetEntity(context, existingEntity.ExternalEntityId);
+            var resultEntity = this.entityRepository.GetEntity(context, existingEntity.ExternalEntityId);
 
             Assert.AreEqual(existingEntity.ExternalEntityId, resultEntity.ExternalEntityId);
             Assert.AreEqual(0, resultEntity.Properties.Count(p => p.Name == "foo"));
@@ -314,11 +627,36 @@ namespace ConcreteDataStoreUnitTests
             this.entityRepository.GetEntitiesById(this.requestContext, new[] { id });
         }
 
+        /// <summary>Test that we fail in the correct way if the entity is not found.</summary>
+        [TestMethod]
+        [ExpectedException(typeof(DataAccessEntityNotFoundException))]
+        public void GetEntityVersionNotFound()
+        {
+            // Setup for an entity that does not exist
+            var entity = this.SetupNewEntityStubs(TestEntityBuilder.BuildPartnerEntity());
+            this.entityRepository.GetEntityVersion(entity.ExternalEntityId);
+        }
+
+        /// <summary>Test that GetEntityVersion returns correct version.</summary>
+        [TestMethod]
+        public void GetEntityVersionSuccess()
+        {
+            // Set up data returned by stubs
+            var entity = TestEntityBuilder.BuildPartnerEntity();
+            entity.LocalVersion = 2;
+            
+            this.indexStore.Stub(f => f.GetEntity(entity.ExternalEntityId, ConcreteEntityRepository.DefaultStorageAccount, null))
+                            .Return(entity.WrappedEntity);
+
+            var version = this.entityRepository.GetEntityVersion(entity.ExternalEntityId);
+            Assert.AreEqual(2, version);
+        }
+
         /// <summary>Test we can merge and update properties.</summary>
         [TestMethod]
         public void TryUpdateEntityProperties()
         {
-            IRawEntity rawEntity = null;
+            IEntity rawEntity = null;
             var entity = this.SetupExistingEntityStubs(TestEntityBuilder.BuildPartnerEntity(), true, x => rawEntity = x);
             var originalKeyCopy = new AzureStorageKey((AzureStorageKey)entity.Key);
             var properties = new List<EntityProperty>
@@ -341,7 +679,7 @@ namespace ConcreteDataStoreUnitTests
         [TestMethod]
         public void TryUpdateEntityPropertiesIgnoreEntity()
         {
-            IRawEntity rawEntity = null;
+            IEntity rawEntity = null;
             var existingEntity = TestEntityBuilder.BuildPartnerEntity();
             var existingFilteredProperty = new EntityProperty("foo", "foovalue", PropertyFilter.Extended);
             existingEntity.Properties.Add(existingFilteredProperty);
@@ -366,7 +704,7 @@ namespace ConcreteDataStoreUnitTests
             // in the context
             this.entityStore.AssertWasCalled(f => f.SaveEntity(
                 Arg<RequestContext>.Is.Anything,
-                Arg<IRawEntity>.Matches(e => e.Properties.Count(p => p.Value == "updatedfoovalue") == 1),
+                Arg<IEntity>.Matches(e => e.Properties.Count(p => p.Value == "updatedfoovalue") == 1),
                 Arg<bool>.Is.Equal(true)));
         }
 
@@ -376,44 +714,6 @@ namespace ConcreteDataStoreUnitTests
         {
             var properties = new List<EntityProperty>();
             var result = this.entityRepository.TryUpdateEntity(this.requestContext, new EntityId(), properties);
-            Assert.IsFalse(result);
-        }
-
-        /// <summary>We should fail when the entity exists but save fails.</summary>
-        [TestMethod]
-        public void TryUpdateEntityPropertiesSaveFails()
-        {
-            var entity = this.SetupExistingEntityStubs(TestEntityBuilder.BuildPartnerEntity(), false, x => { });
-            var properties = new List<EntityProperty>
-                {
-                    new EntityProperty("SomeProperty1", "SomeValue1", PropertyFilter.Default),
-                    new EntityProperty("SomeProperty2", "SomeValue2", PropertyFilter.Extended),
-                    new EntityProperty("SomeProperty3", "SomeValue3", PropertyFilter.System),
-                };
-            this.requestContext.EntityFilter = new RepositoryEntityFilter(true, true, true, true);
-            var result = this.entityRepository.TryUpdateEntity(this.requestContext, entity.ExternalEntityId, properties);
-            Assert.IsFalse(result);
-        }
-
-        /// <summary>We should fail when properties cannot be updated legitmately.</summary>
-        [TestMethod]
-        public void TryUpdateEntityPropertiesInvalidUpdate()
-        {
-            var existingEntity = TestEntityBuilder.BuildPartnerEntity();
-
-            // Set up one existing property with a different filter so update will fail
-            existingEntity.TrySetEntityProperty(
-                new EntityProperty("SomeProperty1", "SomeValue1", PropertyFilter.System));
-            var entity = this.SetupExistingEntityStubs(existingEntity, false, x => { });
-
-            var properties = new List<EntityProperty>
-                {
-                    new EntityProperty("SomeProperty1", "SomeValue1", PropertyFilter.Default),
-                    new EntityProperty("SomeProperty2", "SomeValue2", PropertyFilter.Extended),
-                    new EntityProperty("SomeProperty3", "SomeValue3", PropertyFilter.System),
-                };
-            this.requestContext.EntityFilter = new RepositoryEntityFilter(true, true, true, true);
-            var result = this.entityRepository.TryUpdateEntity(this.requestContext, entity.ExternalEntityId, properties);
             Assert.IsFalse(result);
         }
 
@@ -472,7 +772,7 @@ namespace ConcreteDataStoreUnitTests
             var existingUserEntity = TestEntityBuilder.BuildUserEntity();
             existingUserEntity.Key = new AzureStorageKey("acc", "tab", "par", new EntityId(), 0, DateTime.UtcNow);
             this.entityStore.Stub(f => f.GetUserEntitiesByUserId(Arg<string>.Is.Anything, Arg<IStorageKey>.Is.Anything)).Return(
-                new HashSet<IRawEntity> { existingUserEntity.WrappedEntity });
+                new HashSet<IEntity> { existingUserEntity.WrappedEntity });
 
             // Set up the index to return the correct current versions for the existing user entity
             this.indexStore.Stub(f => f.GetStorageKey(
@@ -534,7 +834,7 @@ namespace ConcreteDataStoreUnitTests
             // Assert that the updated filtered property value was not sent down
             this.entityStore.AssertWasCalled(f => f.SaveEntity(
                 Arg<RequestContext>.Is.Anything,
-                Arg<IRawEntity>.Matches(e => e.Properties.Count(p => p.Value == "updatedfoovalue") == 0),
+                Arg<IEntity>.Matches(e => e.Properties.Count(p => p.Value == "updatedfoovalue") == 0),
                 Arg<bool>.Is.Equal(true)));
         }
 
@@ -549,7 +849,7 @@ namespace ConcreteDataStoreUnitTests
             var userEntity = TestEntityBuilder.BuildUserEntity();
             userEntity.Key = new AzureStorageKey("acc", "tab", "par", new EntityId(), 0, DateTime.UtcNow);
             this.entityStore.Stub(f => f.GetUserEntitiesByUserId(Arg<string>.Is.Anything, Arg<IStorageKey>.Is.Anything)).Return(
-                new HashSet<IRawEntity> { userEntity.WrappedEntity });
+                new HashSet<IEntity> { userEntity.WrappedEntity });
 
             // Set up the index to return the correct current versions
             this.indexStore.Stub(f => f.GetStorageKey(
@@ -579,7 +879,7 @@ namespace ConcreteDataStoreUnitTests
             userEntityOrphan.Key = key1Orphan;
 
             // Set up the stub for the entity store call to return these entities
-            var entities = new HashSet<IRawEntity> { userEntity, userEntityOrphan };
+            var entities = new HashSet<IEntity> { userEntity, userEntityOrphan };
             this.entityStore.Stub(f => f.GetUserEntitiesByUserId(Arg<string>.Is.Anything, Arg<IStorageKey>.Is.Anything)).Return(entities);
 
             // Set up the index to return the correct current versions
@@ -601,7 +901,7 @@ namespace ConcreteDataStoreUnitTests
             this.SetupDefaultCompanyStub();
 
             // Setup stub to return null.
-            this.entityStore.Stub(f => f.GetUserEntitiesByUserId(Arg<string>.Is.Anything, Arg<IStorageKey>.Is.Anything)).Return(new HashSet<IRawEntity>());
+            this.entityStore.Stub(f => f.GetUserEntitiesByUserId(Arg<string>.Is.Anything, Arg<IStorageKey>.Is.Anything)).Return(new HashSet<IEntity>());
 
             // Call repository with bogus user id
             this.entityRepository.GetUser(this.requestContext, "bogususerid");
@@ -639,7 +939,7 @@ namespace ConcreteDataStoreUnitTests
             user.Key = new AzureStorageKey("acc", "tab", "par", new EntityId(), 0, DateTime.UtcNow);
 
             this.entityStore.Stub(f => f.GetUserEntitiesByUserId(Arg<string>.Is.Anything, Arg<IStorageKey>.Is.Anything)).Return(
-                new HashSet<IRawEntity> { user.WrappedEntity });
+                new HashSet<IEntity> { user.WrappedEntity });
 
             // Set up the index to return the correct current versions
             this.indexStore.Stub(f => f.GetStorageKey(
@@ -667,14 +967,14 @@ namespace ConcreteDataStoreUnitTests
             // Setup key factory to return full key
             var fullKey = new AzureStorageKey("acc", "tableFoo", "par", new EntityId());
             this.storageKeyFactory.Stub(f => f.BuildNewStorageKey(
-                Arg<string>.Is.Anything, Arg<EntityId>.Is.Anything, Arg<IRawEntity>.Is.Anything)).Return(fullKey);
+                Arg<string>.Is.Anything, Arg<EntityId>.Is.Anything, Arg<IEntity>.Is.Anything)).Return(fullKey);
 
             // Set up stubs
             this.entityStore.Stub(f => f.GetEntityByKey(null, null)).IgnoreArguments().Return(null);
             this.indexStore.Stub(f => f.SaveEntity(null, false)).IgnoreArguments();
             this.entityStore.Stub(f => f.SaveEntity(
                 Arg<RequestContext>.Is.Anything, 
-                Arg<IRawEntity>.Is.Anything, 
+                Arg<IEntity>.Is.Anything, 
                 Arg<bool>.Is.Equal(false)))
                 .Return(true);
 
@@ -685,10 +985,10 @@ namespace ConcreteDataStoreUnitTests
             this.entityStore.AssertWasCalled(f => f.SetupNewCompany(Arg<string>.Is.Anything));
             this.entityStore.AssertWasCalled(f => f.SaveEntity(
                 Arg<RequestContext>.Is.Anything,
-                Arg<IRawEntity>.Matches(e => e.ExternalEntityId == companyEntity.ExternalEntityId),
+                Arg<IEntity>.Matches(e => e.ExternalEntityId == companyEntity.ExternalEntityId),
                 Arg<bool>.Is.Equal(false)));
             this.indexStore.AssertWasCalled(f => f.SaveEntity(
-                Arg<IRawEntity>.Matches(e => e.ExternalEntityId == companyEntity.ExternalEntityId),
+                Arg<IEntity>.Matches(e => e.ExternalEntityId == companyEntity.ExternalEntityId),
                 Arg<bool>.Is.Equal(false)));
         }
 
@@ -718,8 +1018,8 @@ namespace ConcreteDataStoreUnitTests
             var externalType = "Agency";
 
             // Set up the index to return the company1 and company2 entity ids.
-            this.indexStore.Stub(f => f.GetEntityInfoByCategory(CompanyEntity.CompanyEntityCategory)).Return(
-                new List<IRawEntity> 
+            this.indexStore.Stub(f => f.GetEntityInfoByCategory(CompanyEntity.CategoryName)).Return(
+                new List<IEntity> 
                 {
                     new Entity { ExternalEntityId = company1.ExternalEntityId, ExternalType = externalType },
                     new Entity { ExternalEntityId = company2.ExternalEntityId, ExternalType = externalType } 
@@ -728,7 +1028,7 @@ namespace ConcreteDataStoreUnitTests
             // Call the repository get method
             var filterContext = new RequestContext { EntityFilter = new RepositoryEntityFilter() };
             filterContext.EntityFilter.EntityQueries.QueryStringParams.Add(
-                EntityFilterNames.EntityCategoryFilter, CompanyEntity.CompanyEntityCategory);
+                EntityFilterNames.EntityCategoryFilter, CompanyEntity.CategoryName);
             filterContext.EntityFilter.EntityQueries.QueryStringParams.Add(
                 EntityFilterNames.ExternalTypeFilter, externalType);
             var entities = this.entityRepository.GetFilteredEntityIds(filterContext).ToList();
@@ -925,7 +1225,7 @@ namespace ConcreteDataStoreUnitTests
             // Assert that the updated filtered property value was not sent down
             this.entityStore.AssertWasCalled(f => f.SaveEntity(
                 Arg<RequestContext>.Is.Anything,
-                Arg<IRawEntity>.Matches(e => e.Properties.Count(p => p.Value == "updatedfoovalue") == 0),
+                Arg<IEntity>.Matches(e => e.Properties.Count(p => p.Value == "updatedfoovalue") == 0),
                 Arg<bool>.Is.Equal(true)));
         }
 
@@ -1021,7 +1321,7 @@ namespace ConcreteDataStoreUnitTests
 
         /// <summary>An outgoing heavy property that has been de-referenced should not be marked as a blob ref.</summary>
         [TestMethod]
-        public void RealizedPropertyClearsBlobRef()
+        public void RealizedPropertyHandlesBlobRef()
         {
             var context = this.requestContext;
             context.EntityFilter = new RepositoryEntityFilter(true, true, true, true);
@@ -1041,6 +1341,11 @@ namespace ConcreteDataStoreUnitTests
             var realizedProperty = ConcreteEntityRepository.RealizeProperty(context, outgoingProperty, this.blobStore);
             Assert.IsFalse(realizedProperty.IsBlobRef);
             Assert.AreEqual(blobBytes[0], ((byte[])realizedProperty.Value)[0]);
+
+            context.ReturnBlobReferences = true;
+            var refProperty = ConcreteEntityRepository.RealizeProperty(context, outgoingProperty, this.blobStore);
+            Assert.IsTrue(refProperty.IsBlobRef);
+            Assert.AreEqual(outgoingProperty.Value, refProperty.Value);
         }
 
         /// <summary>
@@ -1113,7 +1418,7 @@ namespace ConcreteDataStoreUnitTests
         /// <summary>Copy the properties of a source entity to a target entity.</summary>
         /// <param name="sourceEntity">The source entity.</param>
         /// <returns>The new entity.</returns>
-        private static IRawEntity CopyEntity(IRawEntity sourceEntity)
+        private static IEntity CopyEntity(IEntity sourceEntity)
         {
             var newEntity = new Entity();
             newEntity.Key = sourceEntity.Key;
@@ -1140,7 +1445,7 @@ namespace ConcreteDataStoreUnitTests
         /// <param name="entity">The entity.</param>
         /// <param name="indexSaveSuccess">True if index save should return success.</param>
         /// <returns>The entity passback.</returns>
-        private IEntity SetupExistingEntityStubs(EntityWrapperBase entity, bool indexSaveSuccess = true)
+        private IEntity SetupExistingEntityStubs(IEntity entity, bool indexSaveSuccess = true)
         {
             return this.SetupExistingEntityStubs(entity, indexSaveSuccess, x => { });
         }
@@ -1150,7 +1455,7 @@ namespace ConcreteDataStoreUnitTests
         /// <param name="indexSaveSuccess">True if index save should return success.</param>
         /// <param name="captureEntity">Action to capture the saved entity.</param>
         /// <returns>The entity passback.</returns>
-        private IEntity SetupExistingEntityStubs(EntityWrapperBase entity, bool indexSaveSuccess, Action<IRawEntity> captureEntity)
+        private IEntity SetupExistingEntityStubs(IEntity entity, bool indexSaveSuccess, Action<IEntity> captureEntity)
         {
             return this.SetupExistingEntityStubs(entity, true, indexSaveSuccess, captureEntity, true);
         }
@@ -1163,7 +1468,7 @@ namespace ConcreteDataStoreUnitTests
         /// <param name="entityGetSuccess">True if entity get should succeed.</param>
         /// <returns>The entity passback.</returns>
         private IEntity SetupExistingEntityStubs(
-            EntityWrapperBase entity, bool entitySaveSuccess, bool indexSaveSuccess, Action<IRawEntity> captureEntity, bool entityGetSuccess)
+            IEntity entity, bool entitySaveSuccess, bool indexSaveSuccess, Action<IEntity> captureEntity, bool entityGetSuccess)
         {
             return this.SetupExistingEntityStubs(
                 entity, entitySaveSuccess, indexSaveSuccess, captureEntity, entityGetSuccess, null);
@@ -1178,7 +1483,7 @@ namespace ConcreteDataStoreUnitTests
         /// <param name="version">Optional version (null for default behavior)</param>
         /// <returns>The entity passback.</returns>
         private IEntity SetupExistingEntityStubs(
-            EntityWrapperBase entity, bool entitySaveSuccess, bool indexSaveSuccess, Action<IRawEntity> captureEntity, bool entityGetSuccess, int? version)
+            IEntity entity, bool entitySaveSuccess, bool indexSaveSuccess, Action<IEntity> captureEntity, bool entityGetSuccess, int? version)
         {
             var localVersion = version.HasValue ? version.Value : 0;
             var existingKey = new AzureStorageKey("acc", "tab", "par", entity.ExternalEntityId);
@@ -1202,13 +1507,13 @@ namespace ConcreteDataStoreUnitTests
                 f =>
                 f.SaveEntity(
                     Arg<RequestContext>.Is.Anything, 
-                    Arg<IRawEntity>.Is.Anything, 
+                    Arg<IEntity>.Is.Anything, 
                     Arg<bool>.Is.Equal(true)))
                     .Return(true)
                     .WhenCalled(a =>
                         {
                             a.ReturnValue = entitySaveSuccess;
-                            captureEntity((IRawEntity)a.Arguments[1]);
+                            captureEntity((IEntity)a.Arguments[1]);
                         });
 
             // For updating entities set the factory to return an updated key
@@ -1227,12 +1532,12 @@ namespace ConcreteDataStoreUnitTests
 
             // Setup default index gets based on entity passed in
             this.indexStore.Stub(f => f.GetEntity(entity.ExternalEntityId, ConcreteEntityRepository.DefaultStorageAccount, version))
-                .Return(entity.WrappedEntity);
+                .Return(entity.SafeUnwrapEntity());
             this.indexStore.Stub(f => f.GetStorageKey(entity.ExternalEntityId, ConcreteEntityRepository.DefaultStorageAccount))
                 .Return(entity.Key);
 
             // Return a copy of the existing entity to be used by the caller for updating
-            return EntityWrapperBase.BuildWrappedEntity(CopyEntity(entity));
+            return CopyEntity(entity).BuildWrappedEntity();
         }
 
         /// <summary>Helper method to build the DAL stubs for a new entity.</summary>
@@ -1254,14 +1559,14 @@ namespace ConcreteDataStoreUnitTests
             this.storageKeyFactory.Stub(f => f.BuildNewStorageKey(
                 Arg<string>.Is.Anything, 
                 Arg<EntityId>.Is.Anything,
-                Arg<IRawEntity>.Matches(e => e.ExternalEntityId == entity.ExternalEntityId))).Return(key);
+                Arg<IEntity>.Matches(e => e.ExternalEntityId == entity.ExternalEntityId))).Return(key);
 
             // Save should just return the entity passed in
             if (!saveFail)
             {
                 this.entityStore.Stub(f => f.SaveEntity(
                     Arg<RequestContext>.Is.Anything,
-                    Arg<IRawEntity>.Matches(e => e.ExternalEntityId == entity.ExternalEntityId),
+                    Arg<IEntity>.Matches(e => e.ExternalEntityId == entity.ExternalEntityId),
                     Arg<bool>.Is.Equal(false)))
                     .Return(true);
             }
@@ -1269,7 +1574,7 @@ namespace ConcreteDataStoreUnitTests
             {
                 this.entityStore.Stub(f => f.SaveEntity(
                     Arg<RequestContext>.Is.Anything,
-                    Arg<IRawEntity>.Matches(e => e.ExternalEntityId == entity.ExternalEntityId),
+                    Arg<IEntity>.Matches(e => e.ExternalEntityId == entity.ExternalEntityId),
                     Arg<bool>.Is.Equal(false)))
                     .Throw(new StorageClientException());
             }
@@ -1291,15 +1596,15 @@ namespace ConcreteDataStoreUnitTests
         
         /// <summary>Helper method to assert that saving a new entity correctly calls the datastore methods.</summary>
         /// <param name="entity">The entity.</param>
-        private void AssertSaveNewEntity(IRawEntity entity)
+        private void AssertSaveNewEntity(IEntity entity)
         {
             this.entityStore.AssertWasCalled(f => f.SaveEntity(
                 Arg<RequestContext>.Is.Anything,
-                Arg<IRawEntity>.Matches(e => e.ExternalEntityId == entity.ExternalEntityId),
+                Arg<IEntity>.Matches(e => e.ExternalEntityId == entity.ExternalEntityId),
                 Arg<bool>.Is.Equal(false)));
             
             this.indexStore.AssertWasCalled(f =>
-                f.SaveEntity(Arg<IRawEntity>.Matches(e => e.ExternalEntityId == entity.ExternalEntityId), Arg<bool>.Is.Equal(false)));
+                f.SaveEntity(Arg<IEntity>.Matches(e => e.ExternalEntityId == entity.ExternalEntityId), Arg<bool>.Is.Equal(false)));
             Assert.IsNotNull(entity.Key);
         }
 
@@ -1310,30 +1615,30 @@ namespace ConcreteDataStoreUnitTests
         /// <param name="entity">The entity.</param>
         /// <param name="originalKey">Original key of the entity that was updated.</param>
         /// <param name="newProperty">A property that is being added to the entity.</param>
-        private void AssertUpdateEntity(IRawEntity entity, AzureStorageKey originalKey, EntityProperty newProperty)
+        private void AssertUpdateEntity(IEntity entity, AzureStorageKey originalKey, EntityProperty newProperty)
         {
             Assert.AreNotEqual(entity.LocalVersion, originalKey.LocalVersion);
             Assert.AreNotEqual(((AzureStorageKey)entity.Key).RowId, originalKey.RowId);
 
             this.entityStore.AssertWasCalled(f => f.SaveEntity(
                 Arg<RequestContext>.Is.Anything,
-                Arg<IRawEntity>.Matches(e => e.Properties.Count(p => p.Name == newProperty.Name) == 1), 
+                Arg<IEntity>.Matches(e => e.Properties.Count(p => p.Name == newProperty.Name) == 1), 
                 Arg<bool>.Is.Equal(true)));
             this.indexStore.AssertWasCalled(f =>
-                f.SaveEntity(Arg<IRawEntity>.Matches(e => e.Properties.Count(p => p.Name == newProperty.Name) == 1), Arg<bool>.Is.Equal(true)));
+                f.SaveEntity(Arg<IEntity>.Matches(e => e.Properties.Count(p => p.Name == newProperty.Name) == 1), Arg<bool>.Is.Equal(true)));
             Assert.IsNotNull(entity.Key);
         }
         
         /// <summary>Helper method to assert that updating an existing entity correctly calls the datastore methods.</summary>
         /// <param name="entity">The entity.</param>
-        private void AssertUpdateEntity(IRawEntity entity)
+        private void AssertUpdateEntity(IEntity entity)
         {
             this.entityStore.AssertWasCalled(f => f.SaveEntity(
                 Arg<RequestContext>.Is.Anything,
-                Arg<IRawEntity>.Matches(e => e.ExternalEntityId == entity.ExternalEntityId),
+                Arg<IEntity>.Matches(e => e.ExternalEntityId == entity.ExternalEntityId),
                 Arg<bool>.Is.Equal(true)));
             this.indexStore.AssertWasCalled(f => f.SaveEntity(
-                Arg<IRawEntity>.Matches(e => e.ExternalEntityId == entity.ExternalEntityId),
+                Arg<IEntity>.Matches(e => e.ExternalEntityId == entity.ExternalEntityId),
                 Arg<bool>.Is.Equal(true)));
         }
 
@@ -1342,7 +1647,7 @@ namespace ConcreteDataStoreUnitTests
         /// <param name="expectedEntity1">The expected entity 1.</param>
         /// <param name="expectedEntity2">The expected entity 2.</param>
         /// <param name="actualEntities">The actual entities.</param>
-        private void AssertGetEntities<T>(IRawEntity expectedEntity1, IRawEntity expectedEntity2, HashSet<T> actualEntities)
+        private void AssertGetEntities<T>(IEntity expectedEntity1, IEntity expectedEntity2, HashSet<T> actualEntities)
         {
             this.indexStore.AssertWasCalled(f => f.GetEntity(
                 expectedEntity1.ExternalEntityId, ConcreteEntityRepository.DefaultStorageAccount, null));
@@ -1355,6 +1660,41 @@ namespace ConcreteDataStoreUnitTests
                 Arg<RequestContext>.Is.Anything,
                 Arg<IStorageKey>.Is.Equal(expectedEntity2.Key)));
             Assert.AreEqual(2, actualEntities.Count);
+        }
+
+        /// <summary>Setup entities for merge testing</summary>
+        /// <param name="incomingRawEntity">The incoming updated entity.</param>
+        /// <param name="targetMergeEntity">The existing entity.</param>
+        private void SetupMergeEntities(
+            out IEntity incomingRawEntity,
+            out IEntity targetMergeEntity)
+        {
+            // Setup associations
+            var target1 = (IEntity)TestEntityBuilder.BuildPartnerEntity(this.targetId1);
+            var target2 = (IEntity)TestEntityBuilder.BuildPartnerEntity(this.targetId2);
+            var target3 = (IEntity)TestEntityBuilder.BuildPartnerEntity(this.targetId3);
+            var target4 = (IEntity)TestEntityBuilder.BuildPartnerEntity(this.targetIdRemoved);
+
+            // Set up a target Partner Entity
+            targetMergeEntity = (IEntity)TestEntityBuilder.BuildPartnerEntity(this.partnerEntityId);
+            targetMergeEntity.TrySetPropertyByName(this.propertyName, this.propertyValue);
+            targetMergeEntity.TrySetPropertyByName(this.propertyNameRemoved1, this.propertyValue);
+            targetMergeEntity.TrySetPropertyByName(this.extPropertyName, this.propertyValue, PropertyFilter.Extended);
+            targetMergeEntity.AssociateEntities(
+                this.assoc1Name, "none", new HashSet<IEntity> { target1 }, AssociationType.Relationship, true);
+            targetMergeEntity.AssociateEntities(
+                this.assocNameRemoved, "none", new HashSet<IEntity> { target4 }, AssociationType.Relationship, true);
+            targetMergeEntity.AssociateEntities(
+                this.assocNameCollRemoved, "none", new HashSet<IEntity> { target2, target3 }, AssociationType.Relationship, true);
+
+            // Set up an updated Partner Entity
+            incomingRawEntity = (IEntity)TestEntityBuilder.BuildPartnerEntity(this.partnerEntityId);
+            incomingRawEntity.TrySetPropertyByName(this.propertyName, this.newPropertyValue);
+            incomingRawEntity.TrySetPropertyByName(this.extPropertyName, this.newPropertyValue, PropertyFilter.Extended);
+            incomingRawEntity.AssociateEntities(
+                this.assoc1Name, "none", new HashSet<IEntity> { target1 }, AssociationType.Relationship, true);
+            incomingRawEntity.AssociateEntities(
+                this.assoc2Name, "none", new HashSet<IEntity> { target2, target3 }, AssociationType.Relationship, true);
         }
 
         /// <summary>Simple blob interface testing type...not trying to test PersistentDictionary here.</summary>

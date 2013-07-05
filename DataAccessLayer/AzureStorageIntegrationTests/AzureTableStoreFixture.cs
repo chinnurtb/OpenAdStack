@@ -1,6 +1,18 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="AzureTableStoreFixture.cs" company="Emerging Media Group">
-//   Copyright Emerging Media Group. All rights reserved.
+// <copyright file="AzureTableStoreFixture.cs" company="Rare Crowds Inc">
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -127,14 +139,14 @@ namespace AzureStorageIntegrationTests
         {
             // Setup unique external type so we don't have a growing set
             var externalType = new EntityId().ToString();
-            var entity1 = new PartnerEntity(new EntityId(), new Entity { EntityCategory = PartnerEntity.PartnerEntityCategory, ExternalType = externalType });
-            var entity2 = new PartnerEntity(new EntityId(), new Entity { EntityCategory = PartnerEntity.PartnerEntityCategory, ExternalType = externalType });
+            var entity1 = new PartnerEntity(new EntityId(), new Entity { EntityCategory = PartnerEntity.CategoryName, ExternalType = externalType });
+            var entity2 = new PartnerEntity(new EntityId(), new Entity { EntityCategory = PartnerEntity.CategoryName, ExternalType = externalType });
 
             this.repository.SaveEntities(this.requestContext, new HashSet<IEntity> { entity1, entity2 });
 
             var filterContext = new RequestContext { EntityFilter = new RepositoryEntityFilter() };
             filterContext.EntityFilter.EntityQueries.QueryStringParams.Add(
-                EntityFilterNames.EntityCategoryFilter, PartnerEntity.PartnerEntityCategory);
+                EntityFilterNames.EntityCategoryFilter, PartnerEntity.CategoryName);
             filterContext.EntityFilter.EntityQueries.QueryStringParams.Add(
                 EntityFilterNames.ExternalTypeFilter, externalType);
 
@@ -245,6 +257,20 @@ namespace AzureStorageIntegrationTests
         public void GetEntitiesByIdNotFound()
         {
             this.repository.GetEntitiesById(this.requestContext, new[] { new EntityId() });
+        }
+
+        /// <summary>Test we get entity version correctly.</summary>
+        [TestMethod]
+        public void GetEntityVersion()
+        {
+            var partnerEntity = TestEntityBuilder.BuildPartnerEntity();
+            var context = new RequestContext { ExternalCompanyId = defaultTestCompanyId };
+            this.repository.SaveEntity(context, partnerEntity);
+            this.repository.SaveEntity(context, partnerEntity);
+            var entity = this.repository.GetEntity(context, partnerEntity.ExternalEntityId);
+            var version = this.repository.GetEntityVersion(partnerEntity.ExternalEntityId);
+            Assert.IsFalse(version == 0);
+            Assert.AreEqual((int)entity.LocalVersion, version);
         }
 
         /// <summary>Test we throw if index update fails because of stale version.</summary>
@@ -483,6 +509,30 @@ namespace AzureStorageIntegrationTests
             Assert.AreEqual(savedUserEntity.UserId, updatedUser.UserId);
         }
 
+        /// <summary>Test that we can create, retrieve, update reports.</summary>
+        [TestMethod]
+        public void RoundtripReport()
+        {
+            var entityId = new EntityId();
+            var reportName = "MyReportName";
+            var reportType = "SomeReportType";
+            var reportData = "SomeReportData";
+            var reportEntity = ReportEntity.BuildReportEntity(entityId, reportName, reportType, reportData);
+            this.repository.SaveEntity(this.requestContext, reportEntity);
+            var roundtripEntity = this.repository.GetEntity<ReportEntity>(this.requestContext, entityId);
+
+            Assert.AreEqual(entityId, (EntityId)roundtripEntity.ExternalEntityId);
+            Assert.AreEqual(reportName, (string)roundtripEntity.ExternalName);
+            Assert.AreEqual(reportType, roundtripEntity.ReportType);
+            Assert.AreEqual(reportData, roundtripEntity.ReportData);
+            Assert.IsTrue(reportEntity.GetEntityPropertyByName(ReportEntity.ReportDataName).IsExtendedProperty);
+
+            roundtripEntity.ReportData = "UpdatedData";
+            this.repository.SaveEntity(this.requestContext, roundtripEntity);
+            roundtripEntity = this.repository.GetEntity<ReportEntity>(this.requestContext, entityId);
+            Assert.AreEqual("UpdatedData", roundtripEntity.ReportData);
+        }
+
         /// <summary>Test that getting a user id that is not found fails correctly.</summary>
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -586,7 +636,7 @@ namespace AzureStorageIntegrationTests
 
             // Assert returned saved campaign entities
             Assert.IsInstanceOfType(savedCampaignEntity, typeof(CampaignEntity));
-            Assert.AreEqual(CampaignEntity.CampaignEntityCategory, (string)savedCampaignEntity.EntityCategory);
+            Assert.AreEqual(CampaignEntity.CategoryName, (string)savedCampaignEntity.EntityCategory);
             Assert.AreEqual(campaignEntity.ExternalEntityId, savedCampaignEntity.ExternalEntityId);
             Assert.AreEqual(campaignEntity.ExternalName, savedCampaignEntity.ExternalName);
             Assert.AreEqual(campaignEntity.Budget, savedCampaignEntity.Budget);
@@ -619,7 +669,7 @@ namespace AzureStorageIntegrationTests
 
             // Assert returned saved creative entities
             Assert.IsInstanceOfType(savedCreativeEntity, typeof(CreativeEntity));
-            Assert.AreEqual(CreativeEntity.CreativeEntityCategory, (string)savedCreativeEntity.EntityCategory);
+            Assert.AreEqual(CreativeEntity.CategoryName, (string)savedCreativeEntity.EntityCategory);
             Assert.AreEqual(creativeEntity.ExternalEntityId, savedCreativeEntity.ExternalEntityId);
             Assert.AreEqual(creativeEntity.ExternalName, savedCreativeEntity.ExternalName);
 
@@ -675,12 +725,54 @@ namespace AzureStorageIntegrationTests
             var association = roundTripEntity.Associations.Single();
             Assert.AreEqual((EntityId)blobEntity.ExternalEntityId, association.TargetEntityId);
             Assert.AreEqual("BlobDetails", association.Details);
-            Assert.AreEqual(BlobEntity.BlobEntityCategory, association.TargetEntityCategory);
+            Assert.AreEqual(BlobEntity.CategoryName, association.TargetEntityCategory);
 
             // Get the blob data
             var returnedBlob = this.repository.GetEntitiesById(context, new[] { blobEntityId }).Single() as BlobEntity;
             var blobToObj = returnedBlob.DeserializeBlob<TestBlobType>();
             Assert.AreEqual(objToBlob.Foo, blobToObj.Foo);
+        }
+
+        /// <summary>
+        /// Save an entity including an explicit blob entity association.
+        /// Update the blob entity and verify the update blob is retrieved
+        /// via the association.
+        /// </summary>
+        [TestMethod]
+        public void UpdateBlobEntity()
+        {
+            var context = this.requestContext;
+
+            // Set up a Blob Entity
+            var blobEntityId = new EntityId();
+            var blobObj = new TestBlobType { Foo = 1, Bar = "two" };
+            var blobEntity = BlobEntity.BuildBlobEntity(blobEntityId, blobObj);
+            this.repository.SaveEntity(context, blobEntity);
+
+            // Set up a Partner Entity
+            var partnerEntityId = new EntityId();
+            var entity = TestEntityBuilder.BuildPartnerEntity(partnerEntityId);
+            entity.AssociateEntities(
+                "BlobOnAStick", "BlobDetails", new HashSet<IEntity> { blobEntity }, AssociationType.Relationship, true);
+            this.repository.SaveEntities(context, new HashSet<IEntity> { entity });
+
+            // Update the blob
+            blobEntity = this.repository.GetEntity<BlobEntity>(context, blobEntityId);
+            var updatedBlobObj = new TestBlobType { Foo = 2, Bar = "two" };
+            blobEntity.UpdateBlobEntity(updatedBlobObj);
+            this.repository.SaveEntity(context, blobEntity);
+
+            // Get current blob from partner entity
+            var roundTripPartnerEntity = this.repository.GetEntity(context, partnerEntityId);
+            var roundTripBlobEntityId = roundTripPartnerEntity.GetAssociationByName("BlobOnAStick").TargetEntityId;
+            var roundtripBlobEntity = this.repository.GetEntity<BlobEntity>(context, roundTripBlobEntityId);
+            var roundtripBlobObj = roundtripBlobEntity.DeserializeBlob<TestBlobType>();
+            
+            // Assert we ended up with the updated blob
+            Assert.AreEqual(blobEntityId, roundTripBlobEntityId);
+            Assert.AreEqual(1, (int)roundtripBlobEntity.LocalVersion);
+            Assert.AreNotEqual(blobObj.Foo, roundtripBlobObj.Foo);
+            Assert.AreEqual(updatedBlobObj.Foo, roundtripBlobObj.Foo);
         }
 
         /// <summary>Entity update is an immutable operation and result in a new table entity.</summary>
@@ -999,7 +1091,7 @@ namespace AzureStorageIntegrationTests
 
         /// <summary>Test we can merge and update properties.</summary>
         [TestMethod]
-        public void UpdateEntityProperties()
+        public void ForceUpdateEntityProperties()
         {
             // Set up a Partner Entity
             var entity = (IEntity)TestEntityBuilder.BuildPartnerEntity(new EntityId());
@@ -1033,6 +1125,79 @@ namespace AzureStorageIntegrationTests
             Assert.AreEqual(3, roundTripEntity.Properties.Count);
             Assert.AreEqual("SomeOtherValue1", (string)ep);
             Assert.IsTrue(ep.IsExtendedProperty);
+        }
+
+        /// <summary>Test we can force update a merge on an entity.</summary>
+        [TestMethod]
+        public void ForceUpdateEntity()
+        {
+            var targetExisting = (IEntity)TestEntityBuilder.BuildPartnerEntity(new EntityId());
+            this.repository.TrySaveEntity(this.requestContext, targetExisting);
+            var targetUpdated = (IEntity)TestEntityBuilder.BuildPartnerEntity(new EntityId());
+            this.repository.TrySaveEntity(this.requestContext, targetUpdated);
+            var targetNew = (IEntity)TestEntityBuilder.BuildPartnerEntity(new EntityId());
+            this.repository.TrySaveEntity(this.requestContext, targetNew);
+            var targetRemoved = (IEntity)TestEntityBuilder.BuildPartnerEntity(new EntityId());
+            this.repository.TrySaveEntity(this.requestContext, targetRemoved);
+
+            // Set up a Partner Entity
+            var entity = (IEntity)TestEntityBuilder.BuildPartnerEntity(new EntityId());
+            entity.AssociateEntities("existing", "none", new HashSet<IEntity> { targetExisting }, AssociationType.Relationship, true);
+            entity.AssociateEntities("remove", "none", new HashSet<IEntity> { targetRemoved }, AssociationType.Relationship, true);
+            entity.SetPropertyByName("existing", "originalvalue");
+            entity.SetPropertyByName("remove", "originalvalue");
+            this.repository.TrySaveEntity(this.requestContext, entity);
+            entity = this.repository.GetEntity(this.requestContext, entity.ExternalEntityId);
+
+            // update one target, add a target, remove a target from the entity
+            entity.AssociateEntities("existing", "none", new HashSet<IEntity> { targetUpdated }, AssociationType.Relationship, true);
+            entity.AssociateEntities("new", "none", new HashSet<IEntity> { targetNew }, AssociationType.Relationship, true);
+            var assocToRemove = entity.GetAssociationByName("remove");
+            entity.Associations.Remove(assocToRemove);
+            entity.SetPropertyByName("existing", "updatedvalue");
+            entity.SetPropertyByName("newProp", "addedvalue");
+            var propToRemove = entity.GetEntityPropertyByName("remove");
+            entity.Properties.Remove(propToRemove);
+
+            var result = this.repository.TryForceUpdateEntity(this.requestContext, entity, new List<string> { "existing", "newProp", "remove" }, new List<string> { "existing", "new", "remove" });
+            Assert.IsTrue(result);
+
+            var roundTripEntity = this.repository.GetEntity(this.requestContext, entity.ExternalEntityId);
+            Assert.AreEqual(2, roundTripEntity.Associations.Count);
+            Assert.AreEqual(targetUpdated.ExternalEntityId, roundTripEntity.GetAssociationByName("existing").TargetEntityId);
+            Assert.AreEqual(targetNew.ExternalEntityId, roundTripEntity.GetAssociationByName("new").TargetEntityId);
+            Assert.IsNull(roundTripEntity.TryGetAssociationByName("remove"));
+            Assert.AreEqual(2, roundTripEntity.Properties.Count);
+            Assert.AreEqual("updatedvalue", roundTripEntity.GetPropertyByName<string>("existing"));
+            Assert.AreEqual("addedvalue", roundTripEntity.GetPropertyByName<string>("newProp"));
+            Assert.IsNull(roundTripEntity.TryGetPropertyByName<string>("remove", null));
+        }
+
+        /// <summary>Test we can force update a merge on an entity.</summary>
+        [TestMethod]
+        public void ForceUpdateEntityStaleVersion()
+        {
+            // Set up a Partner Entity
+            var entity = (IEntity)TestEntityBuilder.BuildPartnerEntity(new EntityId());
+            entity.SetPropertyByName("existing", "originalvalue");
+            this.repository.TrySaveEntity(this.requestContext, entity);
+            var staleEntity = this.repository.GetEntity(this.requestContext, entity.ExternalEntityId);
+            this.repository.TrySaveEntity(this.requestContext, entity);
+            entity = this.repository.GetEntity(this.requestContext, entity.ExternalEntityId);
+
+            Assert.IsTrue(entity.LocalVersion > staleEntity.LocalVersion);
+
+            // Update stale entity
+            staleEntity.SetPropertyByName("existing", "updatedvalue");
+
+            var forceContext = this.requestContext.BuildContextWithNameFilters(
+                new List<string> { "existing" }, new List<string>());
+
+            this.repository.ForceUpdateEntity(forceContext, staleEntity);
+            var roundTripEntity = this.repository.GetEntity(this.requestContext, entity.ExternalEntityId);
+
+            Assert.AreEqual("updatedvalue", roundTripEntity.GetPropertyByName<string>("existing"));
+            Assert.AreEqual(entity.LocalVersion + 1, (int)roundTripEntity.LocalVersion);
         }
 
         /// <summary>

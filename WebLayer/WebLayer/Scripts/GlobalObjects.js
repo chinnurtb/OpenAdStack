@@ -1,4 +1,4 @@
-﻿//globals
+//globals
 var header, Nav, workarea, navTree, content, footer, debugArea;
 var Toolbar;
 var $RCAPI = {
@@ -57,8 +57,8 @@ function insertScriptTag(url) {
 String.prototype.format = function () {
     var args = arguments;
     return this.replace(/\{\{|\}\}|\{(\d+)\}/g, function (m, n) {
-        if (m == "{{") { return "{"; }
-        if (m == "}}") { return "}"; }
+        if (m === "{{") { return "{"; }
+        if (m === "}}") { return "}"; }
         return args[n];
     });
 };
@@ -70,14 +70,14 @@ String.prototype.stripNonNumeric = function (str) {
     var out = '';
     for (var i = 0; i < str.length; i++) {
         if (rgx.test(str.charAt(i))) {
-            if (!((str.charAt(i) == '.' && out.indexOf('.') != -1) ||
-             (str.charAt(i) == '-' && out.length != 0))) {
+            if (!((str.charAt(i) === '.' && out.indexOf('.') !== -1) ||
+             (str.charAt(i) === '-' && out.length !== 0))) {
                 out += str.charAt(i);
             }
         }
     }
     return out;
-}
+};
 
 // extend date with ISO converter
 // ISO-8601 Date Matching
@@ -87,7 +87,7 @@ Date.parseISO = function (val) {
     m = typeof val === 'string' && val.match(reIsoDate);
     if (m) return new Date(Date.UTC(+m[1], +m[2] - 1, +m[3], +m[6] || 0, +m[7] || 0, +m[9] || 0, parseInt((+m[10]) * 1000) || 0));
     return null;
-}
+};
 
 // override the toISOString so it works in IE(older than IE9 standards)
 Date.prototype.toISOString = Date.prototype.toISOString || function () {
@@ -105,12 +105,13 @@ Date.prototype.shiftToUTC = function () {
     // Add the timezone offset to the local date to create a UTC date
     var offset = this.getTimezoneOffset() * 60000;
     return new Date(this.getTime() + offset);
-}
+};
+
 Date.prototype.shiftFromUTC = function () {
     // Subtract the timezone offset from a local date (representing a UTC date)
     var offset = this.getTimezoneOffset() * 60000;
     return new Date(this.getTime() - offset);
-}
+};
 
 //extend number with format
 /**
@@ -159,7 +160,7 @@ Number.prototype.format = function (format) {
 
         // break the number into chunks of 3 digits; first chunk may be less than 3
         for (var i = 0; i < j; i += n) {
-            if (i != 0) { n = 3; }
+            if (i !== 0) { n = 3; }
             parr[parr.length] = cnum.substr(i, n);
             m -= 1;
         }
@@ -196,19 +197,19 @@ function LookUpResource(object, resource) {
             ],
             DefaultWizardMenu: [{ DisplayText: 'New Campaign', Href: 'campaignCreate.html'}],
             HelpDefaultTitle: 'Help',
-            HelpCampaignCreate: 'Input a name for your campaign.<br><br>Input your budget and target average CPM.<br><br>Input your start and end dates.<br><br>Select the type of Rare Crowds Campaign you\'d like to set up:<br><br><b>"Only Rare Inventory"</b> will only buy inventory that has 4+ measures, but may not spend your whole budget.<br><br><b>"Fixed Budget Goal"</b> will maximize for confidence that it will spend the whole budget you\'ve allocated, and will try to spend no more than 10% of your budget on inventory below 4 measures.<br><br><b>"Blended Inventory Mix"</b> will guarantee that it will spend the entire allocated budget, but will deliver a mix of inventory across 1+ measures, including whatever rare inventory it can find.<br><br>After making all your selections, click Save Campaign Setup.',
-            HelpCampaignCreateAPNX: 'Input a name for your campaign.<br><br>Input your budget and target average CPM.<br><br>Input your start and end dates.',
-            HelpDefault: 'From this screen you can access existing campaigns, or access the New Campaign screen. Click on the campaign you’d like to enter, or on New Campaign.',
-            HelpMeasureValuation: 'On this screen, you will set proportional value of each measure that you\'ve added to the system. Keep in mind that the values you assign here will lead to specific price changes of each piece of inventory - so think of this as the first step in setting prices or valuation of inventory. It\'s fine to set multiple measures to the same proportional value, but ideally each measure should be treated uniquely.',
-            HelpReview: 'This page describes the rules of how we will deliver your campaign.<br><br>On the left side is the layer model showing how we’ll attempt to distribute your budget. At the bottom is “standard inventory” – which is inventory you can buy today that has between 1-3 targeting segments applied. Each layer becomes progressively more targeted as you move upward. Depending on how you set up your campaign, the system will optimize how it allocates budget in different ways, affecting the budget allocation on this page.<br><br>The right side of the page shows the segments you selected for creating your campaign, and the rules for how we can combine segments to create inventory. ',
-            HelpMeasureCreate: 'From this page, select the measures you want to add to your campaign.  You can also group measures into "or groups" and set measures or groups as "required".<br><br>On the left side of the screen, find measures you\'d like to add to your campaign, to add them to your campaign, either double-click them, or select and click the ">>" button to move them to the right. You can search for measures using the Search Filter box at the top of that screen. You must add at least 8 measures to your campaign to get the real value of Rare Crowds. Please limit your campaign to no more than 20 measures.  You can always set up multiple campaigns if you want to try different approaches.<br><br>On the right side of the screen, you can group measures together by clicking the "select" box, then clicking the "group" button – groups can also be given custom names. This is useful for measures that are mutually exclusive - e.g. Age Ranges, Gender, Geography, etc... You can also lock measures or groups that are required to ensure all impressions contain them. <b>NOTE:</b> If you pin one or more measures, you will significantly reduce the amount of available inventory - in some cases making it impossible to find.',
+            HelpCampaignCreate: '<b>Input a name for your campaign.<br><br>Input your Total Budget.<br><br>Input your Max Average CPM. </b>This represents the maximum average CPM you want this campaign to stay under. This also gives a sense of the maximum volume you will ever run on this campaign, since budget / CPM * 1000 gives you the number of maximum impressions you\'re likely to see in this campaign. Note that this is Maximum average, not a target average.  We strongly recommend that this maximum be realistic - if you set this to a very low number, you will make it very hard for the campaign to spend budget on anything but very low cost inventory. <b>Note</b> that data costs are included in this CPM average, so the average price is media cost + data cost.<br><br><b>Input your campaign flight dates</b> (start and end dates).',
+            HelpCampaignCreateAPNX: '<b>Input a name for your campaign.<br><br>Input your Total Budget.<br><br>Input your Max Average CPM. </b>This represents the maximum average CPM you want this campaign to stay under. This also gives a sense of the maximum volume you will ever run on this campaign, since budget / CPM * 1000 gives you the number of maximum impressions you\'re likely to see in this campaign. Note that this is Maximum average, not a target average.  We strongly recommend that this maximum be realistic - if you set this to a very low number, you will make it very hard for the campaign to spend budget on anything but very low cost inventory. <b>Note</b> that data costs are included in this CPM average, so the average price is media cost + data cost.<br><br><b>Input your campaign flight dates</b> (start and end dates).',
+            HelpDefault: 'From this screen you can access existing campaigns, or access the New Campaign screen. Click on the campaign you\'d like to enter, or on New Campaign.',
+            HelpMeasureValuation: 'On this screen, you will set a CPM value of each measure that you\'ve added to the system. Keep in mind that the values you assign here will lead to specific price changes of each piece of inventory - so think of this as the first step in setting prices or valuation of inventory. It\'s fine to set multiple measures to the same CPM value, but ideally each measure should be valued uniquely.<br><br>Use the sliders for broad changes, or type in an explicit CPM price and hit enter for direct control. There are no limits on the price, and some measures may well be valuable and set to a significantly high CPM depending on your campaign goals.',
+            HelpReview: 'This page describes the rules of how we will deliver your campaign.<br><br>The right side of the page shows the segments you selected for creating your campaign, and the rules for how we can combine segments to create inventory. You\'ll see phrases like "always one of these", "Optionally one of these", and "Optionally one or more of these".<br><br>On the bottom left of the page are the overall campaign "business terms".  This includes the budget, the combinations (the number of potential line items that might exist), the maximum average CPM you input, and the flight dates you signed up for.  These can all be adjusted on the setup screen.<br><br>On the top left side of the page is the layer model showing how we\'ll attempt to distribute your budget. At the bottom is standard inventory, which is inventory you can buy today that has between 1-3 targeting segments applied. Each layer becomes progressively more targeted as you move upward. Depending on how you set up your campaign, the system will optimize how it allocates budget in different ways, affecting the budget allocation on this page. We always try to deliver budget inventory we can find during the life of the campaign.',
+            HelpMeasureCreate: 'From this page, select the measures you want to add to your campaign. You can also group measures together into "or groups" and set measures or groups as "required" or Locked.<br><br>On the left side of the screen, find measures you\'d like to add to your campaign, to add them to your campaign, either double-click them, or select and click the ">>" button to move them to the right. You can search for measures using the Search Filter box at the top of that screen. You must add at least 8 measures to your campaign to get the real value of Rare Crowds. Please limit your campaign to no more than 20 measures (you can go over this limit, but rendering your valuations screen may take a long time). You can always set up multiple campaigns if you want to try different approaches.<br><br>On the right side of the screen, you can group measures together by clicking the "select" box, then clicking the "group" button groups can also be given custom names. This is useful for measures that are mutually exclusive - e.g. Age Ranges, Gender, Geography, etc...<br><br>You can also lock measures or groups that are required to ensure all impressions contain them. <b>NOTE:</b> By locking (requiring) specific measures or groups of measures you may significantly reduce the amount of available inventory - in some cases making it impossible to find. If any individual measure is by nature rare, take into account that you may want to avoid locking the measure. Please contact Rare Crowds support for assistance here.',
             HelpInventoryDefinition: '',
-            HelpReportDelivery: '',
-            HelpNodeOverride: 'This screen shows the full graph of possible combinations of measures that could be found in an inventory source. Each square is an inventory definition that will have a price assigned. The system will solicit prices from you, put in your ideal and maximum valuation on each step of the process as requested. <br><br>Once this is done, you can click on any node in the screen to see what measures define it, and the price that is assigned. Note that all the parents and children of that node are also highlighted.' +
-            '<br /><br /><table width="100%" style="font:13px Tahoma">' +
+            HelpCreative: 'From this screen you can upload new creatives (3rd Party Ad Tags, Images or Flash) or you can select existing creatives from other campaigns and assign them to this campaign.',
+            HelpNodeOverride: '<table width="100%" style="font:13px Tahoma">' +
                 '<tr><td style="background:#ffff00;height:20px;width:20px" /></tr><tr><td>Explicit Valuation</td></tr>' +
                 '<tr><td style="background:#000000;height:20px;width:20px" /></tr><tr><td>Default Valuation</td></tr>' +
-                '<tr><td style="background:#0080ff;height:20px;width:20px" /></tr><tr><td>Informed Valuation</td></tr></table>',
+                '<tr><td style="background:#0080ff;height:20px;width:20px" /></tr><tr><td>Informed Valuation</td></tr></table>' +
+                '<br><b>Note:</b> This screen may take some time to load if you\'ve chosen more than 20 measures, please be patient.<br><br>When you visit this screen for the first time during a campaign setup, you will be presented with a wizard that requests specific valuations (ideal and maximum) for 9-12 inventory definitions.  Giving pricing inputs for the wizard is required, this should only take a few minutes.<br><br>Once you\'ve completed this wizard, you can leave this page and be done with your campaign configuration.  However, we do give you additional valuation control for advanced user scenarios as well, should you choose to use them. THIS IS NOT REQUIRED.<br><br>This screen shows the full graph of possible combinations of measures that could be found in an inventory source. Each square is an inventory definition (line item) that will have a price assigned. You can select any node, and input your ideal and maximum valuation on any node.  Note that all the parents and children of that node are also highlighted any time you select a node.',
             
             HelpReportDelivery: '<table width="100%" style="font:13px Tahoma">' +
                 '<tr><td style="background:#804020;height:20px;width:20px" /></tr><tr><td>Never Exported</td></tr>' +
@@ -608,4 +609,49 @@ function decode64(input) {
     return unescape(output);
 }
 
+//propertyOrder ==> array of property names in order of sort precedence
+//****NOTE if a property is an array it is sorted by length
+//*****Overload if an Array property starts with v_ then it is sorted by the concatenated values of the array, weird, but functional, mostly to provide a simple consistent sort order
+//desc ==> bool true == decending order
+function JsonSort(a, b, propertyOrder, desc) {
+    if (propertyOrder.constructor !== Array) { throw new Error("propertyOrder must be an array"); }
+    var newA = a;
+    var newB = b;
+    if (desc) { //switch comparison order
+        newA = b;
+        newB = a;
+    }
+    for (var i = 0; i < propertyOrder.length; i++) {
+        var property = propertyOrder[i];
+        var withValues = false;
+        if (propertyOrder[i].indexOf("v_") === 0) {
+            property = propertyOrder[i].substring(2);
+            withValues = true;
+        }
+        var compA = getCompareValue(newA[property], withValues);
+        var compB = getCompareValue(newB[property], withValues); 
+        if (compB < compA) {
+                return 1;
+        } 
+        if (compB > compA) {
+                return -1;
+        }
+    }
+    return 0;
+
+    function getCompareValue(value, withValues) {
+        if (value.constructor === Array) {
+            var tempValue = '000' + value.length;
+            tempValue = tempValue.substring(tempValue.length - 4);
+            if (withValues) {
+                tempValue += value.join(',');
+            }
+            value = tempValue;
+        }
+        return value;
+    }
+}
+
+
 insertScriptTag('.\/scripts\/ApnxHandshake.js');
+

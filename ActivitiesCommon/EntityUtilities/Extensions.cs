@@ -1,6 +1,18 @@
 // --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Extensions.cs" company="Rare Crowds Inc">
-//   Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -23,7 +35,7 @@ namespace EntityUtilities
         /// <summary>Serialize entity to JSON.</summary>
         /// <param name="entity">The entity</param>
         /// <returns>JSON string. </returns>
-        public static string SerializeToJson(this IRawEntity entity)
+        public static string SerializeToJson(this IEntity entity)
         {
             return SerializeToJson(entity, new EntitySerializationFilter());
         }
@@ -32,7 +44,7 @@ namespace EntityUtilities
         /// <param name="entity">The entity.</param>
         /// <param name="filter">The entity filter.</param>
         /// <returns>A JSON string.</returns>
-        public static string SerializeToJson(this IRawEntity entity, IEntityFilter filter)
+        public static string SerializeToJson(this IEntity entity, IEntityFilter filter)
         {
             return EntityJsonSerializer.SerializeToJson(entity, filter);
         }
@@ -41,7 +53,7 @@ namespace EntityUtilities
         /// Serializes an enumerable of entities to a json list
         /// </summary>
         /// <param name="entities">The entities</param>
-        /// <typeparam name="TEntity">The type of entity. Must inherit from EntityWrapperBase.</typeparam>
+        /// <typeparam name="TEntity">The type of entity.</typeparam>
         /// <returns>The json list</returns>
         public static string SerializeToJson<TEntity>(this IEnumerable<TEntity> entities)
             where TEntity : IEntity
@@ -54,7 +66,7 @@ namespace EntityUtilities
         /// </summary>
         /// <param name="entities">The entities</param>
         /// <param name="filter">The entity filter.</param>
-        /// <typeparam name="TEntity">The type of entity. Must inherit from EntityWrapperBase.</typeparam>
+        /// <typeparam name="TEntity">The type of entity.</typeparam>
         /// <returns>The json list</returns>
         public static string SerializeToJson<TEntity>(
             this IEnumerable<TEntity> entities,

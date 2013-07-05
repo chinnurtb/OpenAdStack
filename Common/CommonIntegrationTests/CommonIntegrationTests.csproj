@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CloudBlobDictionaryFixture.cs" />
+    <Compile Include="MailLoggerFixture.cs" />
     <Compile Include="SqlDictionaryWithMockFixture.cs" />
     <Compile Include="PersistentDictionaryFixtureBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -68,6 +69,14 @@
     <ProjectReference Include="..\AzureUtilities\AzureUtilities.csproj">
       <Project>{C89524C4-B3E0-41DD-A4DF-1440143FE82A}</Project>
       <Name>AzureUtilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DefaultMailTemplates\DefaultMailTemplates.csproj">
+      <Project>{54D1055D-9246-4C35-8A30-1E485E216336}</Project>
+      <Name>DefaultMailTemplates</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Diagnostics\Diagnostics.csproj">
+      <Project>{25BA9F11-94F9-4D24-8F52-4E5C5AD50454}</Project>
+      <Name>Diagnostics</Name>
     </ProjectReference>
     <ProjectReference Include="..\SqlUtilities\SqlUtilities.csproj">
       <Project>{BF372B6F-D93D-4099-90AE-1B661D1948EF}</Project>

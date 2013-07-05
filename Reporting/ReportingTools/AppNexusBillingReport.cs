@@ -1,6 +1,18 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="AppNexusBillingReport.cs" company="Rare Crowds Inc">
-//   Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -324,6 +336,86 @@ namespace ReportingTools
             rowMetrics.AddRange(groupsMetrics);
 
             return rowMetrics.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+        }
+
+        /// <summary>
+        /// Process each row of raw delivery data on the campaign with the given row handler.
+        /// Update LatestDeliveryData time as we go.
+        /// </summary>
+        /// <param name="rowOutputHandler">The row output handler.</param>
+        internal void ProcessRawDeliveryData(Action<DeliveryNetworkDesignation, Dictionary<string, PropertyValue>> rowOutputHandler)
+        {
+            // Get the raw delivery data out of the blob
+            var rawDeliveryDataIndexes = this.Dac
+                .RawDeliveryData.RetrieveRawDeliveryDataIndexItems();
+
+            this.LatestDeliveryData = DateTime.MinValue;
+
+            if (rawDeliveryDataIndexes == null)
+            {
+                return;
+            }
+
+            var dedupedRows =
+                new Dictionary<string, Tuple<DateTime, DeliveryNetworkDesignation, Dictionary<string, PropertyValue>>>();
+
+            foreach (var rawDeliveryDataIndexEntry in rawDeliveryDataIndexes)
+            {
+                // Get the network
+                var network = rawDeliveryDataIndexEntry.DeliveryNetwork;
+
+                // Get the index.
+                var rawDeliveryDataIndex = rawDeliveryDataIndexEntry.RawDeliveryDataEntityIds;
+
+                foreach (var rawDataEntityId in rawDeliveryDataIndex)
+                {
+                    var result = this.Dac
+                        .RawDeliveryData.RetrieveRawDeliveryDataItem(rawDataEntityId);
+                    var rawDeliveryData = result.RawDeliveryData;
+                    var deliveryReportDate = result.DeliveryDataReportDate;
+
+                    // No partial success.
+                    if (rawDeliveryData == null)
+                    {
+                        return;
+                    }
+
+                    var canonicalDeliveryData = new CanonicalDeliveryData(network);
+                    var parser = GetCampaignDeliveryDataActivity.NetworkRawDeliveryDataParserMap[network];
+                    if (!canonicalDeliveryData.AddRawData(rawDeliveryData, deliveryReportDate, parser))
+                    {
+                        return;
+                    }
+
+                    var deliveryData = canonicalDeliveryData.DeliveryDataForNetwork;
+
+                    // Dedupe raw data
+                    foreach (var rawDeliveryRow in deliveryData)
+                    {
+                        var key = rawDeliveryRow[dataName.HourFieldName].SerializationValue + rawDeliveryRow[dataName.CampaignIdFieldName].SerializationValue;
+                        if (dedupedRows.ContainsKey(key) && dedupedRows[key].Item1 > deliveryReportDate)
+                        {
+                            continue;
+                        }
+
+                        dedupedRows[key] = new Tuple<DateTime, DeliveryNetworkDesignation, Dictionary<string, PropertyValue>>(
+                            deliveryReportDate, network, rawDeliveryRow);
+                    }
+                }
+            }
+
+            foreach (var dedupedRow in dedupedRows)
+            {
+                var network = dedupedRow.Value.Item2;
+                var rawDeliveryRow = dedupedRow.Value.Item3;
+
+                // Update latest delivery hour
+                var hour = (DateTime)rawDeliveryRow[dataName.HourFieldName];
+                this.LatestDeliveryData = hour > this.LatestDeliveryData ? hour : this.LatestDeliveryData;
+
+                // Call the row output handler
+                rowOutputHandler(network, rawDeliveryRow);
+            }
         }
 
         /// <summary>Get measure names.</summary>
@@ -766,68 +858,6 @@ namespace ReportingTools
             measureMetrics.Add("{0}:{1}".FormatInvariant(columnPrefix, "Effective Cost"), effectiveCostOut);
 
             return measureMetrics;
-        }
-
-        /// <summary>
-        /// Process each row of raw delivery data on the campaign with the given row handler.
-        /// Update LatestDeliveryData time as we go.
-        /// </summary>
-        /// <param name="rowOutputHandler">The row output handler.</param>
-        private void ProcessRawDeliveryData(Action<DeliveryNetworkDesignation, Dictionary<string, PropertyValue>> rowOutputHandler)
-        {
-            // Get the raw delivery data out of the blob
-            var rawDeliveryDataIndexes = this.Dac
-                .RawDeliveryData.RetrieveRawDeliveryDataIndexItems();
-
-            this.LatestDeliveryData = DateTime.MinValue;
-
-            if (rawDeliveryDataIndexes == null)
-            {
-                return;
-            }
-
-            foreach (var rawDeliveryDataIndexEntry in rawDeliveryDataIndexes)
-            {
-                // Get the network
-                var network = rawDeliveryDataIndexEntry.DeliveryNetwork;
-
-                // Get the index.
-                var rawDeliveryDataIndex = rawDeliveryDataIndexEntry.RawDeliveryDataEntityIds;
-
-                foreach (var rawDataEntityId in rawDeliveryDataIndex)
-                {
-                    var result = this.Dac
-                        .RawDeliveryData.RetrieveRawDeliveryDataItem(rawDataEntityId);
-                    var rawDeliveryData = result.RawDeliveryData;
-                    var deliveryReportDate = result.DeliveryDataReportDate;
-
-                    // No partial success.
-                    if (rawDeliveryData == null)
-                    {
-                        return;
-                    }
-
-                    var canonicalDeliveryData = new CanonicalDeliveryData(network);
-                    var parser = GetCampaignDeliveryDataActivity.NetworkRawDeliveryDataParserMap[network];
-                    if (!canonicalDeliveryData.AddRawData(rawDeliveryData, deliveryReportDate, parser))
-                    {
-                        return;
-                    }
-
-                    var deliveryData = canonicalDeliveryData.DeliveryDataForNetwork;
-
-                    // Build data rows
-                    foreach (var rawDeliveryRow in deliveryData)
-                    {
-                        // Update latest delivery hour
-                        var hour = (DateTime)rawDeliveryRow[dataName.HourFieldName];
-                        this.LatestDeliveryData = hour > this.LatestDeliveryData ? hour : this.LatestDeliveryData;
-
-                        // Call the row output handler
-                        rowOutputHandler(network, rawDeliveryRow);
-                    }
-                }
-            }
         }
     }
 }

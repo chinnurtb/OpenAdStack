@@ -29,11 +29,10 @@
     function thisPageRender() {
         workarea.progressOn();
 
-        if (cClient.Get('Id') != '2db94cfc39fe40ec893807fc807a77a9' && cClient.Get('Id') != '2db94cfc39fe40ec893807fc807a77a9') {
+        if (cClient.Get('Id') != '2db94cfc39fe40ec893807fc807a77a9' && cClient.Get('Id') != '1aa0788c10f24ab38c1e6a168ea51793') {
             var allocIndex = cClient.Get('DAAllocationIndex');
-            allocIndex = allocIndex.sort(function (a, b) { return a.AllocationStartTime > b.AllocationStartTime; });
-            for (var allocation in allocIndex) {
-                deliveryDataList.push($RCAPI.URI.CampaignGetBlob.format($RCUI.advertiser, $RCUI.campaign, allocIndex[allocation].AllocationOutputsId));
+            for (var i = 0; i < allocIndex.length; i++ ) {
+                deliveryDataList.push($RCAPI.URI.CampaignGetBlob.format($RCUI.advertiser, $RCUI.campaign, allocIndex[i].AllocationOutputsId));
             }
         }
         else {  //rare crowds / comics dungeon / demo - sim
@@ -187,6 +186,7 @@
         if (NodeArray.Blob != undefined) { NodeArray = NodeArray.Blob; }
         $RCUI.debugReport.record('Allocation Phase: ' + NodeArray.Phase +
             ' Allocation: ' + counter +
+            ' Period Start: ' + NodeArray.PeriodStart +
             ' Insight Score: ' + Math.round(NodeArray.InsightScore * 10000) / 10000 +
             ' ValVol: ' + Math.round(NodeArray.ValueVolumeScore) +
             ' Period Budget: ' + Math.round(NodeArray.PeriodBudget) +
@@ -209,8 +209,8 @@
         var valuationList = totalGraph.Valuations.NodeValuationSet.sort(sortByTier);
         var messageObject = document.getElementById("NodeInfo");
         var messageText = '<table height="100%" cellspacing="0" cellpadding="1" style="font:tahoma;font-size:12px">';
-        for (var measure in valuationList[selectedNode].MeasureSet) {
-            messageText += '<tr><td valign="top" style="border-bottom:1px solid;">' + getMeasureDisplayName(valuationList[selectedNode].MeasureSet[measure]) + "<\/td><\/tr>";
+        for (var i = 0; i < valuationList[selectedNode].MeasureSet.length; i++ ) {
+            messageText += '<tr><td valign="top" style="border-bottom:1px solid;">' + getMeasureDisplayName(valuationList[selectedNode].MeasureSet[i]) + "<\/td><\/tr>";
         }
         messageText += '<tr><td style="font:tahoma;font-size:13px"><b>Valuation: <\/b>' + valuationList[selectedNode].MaxValuation + '<\/td><\/tr>';
         messageText += '<tr><td height="100%" style="font:tahoma;font-size:12px;">' + getPerNodeResults(valuationList[selectedNode].MeasureSet); +'<\/td><\/tr><\/table>';
@@ -244,9 +244,9 @@
     function generateMeasuresListHTML(measureList) { //TODO Dedupe with Overrides.html
         var messageText = '<table cellspacing=0 style="font:tahoma;font-size:12px">';
         var nodeValuationJson = { 'MeasureSet': [], 'IdealValuation': 0, 'MaxValuation': 0 }
-        for (var measure in measureList) {
-            messageText += '<tr><td style="border-bottom:1px solid;">' + getMeasureDisplayName(measureList[measure]) + "<\/td><\/tr>";
-            nodeValuationJson.MeasureSet.push(measureList[measure]);
+        for (var i = 0; i < measureList.length; i++) {
+            messageText += '<tr><td style="border-bottom:1px solid;">' + getMeasureDisplayName(measureList[i]) + "<\/td><\/tr>";
+            nodeValuationJson.MeasureSet.push(measureList[i]);
         }
         messageText += '<span id="hiddenNodeValuationJson" style="display:none">' + JSON.stringify(nodeValuationJson) + '</span>';
         messageText += '<\/table>'

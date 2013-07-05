@@ -1,6 +1,18 @@
 //-----------------------------------------------------------------------
 // <copyright file="AzureEntityDataStore.cs" company="Rare Crowds Inc.">
-//     Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -77,7 +89,7 @@ namespace ConcreteDataStore
         /// <param name="entity">The generic entity.</param>
         /// <param name="isUpdate">True if this is an update of an existing entity.</param>
         /// <returns>True if successful.</returns>
-        public bool SaveEntity(RequestContext requestContext, IRawEntity entity, bool isUpdate = false)
+        public bool SaveEntity(RequestContext requestContext, IEntity entity, bool isUpdate = false)
         {
             var key = (AzureStorageKey)entity.Key;
             var table = key.TableName;
@@ -104,7 +116,7 @@ namespace ConcreteDataStore
         /// <param name="userId">The user id.</param>
         /// <param name="companyKey">The key for the company holding the user.</param>
         /// <returns>The user entities.</returns>
-        public HashSet<IRawEntity> GetUserEntitiesByUserId(string userId, IStorageKey companyKey)
+        public HashSet<IEntity> GetUserEntitiesByUserId(string userId, IStorageKey companyKey)
         {
             var storageKey = (AzureStorageKey)companyKey;
 
@@ -121,7 +133,7 @@ namespace ConcreteDataStore
                 entity.WrappedEntity.Key = BuildKeyFromSerializationEntity(entity, storageKey);
             }
 
-            return new HashSet<IRawEntity>(entities.Select(e => e.WrappedEntity));
+            return new HashSet<IEntity>(entities.Select(e => e.WrappedEntity));
         }
 
         /// <summary>Remove and entity from entity store.</summary>
@@ -154,7 +166,7 @@ namespace ConcreteDataStore
         /// <param name="requestContext">
         /// Context information for the request.</param><param name="key">An IStorageKey key.</param>
         /// <returns>An entity that is normalized but not serialized.</returns>
-        public IRawEntity GetEntityByKey(RequestContext requestContext, IStorageKey key)
+        public IEntity GetEntityByKey(RequestContext requestContext, IStorageKey key)
         {
             var storageKey = (AzureStorageKey)key;
 
@@ -327,7 +339,7 @@ namespace ConcreteDataStore
         private static bool IsIEntityProperty(string odataName)
         {
             var matches =
-                typeof(IRawEntity).GetProperties().Where(p => p.PropertyType == typeof(EntityProperty) && p.Name == odataName).ToList();
+                typeof(IEntity).GetProperties().Where(p => p.PropertyType == typeof(EntityProperty) && p.Name == odataName).ToList();
 
             // If this happens something is bad wrong.
             if (matches.Count() > 1)
@@ -341,7 +353,7 @@ namespace ConcreteDataStore
         /// <summary>Create an object compatible with Azure storage client.</summary>
         /// <param name="entity">The entity to wrap.</param>
         /// <returns>The the wrapper object.</returns>
-        private static AzureSerializationEntity CreateWrappedEntity(IRawEntity entity)
+        private static AzureSerializationEntity CreateWrappedEntity(IEntity entity)
         {
             var key = (AzureStorageKey)entity.Key;
             var entityWrapper = new AzureSerializationEntity(entity);

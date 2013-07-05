@@ -1,6 +1,18 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="AppNexusCampaignExporterBase.cs" company="Rare Crowds Inc">
-//     Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -162,7 +174,7 @@ namespace AppNexusActivities
             var nodesToUpdate = nodesForExport
                 .Where(allocation => campaignAllocationIds.ContainsKey(allocation.Value.AllocationId))
                 .ToDictionary();
-            this.UpdateCampaignsForNodes(nodesToUpdate, advertiserId, creativeIds);
+            this.UpdateCampaignsForNodes(nodesToUpdate, advertiserId, lineItemId, creativeIds);
 
             // Deactivate active campaigns that are not included in the exportAllocationIds from Dynamic Allocation
             var campaignsToDelete = campaignAllocationIds
@@ -418,10 +430,12 @@ namespace AppNexusActivities
         /// </summary>
         /// <param name="nodesToCreate">Allocation nodes to update the campaigns for</param>
         /// <param name="advertiserId">The AppNexus advertiser id</param>
+        /// <param name="lineItemId">The AppNexus line-item id</param>
         /// <param name="creativeIds">The AppNexus creative ids</param>
         private void UpdateCampaignsForNodes(
             IDictionary<MeasureSet, PerNodeBudgetAllocationResult> nodesToCreate,
             int advertiserId,
+            int lineItemId,
             int[] creativeIds)
         {
             var nodeCount = nodesToCreate.Count();
@@ -440,7 +454,14 @@ namespace AppNexusActivities
                     nodeAllocation);
                 try
                 {
-                    this.UpdateCampaign(nodeAllocation, advertiserId, creativeIds);
+                    // Find the existing campaign and its profile id
+                    var campaignCode = nodeAllocation.Value.AllocationId;
+                    var oldCampaign = this.Client.GetCampaignByCode(advertiserId, campaignCode);
+                    var profileId = (int)oldCampaign[AppNexusValues.ProfileId];
+
+                    // Delete the old campaign and create a new one
+                    this.DeleteCampaign(advertiserId, campaignCode);
+                    this.CreateCampaign(nodeAllocation, advertiserId, lineItemId, profileId, creativeIds);
                     this.metrics.UpdatedCampaigns.Add(nodeAllocation.Value.AllocationId);
                 }
                 catch (AppNexusClientException ance)
@@ -539,10 +560,12 @@ namespace AppNexusActivities
             }
         }
 
+        /*
         /// <summary>Updates the AppNexus campaign for the allocation</summary>
         /// <param name="nodeAllocation">The per-node budget allocation result and measure set</param>
         /// <param name="advertiserId">The AppNexus advertiser id</param>
         /// <param name="creativeIds">The AppNexus ids of the creatives</param>
+        [Obsolete("Delete existing campaigns and re-create them", true)]
         private void UpdateCampaign(
             KeyValuePair<MeasureSet, PerNodeBudgetAllocationResult> nodeAllocation,
             int advertiserId,
@@ -589,6 +612,7 @@ namespace AppNexusActivities
                 throw;
             }
         }
+        */
 
         /// <summary>Creates an AppNexus campaign for the allocation</summary>
         /// <param name="nodeAllocation">The per-node budget allocation result and measure set</param>
@@ -607,8 +631,8 @@ namespace AppNexusActivities
             var measures = nodeAllocation.Key;
             var allocation = nodeAllocation.Value;
 
-            var lifetimeBudget = allocation.LifetimeMediaSpend + allocation.ExportBudget;
-            var lifetimeImpressionCap = allocation.LifetimeImpressions + allocation.PeriodImpressionCap;
+            var lifetimeBudget = allocation.ExportBudget;
+            var lifetimeImpressionCap = allocation.PeriodImpressionCap;
             var campaignName = DynamicAllocationActivityUtilities.MakeExportUnitNameForAllocation(
                 allocation,
                 this.CampaignEntity,

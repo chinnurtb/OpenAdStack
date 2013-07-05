@@ -1,6 +1,18 @@
 // --------------------------------------------------------------------------------------------------------------------
 // <copyright file="BlobEntity.cs" company="Rare Crowds Inc">
-//   Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -20,15 +32,15 @@ namespace DataAccessLayer
         /// <summary>Property Name for BlobPropertyType property.</summary>
         public const string BlobPropertyTypeName = "BlobPropertyType";
 
-        /// <summary>Category Name for Blob Entities.</summary>
-        public const string BlobEntityCategory = "DataReference";
-
         /// <summary>Property Name for BlobBytes property.</summary>
         public const string BlobDataPropertyName = "BlobData";
 
+        /// <summary>Category Name for Blob Entities.</summary>
+        public const string CategoryName = "DataReference";
+
         /// <summary>Initializes a new instance of the <see cref="BlobEntity"/> class.</summary>
         /// <param name="entity">The IEntity object from which to construct.</param>
-        public BlobEntity(IRawEntity entity)
+        public BlobEntity(IEntity entity)
         {
             this.Initialize(entity);
 
@@ -59,7 +71,7 @@ namespace DataAccessLayer
             var wrappedEntity = new Entity
             {
                 ExternalEntityId = externalEntityId,
-                EntityCategory = BlobEntityCategory,
+                EntityCategory = CategoryName,
             };
 
             this.Initialize(wrappedEntity);
@@ -71,6 +83,11 @@ namespace DataAccessLayer
             {
                 this.BlobData = serializedObjToBlob;
             }
+        }
+
+        /// <summary>Initializes a new instance of the <see cref="BlobEntity"/> class.</summary>
+        public BlobEntity()
+        {
         }
 
         /// <summary>Gets or sets BlobData.</summary>
@@ -97,38 +114,15 @@ namespace DataAccessLayer
         /// <returns>A blob entity that has not yet been persisted.</returns>
         public static BlobEntity BuildBlobEntity<T>(EntityId externalEntityId, T objToBlob) where T : class
         {
-            // If data is already a string, don't bother to serialize it
-            var candidateData = objToBlob as string;
-            if (candidateData != null)
-            {
-                // Construct a entity object
-                return new BlobEntity(externalEntityId, candidateData);
-            }
-
-            // Otherwise serialize to json string
-            try
-            {
-                if (objToBlob == null)
-                {
-                    throw new ArgumentException("Cannot serialize null object to blob.");
-                }
-
-                var blobString = JsonConvert.SerializeObject(objToBlob);
-                return new BlobEntity(externalEntityId, blobString);
-            }
-            catch (Exception e)
-            {
-                var msg = "Could not serialize entity as requested type: {0}"
-                    .FormatInvariant(typeof(T).FullName);
-                throw new DataAccessException(msg, e);
-            }
+            return AddDataToBlob(objToBlob, blobString => new BlobEntity(externalEntityId, blobString));
         }
 
-        /// <summary>Abstract method to validate type of entity.</summary>
-        /// <param name="entity">The entity.</param>
-        public override void ValidateEntityType(IRawEntity entity)
+        /// <summary>Build a BlobEntity given a DataContract serializable object.</summary>
+        /// <param name="objToBlob">The object that will be serialized.</param>
+        /// <typeparam name="T">Type of the object to be serialized.</typeparam>
+        public void UpdateBlobEntity<T>(T objToBlob) where T : class
         {
-            ThrowIfCategoryMismatch(entity, BlobEntityCategory);
+            AddDataToBlob(objToBlob, blobString => { this.BlobData = blobString; return this; });
         }
 
         /// <summary>Deserialize the contained blob bytes.</summary>
@@ -184,6 +178,46 @@ namespace DataAccessLayer
                 var serializer = new DataContractSerializer(typeof(TResult));
                 stream.Seek(0, SeekOrigin.Begin);
                 return (TResult)serializer.ReadObject(stream);
+            }
+        }
+
+        /// <summary>Abstract method to validate type of entity.</summary>
+        /// <param name="entity">The entity.</param>
+        protected override void ValidateEntityType(IEntity entity)
+        {
+            ThrowIfCategoryMismatch(entity, CategoryName);
+        }
+
+        /// <summary>Add data to a given a DataContract serializable object and builder method.</summary>
+        /// <param name="objToBlob">The object that will be serialized.</param>
+        /// <param name="buildBlob">Builder method returning a blob.</param>
+        /// <typeparam name="T">Type of the object to be serialized.</typeparam>
+        /// <returns>A blob entity with the serialized data.</returns>
+        private static BlobEntity AddDataToBlob<T>(T objToBlob, Func<string, BlobEntity> buildBlob) where T : class
+        {
+            // If data is already a string, don't bother to serialize it
+            var candidateData = objToBlob as string;
+            if (candidateData != null)
+            {
+                // Construct a entity object
+                return buildBlob(candidateData);
+            }
+
+            // Otherwise serialize to json string
+            try
+            {
+                if (objToBlob == null)
+                {
+                    throw new ArgumentException("Cannot serialize null object to blob.");
+                }
+
+                var blobString = JsonConvert.SerializeObject(objToBlob);
+                return buildBlob(blobString);
+            }
+            catch (Exception e)
+            {
+                var msg = "Could not serialize entity as requested type: {0}".FormatInvariant(typeof(T).FullName);
+                throw new DataAccessException(msg, e);
             }
         }
     }

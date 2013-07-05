@@ -31,6 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Diagnostics, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json.Net35">
       <HintPath>..\..\External\Newtonsoft.Json.Net35.dll</HintPath>
     </Reference>
@@ -57,6 +58,8 @@
     <Compile Include="DataAccessStaleEntityException.cs" />
     <Compile Include="DataAccessTypeMismatchException.cs" />
     <Compile Include="DataAccessEntityNotFoundException.cs" />
+    <Compile Include="DefaultRetryProvider.cs" />
+    <Compile Include="EntityExtensions.cs" />
     <Compile Include="EntityFilterNames.cs" />
     <Compile Include="EntitySchemaFeatureId.cs" />
     <Compile Include="Extensions.cs" />
@@ -64,6 +67,7 @@
     <Compile Include="DataAccessException.cs" />
     <Compile Include="IEntityFilter.cs" />
     <Compile Include="IEntityQuery.cs" />
+    <Compile Include="IRetryProvider.cs" />
     <Compile Include="IUserAccessStore.cs" />
     <Compile Include="IUserAccessStoreFactory.cs" />
     <Compile Include="CreativeEntity.cs" />
@@ -76,7 +80,6 @@
     <Compile Include="IBlobStoreFactory.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="IRawEntity.cs" />
     <Compile Include="IEntityRepository.cs" />
     <Compile Include="IEntityStore.cs" />
     <Compile Include="IEntityStoreFactory.cs" />
@@ -94,6 +97,7 @@
     <Compile Include="PropertyFilter.cs" />
     <Compile Include="PropertyType.cs" />
     <Compile Include="PropertyValue.cs" />
+    <Compile Include="ReportEntity.cs" />
     <Compile Include="RepositoryEntityFilter.cs" />
     <Compile Include="RepositoryEntityQuery.cs" />
     <Compile Include="RequestContext.cs" />

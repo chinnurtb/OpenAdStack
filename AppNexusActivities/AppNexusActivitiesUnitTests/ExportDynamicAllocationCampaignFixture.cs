@@ -1,6 +1,18 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="ExportDynamicAllocationCampaignFixture.cs" company="Rare Crowds Inc">
-//     Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -234,16 +246,8 @@ namespace AppNexusActivitiesUnitTests
 
                 if (this.testUpdatedExportAllocationIds.Contains(allocation.AllocationId))
                 {
-                    if (this.testInitialExportAllocationIds.Contains(allocation.AllocationId))
-                    {
-                        // Check the campaign was updated
-                        Assert.IsTrue(this.testLogger.HasMessagesContaining(campaignUpdatedSubstring));
-                    }
-                    else
-                    {
-                        // Check the campaign was created
-                        Assert.IsTrue(this.testLogger.HasMessagesMatching(campaignCreatedPattern));
-                    }
+                    // Check the campaign was created
+                    Assert.IsTrue(this.testLogger.HasMessagesMatching(campaignCreatedPattern));
                 }
                 else if (this.testInitialExportAllocationIds.Contains(allocation.AllocationId))
                 {
@@ -590,11 +594,13 @@ namespace AppNexusActivitiesUnitTests
                     Arg<decimal>.Is.Anything,
                     Arg<long>.Is.Anything,
                     Arg<decimal>.Is.Anything))
-                .Return(rand.Next())
+                .Return(-1)
                 .WhenCalled(call =>
                 {
+                    var id = rand.Next();
                     var name = (string)call.Arguments[1];
                     var code = (string)call.Arguments[2];
+                    var profileId = (int)call.Arguments[4];
                     var active = (bool)call.Arguments[6];
                     if (this.MockCampaignCreated(code))
                     {
@@ -604,7 +610,7 @@ namespace AppNexusActivitiesUnitTests
                     this.mockAppNexusLineItemCampaigns.Add(
                         new Dictionary<string, object>
                         {
-                            { AppNexusValues.Id, (int)call.ReturnValue },
+                            { AppNexusValues.Id, id },
                             { AppNexusValues.Name, name },
                             {
                                 AppNexusValues.State,
@@ -612,8 +618,11 @@ namespace AppNexusActivitiesUnitTests
                                     AppNexusValues.StateActive :
                                     AppNexusValues.StateInactive
                             },
-                            { AppNexusValues.Code, code }
+                            { AppNexusValues.Code, code },
+                            { AppNexusValues.ProfileId, profileId },
                         });
+
+                    call.ReturnValue = id;
                 });
 
             this.mockAppNexusClient.Stub(f =>
@@ -630,12 +639,27 @@ namespace AppNexusActivitiesUnitTests
                     Arg<decimal>.Is.Anything))
                 .WhenCalled(call =>
                 {
+                    Assert.Fail("Campaigns should be deleted and recreated, not updated.");
+
+                    /*
                     var code = call.Arguments[0] as string;
                     if (!this.MockCampaignCreated(code))
                     {
                         // Campaign does not exist (yet)
                         throw new AppNexusClientException(string.Empty, string.Empty);
                     }
+                    */
+                });
+
+            this.mockAppNexusClient.Stub(f =>
+                f.DeleteCampaign(
+                    Arg<int>.Is.Anything,
+                    Arg<int>.Is.Anything))
+                .WhenCalled(call =>
+                {
+                    var campaignId = (int)call.Arguments[1];
+                    var campaign = this.GetMockCreatedCampaign(campaignId);
+                    this.mockAppNexusLineItemCampaigns.Remove(campaign);
                 });
 
             this.mockAppNexusClient.Stub(f =>
@@ -693,6 +717,18 @@ namespace AppNexusActivitiesUnitTests
             return this.mockAppNexusLineItemCampaigns
                 .Cast<IDictionary<string, object>>()
                 .FirstOrDefault(c => (string)c[AppNexusValues.Code] == code);
+        }
+
+        /// <summary>
+        /// Gets a campaign created using the mock
+        /// </summary>
+        /// <param name="id">Id of the campaign</param>
+        /// <returns>The campaign, if created; otherwise, null.</returns>
+        private IDictionary<string, object> GetMockCreatedCampaign(int id)
+        {
+            return this.mockAppNexusLineItemCampaigns
+                .Cast<IDictionary<string, object>>()
+                .FirstOrDefault(c => (int)c[AppNexusValues.Id] == id);
         }
 
         /// <summary>

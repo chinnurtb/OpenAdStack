@@ -1,6 +1,18 @@
 // --------------------------------------------------------------------------------------------------------------------
 // <copyright file="EntityActivityQuery.cs" company="Rare Crowds Inc">
-//   Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -52,7 +64,7 @@ namespace EntityUtilities
         /// </summary>
         /// <param name="entity">The entity.</param>
         /// <returns>true if regex matches, false if no match </returns>
-        public bool CheckPropertyRegexMatch(IRawEntity entity)
+        public bool CheckPropertyRegexMatch(IEntity entity)
         {
             // Default will be to treat properties as matched if there are no filters
             var queryValues = this.QueryStringParams;
@@ -64,11 +76,11 @@ namespace EntityUtilities
             // TODO: Generalize, this only works for top-level IEntity properties and is narrow
             // with regard to casing
             IEnumerable<string> propertyNames =
-                typeof(IRawEntity).GetProperties().Where(p => p.PropertyType == typeof(EntityProperty)).Select(p => p.Name);
+                typeof(IEntity).GetProperties().Where(p => p.PropertyType == typeof(EntityProperty)).Select(p => p.Name);
 
             foreach (var name in propertyNames)
             {
-                var entityProperty = (EntityProperty)typeof(IRawEntity).GetProperty(name).GetValue(entity, null);
+                var entityProperty = (EntityProperty)typeof(IEntity).GetProperty(name).GetValue(entity, null);
                 if (entityProperty != null)
                 {
                     if (queryValues.Count > 0)

@@ -1,6 +1,18 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="CompanyEntityFixture.cs" company="Emerging Media Group">
-//   Copyright Emerging Media Group. All rights reserved.
+// <copyright file="CompanyEntityFixture.cs" company="Rare Crowds Inc">
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -26,7 +38,7 @@ namespace DataAccessLayerUnitTests
             {
                 ExternalEntityId = new EntityProperty("ExternalEntityId", new EntityId()),
                 ExternalName = new EntityProperty("ExternalName", TestEntityBuilder.ExternalName),
-                EntityCategory = new EntityProperty("EntityCategory", CompanyEntity.CompanyEntityCategory),
+                EntityCategory = new EntityProperty("EntityCategory", CompanyEntity.CategoryName),
                 ExternalType = new EntityProperty("ExternalType", TestEntityBuilder.AgencyExternalType),
                 CreateDate = new EntityProperty("CreateDate", DateTime.Now),
                 LastModifiedDate = new EntityProperty("LastModifiedDate", DateTime.Now),
@@ -42,8 +54,8 @@ namespace DataAccessLayerUnitTests
             var companyEntity = new CompanyEntity(this.wrappedEntity);
             Assert.AreSame(this.wrappedEntity, companyEntity.WrappedEntity);
 
-            var blobEntityBase = EntityWrapperBase.BuildWrappedEntity(this.wrappedEntity);
-            Assert.AreSame(this.wrappedEntity, EntityWrapperBase.SafeUnwrapEntity(blobEntityBase));
+            var blobEntityBase = this.wrappedEntity.BuildWrappedEntity();
+            Assert.AreSame(this.wrappedEntity, blobEntityBase.SafeUnwrapEntity());
         }
 
         /// <summary>Test we do not double wrap.</summary>
@@ -55,27 +67,13 @@ namespace DataAccessLayerUnitTests
             Assert.AreSame(this.wrappedEntity, companyEntityWrap.WrappedEntity);
         }
 
-        /// <summary>Test we can construct from a json object.</summary>
-        [TestMethod]
-        public void ConstructFromJson()
-        {
-            var externalEntityId = new EntityId();
-            var companyEntity = TestEntityBuilder.BuildCompanyEntity(externalEntityId);
-
-            // We currently don't use any properties beyond IEntity but assert those that are relevant
-            Assert.AreEqual(externalEntityId, (EntityId)companyEntity.ExternalEntityId);
-            Assert.AreEqual(TestEntityBuilder.ExternalName, (string)companyEntity.ExternalName);
-            Assert.AreEqual(TestEntityBuilder.AgencyExternalType, (string)companyEntity.ExternalType);
-            Assert.AreEqual(CompanyEntity.CompanyEntityCategory, (string)companyEntity.EntityCategory);
-        }
-
         /// <summary>Validate that entity construction fails if category is not Company.</summary>
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(DataAccessTypeMismatchException))]
         public void FailValidationIfCategoryPropertyNotCompany()
         {
             this.wrappedEntity.EntityCategory = "foobar";
-            var companyEntity = new CompanyEntity(this.wrappedEntity);
+            new CompanyEntity(this.wrappedEntity);
         }
     }
 }

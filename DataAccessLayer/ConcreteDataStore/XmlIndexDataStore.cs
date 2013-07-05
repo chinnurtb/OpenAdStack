@@ -1,6 +1,18 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="XmlIndexDataStore.cs" company="Emerging Media Group">
-//   Copyright Emerging Media Group. All rights reserved.
+// <copyright file="XmlIndexDataStore.cs" company="Rare Crowds Inc">
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -96,7 +108,7 @@ namespace ConcreteDataStore
         /// <returns>
         /// A list of minimally populated raw entities.
         /// </returns>
-        public IList<IRawEntity> GetEntityInfoByCategory(string entityCategory)
+        public IList<IEntity> GetEntityInfoByCategory(string entityCategory)
         {
             throw new NotImplementedException();
         }
@@ -108,7 +120,7 @@ namespace ConcreteDataStore
         /// <returns>
         /// A partially populated entity with the key.
         /// </returns>
-        public IRawEntity GetEntity(EntityId externalEntityId, string storageAccountName, int? version)
+        public IEntity GetEntity(EntityId externalEntityId, string storageAccountName, int? version)
         {
             throw new NotImplementedException();
         }
@@ -116,7 +128,7 @@ namespace ConcreteDataStore
         /// <summary>Save a reference to an entity in the index store.</summary>
         /// <param name="rawEntity">The raw entity.</param>
         /// <param name="isUpdate">True if this is an update of an existing entity.</param>
-        public void SaveEntity(IRawEntity rawEntity, bool isUpdate = false)
+        public void SaveEntity(IEntity rawEntity, bool isUpdate = false)
         {
             if (isUpdate)
             {
@@ -175,7 +187,7 @@ namespace ConcreteDataStore
         
         /// <summary>We just need to update the index metadata (not the keys fields).</summary>
         /// <param name="rawEntity">The raw entity.</param>
-        private void UpdateIndexEntry(IRawEntity rawEntity)
+        private void UpdateIndexEntry(IEntity rawEntity)
         {
             var dataSet = this.IndexDataSet;
             var entityIdRow = (from entity in dataSet.EntityId
@@ -265,7 +277,7 @@ namespace ConcreteDataStore
         /// <summary>Save the key fields for the corresponding type of data store.</summary>
         /// <param name="rawEntity">The raw entity.</param>
         /// <param name="storageType">The storage type.</param>
-        private void SaveKeyFieldsByStorageType(IRawEntity rawEntity, string storageType)
+        private void SaveKeyFieldsByStorageType(IEntity rawEntity, string storageType)
         {
             // TODO: define an enum for these
             if (storageType == "Xml")
@@ -286,7 +298,7 @@ namespace ConcreteDataStore
 
         /// <summary>Save key fields for an Xml data store.</summary>
         /// <param name="rawEntity">The raw entity.</param>
-        private void SaveXmlKeyFields(IRawEntity rawEntity)
+        private void SaveXmlKeyFields(IEntity rawEntity)
         {
             // Create the keyfields row object
             var xmlRawEntity = (XmlRawEntity)rawEntity;
@@ -305,7 +317,7 @@ namespace ConcreteDataStore
 
         /// <summary>Save key fields for an Azure Table data store.</summary>
         /// <param name="rawEntity">The raw entity.</param>
-        private void SaveAzureKeyFields(IRawEntity rawEntity)
+        private void SaveAzureKeyFields(IEntity rawEntity)
         {
             // Create the keyfields row object
             var storageKey = (AzureStorageKey)rawEntity.Key;
@@ -323,7 +335,7 @@ namespace ConcreteDataStore
 
         /// <summary>Save key fields for an S3 data store.</summary>
         /// <param name="rawEntity">The raw entity.</param>
-        private void SaveS3KeyFields(IRawEntity rawEntity)
+        private void SaveS3KeyFields(IEntity rawEntity)
         {
             // TODO: Implement an S3RawEntity and populate the rest of the fields
             var aws3KeyFieldsRow = this.IndexDataSet.S3KeyFields.NewS3KeyFieldsRow();

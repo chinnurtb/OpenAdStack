@@ -1,6 +1,18 @@
 // --------------------------------------------------------------------------------------------------------------------
 // <copyright file="DynamicAllocationCampaignTestStub.cs" company="Rare Crowds Inc">
-//   Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -68,7 +80,7 @@ namespace DynamicAllocationTestUtilities
             // Build a company and setup stub
             var companyJson =
                 @"{{""EntityCategory"":""{0}"",""ExternalName"":""{1}""}}".FormatInvariant(
-                    CompanyEntity.CompanyEntityCategory, "CompanyFoo");
+                    CompanyEntity.CategoryName, "CompanyFoo");
             var companyEntity = EntityJsonSerializer.DeserializeCompanyEntity(companyEntityId, companyJson);
 
             // Build an owner user
@@ -77,20 +89,21 @@ namespace DynamicAllocationTestUtilities
             // Build a campaign
             var campaignJson =
                 @"{{""EntityCategory"":""{0}"",""ExternalName"":""{1}""}}".FormatInvariant(
-                    CampaignEntity.CampaignEntityCategory, "CampaignFoo");
+                    CampaignEntity.CategoryName, "CampaignFoo");
             var campaignEntity = EntityJsonSerializer.DeserializeCampaignEntity(campaignEntityId, campaignJson);
             campaignEntity.LastModifiedDate = DateTime.UtcNow;
 
             campaignEntity.SetOwnerId(campaignOwnerId);
 
-            // Build raw delivery data blob entities
+            // Build raw delivery data blob entities. The second overlaps the first with duplicate campaign/hours.
+            // One 'duplicate' hour has updated data in the later report (csv2)
             var rawDeliveryDataEntityId1 = new EntityId();
             var rawDeliveryDataEntity1 = BlobEntity.BuildBlobEntity(rawDeliveryDataEntityId1, this.rawDeliveryDataCsv1) as IEntity;
             rawDeliveryDataEntity1.LastModifiedDate = DateTime.UtcNow;
 
             var rawDeliveryDataEntityId2 = new EntityId();
             var rawDeliveryDataEntity2 = BlobEntity.BuildBlobEntity(rawDeliveryDataEntityId2, this.rawDeliveryDataCsv2) as IEntity;
-            rawDeliveryDataEntity2.LastModifiedDate = DateTime.UtcNow;
+            rawDeliveryDataEntity2.LastModifiedDate = DateTime.UtcNow.AddDays(1);
 
             // Set delivery data index
             var deliveryDataIndexJson =

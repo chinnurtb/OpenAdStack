@@ -1,8 +1,20 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="ExtensionsFixture.cs" company="Rare Crowds Inc">
-//     Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
-//-----------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 using System;
 using System.Collections.Generic;
@@ -63,7 +75,7 @@ namespace EntityUtilitiesUnitTests
             {
                 ExternalEntityId = new EntityProperty("ExternalEntityId", new EntityId()),
                 ExternalName = new EntityProperty("ExternalName", "Test Company"),
-                EntityCategory = new EntityProperty("EntityCategory", CompanyEntity.CompanyEntityCategory),
+                EntityCategory = new EntityProperty("EntityCategory", CompanyEntity.CategoryName),
                 ExternalType = new EntityProperty("ExternalType", "Agency"),
                 CreateDate = new EntityProperty("CreateDate", DateTime.Now),
                 LastModifiedDate = new EntityProperty("LastModifiedDate", DateTime.Now),
@@ -90,7 +102,7 @@ namespace EntityUtilitiesUnitTests
             {
                 ExternalEntityId = new EntityId(),
                 ExternalName = "Test Campaign",
-                EntityCategory = CampaignEntity.CampaignEntityCategory,
+                EntityCategory = CampaignEntity.CategoryName,
                 ExternalType = "Campaign Type",
                 CreateDate = DateTime.UtcNow,
                 LastModifiedDate = DateTime.UtcNow,
@@ -121,7 +133,7 @@ namespace EntityUtilitiesUnitTests
             {
                 ExternalEntityId = new EntityProperty("ExternalEntityId", new EntityId()),
                 ExternalName = new EntityProperty("ExternalName", "Test Creative"),
-                EntityCategory = new EntityProperty("EntityCategory", CreativeEntity.CreativeEntityCategory),
+                EntityCategory = new EntityProperty("EntityCategory", CreativeEntity.CategoryName),
                 ExternalType = new EntityProperty("ExternalType", "FooThingy"),
                 CreateDate = new EntityProperty("CreateDate", DateTime.Now),
                 LastModifiedDate = new EntityProperty("LastModifiedDate", DateTime.Now),
@@ -146,7 +158,7 @@ namespace EntityUtilitiesUnitTests
             {
                 ExternalEntityId = new EntityProperty("ExternalEntityId", new EntityId()),
                 ExternalName = new EntityProperty("ExternalName", "Test Partner Foo"),
-                EntityCategory = new EntityProperty("EntityCategory", PartnerEntity.PartnerEntityCategory),
+                EntityCategory = new EntityProperty("EntityCategory", PartnerEntity.CategoryName),
                 ExternalType = new EntityProperty("ExternalType", "Foo Type")
             });
             string jsonEntity = partnerEntity.SerializeToJson();
@@ -169,7 +181,7 @@ namespace EntityUtilitiesUnitTests
             {
                 ExternalEntityId = new EntityProperty("ExternalEntityId", new EntityId()),
                 ExternalName = new EntityProperty("ExternalName", "Test User"),
-                EntityCategory = new EntityProperty("EntityCategory", UserEntity.UserEntityCategory),
+                EntityCategory = new EntityProperty("EntityCategory", UserEntity.CategoryName),
                 ExternalType = new EntityProperty("ExternalType", "User Type"),
                 CreateDate = new EntityProperty("CreateDate", DateTime.Now),
                 LastModifiedDate = new EntityProperty("LastModifiedDate", DateTime.Now),
@@ -200,7 +212,7 @@ namespace EntityUtilitiesUnitTests
                 ExternalName = "MyFoos",
                 AssociationType = AssociationType.Relationship,
                 TargetEntityId = 1,
-                TargetEntityCategory = CompanyEntity.CompanyEntityCategory,
+                TargetEntityCategory = CompanyEntity.CategoryName,
                 TargetExternalType = "targetfoo"
             };
             var jsonDictionary = association.SerializeToJsonCollectionFragmentDictionary();
@@ -228,7 +240,7 @@ namespace EntityUtilitiesUnitTests
             {
                 ExternalEntityId = new EntityProperty("ExternalEntityId", new EntityId()),
                 ExternalName = new EntityProperty("ExternalName", "Test Partner Foo"),
-                EntityCategory = new EntityProperty("EntityCategory", PartnerEntity.PartnerEntityCategory),
+                EntityCategory = new EntityProperty("EntityCategory", PartnerEntity.CategoryName),
                 ExternalType = new EntityProperty("ExternalType", "Foo Type")
             });
 
@@ -257,7 +269,7 @@ namespace EntityUtilitiesUnitTests
             {
                 ExternalEntityId = new EntityProperty("ExternalEntityId", new EntityId()),
                 ExternalName = new EntityProperty("ExternalName", "Test Partner Foo"),
-                EntityCategory = new EntityProperty("EntityCategory", PartnerEntity.PartnerEntityCategory),
+                EntityCategory = new EntityProperty("EntityCategory", PartnerEntity.CategoryName),
                 ExternalType = new EntityProperty("ExternalType", "Foo Type")
             });
 
@@ -284,7 +296,7 @@ namespace EntityUtilitiesUnitTests
             {
                 ExternalEntityId = new EntityProperty("ExternalEntityId", new EntityId()),
                 ExternalName = new EntityProperty("ExternalName", "Test Partner Foo"),
-                EntityCategory = new EntityProperty("EntityCategory", PartnerEntity.PartnerEntityCategory),
+                EntityCategory = new EntityProperty("EntityCategory", PartnerEntity.CategoryName),
                 ExternalType = new EntityProperty("ExternalType", "Foo Type")
             });
 
@@ -309,7 +321,7 @@ namespace EntityUtilitiesUnitTests
             {
                 ExternalEntityId = new EntityProperty("ExternalEntityId", new EntityId()),
                 ExternalName = new EntityProperty("ExternalName", "Test User"),
-                EntityCategory = new EntityProperty("EntityCategory", UserEntity.UserEntityCategory),
+                EntityCategory = new EntityProperty("EntityCategory", UserEntity.CategoryName),
                 ExternalType = new EntityProperty("ExternalType", string.Empty)
             });
             Assert.AreEqual(UserType.Unknown, user.GetUserType());
@@ -329,7 +341,7 @@ namespace EntityUtilitiesUnitTests
             {
                 ExternalEntityId = new EntityProperty("ExternalEntityId", new EntityId()),
                 ExternalName = new EntityProperty("ExternalName", "Test User"),
-                EntityCategory = new EntityProperty("EntityCategory", UserEntity.UserEntityCategory),
+                EntityCategory = new EntityProperty("EntityCategory", UserEntity.CategoryName),
                 ExternalType = new EntityProperty("ExternalType", string.Empty)
             });
             Assert.AreEqual(UserType.Unknown, user.GetUserType());
@@ -348,7 +360,7 @@ namespace EntityUtilitiesUnitTests
             {
                 ExternalEntityId = new EntityProperty("ExternalEntityId", new EntityId()),
                 ExternalName = new EntityProperty("ExternalName", "Test Partner Foo"),
-                EntityCategory = new EntityProperty("EntityCategory", PartnerEntity.PartnerEntityCategory),
+                EntityCategory = new EntityProperty("EntityCategory", PartnerEntity.CategoryName),
                 ExternalType = new EntityProperty("ExternalType", "Foo Type")
             });
             Assert.IsNull(entity.GetOwnerId());
@@ -368,7 +380,7 @@ namespace EntityUtilitiesUnitTests
             {
                 ExternalEntityId = new EntityProperty("ExternalEntityId", new EntityId()),
                 ExternalName = new EntityProperty("ExternalName", "Test Partner Foo"),
-                EntityCategory = new EntityProperty("EntityCategory", PartnerEntity.PartnerEntityCategory),
+                EntityCategory = new EntityProperty("EntityCategory", PartnerEntity.CategoryName),
                 ExternalType = new EntityProperty("ExternalType", "Foo Type"),
                 LastModifiedUser = new EntityProperty("LastModifiedUser", lastModifiedUserId),
             });

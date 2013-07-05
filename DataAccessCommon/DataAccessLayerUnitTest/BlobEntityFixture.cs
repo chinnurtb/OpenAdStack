@@ -1,6 +1,18 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="BlobEntityFixture.cs" company="Rare Crowds Inc">
-//   Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -30,7 +42,7 @@ namespace DataAccessLayerUnitTests
             this.wrappedEntity = new Entity
             {
                 ExternalEntityId = new EntityProperty { Name = "ExternalEntityId", Value = new EntityId() },
-                EntityCategory = new EntityProperty { Name = "EntityCategory", Value = BlobEntity.BlobEntityCategory },
+                EntityCategory = new EntityProperty { Name = "EntityCategory", Value = BlobEntity.CategoryName },
                 CreateDate = new EntityProperty { Name = "CreateDate", Value = DateTime.Now },
                 LastModifiedDate = new EntityProperty { Name = "LastModifiedDate", Value = DateTime.Now },
                 LocalVersion = new EntityProperty { Name = "LocalVersion", Value = 1 },
@@ -47,8 +59,8 @@ namespace DataAccessLayerUnitTests
             Assert.AreSame(this.wrappedEntity, blobEntity.WrappedEntity);
             Assert.AreEqual(null, blobEntity.BlobData.Value);
 
-            var entityBase = EntityWrapperBase.BuildWrappedEntity(this.wrappedEntity);
-            Assert.AreSame(this.wrappedEntity, EntityWrapperBase.SafeUnwrapEntity(entityBase));
+            var entityBase = this.wrappedEntity.BuildWrappedEntity();
+            Assert.AreSame(this.wrappedEntity, entityBase.SafeUnwrapEntity());
         }
 
         /// <summary>Test we can construct and validate from existing entity object.</summary>
@@ -95,6 +107,12 @@ namespace DataAccessLayerUnitTests
 
             Assert.AreEqual(blobEntityId, (EntityId)blobEntity.ExternalEntityId);
             Assert.AreEqual(objToBlob, blobToObj);
+
+            var updatedObjToBlob = "{\"json1\" : \"val2\" }";
+            blobEntity.UpdateBlobEntity(updatedObjToBlob);
+            blobToObj = blobEntity.DeserializeBlob<string>();
+            Assert.AreEqual(blobEntityId, (EntityId)blobEntity.ExternalEntityId);
+            Assert.AreEqual(updatedObjToBlob, blobToObj);
         }
 
         /// <summary>Test the factory method to construct from a non-json string.</summary>
@@ -108,6 +126,12 @@ namespace DataAccessLayerUnitTests
 
             Assert.AreEqual(blobEntityId, (EntityId)blobEntity.ExternalEntityId);
             Assert.AreEqual(objToBlob, blobToObj);
+
+            var updatedObjToBlob = "WithKetchup";
+            blobEntity.UpdateBlobEntity(updatedObjToBlob);
+            blobToObj = blobEntity.DeserializeBlob<string>();
+            Assert.AreEqual(blobEntityId, (EntityId)blobEntity.ExternalEntityId);
+            Assert.AreEqual(updatedObjToBlob, blobToObj);
         }
 
         /// <summary>Test the factory method to construct from a serializable object and subsequently deserialize.</summary>
@@ -122,6 +146,13 @@ namespace DataAccessLayerUnitTests
             Assert.AreEqual(blobEntityId, (EntityId)blobEntity.ExternalEntityId);
             Assert.AreEqual(objToBlob.Foo, blobToObj.Foo);
             Assert.AreEqual(objToBlob.Bar, blobToObj.Bar);
+
+            var updatedObjToBlob = new TestBlobType { Foo = 1, Bar = "WithKetchup" };
+            blobEntity.UpdateBlobEntity(updatedObjToBlob);
+            blobToObj = blobEntity.DeserializeBlob<TestBlobType>();
+            Assert.AreEqual(blobEntityId, (EntityId)blobEntity.ExternalEntityId);
+            Assert.AreEqual(updatedObjToBlob.Foo, blobToObj.Foo);
+            Assert.AreEqual(updatedObjToBlob.Bar, blobToObj.Bar);
         }
 
         /// <summary>Test we deserialized correctly an object that was built as a json string but deserialized to target type.</summary>
@@ -137,6 +168,14 @@ namespace DataAccessLayerUnitTests
             Assert.AreEqual(blobEntityId, (EntityId)blobEntity.ExternalEntityId);
             Assert.AreEqual(objToBlob.Foo, blobToObj.Foo);
             Assert.AreEqual(objToBlob.Bar, blobToObj.Bar);
+
+            var updatedObjToBlob = new TestBlobType { Foo = 1, Bar = "WithKetchup" };
+            objJson = JsonConvert.SerializeObject(updatedObjToBlob);
+            blobEntity.UpdateBlobEntity(objJson);
+            blobToObj = blobEntity.DeserializeBlob<TestBlobType>();
+            Assert.AreEqual(blobEntityId, (EntityId)blobEntity.ExternalEntityId);
+            Assert.AreEqual(updatedObjToBlob.Foo, blobToObj.Foo);
+            Assert.AreEqual(updatedObjToBlob.Bar, blobToObj.Bar);
         }
 
         /// <summary>Test we deserialized correctly an object that was saved with the string constructor instead of the factory method.</summary>
@@ -209,7 +248,7 @@ namespace DataAccessLayerUnitTests
 
         /// <summary>Validate that entity construction fails if category is not Blob.</summary>
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(DataAccessTypeMismatchException))]
         public void FailValidationIfCategoryPropertyNotBlob()
         {
             this.wrappedEntity.EntityCategory = "foobar";

@@ -254,7 +254,7 @@ function getGroupedValuations() {
 function getMeasureDisplayName(measureId) {
     var measureMapping = cachedMeasureMap.Get(measureId);
     if (measureMapping == undefined) {
-        return "**Error! Could not figure out display name.**";
+        return "**Measure not found** (" + measureId + ")";
     }
     return measureMapping.displayName.replace(/:/g, ": ");
 }

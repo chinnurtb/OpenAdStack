@@ -1,6 +1,18 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="AppNexusMeasureSourcesFixture.cs" company="Rare Crowds Inc">
-//     Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -192,7 +204,7 @@ namespace AppNexusActivitiesUnitTests
                 source.Measures
                 .Where(region =>
                     ((string)region.Value[AppNexusMeasureValues.AppNexusId]).StartsWith("US"));
-            Assert.AreEqual(53, unitedStatesRegions.Count());
+            Assert.AreEqual(51, unitedStatesRegions.Count());
             
             // 10 provinces + 3 territories
             var canadianRegions =
@@ -364,6 +376,7 @@ namespace AppNexusActivitiesUnitTests
             Assert.AreEqual(3, segments.Count);
             Assert.IsTrue(segments.Any(segment => segment.Value[MeasureValues.DisplayName] as string == "AppNexus:Segments:exelate:Custom Segment Name"));
             Assert.IsTrue(segments.Any(segment => segment.Value[MeasureValues.SubType] as string == "Targeting"));
+            Assert.AreEqual(MeasureInfo.DataProviderUnknown, segments.First().Value[MeasureValues.DataProvider] as string);
         }
 
         /// <summary>

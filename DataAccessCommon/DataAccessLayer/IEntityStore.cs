@@ -1,6 +1,18 @@
 // --------------------------------------------------------------------------------------------------------------------
 // <copyright file="IEntityStore.cs" company="Rare Crowds Inc">
-//   Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -16,7 +28,7 @@ namespace DataAccessLayer
         /// <param name="context">Context information for the request.</param>
         /// <param name="key">An IStorageKey key.</param>
         /// <returns>An entity that is normalized but not serialized.</returns>
-        IRawEntity GetEntityByKey(RequestContext context, IStorageKey key);
+        IEntity GetEntityByKey(RequestContext context, IStorageKey key);
         
         /// <summary>Do the setup work in a datastore needed to add a new company (does not save a company entity).</summary>
         /// <param name="externalName">External name of company.</param>
@@ -29,13 +41,13 @@ namespace DataAccessLayer
         /// <param name="isUpdate">True if this is an update of an existing entity.</param>
         /// <returns>True if save successful.</returns>
         [SuppressMessage("Microsoft.Design", "CA1026", Justification = "Not targeted for non-C# languages.")]
-        bool SaveEntity(RequestContext context, IRawEntity rawEntity, bool isUpdate = false);
+        bool SaveEntity(RequestContext context, IEntity rawEntity, bool isUpdate = false);
 
         /// <summary>Get the user entities with a given UserId.</summary>
         /// <param name="userId">The user id.</param>
         /// <param name="companyKey">The key for the company holding the user.</param>
         /// <returns>The user entities.</returns>
-        HashSet<IRawEntity> GetUserEntitiesByUserId(string userId, IStorageKey companyKey);
+        HashSet<IEntity> GetUserEntitiesByUserId(string userId, IStorageKey companyKey);
 
         /// <summary>Remove and entity from entity store.</summary>
         /// <param name="storageKey">The storage key of the entity to remove.</param>

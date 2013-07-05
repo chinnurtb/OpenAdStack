@@ -1,6 +1,18 @@
 // --------------------------------------------------------------------------------------------------------------------
 // <copyright file="IEntityRepository.cs" company="Rare Crowds Inc">
-//   Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -37,6 +49,12 @@ namespace DataAccessLayer
         /// <exception cref="DataAccessEntityNotFoundException">If not found.</exception>
         HashSet<IEntity> GetEntitiesById(RequestContext context, EntityId[] entityIds);
 
+        /// <summary> Get the current version of an entity.</summary>
+        /// <param name="entityId">The external id of the entity.</param>
+        /// <returns>The version.</returns>
+        /// <exception cref="DataAccessEntityNotFoundException">If not found.</exception>
+        int GetEntityVersion(EntityId entityId);
+
         /// <summary>Save a single entity.</summary>
         /// <param name="context">The request context.</param>
         /// <param name="entity">The entity to save.</param>
@@ -51,13 +69,16 @@ namespace DataAccessLayer
         /// <exception cref="DataAccessStaleEntityException">On stale version.</exception>
         void SaveEntities(RequestContext context, HashSet<IEntity> entities);
 
-        /// <summary>Update a single entity with a list of properties.</summary>
+        /// <summary>
+        /// Obsolete: Use IEntityRepository extension method ForceUpdateEntity.
+        /// Update a single entity with a list of properties.
+        /// </summary>
         /// <param name="context">The request context.</param>
         /// <param name="entityId">The entity id to update.</param>
         /// <param name="properties">The properties to add or update on the entity.</param>
         /// <returns>True if successful.</returns>
         bool TryUpdateEntity(RequestContext context, EntityId entityId, IEnumerable<EntityProperty> properties);
-        
+
         /// <summary>Add a set of existing target entities as associations of a single source entity.</summary>
         /// <param name="context">Context information for the request.</param>
         /// <param name="sourceEntityId">The external entity id of the source entity to which the target entities are being associated.</param>

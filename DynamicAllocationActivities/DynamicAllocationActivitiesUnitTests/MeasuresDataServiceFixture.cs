@@ -1,6 +1,18 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="MeasuresDataServiceFixture.cs" company="Rare Crowds Inc">
-//     Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -103,26 +115,6 @@ namespace DynamicAllocationActivitiesUnitTests
             this.TestDataRangeRequest(offset, maxResults);
         }
 
-        /// <summary>Test getting measures filtered by include types</summary>
-        [TestMethod]
-        public void GetIncludeFilteredMeasures()
-        {
-            var includeTypes = new[] { "DMA", "State" };
-
-            // Create a request for maximum results with a filter to only include DMA
-            int maxResults = this.Measures
-                .Distinct(measure => measure.Value[MeasureValues.DisplayName])
-                .Count();
-            var request = this.CreatePagedActivityRequest(0, maxResults);
-            request.Values[DataServiceActivityValues.Include] = string.Join(",", includeTypes);
-
-            // Run the activity and get the JSON results
-            var results = this.RunJsonActivity(request);
-
-            // Verify only results of the included types are returned
-            Assert.IsTrue(results.All(r => includeTypes.Contains((string)r.Value[MeasureValues.Type])));
-        }
-        
         /// <summary>Test getting measures filtered by id</summary>
         [TestMethod]
         public void GetMeasuresById()
@@ -144,6 +136,26 @@ namespace DynamicAllocationActivitiesUnitTests
             Assert.IsTrue(results.All(r => ids.Contains(r.Key)));
         }
 
+        /// <summary>Test getting measures filtered by include types</summary>
+        [TestMethod]
+        public void GetIncludeFilteredMeasures()
+        {
+            var includeTypes = new[] { "DMA", "State" };
+
+            // Create a request for maximum results with a filter to only include DMA
+            int maxResults = this.Measures
+                .Distinct(measure => measure.Value[MeasureValues.DisplayName])
+                .Count();
+            var request = this.CreatePagedActivityRequest(0, maxResults);
+            request.Values[DataServiceActivityValues.Include] = string.Join(",", includeTypes);
+
+            // Run the activity and get the JSON results
+            var results = this.RunJsonActivity(request);
+
+            // Verify only results of the included types are returned
+            Assert.IsTrue(results.All(r => includeTypes.Contains((string)r.Value[MeasureValues.Type])));
+        }
+
         /// <summary>Test getting measures filtered by exclude types</summary>
         [TestMethod]
         public void GetExcludeFilteredMeasures()
@@ -162,6 +174,46 @@ namespace DynamicAllocationActivitiesUnitTests
 
             // Verify only results not of the excluded types are returned
             Assert.IsTrue(results.All(r => !excludeTypes.Contains((string)r.Value[MeasureValues.Type])));
+        }
+
+        /// <summary>Test getting measures filtered by include cost types</summary>
+        [TestMethod]
+        public void GetIncludeCostTypesFilteredMeasures()
+        {
+            var includeCostTypes = new[] { "NoCost", "Lotame" };
+
+            // Create a request for maximum results with a filter to only include NoCost and Lotame
+            int maxResults = this.Measures
+                .Distinct(measure => measure.Value[MeasureValues.DisplayName])
+                .Count();
+            var request = this.CreatePagedActivityRequest(0, maxResults);
+            request.Values[DynamicAllocationActivityValues.IncludeCostTypes] = string.Join(",", includeCostTypes);
+
+            // Run the activity and get the JSON results
+            var results = this.RunJsonActivity(request);
+
+            // Verify only results of the included types are returned
+            Assert.IsTrue(results.All(r => includeCostTypes.Contains((string)r.Value[MeasureValues.DataProvider])));
+        }
+
+        /// <summary>Test getting measures filtered by exclude cost types</summary>
+        [TestMethod]
+        public void GetExcludeCostTypesFilteredMeasures()
+        {
+            var excludeCostTypes = new[] { "Unknown", "NoCost" };
+
+            // Create a request for maximum results with a filter to only include DMA
+            int maxResults = this.Measures
+                .Distinct(measure => measure.Value[MeasureValues.DisplayName])
+                .Count();
+            var request = this.CreatePagedActivityRequest(0, maxResults);
+            request.Values[DynamicAllocationActivityValues.ExcludeCostTypes] = string.Join(",", excludeCostTypes);
+
+            // Run the activity and get the JSON results
+            var results = this.RunJsonActivity(request);
+
+            // Verify only results not of the excluded types are returned
+            Assert.IsTrue(results.All(r => !excludeCostTypes.Contains((string)r.Value[MeasureValues.DataProvider])));
         }
 
         /// <summary>Test formatting results as xml</summary>
@@ -246,6 +298,24 @@ namespace DynamicAllocationActivitiesUnitTests
 
             var resultsXml = result.Values[DataServiceActivityValues.Results];
             Assert.IsFalse(string.IsNullOrWhiteSpace(resultsXml));
+        }
+
+        /// <summary>Test filtering measures by cost type</summary>
+        [TestMethod]
+        public void IsMeasureOfCostType()
+        {
+            var measure = new Dictionary<string, object>
+            {
+                { "displayName", "AppNexus:Demographic:Age Ranges:Ages 18-24" },
+                { "dataProvider", "NoCost" },
+                { "network", "AppNexus" },
+                { "type", "demographic" },
+                { "subtype", "agerange" },
+                { "APNXId", "18-24" },
+            };
+
+            Assert.IsFalse(MeasuresDataServiceActivity.IsMeasureOfCostType("UnKnown", measure));
+            Assert.IsTrue(MeasuresDataServiceActivity.IsMeasureOfCostType("nocost", measure));
         }
 
         /// <summary>Delegate for submitting activity requests from within activities</summary>

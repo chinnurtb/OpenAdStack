@@ -1,6 +1,18 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="CampaignEntityFixture.cs" company="Emerging Media Group">
-//   Copyright Emerging Media Group. All rights reserved.
+// <copyright file="CampaignEntityFixture.cs" company="Rare Crowds Inc">
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -26,7 +38,7 @@ namespace DataAccessLayerUnitTests
             {
                 ExternalEntityId = new EntityProperty("ExternalEntityId", new EntityId()),
                 ExternalName = new EntityProperty("ExternalName", TestEntityBuilder.ExternalName),
-                EntityCategory = new EntityProperty("EntityCategory", CampaignEntity.CampaignEntityCategory),
+                EntityCategory = new EntityProperty("EntityCategory", CampaignEntity.CategoryName),
                 ExternalType = new EntityProperty("ExternalType", TestEntityBuilder.ExternalType),
                 CreateDate = new EntityProperty("CreateDate", DateTime.Now),
                 LastModifiedDate = new EntityProperty("LastModifiedDate", DateTime.Now),
@@ -61,11 +73,11 @@ namespace DataAccessLayerUnitTests
 
         /// <summary>Validate that entity construction fails if category is not Campaign.</summary>
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(DataAccessTypeMismatchException))]
         public void FailValidationIfCategoryPropertyNotCampaign()
         {
             this.wrappedEntity.EntityCategory = "foobar";
-            var campaignEntity = new CampaignEntity(this.wrappedEntity);
+            new CampaignEntity(this.wrappedEntity);
         }
 
         /// <summary>Test we can construct from a raw entity.</summary>
@@ -76,15 +88,15 @@ namespace DataAccessLayerUnitTests
             var campaignEntity = TestEntityBuilder.BuildCampaignEntity(externalEntityId);
 
             Assert.AreEqual(externalEntityId, (EntityId)campaignEntity.ExternalEntityId);
-            Assert.AreEqual(CampaignEntity.CampaignEntityCategory, (string)campaignEntity.EntityCategory);
+            Assert.AreEqual(CampaignEntity.CategoryName, (string)campaignEntity.EntityCategory);
             Assert.AreEqual(TestEntityBuilder.ExternalName, (string)campaignEntity.ExternalName);
             Assert.AreEqual(TestEntityBuilder.Budget, (long)campaignEntity.Budget);
             Assert.AreEqual(TestEntityBuilder.StartDate, (DateTime)campaignEntity.StartDate);
             Assert.AreEqual(TestEntityBuilder.EndDate, (DateTime)campaignEntity.EndDate);
             Assert.AreEqual(TestEntityBuilder.PersonaName, (string)campaignEntity.PersonaName);
 
-            var entityBase = EntityWrapperBase.BuildWrappedEntity(this.wrappedEntity);
-            Assert.AreSame(this.wrappedEntity, EntityWrapperBase.SafeUnwrapEntity(entityBase));
+            var entityBase = this.wrappedEntity.BuildWrappedEntity();
+            Assert.AreSame(this.wrappedEntity, entityBase.SafeUnwrapEntity());
         }
 
         /// <summary>Verify we can correctly get and set Budget property.</summary>

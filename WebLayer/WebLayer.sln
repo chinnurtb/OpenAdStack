@@ -5,12 +5,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebLayer", "WebLayer\WebLay
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ConfigTransforms", "ConfigTransforms", "{F1ABC8B6-C556-4EBB-8035-DE831516854C}"
 	ProjectSection(SolutionItems) = preProject
-		..\build\Config\Transforms\WebLayer.web.config.ApnxAppProd.xml = ..\build\Config\Transforms\WebLayer.web.config.ApnxAppProd.xml
-		..\build\Config\Transforms\WebLayer.web.config.ApnxAppSand.xml = ..\build\Config\Transforms\WebLayer.web.config.ApnxAppSand.xml
-		..\build\Config\Transforms\WebLayer.web.config.Cloud.xml = ..\build\Config\Transforms\WebLayer.web.config.Cloud.xml
-		..\build\Config\Transforms\WebLayer.web.config.Integration.xml = ..\build\Config\Transforms\WebLayer.web.config.Integration.xml
-		..\build\Config\Transforms\WebLayer.web.config.Local.xml = ..\build\Config\Transforms\WebLayer.web.config.Local.xml
-		..\build\Config\Transforms\WebLayer.web.config.Production.xml = ..\build\Config\Transforms\WebLayer.web.config.Production.xml
+		..\..\..\LucyConfig\ConfigTransforms\WebLayer.web.config.ApnxAppProd.xml = ..\..\..\LucyConfig\ConfigTransforms\WebLayer.web.config.ApnxAppProd.xml
+		..\..\..\LucyConfig\ConfigTransforms\WebLayer.web.config.ApnxAppSand.xml = ..\..\..\LucyConfig\ConfigTransforms\WebLayer.web.config.ApnxAppSand.xml
+		..\..\..\LucyConfig\ConfigTransforms\WebLayer.web.config.Cloud.xml = ..\..\..\LucyConfig\ConfigTransforms\WebLayer.web.config.Cloud.xml
+		..\..\..\LucyConfig\ConfigTransforms\WebLayer.web.config.Integration.xml = ..\..\..\LucyConfig\ConfigTransforms\WebLayer.web.config.Integration.xml
+		..\..\..\LucyConfig\ConfigTransforms\WebLayer.web.config.Local.xml = ..\..\..\LucyConfig\ConfigTransforms\WebLayer.web.config.Local.xml
+		..\..\..\LucyConfig\ConfigTransforms\WebLayer.web.config.Production.xml = ..\..\..\LucyConfig\ConfigTransforms\WebLayer.web.config.Production.xml
 	EndProjectSection
 EndProject
 Global

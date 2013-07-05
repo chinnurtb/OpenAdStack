@@ -1,6 +1,18 @@
 // -----------------------------------------------------------------------
 // <copyright file="CanonicalDeliveryData.cs" company="Rare Crowds Inc">
-//  Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 // -----------------------------------------------------------------------
 
@@ -119,7 +131,13 @@ namespace DynamicAllocationActivities
                 var key = "{0}:{1}".FormatInvariant(
                     parsedRecord[RawDeliveryDataParserBase.AllocationIdFieldName],
                     parsedRecord[RawDeliveryDataParserBase.HourFieldName]);
-                this.ParsedRecords[key] = parsedRecord;
+
+                // We are processing raw data reports most recent first until we hit our lookback.
+                // Assume more recent data for the same hour is more accurate and don't replace if present.
+                if (!this.ParsedRecords.ContainsKey(key))
+                {
+                    this.ParsedRecords[key] = parsedRecord;
+                }
             }
 
             // Set latest delivery report date seen so far

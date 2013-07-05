@@ -1,6 +1,18 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="UpdateBudgetAllocations.cs" company="Rare Crowds Inc">
-//     Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -69,18 +81,23 @@ namespace DynamicAllocationActivityDispatchers
                 LogManager.Log(
                     LogLevels.Error,
                     true,
-                    "Updated budget allocations ({0}) failed for campaign '{1}': {2}",
+                    "Updated budget allocations ({0}) failed for campaign '{1}': {2}\n\nRequest:\n{3}\n\nResult:\n{4}",
+                    result.Task,
                     campaignEntityId,
-                    result.Error.Message);
+                    result.Error.Message,
+                    request.SerializeToXml().Replace("<", "&lt;").Replace(">", "&gt;"),
+                    result.SerializeToXml().Replace("<", "&lt;").Replace(">", "&gt;"));
             }
             else
             {
                 LogManager.Log(
                     LogLevels.Information,
-                    "Updated budget allocations ({0}) for campaign '{1}'.\n{2}",
+                    true,
+                    "Updated budget allocations ({0}) for campaign '{1}'.\n\nRequest:\n{2}\n\nResult:\n{3}",
                     result.Task,
                     campaignEntityId,
-                    result.Values);
+                    request.SerializeToXml().Replace("<", "&lt;").Replace(">", "&gt;"),
+                    result.SerializeToXml().Replace("<", "&lt;").Replace(">", "&gt;"));
             }
 
             Scheduler.RemoveCompletedEntry<string, DateTime, bool>(

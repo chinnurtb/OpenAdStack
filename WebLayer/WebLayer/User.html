@@ -233,7 +233,6 @@
                 return {
                     'ExternalName': form.getItemValue("inputFirstName") + ' ' + form.getItemValue("inputLastName"),
                     'ExternalType': form.getItemValue("selectUserType"),
-                    'LocalVersion': form.getItemValue("version"),
                     'Properties': {
                         "FirstName": form.getItemValue("inputFirstName"),
                         "LastName": form.getItemValue("inputLastName"),
@@ -266,12 +265,14 @@
             var accessListPropertyValue = createUserAccessProperty(userAccessRaw);
             // only add the USER components of existing access values
             var existingAccessArray = userAccessValue.split("|");
-            for (var i = 0; i < existingAccessArray.length; i++ ) {
+            for (var i = 0; i < existingAccessArray.length; i++) {
                 if (existingAccessArray[i].indexOf("USER") != -1) {
                     accessListPropertyValue = existingAccessArray[i] + "|" + accessListPropertyValue;
                 }
-            }            
-            var userOutputJSON = new $RCAjax($RCAPI.URI.UserUpdate.format(listGrid.cells(getSelectRowIdFromGrid(), 3).getValue()), JSON.stringify(createUserJSON(userEditForm, accessListPropertyValue)), 'PUT', null, null, false, null, routePostErrors);
+            }
+            var updateUserJson = createUserJSON(userEditForm, accessListPropertyValue)
+            updateUserJson.LocalVersion = userEditForm.getItemValue("version");
+            var userOutputJSON = new $RCAjax($RCAPI.URI.UserUpdate.format(listGrid.cells(getSelectRowIdFromGrid(), 3).getValue()), JSON.stringify(updateUserJson), 'PUT', null, null, false, null, routePostErrors);
             windowClose();
         }
 

@@ -1,6 +1,18 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="GetBudgetAllocationsActivityTestFixture.cs" company="Rare Crowds Inc">
-//  Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 // -----------------------------------------------------------------------
 
@@ -167,7 +179,7 @@ namespace DynamicAllocationActivitiesUnitTests
             {
                 AssociationType = AssociationType.Relationship,
                 ExternalName = DynamicAllocationEntityProperties.AllocationSetActive,
-                TargetEntityCategory = BlobEntity.BlobEntityCategory,
+                TargetEntityCategory = BlobEntity.CategoryName,
                 TargetEntityId = this.activeAllocationEntityId,
                 TargetExternalType = "???"
             });
@@ -461,7 +473,7 @@ namespace DynamicAllocationActivitiesUnitTests
             {
                 AssociationType = AssociationType.Relationship,
                 ExternalName = DynamicAllocationEntityProperties.AllocationHistoryIndex,
-                TargetEntityCategory = BlobEntity.BlobEntityCategory,
+                TargetEntityCategory = BlobEntity.CategoryName,
                 TargetEntityId = indexEntityId,
                 TargetExternalType = "???"
             });
@@ -583,6 +595,83 @@ namespace DynamicAllocationActivitiesUnitTests
             campaign.StartDate = DateTime.UtcNow.AddDays(3);
             var actual = GetBudgetAllocationsActivity.FindNextReallocation(campaign, DateTime.UtcNow);
             Assert.AreEqual((DateTime)campaign.StartDate, actual);
+        }
+
+        /// <summary>
+        /// Test reallocations are correctly scheduled per the config when the campaign starts at midnight
+        /// </summary>
+        [TestMethod]
+        public void FindNextReallocationScheduleFromMidnight()
+        {
+            // Schedule for start time-of-day +7, 15 and 23 hours
+            ConfigurationManager.AppSettings["DynamicAllocation.ReallocationSchedule"] = "07:00:00|15:00:00|23:00:00";
+            var today = DateTime.UtcNow.Date;
+            var tomorrow = today.AddDays(1);
+
+            // Campaign started 3 days ago at midnight
+            var campaign = EntityJsonSerializer.DeserializeCampaignEntity(new EntityId(), string.Empty);
+            campaign.StartDate = today.AddDays(-3);
+
+            // Begin test 12 minutes after what should've been the first realloc of the day
+            var now = today + TimeSpan.FromHours(7.02);
+
+            // Next scheduled realloc should be at 15:00Z
+            var expected = today.AddHours(15);
+            var actual = GetBudgetAllocationsActivity.FindNextReallocation(campaign, now);
+            Assert.AreEqual(expected, actual);
+
+            // After that the next scheduled realloc should be at 23:00Z
+            now = today + TimeSpan.FromHours(15.1); // 6 minutes after the 15:00Z reallocation has started
+            expected = today.AddHours(23);
+            actual = GetBudgetAllocationsActivity.FindNextReallocation(campaign, now);
+            Assert.AreEqual(expected, actual);
+
+            // After the 23:00Z reallocation the next should be at 07:00Z "tomorrow"
+            now = today + TimeSpan.FromHours(23.15); // 9 minutes after the 23:00Z reallocation has started
+            expected = tomorrow.AddHours(7);
+            actual = GetBudgetAllocationsActivity.FindNextReallocation(campaign, now);
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        /// Test reallocations are correctly scheduled per the config when the campaign starts at midnight
+        /// </summary>
+        /// <remarks>This behavior is expected, however, it is probably not correct.</remarks>
+        [TestMethod]
+        public void FindNextReallocationScheduleFrom0700Eastern()
+        {
+            // Schedule for start time-of-day +7, 15 and 23 hours
+            // This results in a schedule of 19:00Z, 03:00Z, 11:00Z
+            ConfigurationManager.AppSettings["DynamicAllocation.ReallocationSchedule"] = "07:00:00|15:00:00|23:00:00";
+            var today = DateTime.UtcNow.Date;
+            var tomorrow = today.AddDays(1);
+
+            // Campaign started 3 days ago at 7am EST (12:00Z)
+            var campaign = EntityJsonSerializer.DeserializeCampaignEntity(new EntityId(), string.Empty);
+            campaign.StartDate = today.AddDays(-3).AddHours(12);
+
+            // Begin test 12 minutes after what should've been the first realloc of the day (UTC)
+            // campaign.StartDate.TimeOfDay + 15:00 = 03:00Z
+            var now = today + TimeSpan.FromHours(3.02);
+
+            // Next scheduled realloc should be at 19:00Z
+            // campaign.StartDate.TimeOfDay + 07:00 = 19:00Z
+            var expected = today.AddHours(19);
+            var actual = GetBudgetAllocationsActivity.FindNextReallocation(campaign, now);
+            Assert.AreEqual(expected, actual);
+
+            // After that the next scheduled realloc should be at 19:00Z
+            // campaign.StartDate.TimeOfDay + 15:00 = 03:00Z
+            now = today + TimeSpan.FromHours(19.1); // 6 minutes after the 15:00Z reallocation has started
+            expected = tomorrow.AddHours(3);
+            actual = GetBudgetAllocationsActivity.FindNextReallocation(campaign, now);
+            Assert.AreEqual(expected, actual);
+
+            // After another 03:00Z reallocation it goes back to 19:00Z. 11:00Z never gets scheduled.
+            now = tomorrow + TimeSpan.FromHours(3.15); // 9 minutes after the 03:00Z reallocation has started
+            expected = tomorrow.AddHours(19);
+            actual = GetBudgetAllocationsActivity.FindNextReallocation(campaign, now);
+            Assert.AreEqual(expected, actual);
         }
 
         /// <summary>

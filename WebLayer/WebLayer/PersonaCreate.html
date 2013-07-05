@@ -75,7 +75,8 @@
         attribGrid.init();
         attribGrid.setSkin("dhx_web");
         var measuresUri = './api/data/measures.xml?mode=tree&depth=15&company=' + getQueryString()['advertiser']
-                            + '&campaign=' + getQueryString()['campaign'] + '&exclude=old,' + invMeasures.join(',') + ',' + geoMeasures.join(',');
+                            + '&campaign=' + getQueryString()['campaign'] + '&excludecosttypes=UnKnown,DNU&exclude=Old,'
+                            + invMeasures.join(',') + ',' + geoMeasures.join(',');
         attribGrid.kidsXmlFile = measuresUri;
         attribGrid.loadXML(measuresUri);
 

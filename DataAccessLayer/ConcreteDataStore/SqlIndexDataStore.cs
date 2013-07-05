@@ -1,6 +1,18 @@
 //-----------------------------------------------------------------------
 // <copyright file="SqlIndexDataStore.cs" company="Rare Crowds Inc.">
-//     Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -89,7 +101,7 @@ namespace ConcreteDataStore
         /// A partially populated entity with the key only if version is supplied.
         /// If current version is requested, current associations and indexed properties will be included.
         /// </returns>
-        public IRawEntity GetEntity(EntityId externalEntityId, string storageAccountName, int? version)
+        public IEntity GetEntity(EntityId externalEntityId, string storageAccountName, int? version)
         {
             return version == null 
                 ? this.GetIndexEntity(externalEntityId, storageAccountName) 
@@ -101,7 +113,7 @@ namespace ConcreteDataStore
         /// <param name="isUpdate">True if this is an update of an existing entity.</param>
         /// <exception cref="DataAccessStaleEntityException">Throws if index save fails because incoming entity is stale.</exception>
         /// <exception cref="DataAccessException">Throws if index save fails.</exception>
-        public void SaveEntity(IRawEntity rawEntity, bool isUpdate = false)
+        public void SaveEntity(IEntity rawEntity, bool isUpdate = false)
         {
             try
             {
@@ -124,7 +136,7 @@ namespace ConcreteDataStore
         /// <summary>Retrieve a list of entities of a given entity category.</summary>
         /// <param name="entityCategory">The entity category.</param>
         /// <returns>A list of minimally populated raw entities.</returns>
-        public IList<IRawEntity> GetEntityInfoByCategory(string entityCategory)
+        public IList<IEntity> GetEntityInfoByCategory(string entityCategory)
         {
             var commandName = "GetEntityInfoByCategory";
             var parameters = new List<SqlParameter>
@@ -236,7 +248,7 @@ namespace ConcreteDataStore
         /// <param name="storageAccountName">The storage account name.</param>
         /// <param name="resultSets">The query results.</param>
         /// <returns>A partially populated entity with the index data (Most IRawEntity properties, a key, and associations).</returns>
-        private static IRawEntity BuildIndexEntity(Guid externalEntityId, string storageAccountName, QueryResult resultSets)
+        private static IEntity BuildIndexEntity(Guid externalEntityId, string storageAccountName, QueryResult resultSets)
         {
             // Get the entity properties
             var entity = new Entity();
@@ -284,7 +296,7 @@ namespace ConcreteDataStore
         /// <summary>Get index data for an entity.</summary>
         /// <param name="entityInfo">The query record for the entity.</param>
         /// <returns>A partially populated entity with the entity info.</returns>
-        private static IRawEntity BuildInfoEntity(QueryRecord entityInfo)
+        private static IEntity BuildInfoEntity(QueryRecord entityInfo)
         {
             // Get the entity properties
             var entity = new Entity();
@@ -300,7 +312,7 @@ namespace ConcreteDataStore
         /// <param name="externalEntityId">The external entity id.</param>
         /// <param name="storageAccountName">The storage account name.</param>
         /// <returns>A partially populated entity with key, current associations and indexed properties included.</returns>
-        private IRawEntity GetIndexEntity(EntityId externalEntityId, string storageAccountName)
+        private IEntity GetIndexEntity(EntityId externalEntityId, string storageAccountName)
         {
             var commandName = "GetEntityIndexEntry";
             var parameters = new List<SqlParameter>
@@ -350,7 +362,7 @@ namespace ConcreteDataStore
         /// <summary>Add a new index entry for an entity.</summary>
         /// <param name="entity">The entity to add/update in the index.</param>
         /// <param name="active">True if the entity should be marked active.</param>
-        private void SaveEntityIndexEntry(IRawEntity entity, bool active)
+        private void SaveEntityIndexEntry(IEntity entity, bool active)
         {
             var parameters = new List<SqlParameter>
                 {

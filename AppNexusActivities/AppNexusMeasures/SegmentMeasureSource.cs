@@ -1,6 +1,18 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="SegmentMeasureSource.cs" company="Rare Crowds Inc">
-//     Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -195,7 +207,8 @@ namespace AppNexusActivities.Measures
                                 DataCostColumns.ToDictionary(
                                     col => col,
                                     col =>
-                                        (string.IsNullOrWhiteSpace(dataCost[col]) ||
+                                        (!dataCost.ContainsKey(col) ||
+                                        string.IsNullOrWhiteSpace(dataCost[col]) ||
                                         ((string)dataCost[col]).ToLowerInvariant() == "null") ? null :
                                         decimal.TryParse((string)dataCost[col], out value) ? (object)value : dataCost[col]));
                 }
@@ -299,68 +312,13 @@ namespace AppNexusActivities.Measures
             }
         }
 
-        /// <summary>Fetch the latest segment measure map</summary>
-        /// <returns>The latest MeasureMap</returns>
-        protected override MeasureMapCacheEntry FetchLatestMeasureMap()
-        {
-            var measures = this.CreateMeasuresFromSegments(this.DataCostsRequired, true);
-            return new MeasureMapCacheEntry
-            {
-                Expiry = DateTime.UtcNow + this.CacheExpiryTime,
-                MeasureMapJson = JsonConvert.SerializeObject(measures)
-            };
-        }
-
-        /// <summary>Creates measures from AppNexus segments</summary>
-        /// <param name="dataCostsRequired">
-        /// Whether to only include segments with data costs defined.
-        /// </param>
-        /// <param name="includeDataCosts">
-        /// Whether to include name overrides and datacosts.
-        /// </param>
-        /// <returns>the segment measures</returns>
-        private IDictionary<long, IDictionary<string, object>> CreateMeasuresFromSegments(
-            bool dataCostsRequired,
-            bool includeDataCosts)
-        {
-            var segments = this.AppNexusClient.GetMemberSegments();
-            if (segments == null)
-            {
-                throw new InvalidOperationException("Unable to get segments from AppNexus.");
-            }
-
-            if (dataCostsRequired && this.SegmentDataCosts == null)
-            {
-                LogManager.Log(
-                    LogLevels.Warning,
-                    "No segment data costs found for '{0}' ({1}). Segment measures will not be available.",
-                    this.AppNexusClient.Id,
-                    this.SegmentDataCostsCsvName);
-                return new Dictionary<long, IDictionary<string, object>>();
-            }
-
-            var dataCosts = includeDataCosts ? this.SegmentDataCosts : new Dictionary<long, IDictionary<string, object>>();
-            var nameOverrides = includeDataCosts ? this.SegmentNameOverrides : new Dictionary<long, string>();
-            return segments
-                .Select(segment =>
-                    this.CreateSegmentMeasure(
-                        segment,
-                        dataCosts,
-                        nameOverrides,
-                        dataCostsRequired))
-                .Where(measure =>
-                    measure.Key > 0 &&
-                    measure.Value != null)
-                .ToDictionary();
-        }
-
         /// <summary>Creates a measure that represents an AppNexus segment</summary>
         /// <param name="segment">The AppNexus segment</param>
         /// <param name="dataCosts">Lookup table of segments data costs</param>
         /// <param name="nameOverrides">Lookup table of segment name overrides</param>
         /// <param name="dataCostRequired">Whether to only include segments with data costs</param>
         /// <returns>The measure</returns>
-        private KeyValuePair<long, IDictionary<string, object>> CreateSegmentMeasure(
+        internal KeyValuePair<long, IDictionary<string, object>> CreateSegmentMeasure(
             IDictionary<string, object> segment,
             IDictionary<long, IDictionary<string, object>> dataCosts,
             IDictionary<long, string> nameOverrides,
@@ -416,7 +374,10 @@ namespace AppNexusActivities.Measures
             // Copy the data costs for the segment/data provider
             foreach (var column in DataCostColumns)
             {
-                measure[column] = segmentDataCost != null ? segmentDataCost[column] : null;
+                measure[column] =
+                    segmentDataCost != null ? segmentDataCost[column] : // Value from data costs
+                    measure.ContainsKey(column) ? measure[column] :     // Value from defaults
+                    null;                                               // Null
             }
 
             // Require at least one data cost column to be non-null if data costs required
@@ -427,14 +388,68 @@ namespace AppNexusActivities.Measures
 
             // Add supplementary columns (where present)
             measure.Add(SupplementaryColumns
-                .Select(col => new KeyValuePair<string, object>(
-                    col,
-                    segment.ContainsKey(col) ? segment[col] : null)));
+                .Where(col => segment.ContainsKey(col) && !(segment[col] is string && string.IsNullOrWhiteSpace((string)segment[col])))
+                .Select(col => new KeyValuePair<string, object>(col, segment[col])));
 
             // Return the measure with its measure id
             return new KeyValuePair<long, IDictionary<string, object>>(measureId, measure);
         }
-    
+
+        /// <summary>Fetch the latest segment measure map</summary>
+        /// <returns>The latest MeasureMap</returns>
+        protected override MeasureMapCacheEntry FetchLatestMeasureMap()
+        {
+            var measures = this.CreateMeasuresFromSegments(this.DataCostsRequired, true);
+            return new MeasureMapCacheEntry
+            {
+                Expiry = DateTime.UtcNow + this.CacheExpiryTime,
+                MeasureMapJson = JsonConvert.SerializeObject(measures)
+            };
+        }
+
+        /// <summary>Creates measures from AppNexus segments</summary>
+        /// <param name="dataCostsRequired">
+        /// Whether to only include segments with data costs defined.
+        /// </param>
+        /// <param name="includeDataCosts">
+        /// Whether to include name overrides and datacosts.
+        /// </param>
+        /// <returns>the segment measures</returns>
+        private IDictionary<long, IDictionary<string, object>> CreateMeasuresFromSegments(
+            bool dataCostsRequired,
+            bool includeDataCosts)
+        {
+            var segments = this.AppNexusClient.GetMemberSegments();
+            if (segments == null)
+            {
+                throw new InvalidOperationException("Unable to get segments from AppNexus.");
+            }
+
+            if (dataCostsRequired && this.SegmentDataCosts == null)
+            {
+                LogManager.Log(
+                    LogLevels.Warning,
+                    "No segment data costs found for '{0}' ({1}). Segment measures will not be available.",
+                    this.AppNexusClient.Id,
+                    this.SegmentDataCostsCsvName);
+                return new Dictionary<long, IDictionary<string, object>>();
+            }
+
+            var dataCosts = includeDataCosts ? this.SegmentDataCosts : new Dictionary<long, IDictionary<string, object>>();
+            var nameOverrides = includeDataCosts ? this.SegmentNameOverrides : new Dictionary<long, string>();
+            return segments
+                .Select(segment =>
+                    this.CreateSegmentMeasure(
+                        segment,
+                        dataCosts,
+                        nameOverrides,
+                        dataCostsRequired))
+                .Where(measure =>
+                    measure.Key > 0 &&
+                    measure.Value != null)
+                .ToDictionary();
+        }
+
         /// <summary>Gets the specified segment data CSV</summary>
         /// <remarks>
         /// Attempts to get the data from the segment data store. If no data exists

@@ -89,7 +89,7 @@ function pageRender(localPageRenderer) {
     content.hideHeader();
 
     var foo1 = document.createElement('div');
-    foo1.setAttribute('style', 'padding:8px;background:#c0c0c0;-moz-border-radius: 22px;border-radius: 22px;');
+    foo1.setAttribute('style', 'padding:8px;background:#c0c0c0;-moz-border-radius: 20px;border-radius: 20px;height:100%;overflow:auto');
     foo1.innerHTML = '<div style="font:12pt Tahoma;font-weight: bold;color:#880000;padding-bottom:12px;">' + $RCUI.resources('Campaign', 'HelpDefaultTitle') + '<\/div>';
     foo1.innerHTML += '<div id="rrContent" style="font:13px Tahoma;padding:2px;">' + $RCUI.resources('Campaign', 'HelpDefault') + '<\/div>';
     content.attachObject(foo1);

@@ -1,6 +1,18 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TestEntityBuilder.cs" company="Emerging Media Group">
-//   Copyright Emerging Media Group. All rights reserved.
+// <copyright file="TestEntityBuilder.cs" company="Rare Crowds Inc">
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -50,6 +62,30 @@ namespace DataAccessLayerUnitTests
 
         /// <summary>Wrapped entity ContactPhone property value.</summary>
         public const string ContactPhone = "123-456-7890";
+
+        /// <summary>Wrapped entity ReportType property value.</summary>
+        public const string ReportType = "SomeReportType";
+
+        /// <summary>Wrapped entity ReportType property value.</summary>
+        public const string ReportData = "SomeReportData";
+
+        /// <summary>Association for testing.</summary>
+        public static readonly Association TestAssociation = new Association
+        {
+            AssociationType = AssociationType.Relationship,
+            ExternalName = AssociationName,
+            TargetEntityId = new EntityId(),
+            TargetExternalType = "AdvertiserFoo"
+        };
+
+        /// <summary>Name of association in entity association collection.</summary>
+        public const string AssociationName = "SomeAssociationName";
+
+        /// <summary>Name of property in entity property collection.</summary>
+        public const string PropertyName = "SomePropertyName";
+
+        /// <summary>Value of property in entity property collection.</summary>
+        public const string PropertyValue = "SomePropertyValue";
 
         /// <summary>Helper method to build a campaign entity.</summary>
         /// <returns>A CampaignEntity.</returns>
@@ -167,6 +203,59 @@ namespace DataAccessLayerUnitTests
                     ExternalName = "MyFooThingy",
                     ExternalType = "FooThingy"
                 });
+        }
+
+        /// <summary>Helper method to build a report entity.</summary>
+        /// <param name="externalEntityId">Entity Id</param>
+        /// <returns>A ReportEntity.</returns>
+        public static ReportEntity BuildReportEntity(EntityId externalEntityId)
+        {
+            return new ReportEntity(
+                externalEntityId,
+                new Entity
+                {
+                    ExternalName = "MyFooThingy",
+                    ExternalType = "FooThingy",
+                    Properties =
+                        {
+                            new EntityProperty(ReportEntity.ReportTypeName, ReportType),
+                            new EntityProperty(ReportEntity.ReportDataName, ReportData, PropertyFilter.Extended)
+                        }
+                });
+        }
+
+        /// <summary>Build a TestEntity with properties and associations</summary>
+        /// <returns>The test entity.</returns>
+        public static TestEntity BuildTestEntityPopulated()
+        {
+            var wrappedEntity = BuildTestEntity().WrappedEntity;
+
+            wrappedEntity.Properties.Add(
+                new EntityProperty { Name = PropertyName, Value = PropertyValue });
+
+            wrappedEntity.Associations.Add(TestAssociation);
+
+            return new TestEntity(wrappedEntity);
+        }
+
+        /// <summary>Build a TestEntity</summary>
+        /// <returns>The test entity.</returns>
+        public static TestEntity BuildTestEntity()
+        {
+            var wrappedEntity = new Entity
+            {
+                ExternalEntityId = new EntityId(),
+                ExternalName = "FooThingyThing",
+                EntityCategory = TestEntity.CategoryName,
+                ExternalType = "FooThingy",
+                CreateDate = DateTime.Now,
+                LastModifiedDate = DateTime.Now,
+                LocalVersion = 1,
+                LastModifiedUser = "abc123",
+                SchemaVersion = 1
+            };
+
+            return new TestEntity(wrappedEntity);
         }
     }
 }

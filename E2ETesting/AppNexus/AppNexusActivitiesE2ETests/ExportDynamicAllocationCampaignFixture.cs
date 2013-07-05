@@ -1,6 +1,18 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="ExportDynamicAllocationCampaignFixture.cs" company="Rare Crowds Inc">
-//     Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -298,16 +310,8 @@ namespace AppNexusActivitiesE2ETests
 
                 if (this.testUpdatedExportAllocationIds.Contains(allocation.AllocationId))
                 {
-                    if (this.testInitialExportAllocationIds.Contains(allocation.AllocationId))
-                    {
-                        // Check the campaign was updated
-                        Assert.IsTrue(this.testLogger.HasMessagesContaining(campaignUpdatedSubstring));
-                    }
-                    else
-                    {
-                        // Check the campaign was created
-                        Assert.IsTrue(this.testLogger.HasMessagesMatching(campaignCreatedPattern));
-                    }
+                    // Check the campaign was created
+                    Assert.IsTrue(this.testLogger.HasMessagesMatching(campaignCreatedPattern));
                 }
                 else if (this.testInitialExportAllocationIds.Contains(allocation.AllocationId))
                 {
@@ -444,9 +448,6 @@ namespace AppNexusActivitiesE2ETests
                 .Select(allocation => allocation.AllocationId);
             foreach (var allocation in this.testUpdatedAllocations.PerNodeResults.Values)
             {
-                var campaignUpdatedSubstring =
-                    @"Updated AppNexus Campaign for Allocation '{0}'"
-                    .FormatInvariant(allocation.AllocationId);
                 var campaignCreatedPattern =
                     @"Created AppNexus Campaign '[0-9]+' for Allocation 'PerNodeBudgetAllocationResult: \[\n\tAllocationId={0}.*"
                     .FormatInvariant(allocation.AllocationId);
@@ -459,16 +460,8 @@ namespace AppNexusActivitiesE2ETests
 
                 if (this.testUpdatedExportAllocationIds.Contains(allocation.AllocationId))
                 {
-                    if (this.testInitialExportAllocationIds.Contains(allocation.AllocationId))
-                    {
-                        // Check the campaign was updated
-                        Assert.IsTrue(this.testLogger.HasMessagesContaining(campaignUpdatedSubstring));
-                    }
-                    else
-                    {
-                        // Check the campaign was created
-                        Assert.IsTrue(this.testLogger.HasMessagesMatching(campaignCreatedPattern));
-                    }
+                    // Check the campaign was created
+                    Assert.IsTrue(this.testLogger.HasMessagesMatching(campaignCreatedPattern));
                 }
                 else if (this.testInitialExportAllocationIds.Contains(allocation.AllocationId))
                 {
@@ -481,7 +474,6 @@ namespace AppNexusActivitiesE2ETests
                 {
                     // if neither initialExportedAllocationIds nor initialExportedAllocationIds contains allocation.AllocationId
                     // then no log activity of that campaign should have taken place
-                    Assert.IsFalse(this.testLogger.HasMessagesContaining(campaignUpdatedSubstring));
                     Assert.IsFalse(this.testLogger.HasMessagesContaining(campaignCreatedPattern));
                     Assert.IsFalse(this.testLogger.HasMessagesContaining(deletedCampaignSubstring));
                     Assert.IsFalse(this.testLogger.HasMessagesContaining(noCampaignFoundToDeactivateSubstring));

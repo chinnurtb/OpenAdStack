@@ -1,6 +1,18 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="BlobPropertyEntityFixture.cs" company="Rare Crowds Inc">
-//   Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -27,7 +39,7 @@ namespace ConcreteDataStoreUnitTests
             this.wrappedEntity = new Entity
             {
                 ExternalEntityId = new EntityProperty { Name = "ExternalEntityId", Value = new EntityId() },
-                EntityCategory = new EntityProperty { Name = "EntityCategory", Value = BlobPropertyEntity.BlobPropertyEntityCategory },
+                EntityCategory = new EntityProperty { Name = "EntityCategory", Value = BlobPropertyEntity.CategoryName },
                 CreateDate = new EntityProperty { Name = "CreateDate", Value = DateTime.Now },
                 LastModifiedDate = new EntityProperty { Name = "LastModifiedDate", Value = DateTime.Now },
                 LocalVersion = new EntityProperty { Name = "LocalVersion", Value = 1 },
@@ -83,7 +95,7 @@ namespace ConcreteDataStoreUnitTests
 
         /// <summary>Validate that entity construction fails if category is not Blob.</summary>
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [ExpectedException(typeof(DataAccessTypeMismatchException))]
         public void FailValidationIfCategoryPropertyNotBlob()
         {
             this.wrappedEntity.EntityCategory = "foobar";

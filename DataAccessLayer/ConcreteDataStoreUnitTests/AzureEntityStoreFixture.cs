@@ -1,6 +1,18 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="AzureEntityStoreFixture.cs" company="Rare Crowds Inc.">
-//     Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -109,7 +121,7 @@ namespace ConcreteDataStoreUnitTests
             var entity = new Entity
                 {
                     ExternalEntityId = new EntityId(),
-                    EntityCategory = CompanyEntity.CompanyEntityCategory,
+                    EntityCategory = CompanyEntity.CategoryName,
                     CreateDate = DateTime.UtcNow,
                     LastModifiedDate = DateTime.UtcNow,
                     ExternalName = "CompanyFoo",
@@ -139,7 +151,7 @@ namespace ConcreteDataStoreUnitTests
             Assert.AreEqual(entity.LocalVersion, roundTripEntity.LocalVersion);
 
             // Assert property bag
-            var getByName = new Func<string, IRawEntity, EntityProperty>((x, y) => y.Properties.Single(p => p.Name == x));
+            var getByName = new Func<string, IEntity, EntityProperty>((x, y) => y.Properties.Single(p => p.Name == x));
             Assert.AreEqual(getByName("Foo", entity), getByName("Foo", roundTripEntity));
             Assert.AreEqual(getByName("FooId", entity), getByName("FooId", roundTripEntity));
 
@@ -500,7 +512,7 @@ namespace ConcreteDataStoreUnitTests
             var association1 = new Association
             {
                 TargetEntityId = new EntityId(1),
-                TargetEntityCategory = CompanyEntity.CompanyEntityCategory,
+                TargetEntityCategory = CompanyEntity.CategoryName,
                 TargetExternalType = "Agency",
                 ExternalName = "Agencies",
                 AssociationType = AssociationType.Relationship
@@ -626,7 +638,7 @@ namespace ConcreteDataStoreUnitTests
         /// <summary>Round-trip serialize/deserialize an entity through Azure OData xml.</summary>
         /// <param name="entity">The raw entity.</param>
         /// <returns>The round-trip raw entity.</returns>
-        private IRawEntity RoundTripSerialize(IRawEntity entity)
+        private IEntity RoundTripSerialize(IEntity entity)
         {
             var rawEntity = new AzureSerializationEntity(entity);
 

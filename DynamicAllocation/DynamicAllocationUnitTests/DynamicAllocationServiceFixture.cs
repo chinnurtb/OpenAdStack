@@ -1,6 +1,18 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="DynamicAllocationServiceFixture.cs" company="Rare Crowds Inc">
-//   Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -184,6 +196,67 @@ namespace DynamicAllocationUnitTests
                 .PerNodeResults
                 .Where(pnr => !exportMeasureSets.Contains(pnr.Key))
                 .All(pnr => pnr.Value.ExportCount == 1));
+        }
+
+        /// <summary>
+        /// A test for the IncrementExportCounts method
+        /// </summary>
+        [TestMethod]
+        public void IncrementIncrementedExportCounts()
+        {
+            var measureSets = new List<MeasureSet> 
+            { 
+                new MeasureSet { 1 }, 
+                new MeasureSet { 1, 2 }, 
+                new MeasureSet { 2, 3 }, 
+                new MeasureSet { 1, 2, 3 } 
+            };
+
+            var exportMeasureSets = new MeasureSet[] 
+            {
+                new MeasureSet { 1 }, 
+                new MeasureSet { 1, 2 }, 
+            };
+
+            var campaign = new BudgetAllocation
+            {
+                PerNodeResults = measureSets.ToDictionary(
+                    ms => ms,
+                    ms => new PerNodeBudgetAllocationResult
+                    {
+                        Valuation = (decimal)ms.Count,
+                        ExportCount = 0,
+                    })
+            };
+
+            var actual = new DynamicAllocationEngine(measureMap).IncrementExportCounts(campaign, exportMeasureSets);
+            Assert.AreEqual(1, actual.PerNodeResults[measureSets[0]].ExportCount);
+            Assert.AreEqual(1, actual.PerNodeResults[measureSets[1]].ExportCount);
+            Assert.AreEqual(0, actual.PerNodeResults[measureSets[2]].ExportCount);
+            Assert.AreEqual(0, actual.PerNodeResults[measureSets[3]].ExportCount);
+
+            exportMeasureSets = new MeasureSet[] 
+            {
+                new MeasureSet { 1, 2, 3 } 
+            };
+
+            actual = new DynamicAllocationEngine(measureMap).IncrementExportCounts(campaign, exportMeasureSets);
+            Assert.AreEqual(1, actual.PerNodeResults[measureSets[0]].ExportCount);
+            Assert.AreEqual(1, actual.PerNodeResults[measureSets[1]].ExportCount);
+            Assert.AreEqual(0, actual.PerNodeResults[measureSets[2]].ExportCount);
+            Assert.AreEqual(1, actual.PerNodeResults[measureSets[3]].ExportCount);
+        
+            exportMeasureSets = new MeasureSet[] 
+            {
+                new MeasureSet { 1 },
+                new MeasureSet { 2, 3 }, 
+            };
+
+            actual = new DynamicAllocationEngine(measureMap).IncrementExportCounts(campaign, exportMeasureSets);
+            Assert.AreEqual(2, actual.PerNodeResults[measureSets[0]].ExportCount);
+            Assert.AreEqual(1, actual.PerNodeResults[measureSets[1]].ExportCount);
+            Assert.AreEqual(1, actual.PerNodeResults[measureSets[2]].ExportCount);
+            Assert.AreEqual(1, actual.PerNodeResults[measureSets[3]].ExportCount);
         }
     }
 }

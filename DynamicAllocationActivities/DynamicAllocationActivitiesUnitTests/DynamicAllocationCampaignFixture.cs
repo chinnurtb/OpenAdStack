@@ -1,6 +1,18 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="DynamicAllocationCampaignFixture.cs" company="Rare Crowds Inc">
-//  Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 // -----------------------------------------------------------------------
 
@@ -113,8 +125,8 @@ namespace DynamicAllocationActivitiesUnitTests
         {
             var dac = new DynamicAllocationCampaign(this.repository, this.companyEntityId, this.campaignEntityId);
             Assert.AreSame(this.repository, dac.Repository);
-            Assert.AreSame(this.campaignEntity, dac.CampaignEntity);
-            Assert.AreSame(this.companyEntity, dac.CompanyEntity);
+            Assert.AreSame(this.campaignEntity.WrappedEntity, dac.CampaignEntity.WrappedEntity);
+            Assert.AreSame(this.companyEntity.WrappedEntity, dac.CompanyEntity.WrappedEntity);
             Assert.IsNotNull(dac.CampaignConfig);
             Assert.IsNotNull(dac.AllocationParameters);
             Assert.IsNotNull(dac.BudgetAllocationHistory);
@@ -128,7 +140,7 @@ namespace DynamicAllocationActivitiesUnitTests
         {
             var dac = new DynamicAllocationCampaign(this.repository, this.companyEntityId, this.campaignEntityId, this.campaignVersion);
             Assert.AreSame(this.repository, dac.Repository);
-            Assert.AreSame(this.campaignEntityVersioned, dac.CampaignEntity);
+            Assert.AreSame(this.campaignEntityVersioned.WrappedEntity, dac.CampaignEntity.WrappedEntity);
         }
 
         /// <summary>Happy path injection constructor success.</summary>

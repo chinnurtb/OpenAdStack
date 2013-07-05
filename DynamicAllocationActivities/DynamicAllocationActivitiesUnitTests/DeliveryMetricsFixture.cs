@@ -1,6 +1,18 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="DeliveryMetricsFixture.cs" company="Rare Crowds Inc">
-//  Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 // -----------------------------------------------------------------------
 
@@ -345,7 +357,7 @@ namespace DynamicAllocationActivitiesUnitTests
                     this.BuildDeliveryRecord(hourThree, 100, 1m),
                 };
 
-            this.deliveryMetrics.UpdateNodeMetrics(
+            DeliveryMetrics.UpdateNodeMetrics(
                 nodeMetrics, 
                 measureSet, 
                 measureSetDeliveryData, 
@@ -371,7 +383,6 @@ namespace DynamicAllocationActivitiesUnitTests
             Assert.AreEqual(12, nodeMetrics.TotalEligibleHours);
             Assert.AreEqual(400L, nodeMetrics.TotalImpressions);
             Assert.AreEqual(4m, nodeMetrics.TotalMediaSpend);
-            Assert.AreEqual(.3m, nodeMetrics.TotalSpend);
 
             // Make assertions against zero-delivery hour metrics
             var zeroDeliveryHour = hourThree + OneHour;
@@ -413,7 +424,7 @@ namespace DynamicAllocationActivitiesUnitTests
             // Set up unprocessed delivered hours
             var measureSetDeliveryData = new List<Dictionary<string, PropertyValue>>();
 
-            this.deliveryMetrics.UpdateNodeMetrics(
+            DeliveryMetrics.UpdateNodeMetrics(
                 nodeMetrics,
                 measureSet, 
                 measureSetDeliveryData, 
@@ -453,7 +464,7 @@ namespace DynamicAllocationActivitiesUnitTests
             // Set up unprocessed delivered hours
             var measureSetDeliveryData = new List<Dictionary<string, PropertyValue>>();
 
-            this.deliveryMetrics.UpdateNodeMetrics(
+            DeliveryMetrics.UpdateNodeMetrics(
                 nodeMetrics,
                 measureSet,
                 measureSetDeliveryData,
@@ -516,7 +527,7 @@ namespace DynamicAllocationActivitiesUnitTests
                     this.BuildDeliveryRecord(reportCutoff, 200, 2m)
                 };
 
-            this.deliveryMetrics.UpdateNodeMetrics(
+            DeliveryMetrics.UpdateNodeMetrics(
                 nodeMetrics, 
                 measureSet, 
                 measureSetDeliveryData, 
@@ -543,7 +554,6 @@ namespace DynamicAllocationActivitiesUnitTests
             Assert.AreEqual(hoursSeen + 24, nodeMetrics.TotalEligibleHours);
             Assert.AreEqual((hoursSeen * 100L) + 200L, nodeMetrics.TotalImpressions);
             Assert.AreEqual((hoursSeen * 1m) + 2m, nodeMetrics.TotalMediaSpend);
-            Assert.AreEqual((hoursSeen * 0.1m) + 0.1m, nodeMetrics.TotalSpend);
 
             // Make assertions against zero-delivery hour metrics
             var zeroDeliveryHourMetrics = nodeMetrics.DeliveryProfile[DeliveryMetrics.GetProfileHourIndex(hourOne - OneHour)];
@@ -587,7 +597,7 @@ namespace DynamicAllocationActivitiesUnitTests
                     this.BuildDeliveryRecord(gapHour, 200, 2m)
                 };
 
-            this.deliveryMetrics.UpdateNodeMetrics(
+            DeliveryMetrics.UpdateNodeMetrics(
                 nodeMetrics, 
                 measureSet, 
                 measureSetDeliveryData, 
@@ -613,7 +623,6 @@ namespace DynamicAllocationActivitiesUnitTests
             Assert.AreEqual(45, nodeMetrics.TotalEligibleHours);
             Assert.AreEqual(200L, nodeMetrics.TotalImpressions);
             Assert.AreEqual(2m, nodeMetrics.TotalMediaSpend);
-            Assert.AreEqual(0.1m, nodeMetrics.TotalSpend);
         }
 
         /// <summary>
@@ -650,7 +659,7 @@ namespace DynamicAllocationActivitiesUnitTests
                     this.BuildDeliveryRecord(deliveredHour, 200, 2m)
                 };
 
-            this.deliveryMetrics.UpdateNodeMetrics(
+            DeliveryMetrics.UpdateNodeMetrics(
                 nodeMetrics,
                 measureSet,
                 measureSetDeliveryData,
@@ -663,7 +672,6 @@ namespace DynamicAllocationActivitiesUnitTests
             Assert.AreEqual(15, nodeMetrics.TotalEligibleHours);
             Assert.AreEqual(200L, nodeMetrics.TotalImpressions);
             Assert.AreEqual(2m, nodeMetrics.TotalMediaSpend);
-            Assert.AreEqual(.1m, nodeMetrics.TotalSpend);
             Assert.AreEqual(lastCampaignDeliveryHour, nodeMetrics.LastProcessedEligibilityHour);
             Assert.AreEqual(deliveredHour, nodeMetrics.LastProcessedDeliveryHour);
 
@@ -729,7 +737,7 @@ namespace DynamicAllocationActivitiesUnitTests
                     this.BuildDeliveryRecord(deliveredHour, 200, 2m)
                 };
 
-            this.deliveryMetrics.UpdateNodeMetrics(
+            DeliveryMetrics.UpdateNodeMetrics(
                 nodeMetrics,
                 measureSet,
                 measureSetDeliveryData,
@@ -776,7 +784,7 @@ namespace DynamicAllocationActivitiesUnitTests
                     this.BuildDeliveryRecord(deliveredHour, 100, 1m)
                 };
 
-            this.deliveryMetrics.UpdateNodeMetrics(
+            DeliveryMetrics.UpdateNodeMetrics(
                 nodeMetrics,
                 measureSet,
                 measureSetDeliveryData,
@@ -798,7 +806,7 @@ namespace DynamicAllocationActivitiesUnitTests
 
             // Update the node again like a new report was pulled with no additional
             // data for this node but updates to existing hours
-            this.deliveryMetrics.UpdateNodeMetrics(
+            DeliveryMetrics.UpdateNodeMetrics(
                 nodeMetrics,
                 measureSet,
                 measureSetDeliveryData,
@@ -811,7 +819,6 @@ namespace DynamicAllocationActivitiesUnitTests
             Assert.AreEqual(24, nodeMetrics.TotalEligibleHours);
             Assert.AreEqual(400L, nodeMetrics.TotalImpressions);
             Assert.AreEqual(4m, nodeMetrics.TotalMediaSpend);
-            Assert.AreEqual(.2m, nodeMetrics.TotalSpend);
             Assert.AreEqual(periodStart + OneDay - OneHour, nodeMetrics.LastProcessedEligibilityHour);
             Assert.AreEqual(previousZeroHour, nodeMetrics.LastProcessedDeliveryHour);
 
@@ -859,7 +866,7 @@ namespace DynamicAllocationActivitiesUnitTests
                     this.BuildDeliveryRecord(deliveredHour, 100, 1m)
                 };
 
-            this.deliveryMetrics.UpdateNodeMetrics(
+            DeliveryMetrics.UpdateNodeMetrics(
                 nodeMetrics,
                 measureSet,
                 measureSetDeliveryData,
@@ -877,7 +884,7 @@ namespace DynamicAllocationActivitiesUnitTests
 
             // Update the node again like a new report was pulled with no additional
             // data for this node but updates to existing hours
-            this.deliveryMetrics.UpdateNodeMetrics(
+            DeliveryMetrics.UpdateNodeMetrics(
                 nodeMetrics,
                 measureSet,
                 measureSetDeliveryData,
@@ -923,7 +930,7 @@ namespace DynamicAllocationActivitiesUnitTests
             // Set up zero delivery.
             var measureSetDeliveryData = new List<Dictionary<string, PropertyValue>>();
 
-            this.deliveryMetrics.UpdateNodeMetrics(
+            DeliveryMetrics.UpdateNodeMetrics(
                 nodeMetrics,
                 measureSet,
                 measureSetDeliveryData,

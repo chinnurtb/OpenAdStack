@@ -1,6 +1,18 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="RetrieveCampaignDeliveryReportsFixture.cs" company="Rare Crowds Inc">
-//     Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -230,6 +242,71 @@ namespace DeliveryNetworkActivityDispatchersUnitTests
             Assert.AreEqual(
                 AppNexusMaxReportRequests - numberOfReportsToRetrieve + 1,
                 reportsToRequestInProgressCount);
+        }
+
+        /// <summary>
+        /// Test that failed report request are immediately rescheduled.
+        /// </summary>
+        [TestMethod]
+        public void RequestReportFailed()
+        {
+            // Test ids
+            var campaignEntityId = new EntityId().ToString();
+            var companyEntityId = new EntityId().ToString();
+
+            // Test request for RequestCampaignReportActivity
+            var requestRequest = new ActivityRequest
+            {
+                Task = AppNexusActivityTasks.RequestCampaignReport,
+                Values =
+                {
+                    { EntityActivityValues.CompanyEntityId, companyEntityId },
+                    { EntityActivityValues.CampaignEntityId, campaignEntityId },
+                }
+            };
+
+            // Test result from RequestCampaignReportActivity
+            var requestResult = new ActivityResult
+            {
+                Task = AppNexusActivityTasks.RequestCampaignReport,
+                Succeeded = true,
+                RequestId = requestRequest.Id,
+                Values =
+                {
+                    { AppNexusActivityValues.ReportId, string.Empty },
+                    { AppNexusActivityValues.Reschedule, false.ToString() },
+                    { EntityActivityValues.CompanyEntityId, companyEntityId },
+                    { EntityActivityValues.CampaignEntityId, campaignEntityId },
+                }
+            };
+
+            // Create the scheduled activity source
+            var source = this.CreateScheduledActivitySource();
+
+            // Add an entry to the in-progress registry for a report request
+            var reportsToRequest = Scheduler.GetRegistry<Tuple<string, DeliveryNetworkDesignation>>(
+                DeliveryNetworkSchedulerRegistries.ReportsToRequest);
+            reportsToRequest.Add(
+                DateTime.UtcNow,
+                campaignEntityId,
+                new Tuple<string, DeliveryNetworkDesignation>(
+                    companyEntityId,
+                    DeliveryNetworkDesignation.AppNexus));
+
+            // Handle the result of the request
+            // This will schedule the retrieve
+            RetrieveCampaignDeliveryReports.OnRequestReportResult(requestRequest, requestResult);
+
+            // Assert that the request was rescheduled
+            Assert.AreEqual(1, reportsToRequest[DateTime.UtcNow].Count);
+
+            // Assert that the retrieve was NOT scheduled
+            var appNexusReportsToRetrieveRegistry =
+                DeliveryNetworkSchedulerRegistries.ReportsToRetrieve +
+                DeliveryNetworkDesignation.AppNexus.ToString();
+            var reportsToRetrieve = Scheduler.GetRegistry<Tuple<string, string>>(
+                appNexusReportsToRetrieveRegistry);
+            Assert.AreEqual(0, reportsToRetrieve[DateTime.UtcNow].Count);
         }
 
         /// <summary>

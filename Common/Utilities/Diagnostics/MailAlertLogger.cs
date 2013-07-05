@@ -1,6 +1,18 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="MailAlertLogger.cs" company="Rare Crowds Inc">
-//     Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
 using System;
@@ -111,36 +123,45 @@ namespace Utilities.Diagnostics
         /// <param name="message">The content of the log message</param>
         public void LogMessage(LogLevels level, string instance, string thread, string source, string message)
         {
-            // Reset the throttle every minute
-            if ((DateTime.UtcNow - this.throttlePeriodStart).TotalMinutes >= 1)
+            try
             {
-                this.throttleAlertsSent = 0;
-                this.throttlePeriodStart = DateTime.UtcNow;
-            }
+                // Reset the throttle every minute
+                if ((DateTime.UtcNow - this.throttlePeriodStart).TotalMinutes >= 1)
+                {
+                    this.throttleAlertsSent = 0;
+                    this.throttlePeriodStart = DateTime.UtcNow;
+                }
 
-            // Don't send more than the maximum alerts in one minute
-            if (++this.throttleAlertsSent > MaximumAlertsPerMinute)
-            {
-                return;
-            }
+                // Don't send more than the maximum alerts in one minute
+                if (++this.throttleAlertsSent > MaximumAlertsPerMinute)
+                {
+                    return;
+                }
 
-            // Compose args for the mail template and send the message
-            var subjectArgs = new[]
+                // Compose args for the mail template and send the message
+                var subjectArgs = new[]
+                {
+                    level.ToString(),
+                    source,
+                    message.Split('\n', '\r').First().Left(SubjectMessageLength)
+                };
+                var bodyArgs = new[]
+                {
+                    level.ToString(),
+                    DateTime.UtcNow.ToString("o", CultureInfo.InvariantCulture),
+                    instance,
+                    thread,
+                    source,
+                    message
+                };
+                this.MailClient.SendMail(MailTemplateName, AlertRecipients, subjectArgs, bodyArgs);
+            }
+            catch (Exception e)
             {
-                level.ToString(),
-                source,
-                message.Left(SubjectMessageLength)
-            };
-            var bodyArgs = new[]
-            {
-                level.ToString(),
-                DateTime.UtcNow.ToString("o", CultureInfo.InvariantCulture),
-                instance,
-                thread,
-                source,
-                message
-            };
-            this.MailClient.SendMail(MailTemplateName, AlertRecipients, subjectArgs, bodyArgs);
+                // Must be Trace which is not supported by this logger to ensure no infinite recursion
+                LogManager.Log(LogLevels.Trace, false, "Error sending mail alert: {0}", e);
+                throw;
+            }
         }
     }
 }

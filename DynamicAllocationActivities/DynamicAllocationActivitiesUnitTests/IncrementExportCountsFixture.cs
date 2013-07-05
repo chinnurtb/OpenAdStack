@@ -1,6 +1,18 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="IncrementExportCountsFixture.cs" company="Rare Crowds Inc">
-//  Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 // -----------------------------------------------------------------------
 
@@ -54,10 +66,7 @@ namespace DynamicAllocationActivitiesUnitTests
         private BudgetAllocation activeAllocation;
 
         /// <summary>Exported allocation ids</summary>
-        private string[] exportedAllocationIds;
-
-        /// <summary>Unexported allocation ids</summary>
-        private string[] unexportedAllocationIds;
+        private string[] allocationIds;
 
         /// <summary>Per-test initialization</summary>
         [TestInitialize]
@@ -65,15 +74,11 @@ namespace DynamicAllocationActivitiesUnitTests
         {
             LogManager.Initialize(new[] { MockRepository.GenerateMock<ILogger>() });
 
-            this.exportedAllocationIds = Enumerable.Range(0, 3).Select(i => Guid.NewGuid().ToString("N")).ToArray();
-            this.unexportedAllocationIds = Enumerable.Range(0, 3).Select(i => Guid.NewGuid().ToString("N")).ToArray();
-
             var measureId = 0L;
+            this.allocationIds = Enumerable.Range(0, 10).Select(i => Guid.NewGuid().ToString("N")).ToArray();
             this.activeAllocation = new BudgetAllocation
             {
-                PerNodeResults =
-                    this.exportedAllocationIds.Concat(this.unexportedAllocationIds)
-                    .ToDictionary(
+                PerNodeResults = this.allocationIds.ToDictionary(
                     id => new MeasureSet { ++measureId, ++measureId, ++measureId },
                     id => new PerNodeBudgetAllocationResult { AllocationId = id })
             };
@@ -130,17 +135,9 @@ namespace DynamicAllocationActivitiesUnitTests
             Assert.IsNotNull(activity);
 
             // Create and run the activity request
-            var request = new ActivityRequest
-            {
-                Task = DynamicAllocationActivityTasks.IncrementExportCounts,
-                Values =
-                {
-                    { EntityActivityValues.AuthUserId, this.userId },
-                    { EntityActivityValues.CompanyEntityId, this.companyEntity.ExternalEntityId.ToString() },
-                    { EntityActivityValues.CampaignEntityId, this.campaignEntity.ExternalEntityId.ToString() },
-                    { DeliveryNetworkActivityValues.ExportedAllocationIds, string.Join(",", this.exportedAllocationIds) },
-                }
-            };
+            var exportedAllocationIds = this.allocationIds.Take(3).ToArray();
+            var unexportedAllocationIds = this.allocationIds.Except(exportedAllocationIds).ToArray();
+            var request = this.CreateActivityRequest(exportedAllocationIds);
             var result = activity.Run(request);
 
             // Verify the result
@@ -162,8 +159,8 @@ namespace DynamicAllocationActivitiesUnitTests
                     .Select(pnr => pnr.AllocationId)
                     .ToArray();
             Assert.AreEqual(
-                this.exportedAllocationIds.Length,
-                incrementedAllocationIds.Intersect(this.exportedAllocationIds).Count());
+                exportedAllocationIds.Length,
+                incrementedAllocationIds.Intersect(exportedAllocationIds).Count());
 
             // Verify allocations with ExportCount == 0 match the unexported allocation ids
             var unincrementedAllocationIds = incrementedAllocation.PerNodeResults.Values
@@ -171,8 +168,114 @@ namespace DynamicAllocationActivitiesUnitTests
                 .Select(pnr => pnr.AllocationId)
                 .ToArray();
             Assert.AreEqual(
-                this.unexportedAllocationIds.Length,
-                unincrementedAllocationIds.Intersect(this.unexportedAllocationIds).Count());
+                unexportedAllocationIds.Length,
+                unincrementedAllocationIds.Intersect(unexportedAllocationIds).Count());
+        }
+
+        /// <summary>Test incrementing counts multiple times.</summary>
+        [TestMethod]
+        public void MultipleIncrementExportCounts()
+        {
+            var originalActiveAllocationBlobEntity = this.activeAllocationBlobEntity;
+
+            // Create the activity
+            var activity = Activity.CreateActivity(
+                typeof(IncrementExportCountsActivity),
+                new Dictionary<Type, object> { { typeof(IEntityRepository), this.repository } },
+                ActivityTestHelpers.SubmitActivityRequest)
+                as IncrementExportCountsActivity;
+            Assert.IsNotNull(activity);
+
+            // Create and run the activity request
+            var exportedAllocationIdsA = this.allocationIds.Take(3).ToArray();
+            var exportedAllocationIdsB = this.allocationIds.Except(exportedAllocationIdsA).Take(3).ToArray();
+
+            // Run the activity and verify the counts have been incremented correctly
+            var request = this.CreateActivityRequest(exportedAllocationIdsA);
+            var result = activity.Run(request);
+            Assert.IsTrue(result.Succeeded);
+            var incrementedAllocation = this.dynamicAllocationCampaign.RetrieveActiveAllocation();
+            Assert.IsNotNull(incrementedAllocation);
+            Assert.IsTrue(
+                exportedAllocationIdsA.All(id =>
+                    incrementedAllocation.PerNodeResults.Values
+                    .Single(pnr => pnr.AllocationId == id)
+                    .ExportCount == 1));
+            Assert.IsTrue(
+                this.allocationIds
+                .Except(exportedAllocationIdsA)
+                .All(id =>
+                    incrementedAllocation.PerNodeResults.Values
+                    .Single(pnr => pnr.AllocationId == id)
+                    .ExportCount == 0));
+
+            // Increment some other allocations and verify the export counts
+            request = this.CreateActivityRequest(exportedAllocationIdsB);
+            result = activity.Run(request);
+            Assert.IsTrue(result.Succeeded);
+            incrementedAllocation = this.dynamicAllocationCampaign.RetrieveActiveAllocation();
+            Assert.IsNotNull(incrementedAllocation);
+            Assert.IsTrue(
+                exportedAllocationIdsA.All(id =>
+                    incrementedAllocation.PerNodeResults.Values
+                    .Single(pnr => pnr.AllocationId == id)
+                    .ExportCount == 1));
+            Assert.IsTrue(
+                exportedAllocationIdsB.All(id =>
+                    incrementedAllocation.PerNodeResults.Values
+                    .Single(pnr => pnr.AllocationId == id)
+                    .ExportCount == 1));
+            Assert.IsTrue(
+                this.allocationIds
+                .Except(exportedAllocationIdsA.Concat(exportedAllocationIdsB))
+                .All(id =>
+                    incrementedAllocation.PerNodeResults.Values
+                    .Single(pnr => pnr.AllocationId == id)
+                    .ExportCount == 0));
+
+            // Increment the first allocations again and verify the export counts
+            request = this.CreateActivityRequest(exportedAllocationIdsA);
+            result = activity.Run(request);
+            Assert.IsTrue(result.Succeeded);
+            incrementedAllocation = this.dynamicAllocationCampaign.RetrieveActiveAllocation();
+            Assert.IsNotNull(incrementedAllocation);
+            Assert.IsTrue(
+                exportedAllocationIdsA.All(id =>
+                    incrementedAllocation.PerNodeResults.Values
+                    .Single(pnr => pnr.AllocationId == id)
+                    .ExportCount == 2));
+            Assert.IsTrue(
+                exportedAllocationIdsB.All(id =>
+                    incrementedAllocation.PerNodeResults.Values
+                    .Single(pnr => pnr.AllocationId == id)
+                    .ExportCount == 1));
+            Assert.IsTrue(
+                this.allocationIds
+                .Except(exportedAllocationIdsA.Concat(exportedAllocationIdsB))
+                .All(id =>
+                    incrementedAllocation.PerNodeResults.Values
+                    .Single(pnr => pnr.AllocationId == id)
+                    .ExportCount == 0));
+        }
+
+        /// <summary>
+        /// Creates an activity request with the specified allocation ids
+        /// </summary>
+        /// <param name="exportedAllocationIds">Exported allocation ids to increment</param>
+        /// <returns>The IncrementExportCounts activity request</returns>
+        private ActivityRequest CreateActivityRequest(string[] exportedAllocationIds)
+        {
+            return new ActivityRequest
+            {
+                Task = DynamicAllocationActivityTasks.IncrementExportCounts,
+                Values =
+                {
+                    { EntityActivityValues.AuthUserId, this.userId },
+                    { EntityActivityValues.CompanyEntityId, this.companyEntity.ExternalEntityId.ToString() },
+                    { EntityActivityValues.CampaignEntityId, this.campaignEntity.ExternalEntityId.ToString() },
+                    { DeliveryNetworkActivityValues.ExportedAllocationIds, string.Join(",", exportedAllocationIds) },
+                }
+            };
         }
     }
 }

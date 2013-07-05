@@ -99,9 +99,9 @@
         function generateMeasuresListHTML(measureList) {
             var messageText = '<table cellspacing=0 style="font:tahoma;font-size:12px">';
             var nodeValuationJson = {'MeasureSet' : [], 'IdealValuation' : 0, 'MaxValuation' : 0}
-            for (var measure in measureList) {
-                messageText += '<tr><td style="border-bottom:1px solid;">' + getMeasureDisplayName(measureList[measure]) + "<\/td><\/tr>";
-                nodeValuationJson.MeasureSet.push(measureList[measure]);
+            for (var i = 0; i < measureList.length; i++) {
+                messageText += '<tr><td style="border-bottom:1px solid;">' + getMeasureDisplayName(measureList[i]) + "<\/td><\/tr>";
+                nodeValuationJson.MeasureSet.push(measureList[i]);
             }
             messageText += '<span id="hiddenNodeValuationJson" style="display:none">' + JSON.stringify(nodeValuationJson) + '</span>';
             messageText += '<\/table>'
@@ -144,9 +144,9 @@
         }
 
         function nodeOverrideIndex(testNode){
-            for (var node in campaignData.NodeValuations){
-                if (campaignData.NodeValuations[node].MeasureSet.sort().join(',') == testNode.sort().join(',')){
-                    return node;
+            for (var i = 0; i < campaignData.NodeValuations.length; i++ ) {
+                if (campaignData.NodeValuations[i].MeasureSet.sort().join(',') == testNode.sort().join(',')) {
+                    return i;
                 }
             }
             return -1;
@@ -185,6 +185,9 @@
             // find nodes with the tupleSize number of free floating measures
             var tierNodeList = jsonPath(campaignData, '$.Valuations[?(@.MeasureSet.length == ' + tupleSize + ')]');
             var tierNodePlusOneList = jsonPath(campaignData, '$.Valuations[?(@.MeasureSet.length == ' + (tupleSize + 1) + ')]');
+            if (!tierNodeList || !tierNodePlusOneList) {
+                return [];
+            }
             tierNodeList = tierNodeList.sort(sortByValuations);
             var coveredTargetPlusOneList = [];
             var overrideNodes = [];
@@ -219,11 +222,11 @@
         }
 
         function getHighlightColor(node) {
-            for (var potentialParentNode in recommendNodeList) {
-                if (isChildNodeByNode(recommendNodeList[potentialParentNode], node)) {
+            for (var i = 0; i < recommendNodeList.length; i++ ) {
+                if (isChildNodeByNode(recommendNodeList[i], node)) {
                     return 'rgb(0,128,255)';
                 }
-                if (node.MeasureSet.join(',') == recommendNodeList[potentialParentNode].MeasureSet.join(',')) {
+                if (node.MeasureSet.join(',') == recommendNodeList[i].MeasureSet.join(',')) {
                     return 'rgb(255,255,255)';
                 }
             }

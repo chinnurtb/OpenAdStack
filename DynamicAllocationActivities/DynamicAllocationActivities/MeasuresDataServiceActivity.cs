@@ -1,6 +1,18 @@
 ﻿// -----------------------------------------------------------------------
 // <copyright file="MeasuresDataServiceActivity.cs" company="Rare Crowds Inc">
-//  Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 // -----------------------------------------------------------------------
 
@@ -28,6 +40,15 @@ namespace DynamicAllocationActivities
         /// <summary>Display name for unloaded placeholders</summary>
         private const string UnloadedPlaceholderDisplayName = "<loading>";
 
+        /// <summary>Properties to include in JSON results</summary>
+        private static readonly string[] JsonIncludeProperties = new[]
+        {
+            MeasureValues.DisplayName,
+            MeasureValues.Type,
+            MeasureValues.SubType,
+            MeasureValues.DataProvider,
+        };
+
         /// <summary>Gets the activity runtime category</summary>
         public override ActivityRuntimeCategory RuntimeCategory
         {
@@ -44,6 +65,23 @@ namespace DynamicAllocationActivities
         private IEntityRepository Repository
         {
             get { return (IEntityRepository)this.Context[typeof(IEntityRepository)]; }
+        }
+
+        /// <summary>Checks whether a measure matches the specified cost type</summary>
+        /// <param name="costType">
+        /// Cost type to check for. This is either one of the data providers, NoCost or Unknown.
+        /// </param>
+        /// <param name="measure">
+        /// The measure to be checked. Not required to have type/subtype values.
+        /// </param>
+        /// <returns>
+        /// True if the measure matches the specified type (and subtype, if specified);
+        /// otherwise, false.
+        /// </returns>
+        internal static bool IsMeasureOfCostType(string costType, IDictionary<string, object> measure)
+        {
+            return !measure.ContainsKey(MeasureValues.DataProvider) || string.IsNullOrWhiteSpace((string)measure[MeasureValues.DataProvider]) ? false :
+                costType.ToLowerInvariant() == ((string)measure[MeasureValues.DataProvider]).ToLowerInvariant();
         }
 
         /// <summary>Gets the path for a result</summary>
@@ -83,7 +121,6 @@ namespace DynamicAllocationActivities
         protected override string FormatResultsAsJson(
             IDictionary<string, object> results)
         {
-            string[] includeProperties = new string[] { MeasureValues.DisplayName, MeasureValues.Type, MeasureValues.SubType };
             var startTime = DateTime.UtcNow;
             var resultsJson = AppsJsonSerializer.SerializeObject(
             results.Values
@@ -91,7 +128,7 @@ namespace DynamicAllocationActivities
             .Where(kvp => kvp.Key > 0)
             .Select(kvp => new KeyValuePair<long, IDictionary<string, object>>(
                 kvp.Key,
-                kvp.Value.Where(p => includeProperties.Contains(p.Key)).ToDictionary()))
+                kvp.Value.Where(p => JsonIncludeProperties.Contains(p.Key)).ToDictionary()))
             .ToDictionary());
             LogManager.Log(
                 LogLevels.Trace,
@@ -133,11 +170,32 @@ namespace DynamicAllocationActivities
             KeyValuePair<long, IDictionary<string, object>> result,
             IDictionary<string, string> requestValues)
         {
+            if (requestValues.ContainsKey(DataServiceActivityValues.Ids))
+            {
+                // Filter results not matching one of the included ids
+                var includeIds = requestValues[DataServiceActivityValues.Ids].Split(',')
+                    .Select(id => Convert.ToInt64(id, CultureInfo.InvariantCulture));
+                if (!includeIds.Contains(result.Key))
+                {
+                    return true;
+                }
+            }
+
             if (requestValues.ContainsKey(DataServiceActivityValues.Exclude))
             {
                 // Filter results matching any of the exclude types
                 var excludeTypes = requestValues[DataServiceActivityValues.Exclude].Split(';', ',');
                 if (excludeTypes.Any(type => IsMeasureOfType(type, result.Value)))
+                {
+                    return true;
+                }
+            }
+
+            if (requestValues.ContainsKey(DynamicAllocationActivityValues.ExcludeCostTypes))
+            {
+                // Filter results matching any of the exclude cost types
+                var excludeCostTypes = requestValues[DynamicAllocationActivityValues.ExcludeCostTypes].Split(';', ',');
+                if (excludeCostTypes.Any(costType => IsMeasureOfCostType(costType, result.Value)))
                 {
                     return true;
                 }
@@ -153,11 +211,11 @@ namespace DynamicAllocationActivities
                 }
             }
 
-            if (requestValues.ContainsKey(DataServiceActivityValues.Ids))
+            if (requestValues.ContainsKey(DynamicAllocationActivityValues.IncludeCostTypes))
             {
-                var includeIds = requestValues[DataServiceActivityValues.Ids].Split(',')
-                    .Select(id => Convert.ToInt64(id, CultureInfo.InvariantCulture));
-                if (!includeIds.Contains(result.Key))
+                // Filter results not matching any of the include cost types
+                var includeCostTypes = requestValues[DynamicAllocationActivityValues.IncludeCostTypes].Split(';', ',');
+                if (!includeCostTypes.Any(costType => IsMeasureOfCostType(costType, result.Value)))
                 {
                     return true;
                 }
@@ -266,7 +324,7 @@ namespace DynamicAllocationActivities
                 (DateTime.UtcNow - startTime).TotalSeconds,
                 measures.Length,
                 measureSources.Count());
-            
+
             return measures;
         }
     }

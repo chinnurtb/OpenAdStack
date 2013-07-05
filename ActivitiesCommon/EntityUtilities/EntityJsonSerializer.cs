@@ -1,6 +1,18 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="EntityJsonSerializer.cs" company="Rare Crowds Inc">
-//   Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -63,7 +75,7 @@ namespace EntityUtilities
         /// <summary>Serialize a raw entity to Json.</summary>
         /// <param name="entity">The entity.</param>
         /// <returns>A JSON string.</returns>
-        public static string SerializeToJson(IRawEntity entity)
+        public static string SerializeToJson(IEntity entity)
         {
             return SerializeToJson(entity, new EntitySerializationFilter());
         }
@@ -72,7 +84,7 @@ namespace EntityUtilities
         /// <param name="entity">The entity.</param>
         /// <param name="entityFilter">An entity filter.</param>
         /// <returns>A JSON string.</returns>
-        public static string SerializeToJson(IRawEntity entity, IEntityFilter entityFilter)
+        public static string SerializeToJson(IEntity entity, IEntityFilter entityFilter)
         {
             IDictionary<string, object> serializationDictionary = new Dictionary<string, object>();
             var entityId = string.Empty;
@@ -123,11 +135,11 @@ namespace EntityUtilities
         /// deserialized entity and which should be ignored.
         /// </param>
         /// <returns>An IEntity object.</returns>
-        public static IRawEntity DeserializeEntity(string jsonEntity, IEntityFilter entityFilter)
+        public static IEntity DeserializeEntity(string jsonEntity, IEntityFilter entityFilter)
         {
             try
             {
-                IRawEntity entity = new Entity();
+                IEntity entity = new Entity();
 
                 if (string.IsNullOrEmpty(jsonEntity))
                 {
@@ -165,7 +177,7 @@ namespace EntityUtilities
         /// <summary>Realize the wrapped entity from JSON. Used for construction, shouldn't be needed publically.</summary>
         /// <param name="jsonEntity">The JSON object from which to deserialize.</param>
         /// <returns>An IEntity object.</returns>
-        public static IRawEntity DeserializeEntity(string jsonEntity)
+        public static IEntity DeserializeEntity(string jsonEntity)
         {
             return DeserializeEntity(jsonEntity, new EntityDeserializationFilter());
         }
@@ -223,11 +235,11 @@ namespace EntityUtilities
         /// <summary>Deserialize the IEntity interface properties from a Json Dictionary.</summary>
         /// <param name="entity">The entity to which properties are added.</param>
         /// <param name="jsonPropertyList">The top level entity properties.</param>
-        private static void DeserializeInterfaceProperties(ref IRawEntity entity, IList<JProperty> jsonPropertyList)
+        private static void DeserializeInterfaceProperties(ref IEntity entity, IList<JProperty> jsonPropertyList)
         {
             // Get the IEntity property names
             var interfacePropertyNames =
-                typeof(IRawEntity).GetProperties().Where(p => p.PropertyType == typeof(EntityProperty)).Select(p => p.Name);
+                typeof(IEntity).GetProperties().Where(p => p.PropertyType == typeof(EntityProperty)).Select(p => p.Name);
 
             // Get the IEntity properties from the container
             var interfaceProperties = jsonPropertyList.Where(p => interfacePropertyNames.Contains(p.Name)).ToList();
@@ -241,7 +253,7 @@ namespace EntityUtilities
             foreach (var property in interfaceProperties)
             {
                 var entityProperty = DeserializeEntityPropertyFromJson(property, PropertyFilter.Default);
-                typeof(IRawEntity).GetProperty(property.Name).SetValue(entity, entityProperty, null);
+                typeof(IEntity).GetProperty(property.Name).SetValue(entity, entityProperty, null);
             }
         }
 
@@ -249,7 +261,7 @@ namespace EntityUtilities
         /// <param name="entity">The entity to which the properties are added.</param>
         /// <param name="jsonPropertyList">The top level entity properties.</param>
         /// <param name="entityFilter">The entity filter.</param>
-        private static void DeserializePropertiesFromJson(ref IRawEntity entity, IList<JProperty> jsonPropertyList, IEntityFilter entityFilter)
+        private static void DeserializePropertiesFromJson(ref IEntity entity, IList<JProperty> jsonPropertyList, IEntityFilter entityFilter)
         {
             // By default we ignore extended properties from the client when deserializing, but we allow it internally.
             var propertyBagMap = BuildPropertyBagMap(entityFilter);
@@ -283,7 +295,7 @@ namespace EntityUtilities
         /// <param name="entity">The entity to which the associations are added.</param>
         /// <param name="jsonPropertyList">The json dictionary.</param>
         /// <param name="entityFilter">entity filter object.</param>
-        private static void DeserializeAssociationsFromJson(ref IRawEntity entity, IList<JProperty> jsonPropertyList, IEntityFilter entityFilter)
+        private static void DeserializeAssociationsFromJson(ref IEntity entity, IList<JProperty> jsonPropertyList, IEntityFilter entityFilter)
         {
             // By default we ignore associations from the client but we allow it internally
             if (!entityFilter.IncludeAssociations)
@@ -505,7 +517,7 @@ namespace EntityUtilities
         /// <param name="entity">The entity.</param>
         /// <param name="queryValues">Dictionary where the key is a property name and the value is a regex expression</param>
         /// <returns>true if regex matches, false if no match </returns>
-        private static bool CheckPropertyRegexMatch(IRawEntity entity, Dictionary<string, string> queryValues)
+        private static bool CheckPropertyRegexMatch(IEntity entity, Dictionary<string, string> queryValues)
         {
             if (queryValues == null)
             {
@@ -513,11 +525,11 @@ namespace EntityUtilities
             }
 
             IEnumerable<string> propertyNames =
-                typeof(IRawEntity).GetProperties().Where(p => p.PropertyType == typeof(EntityProperty)).Select(p => p.Name);
+                typeof(IEntity).GetProperties().Where(p => p.PropertyType == typeof(EntityProperty)).Select(p => p.Name);
 
             foreach (var name in propertyNames)
             {
-                var entityProperty = (EntityProperty)typeof(IRawEntity).GetProperty(name).GetValue(entity, null);
+                var entityProperty = (EntityProperty)typeof(IEntity).GetProperty(name).GetValue(entity, null);
                 if (entityProperty != null)
                 {
                     if (queryValues.Count > 0)
@@ -544,14 +556,14 @@ namespace EntityUtilities
         /// <summary>Add the IEntity interface properties of an entity to the serialization dictionary.</summary>
         /// <param name="entity">The entity being serialized.</param>
         /// <param name="serializationDictionary">The target output dictionary.</param>
-        private static void AddInterfacePropertiesToSerializationDictionary(IRawEntity entity, ref IDictionary<string, object> serializationDictionary)
+        private static void AddInterfacePropertiesToSerializationDictionary(IEntity entity, ref IDictionary<string, object> serializationDictionary)
         {
             IEnumerable<string> propertyNames =
-                typeof(IRawEntity).GetProperties().Where(p => p.PropertyType == typeof(EntityProperty)).Select(p => p.Name);
+                typeof(IEntity).GetProperties().Where(p => p.PropertyType == typeof(EntityProperty)).Select(p => p.Name);
 
             foreach (var name in propertyNames)
             {
-                var entityProperty = (EntityProperty)typeof(IRawEntity).GetProperty(name).GetValue(entity, null);
+                var entityProperty = (EntityProperty)typeof(IEntity).GetProperty(name).GetValue(entity, null);
                 if (entityProperty != null)
                 {
                     serializationDictionary.Add(entityProperty.Name, ConvertPropertyValueToDictionaryValue(entityProperty.Name, entityProperty.Value));
@@ -563,7 +575,7 @@ namespace EntityUtilities
         /// <param name="entity">The entity to serialize.</param>
         /// <param name="entityFilter">The entity filter.</param>
         /// <param name="serializationDictionary">The target output dictionary.</param>
-        private static void AddPropertyBagsToSerializationDictionary(IRawEntity entity, IEntityFilter entityFilter, ref IDictionary<string, object> serializationDictionary)
+        private static void AddPropertyBagsToSerializationDictionary(IEntity entity, IEntityFilter entityFilter, ref IDictionary<string, object> serializationDictionary)
         {
             var entityProperties = entity.Properties;
 
@@ -598,7 +610,7 @@ namespace EntityUtilities
         /// <param name="entity">The entity being serialized.</param>
         /// <param name="serializationDictionary">The target serialization dictionary.</param>
         /// <param name="entityFilter">Entity filter object</param>
-        private static void AddAssociationsToSerializationDictionary(IRawEntity entity, ref IDictionary<string, object> serializationDictionary, IEntityFilter entityFilter)
+        private static void AddAssociationsToSerializationDictionary(IEntity entity, ref IDictionary<string, object> serializationDictionary, IEntityFilter entityFilter)
         {
             // Don't include associations if there aren't any or they are filtered
             if (entity.Associations.Count == 0 || !entityFilter.IncludeAssociations)

@@ -1,6 +1,18 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="EntityJsonSerializerFixture.cs" company="Rare Crowds Inc">
-//   Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -8,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DataAccessLayer;
+using DataAccessLayerUnitTests;
 using Diagnostics;
 using EntityUtilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -158,7 +171,7 @@ namespace EntityUtilitiesUnitTests
                         }}
                     }}";
 
-            var entityCategory = TestEntity.TestEntityCategory;
+            var entityCategory = TestEntity.CategoryName;
             var sourceJson = jsonFormat.FormatInvariant(entityCategory, new EntityId().ToString());
 
             // Deserialize to an entity
@@ -208,7 +221,7 @@ namespace EntityUtilitiesUnitTests
                     }}";
 
             var externalNameValue = "fooname";
-            var entityCategory = TestEntity.TestEntityCategory;
+            var entityCategory = TestEntity.CategoryName;
             var externalEntityId = new EntityId().ToString();
             var localVersion = int.MinValue;
             var lastModifiedDate = "2012-10-02T19:36:25.0220653Z";
@@ -316,8 +329,8 @@ namespace EntityUtilitiesUnitTests
                         Name2 = jsonObjectName2Value,
                         Name3 = new Association { AssociationType = AssociationType.Child, ExternalName = externalName }
                     });
-            
-            var rawEntity = new Entity { ExternalEntityId = new EntityId(), EntityCategory = TestEntity.TestEntityCategory };
+
+            var rawEntity = new Entity { ExternalEntityId = new EntityId(), EntityCategory = TestEntity.CategoryName };
             var testEntity = new TestEntity(rawEntity);
             testEntity.SetPropertyValueByName(somePropertyName, objectJson);
 
@@ -379,7 +392,7 @@ namespace EntityUtilitiesUnitTests
                 {
                     ExternalEntityId = externalEntityId, 
                     ExternalName = externalNameValue,
-                    EntityCategory = TestEntity.TestEntityCategory
+                    EntityCategory = TestEntity.CategoryName
                 };
             var testEntity = new TestEntity(rawEntity);
             testEntity.SetPropertyValueByName("SomeProperty", "somevalue");
@@ -403,7 +416,7 @@ namespace EntityUtilitiesUnitTests
             {
                 ExternalEntityId = externalEntityId,
                 ExternalName = externalNameValue,
-                EntityCategory = TestEntity.TestEntityCategory
+                EntityCategory = TestEntity.CategoryName
             };
 
             var testEntity = new TestEntity(rawEntity);
@@ -442,7 +455,7 @@ namespace EntityUtilitiesUnitTests
             var extPropertyValue = "someExtValue";
 
             var sourceJson = JsonFormat.FormatInvariant(
-                externalNameValue, TestEntity.TestEntityCategory, propertyValue, sysPropertyValue, extPropertyValue, assocJson1, new EntityId().ToString());
+                externalNameValue, TestEntity.CategoryName, propertyValue, sysPropertyValue, extPropertyValue, assocJson1, new EntityId().ToString());
 
             // Deserialize entity from Json (with default filtering)
             // There should be no external properties or associations.
@@ -496,7 +509,7 @@ namespace EntityUtilitiesUnitTests
             var externalNameValue = "fooname";
             var somePropertyValue = "somevalue";
             var sourceJson = JsonFormat.FormatInvariant(
-                externalNameValue, TestEntity.TestEntityCategory, somePropertyValue, assocJson1, assocJson2, assocJson3, new EntityId().ToString());
+                externalNameValue, TestEntity.CategoryName, somePropertyValue, assocJson1, assocJson2, assocJson3, new EntityId().ToString());
 
             // Deserialize entity from Json (allow associations too be deserialized)
             var testEntity = new TestEntity(
@@ -545,7 +558,7 @@ namespace EntityUtilitiesUnitTests
             var externalNameValue = "fooname";
             var somePropertyValue = "somevalue";
             var sourceJson = JsonFormat.FormatInvariant(
-                externalNameValue, TestEntity.TestEntityCategory, somePropertyValue, AssocJson1, new EntityId().ToString());
+                externalNameValue, TestEntity.CategoryName, somePropertyValue, AssocJson1, new EntityId().ToString());
 
             // Deserialize entity from Json
             var testEntity = new TestEntity(
@@ -587,7 +600,7 @@ namespace EntityUtilitiesUnitTests
             var externalNameValue = "fooname";
             var somePropertyValue = "somevalue";
             var sourceJson = JsonFormat.FormatInvariant(
-                externalNameValue, TestEntity.TestEntityCategory, somePropertyValue, AssocJson1, new EntityId().ToString());
+                externalNameValue, TestEntity.CategoryName, somePropertyValue, AssocJson1, new EntityId().ToString());
 
             // Deserialize entity from Json
             var testEntity = new TestEntity(
@@ -620,7 +633,7 @@ namespace EntityUtilitiesUnitTests
         {
             var visiblePropertyValue = 1;
             var externalEntityId = new EntityId();
-            var entityCategory = TestEntity.TestEntityCategory;
+            var entityCategory = TestEntity.CategoryName;
 
             // Create the entity
             var testEntity = new TestEntity(new Entity
@@ -749,7 +762,7 @@ namespace EntityUtilitiesUnitTests
             var testEntity = new TestEntity(new Entity
             {
                 ExternalEntityId = new EntityId(),
-                EntityCategory = TestEntity.TestEntityCategory,
+                EntityCategory = TestEntity.CategoryName,
             });
 
             testEntity.TrySetPropertyByName(visiblePropertyName, visiblePropertyValue);

@@ -1,6 +1,18 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="UserEntity.cs" company="Emerging Media Group">
-//   Copyright Emerging Media Group. All rights reserved.
+// <copyright file="UserEntity.cs" company="Rare Crowds Inc">
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -33,25 +45,30 @@ namespace DataAccessLayer
         /// <summary>Contact Phone property name.</summary>
         public const string ContactPhonePropertyName = "ContactPhone";
 
-        /// <summary>Category Name for User Entities.</summary>
-        public const string UserEntityCategory = "User";
-
         /// <summary>Access List property name.</summary>
         public const string AccessListPropertyName = "AccessList";
+
+        /// <summary>Category Name for User Entities.</summary>
+        public const string CategoryName = "User";
 
         /// <summary>Initializes a new instance of the <see cref="UserEntity"/> class.</summary>
         /// <param name="externalEntityId">The external entity id to assign the entity.</param>
         /// <param name="rawEntity">The raw entity from which to construct.</param>
-        public UserEntity(EntityId externalEntityId, IRawEntity rawEntity) 
+        public UserEntity(EntityId externalEntityId, IEntity rawEntity) 
         {
-            this.Initialize(externalEntityId, UserEntityCategory, rawEntity);
+            this.Initialize(externalEntityId, CategoryName, rawEntity);
         }
 
         /// <summary>Initializes a new instance of the <see cref="UserEntity"/> class.</summary>
         /// <param name="entity">The IEntity object from which to construct.</param>
-        public UserEntity(IRawEntity entity)
+        public UserEntity(IEntity entity)
         {
             this.Initialize(entity);
+        }
+
+        /// <summary>Initializes a new instance of the <see cref="UserEntity"/> class.</summary>
+        public UserEntity()
+        {
         }
 
         /// <summary>Gets or sets UserName. Property passed on set can be un-named and name will be set.</summary>
@@ -96,7 +113,7 @@ namespace DataAccessLayer
             set { this.SetEntityProperty(new EntityProperty { Name = ContactPhonePropertyName, Value = value.Value }); }
         }
 
-        /// <summary>Gets or sets AcessList.</summary>
+        /// <summary>Gets or sets AccessList.</summary>
         public EntityProperty AccessList
         {
             get { return this.TryGetEntityPropertyByName(AccessListPropertyName, string.Empty); }
@@ -105,9 +122,9 @@ namespace DataAccessLayer
 
         /// <summary>Abstract method to validate type of entity.</summary>
         /// <param name="entity">The wrapped entity.</param>
-        public override sealed void ValidateEntityType(IRawEntity entity)
+        protected override sealed void ValidateEntityType(IEntity entity)
         {
-            ThrowIfCategoryMismatch(entity, UserEntityCategory);
+            ThrowIfCategoryMismatch(entity, CategoryName);
 
             // TODO: Determine the minimum set of properties a User Entity must have
         }

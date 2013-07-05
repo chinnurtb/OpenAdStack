@@ -1,6 +1,18 @@
 // -----------------------------------------------------------------------
-// <copyright file="ConcreteEntityRepository.cs" company="Emerging Media Group">
-//   Copyright Emerging Media Group. All rights reserved.
+// <copyright file="ConcreteEntityRepository.cs" company="Rare Crowds Inc">
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 // -----------------------------------------------------------------------
 
@@ -146,6 +158,22 @@ namespace ConcreteDataStore
             return entities;
         }
 
+        /// <summary> Get the current version of an entity.</summary>
+        /// <param name="entityId">The external id of the entity.</param>
+        /// <returns>The version.</returns>
+        /// <exception cref="DataAccessEntityNotFoundException">If not found.</exception>
+        public int GetEntityVersion(EntityId entityId)
+        {
+            var indexEntity = this.IndexStoreFactory.GetIndexStore().GetEntity(entityId, DefaultStorageAccount, null);
+            if (indexEntity == null)
+            {
+                var message = "Index entry not found for external entity id: {0}".FormatInvariant(entityId.ToString());
+                throw new DataAccessEntityNotFoundException(message);
+            }
+
+            return indexEntity.LocalVersion;
+        }
+
         /// <summary>Save a single entity.</summary>
         /// <param name="context">The request context.</param>
         /// <param name="entity">The entity to save.</param>
@@ -163,9 +191,9 @@ namespace ConcreteDataStore
         public void SaveEntities(RequestContext context, HashSet<IEntity> entities)
         {
             var requestContext = new RequestContext(context);
-            
+
             // TODO: Investigate partial success scenarios
-            foreach (var rawEntity in entities.Select(EntityWrapperBase.SafeUnwrapEntity))
+            foreach (var rawEntity in entities.Select(e => e.SafeUnwrapEntity()))
             {
                 // See if the key already exists
                 var key = this.IndexStoreFactory.GetIndexStore().GetStorageKey(rawEntity.ExternalEntityId, DefaultStorageAccount);
@@ -178,33 +206,35 @@ namespace ConcreteDataStore
             }
         }
 
-        /// <summary>Update a single entity with a list of properties.</summary>
+        /// <summary>
+        /// Obsolete: Use IEntityRepository extension method ForceUpdateEntity.
+        /// Update a single entity with a list of properties.
+        /// </summary>
         /// <param name="context">The request context.</param>
         /// <param name="entityId">The entity id to update.</param>
         /// <param name="properties">The properties to add or update on the entity.</param>
         /// <returns>True if successful.</returns>
         [SuppressMessage("Microsoft.Design", "CA1031", Justification = "Try pattern implementation.")]
+        [Obsolete("Use IEntityRepository extension method ForceUpdateEntity")]
         public bool TryUpdateEntity(RequestContext context, EntityId entityId, IEnumerable<EntityProperty> properties)
         {
-            var propertiesToUpdate = properties.ToList();
-
-            // We will try three times to get the latest version and merge to overcome
-            // a collision
-            var retryCount = 3;
-            while (retryCount-- > 0)
+            IEntity mergeEntity;
+            try
             {
-                try
-                {
-                    // If it doesn't throw but returns false - don't retry, it's not a collision
-                    return this.UpdateEntity(context, entityId, propertiesToUpdate);
-                }
-                catch (Exception)
-                {
-                }
+                mergeEntity = this.GetMergeEntity(false, entityId, true);
+            }
+            catch (DataAccessEntityNotFoundException)
+            {
+                return false;
             }
 
-            // Fail if we didn't succeed with retries
-            return false;
+            var propertiesToUpdate = properties.ToList();
+            foreach (var entityProperty in propertiesToUpdate)
+            {
+                mergeEntity.SetEntityProperty(entityProperty);
+            }
+
+            return this.TryForceUpdateEntity(context, mergeEntity, propertiesToUpdate.Select(p => p.Name), null);
         }
 
         /// <summary>Add a set of existing target entities as associations of a single source entity.</summary>
@@ -293,7 +323,7 @@ namespace ConcreteDataStore
         public void AddCompany(RequestContext context, CompanyEntity companyEntity)
         {
             var entityStore = this.EntityStoreFactory.GetEntityStore();
-            var rawIncomingEntity = EntityWrapperBase.SafeUnwrapEntity(companyEntity);
+            var rawIncomingEntity = companyEntity.SafeUnwrapEntity();
 
             // Perform new company setup specific to the storage type
             var partialKey = entityStore.SetupNewCompany(companyEntity.ExternalName);
@@ -428,7 +458,7 @@ namespace ConcreteDataStore
         /// <summary>Virtualize added/updated properties as needed</summary>
         /// <param name="requestContext">The request context.</param>
         /// <param name="entity">The entity to virtualize.</param>
-        internal void VirtualizeEntity(RequestContext requestContext, IRawEntity entity)
+        internal void VirtualizeEntity(RequestContext requestContext, IEntity entity)
         {
             var blobStore = this.BlobStoreFactory.GetBlobStore();
             for (var propertyIndex = 0; propertyIndex < entity.Properties.Count; propertyIndex++)
@@ -439,82 +469,34 @@ namespace ConcreteDataStore
             }
         }
 
-        /// <summary>Merge an updated entity with the existing entity if one exists.</summary>
-        /// <param name="incomingEntity">Entity with updates (or new).</param>
-        /// <param name="mergeEntity">Entity being composed to save.</param>
-        /// <param name="isUpdate">True if this is an update.</param>
-        private static void MergeInterfaceProperties(IRawEntity incomingEntity, IRawEntity mergeEntity, bool isUpdate)
+        /// <summary>Merge two entities based based on optional entity filters to produce the target 'saveable' entity.</summary>
+        /// <param name="requestContext">Repository request context for the request.</param>
+        /// <param name="newKey">The key to use for the saved entity.</param>
+        /// <param name="isUpdate">True if the entity is being updated rather than created.</param>
+        /// <param name="targetMergeEntity">The target entity of the merge.</param>
+        /// <param name="incomingRawEntity">Entity with updates (or new).</param>
+        internal void MergeEntities(
+            RequestContext requestContext,
+            IStorageKey newKey,
+            bool isUpdate,
+            IEntity targetMergeEntity,
+            IEntity incomingRawEntity)
         {
-            // Preserve non-updateable properties
-            var createDate = mergeEntity.CreateDate;
+            // Merge the IEntity level properties to the target entity
+            this.MergeInterfaceProperties(targetMergeEntity, incomingRawEntity, isUpdate);
 
-            // Copy over interface properties
-            mergeEntity.InterfaceProperties.Clear();
-            foreach (var property in incomingEntity.InterfaceProperties)
-            {
-                mergeEntity.InterfaceProperties.Add(property);
-            }
+            // Update version, timestamp, etc
+            this.UpdateReadOnlyProperties(requestContext, targetMergeEntity, newKey, isUpdate);
 
-            // Restore non-updateable properties
-            if (isUpdate)
-            {
-                mergeEntity.CreateDate = createDate;
-            }
-        }
-
-        /// <summary>Update internally maintained entity properties (key, timestamp, user, version)</summary>
-        /// <param name="requestContext">Context object for the repository request.</param>
-        /// <param name="entityToSave">Entity being composed to save.</param>
-        /// <param name="updatedKey">Updated (or new) key.</param>
-        /// <param name="isUpdate">True if this is an update.</param>
-        private static void UpdateReadOnlyProperties(
-            RequestContext requestContext, 
-            IRawEntity entityToSave, 
-            IStorageKey updatedKey,
-            bool isUpdate)
-        {
-            // Set the new key
-            entityToSave.Key = updatedKey;
-
-            // Set LastModifiedDate and User independent of whether it's an update.
-            var dateNow = DateTime.UtcNow;
-            entityToSave.LastModifiedDate = dateNow;
-            entityToSave.LastModifiedUser = requestContext.UserId;
-
-            if (isUpdate)
-            {
-                // Increment LocalVersion
-                entityToSave.LocalVersion++;
-            }
-            else
-            {
-                // Set LocalVersion and CreateDate
-                entityToSave.LocalVersion = 0;
-                entityToSave.CreateDate = dateNow;
-            }
-        }
-
-        /// <summary>Merge associations from an input entity if specified by filter.</summary>
-        /// <param name="entityInput">Entity with updates (or new).</param>
-        /// <param name="entityToSave">Entity being composed to save.</param>
-        /// <param name="entityFilter">The entity filter to apply.</param>
-        private static void MergeAssociations(IRawEntity entityInput, IRawEntity entityToSave, IEntityFilter entityFilter)
-        {
-            if (entityFilter.IncludeAssociations)
-            {
-                // Update associations
-                entityToSave.Associations.Clear();
-                foreach (var association in entityInput.Associations)
-                {
-                    entityToSave.Associations.Add(association);
-                }
-            }
+            // Merge the non-Interface properites and associations based on the filter
+            this.MergeWithEntityFilter(
+                targetMergeEntity, incomingRawEntity, requestContext.EntityFilter, requestContext.ForceOverwrite);
         }
 
         /// <summary>Filter the properties according according to the IEntityFilter on the context.</summary>
         /// <param name="entities">The entities to filter.</param>
         /// <param name="requestContext">The RequestContext with the filter.</param>
-        private static void FilterProperties(IEnumerable<IRawEntity> entities, RequestContext requestContext)
+        private static void FilterProperties(IEnumerable<IEntity> entities, RequestContext requestContext)
         {
             // If we don't have an entity filter, nothing to do.
             if (requestContext.EntityFilter == null || entities == null)
@@ -564,48 +546,12 @@ namespace ConcreteDataStore
             return new PropertyValue(PropertyType.Int32, versionSer).DynamicValue;
         }
 
-        /// <summary>Update a single entity with a list of properties.</summary>
-        /// <param name="context">The request context.</param>
-        /// <param name="entityId">The entity id to update.</param>
-        /// <param name="properties">The properties to add or update on the entity.</param>
-        /// <returns>True if successful.</returns>
-        private bool UpdateEntity(RequestContext context, EntityId entityId, IEnumerable<EntityProperty> properties)
-        {
-            var mergeEntity = this.GetMergeEntity(false, entityId, true);
-
-            var wrappedEntity = EntityWrapperBase.BuildWrappedEntity(mergeEntity);
-
-            if (properties.Any(property => !wrappedEntity.TrySetEntityProperty(property)))
-            {
-                var msg = "Could not update properties. Likely cause is that property filter is being changed. This is not supported as a single operation. EntityId: {0}"
-                    .FormatInvariant(entityId.ToString());
-                LogManager.Log(LogLevels.Error, false, msg);
-                return false;
-            }
-
-            var rawEntityToSave = EntityWrapperBase.SafeUnwrapEntity(wrappedEntity);
-
-            // For the save we want to force the merge entity to be saved. It can still fail
-            // if the version has been updated since the call to GetMergeEnity above, but we
-            // will not do the merge again.
-            var requestContext = new RequestContext(context);
-            requestContext.ForceOverwrite = true;
-
-            // Build the new key or updated key
-            var updatedKey = this.GetNewKey(rawEntityToSave, requestContext, rawEntityToSave.Key);
-
-            // If save is successful we are done and successful, otherwise retry
-            this.SaveSingleEntity(requestContext, rawEntityToSave, updatedKey, true);
-
-            return true;
-        }
-
         /// <summary>Get a single entity.</summary>
         /// <param name="requestContext">Context information for the request.</param>
         /// <param name="indexEntity">The index entity.</param>
         /// <param name="version">Version if not current.</param>
         /// <returns>The entity or null.</returns>
-        private IEntity GetSingleEntity(RequestContext requestContext, IRawEntity indexEntity, int? version)
+        private IEntity GetSingleEntity(RequestContext requestContext, IEntity indexEntity, int? version)
         {
             var entityStore = this.EntityStoreFactory.GetEntityStore();
             var rawEntity = entityStore.GetEntityByKey(requestContext, indexEntity.Key);
@@ -634,7 +580,7 @@ namespace ConcreteDataStore
             }
 
             // Apply property filter before realizing 'heavy' properties to avoid unecessary work
-            FilterProperties(new HashSet<IRawEntity> { rawEntity }, requestContext);
+            FilterProperties(new HashSet<IEntity> { rawEntity }, requestContext);
 
             var blobStore = this.BlobStoreFactory.GetBlobStore();
             for (var propertyIndex = 0; propertyIndex < rawEntity.Properties.Count; propertyIndex++)
@@ -643,7 +589,9 @@ namespace ConcreteDataStore
                 rawEntity.Properties[propertyIndex] = realizedProperty;
             }
 
-            return EntityWrapperBase.BuildWrappedEntity(rawEntity);
+            // This provides category specific validation and allows callers
+            // expecting a specific entity category to test against the expected entity wrapper type.
+            return rawEntity.BuildWrappedEntity();
         }
 
         /// <summary>Save a single entity.</summary>
@@ -653,16 +601,16 @@ namespace ConcreteDataStore
         /// <param name="isUpdate">True if the entity is being updated rather than created.</param>
         private void SaveSingleEntity(
             RequestContext requestContext, 
-            IRawEntity entity,
+            IEntity entity,
             IStorageKey key,
             bool isUpdate)
         {
             var entityStore = this.EntityStoreFactory.GetEntityStore();
             var indexStore = this.IndexStoreFactory.GetIndexStore();
-            var rawIncomingEntity = EntityWrapperBase.SafeUnwrapEntity(entity);
+            var incomingRawEntity = entity.SafeUnwrapEntity();
 
             // We do not directly support saving BlobPropertyEntity at the IEntityRepository level
-            if ((string)rawIncomingEntity.EntityCategory == BlobPropertyEntity.BlobPropertyEntityCategory)
+            if ((string)incomingRawEntity.EntityCategory == BlobPropertyEntity.CategoryName)
             {
                 var msg = string.Format(
                     CultureInfo.InvariantCulture,
@@ -672,8 +620,9 @@ namespace ConcreteDataStore
                 throw new DataAccessException(msg);
             }
 
-            // Merge incoming entity with existing entity or new instance
-            var entityToSave = this.MergeIncomingEntity(requestContext, rawIncomingEntity, key, isUpdate);
+            // Get a merge entity from an existing entity or new instance
+            var entityToSave = this.GetMergeEntity(requestContext.ForceOverwrite, incomingRawEntity.ExternalEntityId, isUpdate);
+            this.MergeEntities(requestContext, key, isUpdate, entityToSave, incomingRawEntity);
 
             // Virtualize added/updated properties as needed
             this.VirtualizeEntity(requestContext, entityToSave);
@@ -703,10 +652,10 @@ namespace ConcreteDataStore
 
             // TODO: Try to eliminate the need for this by modifying callers who rely on the
             // state of the incoming entity being updated.
-            rawIncomingEntity.Key = entityToSave.Key;
-            rawIncomingEntity.LocalVersion = entityToSave.LocalVersion;
-            rawIncomingEntity.LastModifiedDate = entityToSave.LastModifiedDate;
-            rawIncomingEntity.LastModifiedUser = entityToSave.LastModifiedUser;
+            incomingRawEntity.Key = entityToSave.Key;
+            incomingRawEntity.LocalVersion = entityToSave.LocalVersion;
+            incomingRawEntity.LastModifiedDate = entityToSave.LastModifiedDate;
+            incomingRawEntity.LastModifiedUser = entityToSave.LastModifiedUser;
         }
 
         /// <summary>Get the latest version of the entity as a base target for the merge.</summary>
@@ -714,7 +663,7 @@ namespace ConcreteDataStore
         /// <param name="entityId">Id of Entity to get.</param>
         /// <param name="isUpdate">True if this is an update.</param>
         /// <returns>An unfiltered entity with all blob refs unrealized.</returns>
-        private IRawEntity GetMergeEntity(bool forceOverwrite, EntityId entityId, bool isUpdate)
+        private IEntity GetMergeEntity(bool forceOverwrite, EntityId entityId, bool isUpdate)
         {
             // If this is not an update the merged entity will start with a new entity
             if (!isUpdate)
@@ -743,82 +692,172 @@ namespace ConcreteDataStore
         }
 
         /// <summary>Merge an updated entity with the existing entity if one exists.</summary>
+        /// <param name="targetMergeEntity">Entity being composed to save.</param>
+        /// <param name="incomingRawEntity">Entity with updates (or new).</param>
+        /// <param name="isUpdate">True if this is an update.</param>
+        [SuppressMessage("Microsoft.Performance", "CA1822", Justification = "Not guaranteed to remain static by intent.")]
+        private void MergeInterfaceProperties(IEntity targetMergeEntity, IEntity incomingRawEntity, bool isUpdate)
+        {
+            // Preserve non-updateable properties
+            var createDate = targetMergeEntity.CreateDate;
+
+            // Copy over interface properties
+            targetMergeEntity.InterfaceProperties.Clear();
+            foreach (var property in incomingRawEntity.InterfaceProperties)
+            {
+                targetMergeEntity.InterfaceProperties.Add(property);
+            }
+
+            // Restore non-updateable properties
+            if (isUpdate)
+            {
+                targetMergeEntity.CreateDate = createDate;
+            }
+        }
+
+        /// <summary>Update internally maintained entity properties (key, timestamp, user, version)</summary>
         /// <param name="requestContext">Context object for the repository request.</param>
-        /// <param name="rawIncomingEntity">Entity with updates (or new).</param>
-        /// <param name="key">The key to use for the saved entity.</param>
-        /// <param name="isUpdate">True if the entity is being updated rather than created.</param>
-        /// <returns>An unfiltered entity with all blob refs unrealized.</returns>
-        private IRawEntity MergeIncomingEntity(
-            RequestContext requestContext, 
-            IRawEntity rawIncomingEntity, 
-            IStorageKey key,
+        /// <param name="targetMergeEntity">Entity being composed to save.</param>
+        /// <param name="updatedKey">Updated (or new) key.</param>
+        /// <param name="isUpdate">True if this is an update.</param>
+        [SuppressMessage("Microsoft.Performance", "CA1822", Justification = "Not guaranteed to remain static by intent.")]
+        private void UpdateReadOnlyProperties(
+            RequestContext requestContext,
+            IEntity targetMergeEntity,
+            IStorageKey updatedKey,
             bool isUpdate)
         {
-            var mergeEntity = this.GetMergeEntity(
-                requestContext.ForceOverwrite, rawIncomingEntity.ExternalEntityId, isUpdate);
+            // Set the new key
+            targetMergeEntity.Key = updatedKey;
 
-            // Current default behavior is to allow everything to be saved if no filter is specified
-            if (requestContext.EntityFilter == null || requestContext.ForceOverwrite)
+            // Set LastModifiedDate and User independent of whether it's an update.
+            var dateNow = DateTime.UtcNow;
+            targetMergeEntity.LastModifiedDate = dateNow;
+            targetMergeEntity.LastModifiedUser = requestContext.UserId;
+
+            if (isUpdate)
             {
-                requestContext.EntityFilter = new RepositoryEntityFilter(true, true, true, true);
+                // Increment LocalVersion
+                targetMergeEntity.LocalVersion++;
             }
+            else
+            {
+                // Set LocalVersion and CreateDate
+                targetMergeEntity.LocalVersion = 0;
+                targetMergeEntity.CreateDate = dateNow;
+            }
+        }
 
-            var entityFilter = requestContext.EntityFilter;
-
-            // Merge the IEntity level properties to the target entity
-            MergeInterfaceProperties(rawIncomingEntity, mergeEntity, isUpdate);
+        /// <summary>Merge the non-interface properties and associations of two entities based on the supplied entity filter.</summary>
+        /// <param name="targetMergeEntity">The target of the merge.</param>
+        /// <param name="incomingRawEntity">Entity with updates (or new).</param>
+        /// <param name="entityFilter">The entity filter to apply to the merge.</param>
+        /// <param name="forceOverwrite">True to force an overwrite (replace) of all properties and associations.</param>
+        private void MergeWithEntityFilter(
+            IEntity targetMergeEntity, IEntity incomingRawEntity, IEntityFilter entityFilter, bool forceOverwrite)
+        {
+            // Current default behavior is to allow everything to be saved if no filter is specified
+            if (entityFilter == null || forceOverwrite)
+            {
+                entityFilter = new RepositoryEntityFilter(true, true, true, true);
+            }
 
             // Merge associations if specified in filter
-            MergeAssociations(rawIncomingEntity, mergeEntity, entityFilter);
+            this.MergeAssociations(targetMergeEntity, incomingRawEntity, entityFilter);
 
             // Merge the property bag
-            this.MergePropertyBag(rawIncomingEntity, mergeEntity, entityFilter);
-            
-            // Update version, timestamp, etc
-            UpdateReadOnlyProperties(requestContext, mergeEntity, key, isUpdate);
-
-            return mergeEntity;
+            this.MergePropertyBag(targetMergeEntity, incomingRawEntity, entityFilter);
         }
 
-        /// <summary>Merge properties matching propertyFilter between and incoming entity and an existing entity.</summary>
-        /// <param name="incomingEntity">Entity with updates (or new).</param>
-        /// <param name="mergeEntity">Entity being composed to save.</param>
+        /// <summary>Merge associations from an input entity if specified by filter.</summary>
+        /// <param name="targetMergeEntity">Entity being composed to save.</param>
+        /// <param name="incomingRawEntity">Entity with updates (or new).</param>
         /// <param name="entityFilter">The entity filter to apply.</param>
-        private void MergePropertyBag(
-            IRawEntity incomingEntity, 
-            IRawEntity mergeEntity, 
+        [SuppressMessage("Microsoft.Performance", "CA1822", Justification = "Not guaranteed to remain static by intent.")]
+        private void MergeAssociations(
+            IEntity targetMergeEntity,
+            IEntity incomingRawEntity,
             IEntityFilter entityFilter)
         {
-            // For property types not included in the filters don't copy from the incoming entity.
-            // For those that are included, merge (desctructively) the properties from the incoming properties.
-            foreach (var propertyFilter in entityFilter.Filters)
+            // Nothing to do. Ignore anything else in the filter if associations are excluded.
+            if (!entityFilter.IncludeAssociations)
             {
-                // Remove the existing properties of this filter type
-                var propertiesToRemove = mergeEntity.Properties
-                    .Where(p => p.Filter == propertyFilter).ToList();
+                return;
+            }
 
-                foreach (var entityProperty in propertiesToRemove)
-                {
-                    mergeEntity.Properties.Remove(entityProperty);
-                }
+            var associationsToRemove = targetMergeEntity.Associations.ToList();
+            var associationsToAdd = incomingRawEntity.Associations.ToList();
 
-                // Add the new and updated properties for this filter type
-                var propertiesToSave = incomingEntity.Properties
-                    .Where(p => p.Filter == propertyFilter)
-                    .Select(incomingProperty => this.MergeProperty(mergeEntity, incomingProperty)).ToList();
+            // If we have an association name filter reduce the sets to match the filter.
+            var associationNameFilters = entityFilter.GetAssociationNameFilter().ToList();
+            if (associationNameFilters.Any())
+            {
+                associationsToRemove = associationsToRemove.Where(a => associationNameFilters.Contains(a.ExternalName)).ToList();
+                associationsToAdd = associationsToAdd.Where(a => associationNameFilters.Contains(a.ExternalName)).ToList();
+            }
 
-                foreach (var entityProperty in propertiesToSave)
-                {
-                    mergeEntity.Properties.Add(entityProperty);
-                }
+            // First remove assocations to be dropped/replaced
+            foreach (var association in associationsToRemove)
+            {
+                targetMergeEntity.Associations.Remove(association);
+            }
+
+            // Then add back new/updated associations
+            foreach (var association in associationsToAdd)
+            {
+                targetMergeEntity.Associations.Add(association);
             }
         }
 
         /// <summary>Merge properties matching propertyFilter between and incoming entity and an existing entity.</summary>
+        /// <param name="targetMergeEntity">Entity being composed to save.</param>
+        /// <param name="incomingRawEntity">Entity with updates (or new).</param>
+        /// <param name="entityFilter">The entity filter to apply.</param>
+        private void MergePropertyBag(
+            IEntity targetMergeEntity,
+            IEntity incomingRawEntity, 
+            IEntityFilter entityFilter)
+        {
+            // Nothing to do. Ignore anything else in the filter if all are excluded
+            var propertyFilters = entityFilter.Filters;
+            if (!propertyFilters.Any())
+            {
+                return;
+            }
+
+            var propertiesToRemove = targetMergeEntity.Properties.Where(p => propertyFilters.Contains(p.Filter)).ToList();
+            var propertiesToAdd = incomingRawEntity.Properties.Where(p => propertyFilters.Contains(p.Filter)).ToList();
+
+            // If we have a property name filter reduce the sets to match the filter.
+            var propertyNameFilters = entityFilter.GetPropertyNameFilter().ToList();
+            if (propertyNameFilters.Any())
+            {
+                propertiesToRemove = propertiesToRemove.Where(p => propertyNameFilters.Contains(p.Name)).ToList();
+                propertiesToAdd = propertiesToAdd.Where(p => propertyNameFilters.Contains(p.Name)).ToList();
+            }
+
+            // Apply merge logic per property to determine final set of properties to include.
+            propertiesToAdd = propertiesToAdd
+                .Select(incomingProperty => this.MergeProperty(targetMergeEntity, incomingProperty)).ToList();
+
+            // First remove the properties to be dropped/replaced
+            foreach (var entityProperty in propertiesToRemove)
+            {
+                targetMergeEntity.Properties.Remove(entityProperty);
+            }
+
+            // Then add back new/updated properties
+            foreach (var entityProperty in propertiesToAdd)
+            {
+                targetMergeEntity.Properties.Add(entityProperty);
+            }
+        }
+
+        /// <summary>Merge properties matching propertyFilter between an incoming entity and an existing entity.</summary>
         /// <param name="mergeEntity">Entity being composed to save.</param>
         /// <param name="propertyInput">Property with updates (or new).</param>
         /// <returns>The property to save.</returns>
-        private EntityProperty MergeProperty(IRawEntity mergeEntity, EntityProperty propertyInput)
+        private EntityProperty MergeProperty(IEntity mergeEntity, EntityProperty propertyInput)
         {
             var existingProperty = mergeEntity.Properties.SingleOrDefault(p => p.Name == propertyInput.Name);
 
@@ -847,7 +886,7 @@ namespace ConcreteDataStore
         /// <param name="requestContext">The repository request context.</param>
         /// <param name="key">And existing key if present.</param>
         /// <returns>The new key for the update.</returns>
-        private IStorageKey GetNewKey(IRawEntity unwrappedEntity, RequestContext requestContext, IStorageKey key)
+        private IStorageKey GetNewKey(IEntity unwrappedEntity, RequestContext requestContext, IStorageKey key)
         {
             // key will be null if this is an insert rather than an update
             if (key == null)
@@ -890,7 +929,7 @@ namespace ConcreteDataStore
         /// <summary>Get subset of valid current versions of the entities retrieved from entity store through non-key queries.</summary>
         /// <param name="entities">The list of entities.</param>
         /// <returns>The subset of valid current versions of the entities.</returns>
-        private IEnumerable<IRawEntity> GetValidCurrentEntities(HashSet<IRawEntity> entities)
+        private IEnumerable<IEntity> GetValidCurrentEntities(HashSet<IEntity> entities)
         {
             // Filter orphaned entities whose entity Id is in the index but whose table key does not correspond to
             // a valid key in the index (failed to clean up entity when it couldn't be added to index)
@@ -898,7 +937,7 @@ namespace ConcreteDataStore
             var currentKeys =
                 entityIds.Select(
                     id => this.IndexStoreFactory.GetIndexStore().GetStorageKey(id, DefaultStorageAccount));
-            var validEntities = new List<IRawEntity>();
+            var validEntities = new List<IEntity>();
 
             foreach (var key in currentKeys)
             {

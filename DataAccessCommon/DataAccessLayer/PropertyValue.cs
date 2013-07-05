@@ -1,6 +1,18 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="PropertyValue.cs" company="Emerging Media Group">
-//   Copyright Emerging Media Group. All rights reserved.
+// <copyright file="PropertyValue.cs" company="Rare Crowds Inc">
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -163,6 +175,24 @@ namespace DataAccessLayer
 
             throw new ArgumentException(
                 "Null value not supported for requested type {0}.".FormatInvariant(typeof(T).FullName));
+        }
+
+        /// <summary>
+        /// Factory method to build a PropertyValue of the appropriate type
+        /// from a generically specified value.
+        /// </summary>
+        /// <param name="value">The value of the property.</param>
+        /// <typeparam name="T">The generically specified type of the property.</typeparam>
+        /// <returns>A PropertyValue if success, otherwise null.</returns>
+        public static PropertyValue BuildPropertyValue<T>(T value)
+        {
+            if (!AllowedTypesMap.ContainsKey(typeof(T)))
+            {
+                throw new InvalidOperationException("Type cannot be mapped to PropertyValue: {0}"
+                    .FormatInvariant(typeof(T).FullName));
+            }
+
+            return new PropertyValue(AllowedTypesMap[typeof(T)], value);
         }
 
         /// <summary>Copy construct from native string type.</summary>

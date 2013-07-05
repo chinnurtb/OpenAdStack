@@ -1,6 +1,18 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="DeliveryMetrics.cs" company="Emerging Media Group">
-//  Copyright Rare Crowds Inc. All rights reserved.
+// <copyright file="DeliveryMetrics.cs" company="Rare Crowds Inc">
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 // -----------------------------------------------------------------------
 
@@ -172,7 +184,7 @@ namespace DynamicAllocationActivities
                 }
 
                 var nodeMetrics = this.NodeMetricsCollection[measureSet];
-                this.UpdateNodeMetrics(
+                UpdateNodeMetrics(
                     nodeMetrics,
                     measureSet,
                     perNodeDeliveryData,
@@ -184,7 +196,16 @@ namespace DynamicAllocationActivities
 
             // Aggregate the totals based on the entire NodeMetricsCollection
             var totalMediaSpend = this.NodeMetricsCollection.Sum(m => m.Value.TotalMediaSpend);
-            var totalSpend = this.NodeMetricsCollection.Sum(m => m.Value.TotalSpend);
+            
+            // TotalSpend is a calculated value and should be re-evaluated for the entire
+            // collection every time.
+            var totalSpend = 0m;
+            foreach (var m in this.NodeMetricsCollection)
+            {
+                m.Value.TotalSpend = this.DeliveryDataCost.CalculateHourCost(
+                    m.Value.TotalImpressions, m.Value.TotalMediaSpend, m.Key);
+                totalSpend += m.Value.TotalSpend;
+            }
 
             // Calculate lifetime media budget. Project as a percentage of total budget
             // based on the ratio to-date of media spend to total spend. If totalSpend
@@ -301,7 +322,7 @@ namespace DynamicAllocationActivities
         /// <param name="lastCampaignDeliveryHour">Last reported hour of actual delivery for campaign.</param>
         /// <param name="lookBackDuration">look back duration.</param>
         /// <param name="eligibilityHistoryBuilder">The node delivery eligibility history.</param>
-        internal void UpdateNodeMetrics(
+        internal static void UpdateNodeMetrics(
             NodeDeliveryMetrics nodeMetrics, 
             MeasureSet measureSet, 
             List<Dictionary<string, PropertyValue>> perNodeDeliveryData, 
@@ -354,7 +375,7 @@ namespace DynamicAllocationActivities
                 var deliveryHour = (DateTime)deliveryRecord[RawDeliveryDataParserBase.HourFieldName];
                 var impressions = (long)deliveryRecord[RawDeliveryDataParserBase.ImpressionsFieldName];
                 var mediaSpend = (decimal)deliveryRecord[RawDeliveryDataParserBase.MediaSpendFieldName];
-                this.UpdateNodeMetricsForHour(ref nodeMetrics, impressions, mediaSpend, deliveryHour, measureSet);
+                UpdateNodeMetricsForHour(ref nodeMetrics, impressions, mediaSpend, deliveryHour);
             }
 
             // Calculate per-hour metrics for zero-delivery hours. Process earliest to latest.
@@ -363,7 +384,7 @@ namespace DynamicAllocationActivities
                     .OrderBy(r => r);
             foreach (var zeroDeliveryEligibleHour in zeroDeliveryEligibleHours)
             {
-                this.UpdateNodeMetricsForHour(ref nodeMetrics, 0L, 0m, zeroDeliveryEligibleHour, measureSet);
+                UpdateNodeMetricsForHour(ref nodeMetrics, 0L, 0m, zeroDeliveryEligibleHour);
             }
 
             // Update the total number of eligible hours for the node. This is the zero delivery eligible
@@ -392,13 +413,11 @@ namespace DynamicAllocationActivities
         /// <param name="impressions">The impressions for the hour.</param>
         /// <param name="mediaSpend">The media spend for the hour.</param>
         /// <param name="deliveryHour">The delivery hour.</param>
-        /// <param name="measureSet">The measure set of the node.</param>
-        internal void UpdateNodeMetricsForHour(
+        private static void UpdateNodeMetricsForHour(
             ref NodeDeliveryMetrics nodeMetrics, 
             long impressions, 
             decimal mediaSpend, 
-            DateTime deliveryHour, 
-            MeasureSet measureSet)
+            DateTime deliveryHour)
         {
             // If we have never seen this hour initialize the hour metrics object
             if (!nodeMetrics.DeliveryProfile.ContainsKey(GetProfileHourIndex(deliveryHour)))
@@ -413,7 +432,6 @@ namespace DynamicAllocationActivities
             // Update the accumulators on the NodeDeliveryMetrics object
             nodeMetrics.TotalImpressions += impressions;
             nodeMetrics.TotalMediaSpend += mediaSpend;
-            nodeMetrics.TotalSpend += this.DeliveryDataCost.CalculateHourCost(impressions, mediaSpend, measureSet);
         }
 
         /// <summary>Update the hour averages</summary>

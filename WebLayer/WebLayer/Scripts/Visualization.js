@@ -1,4 +1,4 @@
-﻿function isChildNode(selectedNodeIndex, testingNodeIndex) {
+function isChildNode(selectedNodeIndex, testingNodeIndex) {
     return isChildNodeByNode(nodes[selectedNodeIndex], nodes[testingNodeIndex]);
 }
 
@@ -7,19 +7,19 @@ function isChildNodeByNode(selectedNode, testingNode) { //child, parent
     var testingNodeMeasures = testingNode.MeasureSet;
     if (selectedNodeMeasures.length > testingNodeMeasures.length) { return false; }
     var isPresent = false;
-    for (var measure in selectedNodeMeasures) {
+    for (var i = 0; i < selectedNodeMeasures.length; i++ ) {
         isPresent = false;
-        for (var compareMeasure in testingNodeMeasures) {
-            if (selectedNodeMeasures[measure] == testingNodeMeasures[compareMeasure]) { isPresent = true; break; }
+        for (var j = 0; j < testingNodeMeasures.length; j++) {
+            if (selectedNodeMeasures[i] === testingNodeMeasures[j]) { isPresent = true; break; }
         }
-        if (!isPresent) { return false };
+        if (!isPresent) { return false; }
     }
     return true;
 }
 
-function sortByValuations(a, b) { return (b.MaxValuation + b.MeasureSet.length / 10000) - (a.MaxValuation + a.MeasureSet.length / 10000); } //first by value then by tier
+function sortByValuations(a, b) { return JsonSort(a, b, ['MaxValuation', 'MeasureSet', 'v_MeasureSet'], true); }  //first by value then by tier
 
-function sortByTier(a, b) { return (b.MeasureSet.length + b.MaxValuation / 1000) - (a.MeasureSet.length + a.MaxValuation / 1000); } //first by tier then by value
+function sortByTier(a, b) { return JsonSort(a, b, ['MeasureSet', 'MaxValuation', 'v_MeasureSet'], true); } //first by tier then by value
 
 function ShowValuationGraph(valuations, sortFunction, colorFunction) {
     valuations = valuations.sort(sortFunction); // get the list sorted ASAP
@@ -44,37 +44,38 @@ function ShowLineage(valuations, sortFunction, colorFunction, selectedIndex) {
     var canvasWidth = this.clickCanvas.width;
     var canvasHeight = this.clickCanvas.height;
     var dims = this.GetCellDimensions(totalNodes);
+    var maxHorizontal = dims.maxHorizontalNodes;
+    var maxVertical = dims.maxVerticalNodes;
 
     var ctx = this.clickCtx;
     ctx.lineWidth = 2;
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
     var nodesRendered = 0;
-    for (var j = 1; j <= dims.maxHorizontalNodes; j++) {
-        var currentNode, nodeType, TopLeft;
-        for (var i = 0; i < dims.maxVerticalNodes; i++) {
+    for (var j = 1; j <= maxHorizontal; j++) {
+        for (var i = 0; i < maxVertical; i++) {
             nodesRendered++;
             if (nodesRendered > totalNodes) {
                 break;
             }
-            currentNode = valuations[nodesRendered - 1];
-            nodeType = '';
-            TopLeft = { x: canvasWidth - (dims.width * j), y: i * dims.height };
-            if (currentNode.MeasureSet.join(',') == selectedNode.MeasureSet.join(',')) {
-                nodeType = 'self';
+            var currentNode = valuations[nodesRendered - 1];
+            var nodeType = '';
+            if (isChildNodeByNode(selectedNode, currentNode)) {
+                nodeType = 'parent';
             }
             else {
-                if (isChildNodeByNode(selectedNode, currentNode)) {
-                    nodeType = 'parent';
+                if (isChildNodeByNode(currentNode, selectedNode)) {
+                    nodeType = 'child';
                 }
                 else {
-                    if (isChildNodeByNode(currentNode, selectedNode)) {
-                        nodeType = 'child';
+                    if (currentNode.MeasureSet.sort().join(',') == selectedNode.MeasureSet.sort().join(',')) {
+                        nodeType = 'self';
                     }
                 }
             }
-            if (nodeType != '') {
-                ctx.strokeStyle = colorFunction(nodeType)
+            if (nodeType !== '') {
+                var TopLeft = { x: canvasWidth - (dims.width * j), y: i * dims.height };
+                ctx.strokeStyle = colorFunction(nodeType);
                 ctx.strokeRect(TopLeft.x + 1, TopLeft.y, dims.width - 1, dims.height - 1);
             }
         }  //vertical
@@ -105,23 +106,28 @@ function getCellDimensions(totalNodes) {
 
 function drawGraph(canvasContext, getColor, nodeList, isFilled) {
     var dims = this.GetCellDimensions(nodeList.length);
+    var width = dims.width - 1;//fill one pixel smaller, lets the canvas color show through
+    var height = dims.height - 1;//fill one pixel smaller, lets the canvas color show through
+    var maxHorizontal = dims.maxHorizontalNodes;
+    var maxVertical = dims.maxVerticalNodes;
     var totalNodes = nodeList.length;
     var nodesRendered = 0;
-    for (var j = 1; j <= dims.maxHorizontalNodes; j++) {
-        for (var i = 0; i < dims.maxVerticalNodes; i++) {
+    for (var j = 1; j <= maxHorizontal; j++) {
+        for (var i = 0; i < maxVertical; i++) {
             nodesRendered++;
             if (nodesRendered > totalNodes) { //needs to be done as final column may not be fully filled
                 break;
             }
             var currentNode = nodeList[nodesRendered - 1];
-            var TopLeft = { x: this.dataCanvas.width - (dims.width * j), y: i * dims.height };
+            var TopLeftX = this.dataCanvas.width - (dims.width * j) + 1;
+            var TopLeftY = i * dims.height;
             if (isFilled){
                 canvasContext.fillStyle = getColor(currentNode);
-                canvasContext.fillRect(TopLeft.x + 1, TopLeft.y, dims.width - 1, dims.height - 1); //fill one pixel smaller, lets the canvas color show through
+                canvasContext.fillRect(TopLeftX, TopLeftY, width, height); 
             }
             else {
                 canvasContext.strokeStyle = getColor(currentNode);
-                canvasContext.strokeRect(TopLeft.x + 1, TopLeft.y, dims.width - 1, dims.height - 1);
+                canvasContext.strokeRect(TopLeftX, TopLeftY, width, height);
             }
         } //vertical
     } //horizontal 

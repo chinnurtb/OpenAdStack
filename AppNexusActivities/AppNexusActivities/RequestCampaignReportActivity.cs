@@ -1,6 +1,18 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="RequestCampaignReportActivity.cs" company="Rare Crowds Inc">
-//     Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -116,33 +128,54 @@ namespace AppNexusActivities
                 return ErrorResult(ActivityErrorId.GenericError, "Campaign '{0}' does not have an AppNexus line item id.", campaignEntity.ExternalEntityId);
             }
 
+            string reportId;
+            bool reschedule;
+            DateTime nextScheduledTime;
             using (var client = this.CreateAppNexusClient(context, companyEntity, campaignEntity))
             {
-                // Request the report
-                var reportId = client.RequestDeliveryReport((int)advertiserId, (int)lineItemId);
-
-                // Determine if additional retrieve requests should be scheduled
-                var nextScheduledTime = DateTime.UtcNow + ReportRequestFrequency;
-                var reschedule = nextScheduledTime < (DateTime)campaignEntity.EndDate + PostEndDateReportingPeriod;
-                LogManager.Log(
-                    LogLevels.Trace,
-                    "Flagging campaign '{0}' ({1}) should {2} re-scheduled. (EndDate: {3}, Next Scheduled Time: {4}, Post-EndDate Reporting Period: {5}",
-                    campaignEntity.ExternalName,
-                    campaignEntity.ExternalEntityId,
-                    reschedule ? "be" : "NOT be",
-                    campaignEntity.EndDate,
-                    nextScheduledTime,
-                    PostEndDateReportingPeriod);
-
-                return this.SuccessResult(new Dictionary<string, string>
+                try
                 {
-                    { EntityActivityValues.CompanyEntityId, request.Values[EntityActivityValues.CompanyEntityId] },
-                    { EntityActivityValues.CampaignEntityId, request.Values[EntityActivityValues.CampaignEntityId] },
-                    { AppNexusActivityValues.ReportId, reportId },
-                    { AppNexusActivityValues.LineItemId, ((int)lineItemId).ToString(CultureInfo.InvariantCulture) },
-                    { AppNexusActivityValues.Reschedule, reschedule.ToString() }
-                });
+                    // Request the report
+                    reportId = client.RequestDeliveryReport((int)advertiserId, (int)lineItemId);
+                    nextScheduledTime = DateTime.UtcNow + ReportRequestFrequency;
+                    reschedule = nextScheduledTime < (DateTime)campaignEntity.EndDate + PostEndDateReportingPeriod;
+                }
+                catch (AppNexusClientException e)
+                {
+                    LogManager.Log(
+                        LogLevels.Error,
+                        true,
+                        "Error requesting delivery report for campaign '{0}' ({1}):\n{2}",
+                        campaignEntity.ExternalName,
+                        campaignEntity.ExternalEntityId,
+                        e);
+
+                    // Report request should be rescheduled immediately
+                    reportId = string.Empty;
+                    nextScheduledTime = DateTime.UtcNow;
+                    reschedule = true;
+                }
             }
+
+            // Determine if additional retrieve requests should be scheduled
+            LogManager.Log(
+                LogLevels.Trace,
+                "Flagging campaign '{0}' ({1}) should {2} re-scheduled. (EndDate: {3}, Next Scheduled Time: {4}, Post-EndDate Reporting Period: {5}",
+                campaignEntity.ExternalName,
+                campaignEntity.ExternalEntityId,
+                reschedule ? "be" : "NOT be",
+                campaignEntity.EndDate,
+                nextScheduledTime,
+                PostEndDateReportingPeriod);
+
+            return this.SuccessResult(new Dictionary<string, string>
+            {
+                { EntityActivityValues.CompanyEntityId, request.Values[EntityActivityValues.CompanyEntityId] },
+                { EntityActivityValues.CampaignEntityId, request.Values[EntityActivityValues.CampaignEntityId] },
+                { AppNexusActivityValues.ReportId, reportId },
+                { AppNexusActivityValues.LineItemId, ((int)lineItemId).ToString(CultureInfo.InvariantCulture) },
+                { AppNexusActivityValues.Reschedule, reschedule.ToString() }
+            });
         }
     }
 }

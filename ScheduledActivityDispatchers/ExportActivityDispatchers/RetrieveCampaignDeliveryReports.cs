@@ -1,6 +1,18 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="RetrieveCampaignDeliveryReports.cs" company="Rare Crowds Inc">
-//     Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -130,7 +142,8 @@ namespace DeliveryNetworkActivityDispatchers
         /// <param name="result">The activity result</param>
         internal static void OnRequestReportResult(ActivityRequest request, ActivityResult result)
         {
-            var campaignEntityId = request.Values[EntityActivityValues.CampaignEntityId];
+            string campaignEntityId;
+            request.Values.TryGetValue(EntityActivityValues.CampaignEntityId, out campaignEntityId);
 
             try
             {
@@ -149,6 +162,7 @@ namespace DeliveryNetworkActivityDispatchers
 
                 // Verify success result is well formed
                 if (!result.Values.ContainsKey(DeliveryNetworkActivityValues.ReportId) ||
+                    !result.Values.ContainsKey(EntityActivityValues.CampaignEntityId) ||
                     !result.Values.ContainsKey(EntityActivityValues.CompanyEntityId) ||
                     !result.Values.ContainsKey(DeliveryNetworkActivityValues.RescheduleReportRequest))
                 {
@@ -167,38 +181,51 @@ namespace DeliveryNetworkActivityDispatchers
                 var companyEntityId = result.Values[EntityActivityValues.CompanyEntityId];
                 var reschedule = bool.Parse(result.Values[DeliveryNetworkActivityValues.RescheduleReportRequest]);
                 var deliveryNetwork = RequestReportTasks.Single(kvp => kvp.Value == result.Task).Key;
+                var requestSucceeded = !string.IsNullOrWhiteSpace(reportId);
 
-                // Schedule retrieval for the requested report
-                if (!Scheduler.AddToSchedule<string, string>(
-                    ReportsToRetrieveSchedulerRegistries[deliveryNetwork],
-                    DateTime.UtcNow,
-                    reportId,
-                    campaignEntityId,
-                    companyEntityId))
+                // Schedule retrieval for the requested report (if request succeeded)
+                if (!requestSucceeded)
                 {
                     LogManager.Log(
-                        LogLevels.Error,
+                        LogLevels.Warning,
                         true,
-                        "Unable to schedule delivery report retrieval for {0} report {1} of campaign '{2}'",
+                        "Report request failed for {0} report of campaign '{1}'. Rescheduling.",
                         deliveryNetwork,
-                        reportId,
                         campaignEntityId);
-                    return;
                 }
                 else
                 {
-                    LogManager.Log(
-                        LogLevels.Information,
-                        "Scheduled retrieval for {0} report '{1}' of campaign '{2}'",
-                        deliveryNetwork,
+                    if (!Scheduler.AddToSchedule<string, string>(
+                        ReportsToRetrieveSchedulerRegistries[deliveryNetwork],
+                        DateTime.UtcNow,
                         reportId,
-                        campaignEntityId);
+                        campaignEntityId,
+                        companyEntityId))
+                    {
+                        LogManager.Log(
+                            LogLevels.Error,
+                            true,
+                            "Unable to schedule delivery report retrieval for {0} report {1} of campaign '{2}'",
+                            deliveryNetwork,
+                            reportId,
+                            campaignEntityId);
+                        return;
+                    }
+                    else
+                    {
+                        LogManager.Log(
+                            LogLevels.Information,
+                            "Scheduled retrieval for {0} report '{1}' of campaign '{2}'",
+                            deliveryNetwork,
+                            reportId,
+                            campaignEntityId);
+                    }
                 }
 
                 // Schedule the next report request
                 if (reschedule)
                 {
-                    var nextReportRequestTime = DateTime.UtcNow + ReportRequestFrequency;
+                    var nextReportRequestTime = requestSucceeded ? DateTime.UtcNow + ReportRequestFrequency : DateTime.UtcNow;
                     if (!Scheduler.AddToSchedule<string, DeliveryNetworkDesignation>(
                         DeliveryNetworkSchedulerRegistries.ReportsToRequest,
                         nextReportRequestTime,

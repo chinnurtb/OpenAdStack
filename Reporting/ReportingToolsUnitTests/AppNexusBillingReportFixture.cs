@@ -1,12 +1,25 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="AppNexusBillingReportFixture.cs" company="Rare Crowds Inc">
-//   Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using DataAccessLayer;
 using Diagnostics;
@@ -242,6 +255,35 @@ namespace ReportingToolsUnitTests
             Assert.AreEqual("103000000000000036", metrics["Group:group2:MeasureId"]);
             Assert.AreEqual("110000000000141937", metrics["Group:group1:MeasureId"]);
             Assert.AreEqual("110000000000142695", metrics["Group:110000000000142695:MeasureId"]);
+        }
+
+        /// <summary>Make sure we dedupe raw delivery records.</summary>
+        [TestMethod]
+        public void ProcessRawDeliveryDataWithDuplicates()
+        {
+            this.SetupCampaign();
+
+            var dynAllCampaign = new DynamicAllocationCampaign(this.repository, this.companyEntityId, this.campaignEntityId);
+            var billingReport = new AppNexusBillingReport(this.repository, dynAllCampaign);
+
+            var processedRows = new List<Dictionary<string, PropertyValue>>();
+            Action<DeliveryNetworkDesignation, Dictionary<string, PropertyValue>>
+                rowOutputHandler = (designation, values) => processedRows.Add(values);
+            billingReport.ProcessRawDeliveryData(rowOutputHandler);
+
+            Assert.AreEqual(19, processedRows.Count);
+            var uniqueRows = processedRows.Select(
+                r => r[parseName.HourFieldName].SerializationValue + r[parseName.CampaignIdFieldName].SerializationValue)
+                .Distinct().ToList();
+            Assert.AreEqual(processedRows.Count, uniqueRows.Count);
+
+            // Assert we got the updated media spend from the campaign/hour record in the later report pull
+            // 406173,2012-06-03 18:00,8d07c3af8f124babb383245bdee4016f,118,1.348296610169491525424000,.159099,0
+            var updatedMediaSpend = (decimal)processedRows
+                    .Where(r => r[parseName.AllocationIdFieldName] == "8d07c3af8f124babb383245bdee4016f")
+                    .Select(r => r[parseName.MediaSpendFieldName])
+                    .Single();
+            Assert.AreEqual(.159099m, updatedMediaSpend);
         }
 
         /// <summary>Assert the number of rows and columns in the report.</summary>

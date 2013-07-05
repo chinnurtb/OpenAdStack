@@ -34,6 +34,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DataAccessLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="DataAccessLayerUnitTests, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Public\bin\Debug\DataAccessLayerUnitTests.dll</HintPath>
+    </Reference>
     <Reference Include="Diagnostics, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
@@ -59,7 +63,6 @@
     <Compile Include="ExtensionsFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryStubUtilitiesFixture.cs" />
-    <Compile Include="TestEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EntityTestUtilities\EntityTestUtilities.csproj">

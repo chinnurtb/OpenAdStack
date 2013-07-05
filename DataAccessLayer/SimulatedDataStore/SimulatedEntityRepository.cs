@@ -1,12 +1,23 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="SimulatedEntityRepository.cs" company="Rare Crowds Inc">
-//   Copyright Rare Crowds Inc. All rights reserved.
+// Copyright 2012-2013 Rare Crowds, Inc.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using ConcreteDataStore;
 using DataAccessLayer;
@@ -125,12 +136,41 @@ namespace SimulatedDataStore
         /// </summary>
         private Dictionary<EntityId, DateTime> EntitiesUpdated { get; set; }
 
+        /// <summary>
+        /// Build a new ConcreteEntityRepository from connection strings.
+        /// </summary>
+        /// <param name="indexConnectionString">
+        /// Index connection string to a persistent repository instance from which to pull cache misses. 
+        /// Writes should not be performed on this repository.
+        /// </param>
+        /// <param name="indexEntityConnectionString">
+        /// Entity connection string to a persistent repository instance from which to pull cache misses. 
+        /// Writes should not be performed on this repository.
+        /// </param>
+        /// <returns>Repository object.</returns>
+        public static IEntityRepository BuildRepository(string indexConnectionString, string indexEntityConnectionString)
+        {
+            if (indexConnectionString == null || indexEntityConnectionString == null)
+            {
+                return null;
+            }
+
+            var indexStoreFactory = new SqlIndexStoreFactory(indexConnectionString);
+            var entityStoreFactory = new AzureEntityStoreFactory(indexEntityConnectionString);
+            var storageKeyFactory = new AzureStorageKeyFactory(indexStoreFactory, new KeyRuleFactory());
+            var blobStoreFactory = new AzureBlobStoreFactory(indexEntityConnectionString);
+            var concreteRepository = new ConcreteEntityRepository(
+                indexStoreFactory, entityStoreFactory, storageKeyFactory, blobStoreFactory);
+
+            return concreteRepository;
+        }
+
         /// <summary>Remove old entities from the memory cache</summary>
         /// <param name="cutoff">The time before which entities should be removed.</param>
         public void CleanOldMemory(DateTime cutoff)
         {
             var blobs = this.Entities
-                .Where(kvp => (string)kvp.Value.EntityCategory == BlobEntity.BlobEntityCategory);
+                .Where(kvp => (string)kvp.Value.EntityCategory == BlobEntity.CategoryName);
 
             var terminated = blobs
                 .Where(kvp => this.EntitiesUpdated[kvp.Key] < cutoff)
@@ -182,6 +222,19 @@ namespace SimulatedDataStore
             }
 
             return entities;
+        }
+
+        /// <summary>
+        /// Get the current version of an entity.
+        /// </summary>
+        /// <param name="entityId">The external id of the entity.</param>
+        /// <returns>
+        /// The version.
+        /// </returns>
+        /// <exception cref="T:DataAccessLayer.DataAccessEntityNotFoundException">If not found.</exception>
+        public int GetEntityVersion(EntityId entityId)
+        {
+            return this.SynchronizeMemoryEntity(new RequestContext(), entityId).LocalVersion;
         }
 
         /// <summary>
@@ -303,35 +356,6 @@ namespace SimulatedDataStore
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Build a new ConcreteEntityRepository from connection strings.
-        /// </summary>
-        /// <param name="indexConnectionString">
-        /// Index connection string to a persistent repository instance from which to pull cache misses. 
-        /// Writes should not be performed on this repository.
-        /// </param>
-        /// <param name="indexEntityConnectionString">
-        /// Entity connection string to a persistent repository instance from which to pull cache misses. 
-        /// Writes should not be performed on this repository.
-        /// </param>
-        /// <returns>Repository object.</returns>
-        private static IEntityRepository BuildRepository(string indexConnectionString, string indexEntityConnectionString)
-        {
-            if (indexConnectionString == null || indexEntityConnectionString == null)
-            {
-                return null;
-            }
-
-            var indexStoreFactory = new SqlIndexStoreFactory(indexConnectionString);
-            var entityStoreFactory = new AzureEntityStoreFactory(indexEntityConnectionString);
-            var storageKeyFactory = new AzureStorageKeyFactory(indexStoreFactory, new KeyRuleFactory());
-            var blobStoreFactory = new AzureBlobStoreFactory(indexEntityConnectionString);
-            var concreteRepository = new ConcreteEntityRepository(
-                indexStoreFactory, entityStoreFactory, storageKeyFactory, blobStoreFactory);
-
-            return concreteRepository;
-        }
-
         /// <summary>Synchronize the local store with the read-only store.</summary>
         /// <param name="context">The request context.</param>
         /// <param name="entityId">The entity Id to syncrhonize.</param>
@@ -369,7 +393,7 @@ namespace SimulatedDataStore
                 ? (string)localEntity.EntityCategory
                 : (string)readOnlyEntity.EntityCategory;
 
-            if (category == CompanyEntity.CompanyEntityCategory)
+            if (category == CompanyEntity.CategoryName)
             {
                 // We don't refresh companies from readonly if they already exist locally
                 if (localEntity != null)
@@ -383,7 +407,7 @@ namespace SimulatedDataStore
                 return readOnlyEntity;
             }
 
-            if (category == BlobEntity.BlobEntityCategory)
+            if (category == BlobEntity.CategoryName)
             {
                 // We don't refresh blob entities from readonly if they already exist locally
                 if (localEntity != null)
