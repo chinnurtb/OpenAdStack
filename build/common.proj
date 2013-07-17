@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+======================================================================
+Common msbuild project include for all Lucy projects.
+
+Whenever a new project is created, the following line in the .csproj:
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.Targets" />
+must be replaced with a reference to this file:
+  <Import Project="$(SolutionDir)\..\build\common.proj" />
+======================================================================
+-->
+
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--
+  -->
+  <PropertyGroup>
+    <BuildTools>$(SolutionDir)..\build\</BuildTools>
+    <TargetProfile Condition=" '$(TargetProfile)' == '' ">Local</TargetProfile>
+    <PrivateConfig Condition=" '$(PrivateConfig)' == '' ">$(SolutionDir)..\..\..\LucyConfig\</PrivateConfig>
+    <EnvironmentSettings>EnvironmentSettings.$(TargetProfile).proj</EnvironmentSettings>
+  </PropertyGroup>
+  <Import Project="$(PrivateConfig)EnvironmentSettings\$(EnvironmentSettings)"/>
+  <Import Project="$(BuildTools)MSBuildExtensionPack\MSBuild.ExtensionPack.tasks"/>
+  <!--
+    ============================================================
+    Project Type GUIDs (for per-project type conditional steps)
+    ============================================================
+  -->
+  <PropertyGroup>
+    <UnitTestProjectTypeGuid>{3AC096D0-A1C2-E12C-1390-A8335801FDAB}</UnitTestProjectTypeGuid>
+    <CSharpProjectTypeGuid>{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</CSharpProjectTypeGuid>
+    <WebApplicationProjectTypeGuid>{349c5851-65df-11da-9384-00065b846f21}</WebApplicationProjectTypeGuid>
+    <MVC3ProjectTypeGuid>{E53F8FEA-EAE0-44A6-8774-FFD645390401}</MVC3ProjectTypeGuid>
+  </PropertyGroup>
+
+  <!--
+  ================================================================
+  Set output path based upon project type.
+  By default, output to {Solution}\Public\bin\{Config}.
+  Test project output to the standard {Project}\bin\{Config}.
+  WebApps output to {Solution}\Public\bin\{Config}\_PublishedWebsites
+  ================================================================
+  -->
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)..\Public\bin\$(Configuration)</OutDir>
+    <OutputPath Condition="!$(ProjectTypeGuids.Contains('$(WebApplicationProjectTypeGuid)'))">$(OutDir)</OutputPath>
+  </PropertyGroup>
+
+  <!--
+  ==============================================================
+  Set the path for the documentation file
+  ==============================================================
+  -->
+  <PropertyGroup Condition="'$(GenerateXmlDocs)'=='True' OR '$(GenerateXmlDocs)'==''">
+    <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
+  
+  <!--
+  ==============================================================
+  Import the standard targets for C# projects and StyleCop
+  ==============================================================
+  -->
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(BuildTools)StyleCop 4.6\StyleCop.Targets"/>
+  <!--
+  ==============================================================
+  Custom BeforeBuild and AfterBuild targets for Lucy
+  ==============================================================
+  -->
+  <PropertyGroup>
+    <BeforeBuildDependsOn>
+      ProjectBeforeBuild
+    </BeforeBuildDependsOn>
+
+    <AfterBuildDependsOn>
+      ProjectAfterBuild;
+      EnvironmentConfigTransform;
+      CopyWebApplicationOutput;
+      StyleCop;
+      FxCop;
+      RunTests;
+      RunNCover;
+      GenerateHtmlDocumentation;
+    </AfterBuildDependsOn>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TeamCityProjectBlockMessage>Building $(ProjectName)...</TeamCityProjectBlockMessage>
+  </PropertyGroup>
+  
+  <Target Name="BeforeBuild" DependsOnTargets="$(BeforeBuildDependsOn)">
+    <!-- Update progress and begin TeamCity block -->
+    <Message Condition="'$(TeamCity)' == 'True'" Text="##teamcity[blockOpened name='$(TeamCityProjectBlockMessage)']" />
+    <Message Condition="'$(TeamCity)' == 'True'" Text="##teamcity[progressStart '$(TeamCityProjectBlockMessage)']" />
+  </Target>
+  
+  <Target Name="AfterBuild" DependsOnTargets="$(AfterBuildDependsOn)">
+    <!-- End TeamCity block -->
+    <Message Condition="'$(TeamCity)' == 'True'" Text="##teamcity[progressFinish '$(TeamCityProjectBlockMessage)']" />
+    <Message Condition="'$(TeamCity)' == 'True'" Text="##teamcity[blockClosed name='$(TeamCityProjectBlockMessage)']" />
+  </Target>
+
+  <!--
+  ==============================================================
+  Resolve Cross-Solution Reference Paths
+  ==============================================================
+  -->
+  <Target Name="BeforeResolveReferences">
+    <ItemGroup>
+      <CrossSolutionSearchPathFiles Include="$(SolutionDir)..\Public\bin\$(Configuration)\*.dll" />
+    </ItemGroup>
+     
+    <RemoveDuplicates Inputs="@(CrossSolutionSearchPathFiles->'%(RootDir)%(Directory)')">    
+      <Output TaskParameter="Filtered" ItemName="CrossSolutionSearchPath" />
+    </RemoveDuplicates>
+   
+    <CreateProperty Value="@(CrossSolutionSearchPath);$(AssemblySearchPaths)">
+      <Output TaskParameter="Value"
+              PropertyName="AssemblySearchPaths" />
+    </CreateProperty>
+    
+    <Message Text="Cross-Solution Search Path: @(CrossSolutionSearchPath)" />
+  </Target>
+
+  <!--
+  ==============================================================
+  Copy Web Application Output back to project folder
+  Required for debugging in Visual Studio
+  ==============================================================
+  -->
+  <Target Name="CopyWebApplicationOutput"
+          Condition="$(ProjectTypeGuids.Contains('$(WebApplicationProjectTypeGuid)'))">
+    <ItemGroup>
+      <WebAppOutput Include="$(OutDir)*.dll;$(OutDir)*.pdb;$(OutDir)*.config" />
+    </ItemGroup>
+    <Copy SourceFiles="@(WebAppOutput)"
+          DestinationFolder="$(ProjectDir)bin" />
+  </Target>
+
+  <!--
+  ==============================================================
+  Transform and detokenise output app.config and web.configs
+  ==============================================================
+  -->
+  <UsingTask TaskName="TransformXml"
+             AssemblyFile="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\Web\Microsoft.Web.Publishing.Tasks.dll"/>
+  <Target Name="EnvironmentConfigTransform">
+    <!-- Settings for regular .NET projects -->
+    <PropertyGroup>
+      <BaseConfig>$(ProjectDir)app.config</BaseConfig>
+      <OutputConfig>$(TargetPath).config</OutputConfig>
+      <TransformXml>$(PrivateConfig)ConfigTransforms\$(ProjectName).app.config.$(TargetProfile).xml</TransformXml>
+    </PropertyGroup>
+    <!-- Settings for ASP.NET WebApplication projects -->
+    <PropertyGroup Condition="$(ProjectTypeGuids.Contains('$(WebApplicationProjectTypeGuid)'))">
+      <BaseConfig>$(ProjectDir)web.config</BaseConfig>
+      <OutputConfig>$(WebProjectOutputDir)\web.config</OutputConfig>
+      <TransformXml>$(PrivateConfig)ConfigTransforms\$(ProjectName).web.config.$(TargetProfile).xml</TransformXml>
+    </PropertyGroup>
+    <TransformXml Condition="$([System.IO.File]::Exists(`$(TransformXml)`))"
+                  Source="$(BaseConfig)"
+                  Transform="$(TransformXml)"
+                  Destination="$(OutputConfig)"
+                  StackTrace="true" />
+    <ItemGroup>
+      <TokenValues Include="SolutionDir">
+        <Replacement>$(SolutionDir)</Replacement>
+      </TokenValues>
+      <TokenValues Include="ProjectDir">
+        <Replacement>$(ProjectDir)</Replacement>
+      </TokenValues>
+      <TokenValues Include="TargetProfile">
+        <Replacement>$(TargetProfile)</Replacement>
+      </TokenValues>
+      <TokenValues Include="Configuration">
+        <Replacement>$(Configuration)</Replacement>
+      </TokenValues>
+      <TokenValues Include="DefaultUserId">
+        <Replacement>$(DefaultUserId)</Replacement>
+      </TokenValues>
+    </ItemGroup>
+    <Message Importance="high" Text="Detokenizing with values from '$(EnvironmentSettings)', additional values: @(TokenValues -> '%(Identity)=%(Replacement)', '; '), and project tokens: '$(ProjectTokens)'" />
+    <MSBuild.ExtensionPack.FileSystem.Detokenise Condition="$([System.IO.File]::Exists(`$(OutputConfig)`))"
+                                                 TaskAction="Analyse"
+                                                 TargetFiles="$(OutputConfig)"
+                                                 SearchAllStores="True"
+                                                 CommandLineValues="$(ProjectTokens)"
+                                                 ReplacementValues="@(TokenValues)"/>
+    <MSBuild.ExtensionPack.FileSystem.Detokenise Condition="$([System.IO.File]::Exists(`$(OutputConfig)`))"
+                                                 TaskAction="Detokenise"
+                                                 TargetFiles="$(OutputConfig)"
+                                                 SearchAllStores="True"
+                                                 CommandLineValues="$(ProjectTokens)"
+                                                 ReplacementValues="@(TokenValues)"/>
+  </Target>
+
+  <!--
+  ==============================================================
+  Run code analysis
+  ==============================================================
+  -->
+  <PropertyGroup>
+    <!--
+    Make sure that assemblies are built with the CODE_ANALYSIS constant
+    This is required to make FxCop suppressions work.
+    -->
+    <DefineConstants Condition="!$(DefineConstants.Contains('CODE_ANALYSIS'))">CODE_ANALYSIS;$(DefineConstants)</DefineConstants>
+  </PropertyGroup>
+  <Target Name="FxCop" Condition="'$(RunFxCop)' != 'False' And '$(SkipFxCop)' != 'True'">
+    <PropertyGroup>
+      <FxCopDir>$(BuildTools)Microsoft Fxcop 10.0\</FxCopDir>
+      <FxCopExe>$(FxCopDir)FxCopCmd.exe</FxCopExe>
+      <FxCopProject>$(FxCopDir)ProductRules.FxCop</FxCopProject>
+      <FxCopProject Condition="$(ProjectTypeGuids.Contains('$(UnitTestProjectTypeGuid)'))">$(FxCopDir)UnitTestRules.FxCop</FxCopProject>
+      <ReportPath>$(SolutionDir)$(SolutionName).$(ProjectName).FxCopReport.xml</ReportPath>
+      <FxCopCommand>"$(FxCopExe)" /gac /igc /c /s /f:"$(TargetPath)" /o:"$(ReportPath)" /p:"$(FxCopProject)"</FxCopCommand>
+      <TeamCityBlockMessage>Running Code Analysis on $(TargetPath)...</TeamCityBlockMessage>
+    </PropertyGroup>
+    <!-- Update progress and begin TeamCity block -->
+    <Message Condition="'$(TeamCity)' == 'True'" Text="##teamcity[blockOpened name='$(TeamCityBlockMessage)']" />
+    <Message Condition="'$(TeamCity)' == 'True'" Text="##teamcity[progressStart '$(TeamCityBlockMessage)']" />
+    <!-- Delete any existing reports from previous runs -->
+    <Delete Files="$(ReportPath)" ContinueOnError="true" />
+    <!-- Run FxCop -->
+    <Exec ContinueOnError="false" Command='$(FxCopCommand)' />
+    <!-- Import FxCop report to TeamCity -->
+    <Message Condition="'$(TeamCity)' == 'True' And $([System.IO.File]::Exists(`$(ReportPath)`))"
+             Text="##teamcity[importData type='FxCop' path='$(ReportPath)']" />
+    <!-- End TeamCity block -->
+    <Message Condition="'$(TeamCity)' == 'True'" Text="##teamcity[progressFinish '$(TeamCityBlockMessage)']" />
+    <Message Condition="'$(TeamCity)' == 'True'" Text="##teamcity[blockClosed name='$(TeamCityBlockMessage)']" />
+    <!-- Error if an rules were violated -->
+    <Error Condition="'$(FxCopAsWarnings)' != 'True' And $([System.IO.File]::Exists(`$(ReportPath)`))"
+             Text="One or more FxCop rules violated."
+             File="$(ReportPath)" />
+  </Target>
+  
+  <!--
+  ==============================================================
+  Post-build Unit Test runs
+  ==============================================================
+  -->
+  <Target Name="RunTests"
+          Condition="$(ProjectTypeGuids.Contains('$(UnitTestProjectTypeGuid)'))
+                     And '$(RunTests)' == 'True'
+                     And ('$(TestFilter)'=='' Or $(ProjectName.Contains('$(TestFilter)')))">
+    <!-- Default to Local.testsettings -->
+    <PropertyGroup>
+      <TestRunConfig Condition="'$(TestRunConfig)'==''">$(SolutionDir)Local.testsettings</TestRunConfig>
+      <TestResultsDir>$(SolutionDir)..\TestResults</TestResultsDir>
+      <TestResultsFile>$(TestResultsDir)\$(SolutionName).$(ProjectName).trx</TestResultsFile>
+      <TeamCityBlockMessage>Running UnitTests in $(TargetPath)...</TeamCityBlockMessage>
+      <MSTestExe>$(VS100COMNTOOLS)..\IDE\mstest.exe</MSTestExe>
+      <MSTestCommand>"$(MSTestExe)" /testcontainer:"$(TargetPath)" /runconfig:"$(TestRunConfig)" /resultsfile:"$(TestResultsFile)"</MSTestCommand>
+      <MSTestCommand Condition="'$(ExcludeTestCategory)'!=''">$(MSTestCommand) /category:"!$(ExcludeTestCategory)"</MSTestCommand>
+    </PropertyGroup>
+    <!-- Update progress and begin TeamCity block -->
+    <Message Condition="'$(TeamCity)' == 'True'" Text="##teamcity[blockOpened name='$(TeamCityBlockMessage)']" />
+    <Message Condition="'$(TeamCity)' == 'True'" Text="##teamcity[progressStart '$(TeamCityBlockMessage)']" />
+    <!-- Create results directory -->
+    <MakeDir Directories="$(TestResultsDir)" />
+    <!-- Delete previous .trx (if one exists) -->
+    <Delete Condition="$([System.IO.File]::Exists('$(TestResultsFile)'))" Files="$(TestResultsFile)" />
+    <!-- Run MSTest -->
+    <Exec Command="$(MSTestCommand)"
+          ContinueOnError="true"
+          WorkingDirectory="$(SolutionDir)">
+      <Output TaskParameter="ExitCode"
+              PropertyName="MSTestResult" />
+    </Exec>
+    
+    <!-- Import test results into TeamCity -->
+    <Message Condition="'$(TeamCity)' == 'True' And $([System.IO.File]::Exists(`$(TestResultsFile)`))"
+             Text="##teamcity[importData type='mstest' path='$(TestResultsFile)']" />
+    <!-- End TeamCity block -->
+    <Message Condition="'$(TeamCity)' == 'True'" Text="##teamcity[progressFinish '$(TeamCityBlockMessage)']" />
+    <Message Condition="'$(TeamCity)' == 'True'" Text="##teamcity[blockClosed name='$(TeamCityBlockMessage)']" />
+    <!-- Error or Warning for failed tests depending on ContinueOnTestFailure -->
+    <Error Condition="'$(MSTestResult)' != '0' And '$(ContinueOnTestFailure)' != 'True'"
+           File="$(ProjectPath)"
+           Text="**Test Failure*** $(TargetPath)" />
+    <Warning Condition="'$(MSTestResult)' != '0' And '$(ContinueOnTestFailure)' == 'True'"
+           File="$(ProjectPath)"
+           Text="***Test Failure*** $(TargetPath)" />
+  </Target>
+
+  <!--
+  ==============================================================
+  Code Coverage (Requires NCover Installation)
+  ==============================================================
+  -->
+  <UsingTask Condition="'$(RunNCover)' == 'True'"
+             TaskName="NCover.MSBuildTasks.NCover"
+             AssemblyFile="$(BuildTools)NCover\NCover.MSBuildTasks.dll"/>
+  <Target Name="RunNCover"
+          Condition="'$(RunNCover)' == 'True' And
+                     $(ProjectTypeGuids.Contains('$(UnitTestProjectTypeGuid)'))">
+    <PropertyGroup>
+      <NCoverPath32>C:\Program Files (x86)\NCover</NCoverPath32>
+      <NCoverPath64>C:\Program Files\NCover</NCoverPath64>
+      <MSTestExe>$(VS100COMNTOOLS)..\IDE\mstest.exe</MSTestExe>
+      <CoverageFile>$(SolutionDir)$(SolutionName).$(ProjectName).NCover.xml</CoverageFile>
+      <TeamCityBlockMessage>Running NCover on $(TargetPath)...</TeamCityBlockMessage>
+    </PropertyGroup>
+    <!-- Check that NCover is actually installed -->
+    <Error Condition="!$([System.IO.File]::Exists(`$(NCoverPath32)\NCover.Console.exe`))"
+           Text="NCover not found at '$(NCoverPath)'" />
+    <!-- Update progress and begin TeamCity block -->
+    <Message Condition="'$(TeamCity)' == 'True'" Text="##teamcity[blockOpened name='$(TeamCityBlockMessage)']" />
+    <Message Condition="'$(TeamCity)' == 'True'" Text="##teamcity[progressStart '$(TeamCityBlockMessage)']" />
+    <!-- Run NCover -->
+    <NCover ToolPath="$(NCoverPath32)"
+            TestRunnerExe="$(MSTestPath)mstest.exe"
+            TestRunnerArgs='/testcontainer:"$(TargetPath)"'
+            CoverChildProcess="QTAgent32.exe"
+            CoverageFile="$(CoverageFile)"
+            CoverAll="True"
+            ContinueOnError="True"
+            OnlyAssembliesWithSource="True"
+            ExcludeFiles=".*\.designer\.cs"
+            ExcludeAssemblies="Google.*;WCFMock;HttpResponder"
+            ExcludeAttributes="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute" />
+    <!-- Import report to TeamCity -->
+    <Message Condition="'$(TeamCity)' == 'True' And $([System.IO.File]::Exists(`$(CoverageFile)`))"
+             Text="##teamcity[dotNetCoverage ncover3_home='$(NCoverPath64)']" />
+    <Message Condition="'$(TeamCity)' == 'True' And $([System.IO.File]::Exists(`$(CoverageFile)`))"
+             Text="##teamcity[dotNetCoverage ncover3_reporter_args='//or FullCoverageReport:Html:{teamcity.report.path}']" />
+    <Message Condition="'$(TeamCity)' == 'True' And $([System.IO.File]::Exists(`$(CoverageFile)`))"
+             Text="##teamcity[importData type='dotNetCoverage' tool='ncover3' path='$(CoverageFile)']" />
+    <!-- End TeamCity block -->
+    <Message Condition="'$(TeamCity)' == 'True'" Text="##teamcity[progressFinish '$(TeamCityBlockMessage)']" />
+    <Message Condition="'$(TeamCity)' == 'True'" Text="##teamcity[blockClosed name='$(TeamCityBlockMessage)']" />
+  </Target>
+
+  <!--
+  ====================================================================
+  Copy Documentation.xsl and add xml-stylesheet to XML documentation
+  ====================================================================
+  -->
+  <Target Name="GenerateHtmlDocumentation" Condition="'$(GenerateXmlDocs)'=='True'">
+    <PropertyGroup>
+      <XmlDoc>$(OutputPath)$(AssemblyName).xml</XmlDoc>
+      <DocumentationXslt>$(BuildTools)Documentation.xsl</DocumentationXslt>
+      <HtmlDoc>$(OutputPath)$(AssemblyName).html</HtmlDoc>
+    </PropertyGroup>
+    <MSBuild.ExtensionPack.Xml.XmlTask Condition="$([System.IO.File]::Exists(`$(XmlDoc)`))"
+                                       TaskAction="Transform"
+                                       XmlFile="$(XmlDoc)"
+                                       XslTransformFile="$(DocumentationXslt)"
+                                       OutputFile="$(HtmlDoc)"
+                                       Indent="true" />
+  </Target>
+
+  <!--
+  ====================================================================
+  Override these in projects instead of "BeforeBuild" and "AfterBuild"
+  ====================================================================
+  -->
+  <Target Name="ProjectBeforeBuild" />
+  <Target Name="ProjectAfterBuild" />
+</Project>

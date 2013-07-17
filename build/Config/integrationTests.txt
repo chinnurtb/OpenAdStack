@@ -1,0 +1,41 @@
+#
+# List of solutions containing integration tests to be run
+#
+
+# Global dependencies and utilities
+TestUtilities\TestUtilities.sln
+Common\Common.sln
+
+# External Feature
+DynamicAllocation\DynamicAllocation.sln
+
+# Core Components
+DataAccessLayer\DataAccessLayer.sln
+Queuing\Queuing.sln
+Scheduling\Scheduling.sln
+
+# Activities
+ActivitiesCommon\ActivitiesCommon.sln
+ScheduledActivityDispatchers\ScheduledActivityDispatchers.sln
+EntityActivities\EntityActivities.sln
+AppNexusActivities\AppNexusActivities.sln
+DynamicAllocationActivities\DynamicAllocationActivities.sln
+GoogleDfpActivities\GoogleDfpActivities.sln
+
+# Billing and Reporting (including activities)
+Reporting\Reporting.sln
+Billing\Billing.sln
+
+# Runtime Ioc
+RuntimeIoc\RuntimeIoc.sln
+
+# UX
+OAuthSecurity\OAuthSecurity.sln
+ApiLayer\ApiLayer.sln
+WebLayer\WebLayer.sln
+
+# Utilities
+Utilities\Utilities.sln
+
+# E2ETesting
+E2ETesting\E2ETesting.sln

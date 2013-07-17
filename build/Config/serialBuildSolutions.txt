@@ -1,0 +1,2 @@
+# List of solutions that should not have their projects built in parallel
+Azure\Azure.sln

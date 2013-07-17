@@ -1,0 +1,7 @@
+#
+# List of post-deployment test solutions to build and run in order
+#
+
+# E2E WebLayer Tests
+E2ETesting\E2ETesting.sln
+

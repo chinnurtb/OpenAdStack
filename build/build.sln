@@ -1,0 +1,95 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B2411C64-18F6-4A4E-82C1-F49626FC01C7}"
+	ProjectSection(SolutionItems) = preProject
+		buildall.cmd = buildall.cmd
+		common.proj = common.proj
+		CopyFiles.cmd = CopyFiles.cmd
+		Documentation.xsl = Documentation.xsl
+		env.cmd = env.cmd
+		MSBuildExtensionPack\MSBuild.ExtensionPack.tasks = MSBuildExtensionPack\MSBuild.ExtensionPack.tasks
+		StyleCop 4.6\StyleCop.Targets = StyleCop 4.6\StyleCop.Targets
+		svnpurge.cmd = svnpurge.cmd
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build Wrappers", "Build Wrappers", "{6C0918C9-95C1-473A-BB2B-C1F47DAA2807}"
+	ProjectSection(SolutionItems) = preProject
+		..\BuildAndDeploy.cmd = ..\BuildAndDeploy.cmd
+		..\BuildAndTest.cmd = ..\BuildAndTest.cmd
+		..\BuildDebug.cmd = ..\BuildDebug.cmd
+		..\BuildRelease.cmd = ..\BuildRelease.cmd
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Private Builds", "Private Builds", "{404EAFAB-F66B-47CD-BD65-B4B35B6ABD56}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\LucyConfig\TeamCity\configurations.txt = ..\..\..\LucyConfig\TeamCity\configurations.txt
+		..\..\..\LucyConfig\TeamCity\settings.txt = ..\..\..\LucyConfig\TeamCity\settings.txt
+		tcpb.cmd = tcpb.cmd
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Config", "Config", "{FB7AFB2F-3DB9-432F-9CF3-74A5BC597F69}"
+	ProjectSection(SolutionItems) = preProject
+		Config\databasesToInstall.txt = Config\databasesToInstall.txt
+		Config\integrationTests.txt = Config\integrationTests.txt
+		Config\postDeploymentTests.txt = Config\postDeploymentTests.txt
+		Config\solutionsToBuild.txt = Config\solutionsToBuild.txt
+		Config\solutionsToPackage.txt = Config\solutionsToPackage.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Transforms", "Transforms", "{67428069-2240-439F-B5A5-0B0FD40DBACF}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\LucyConfig\ConfigTransforms\ApiLayer.web.config.ApnxAppProd.xml = ..\..\..\LucyConfig\ConfigTransforms\ApiLayer.web.config.ApnxAppProd.xml
+		..\..\..\LucyConfig\ConfigTransforms\ApiLayer.web.config.ApnxAppSand.xml = ..\..\..\LucyConfig\ConfigTransforms\ApiLayer.web.config.ApnxAppSand.xml
+		..\..\..\LucyConfig\ConfigTransforms\ApiLayer.web.config.Cloud.xml = ..\..\..\LucyConfig\ConfigTransforms\ApiLayer.web.config.Cloud.xml
+		..\..\..\LucyConfig\ConfigTransforms\ApiLayer.web.config.Integration.xml = ..\..\..\LucyConfig\ConfigTransforms\ApiLayer.web.config.Integration.xml
+		..\..\..\LucyConfig\ConfigTransforms\ApiLayer.web.config.Local.xml = ..\..\..\LucyConfig\ConfigTransforms\ApiLayer.web.config.Local.xml
+		..\..\..\LucyConfig\ConfigTransforms\ApiLayer.web.config.Production.xml = ..\..\..\LucyConfig\ConfigTransforms\ApiLayer.web.config.Production.xml
+		..\..\..\LucyConfig\ConfigTransforms\CreateCompany.app.config.ApnxAppProd.xml = ..\..\..\LucyConfig\ConfigTransforms\CreateCompany.app.config.ApnxAppProd.xml
+		..\..\..\LucyConfig\ConfigTransforms\CreateCompany.app.config.ApnxAppSand.xml = ..\..\..\LucyConfig\ConfigTransforms\CreateCompany.app.config.ApnxAppSand.xml
+		..\..\..\LucyConfig\ConfigTransforms\CreateCompany.app.config.Cloud.xml = ..\..\..\LucyConfig\ConfigTransforms\CreateCompany.app.config.Cloud.xml
+		..\..\..\LucyConfig\ConfigTransforms\CreateUser.app.config.ApnxAppProd.xml = ..\..\..\LucyConfig\ConfigTransforms\CreateUser.app.config.ApnxAppProd.xml
+		..\..\..\LucyConfig\ConfigTransforms\CreateUser.app.config.ApnxAppSand.xml = ..\..\..\LucyConfig\ConfigTransforms\CreateUser.app.config.ApnxAppSand.xml
+		..\..\..\LucyConfig\ConfigTransforms\CreateUser.app.config.Cloud.xml = ..\..\..\LucyConfig\ConfigTransforms\CreateUser.app.config.Cloud.xml
+		..\..\..\LucyConfig\ConfigTransforms\WebLayer.web.config.ApnxAppProd.xml = ..\..\..\LucyConfig\ConfigTransforms\WebLayer.web.config.ApnxAppProd.xml
+		..\..\..\LucyConfig\ConfigTransforms\WebLayer.web.config.ApnxAppSand.xml = ..\..\..\LucyConfig\ConfigTransforms\WebLayer.web.config.ApnxAppSand.xml
+		..\..\..\LucyConfig\ConfigTransforms\WebLayer.web.config.Cloud.xml = ..\..\..\LucyConfig\ConfigTransforms\WebLayer.web.config.Cloud.xml
+		..\..\..\LucyConfig\ConfigTransforms\WebLayer.web.config.Integration.xml = ..\..\..\LucyConfig\ConfigTransforms\WebLayer.web.config.Integration.xml
+		..\..\..\LucyConfig\ConfigTransforms\WebLayer.web.config.Local.xml = ..\..\..\LucyConfig\ConfigTransforms\WebLayer.web.config.Local.xml
+		..\..\..\LucyConfig\ConfigTransforms\WebLayer.web.config.Production.xml = ..\..\..\LucyConfig\ConfigTransforms\WebLayer.web.config.Production.xml
+		..\..\..\LucyConfig\ConfigTransforms\WebLayerTest.app.config.Cloud.xml = ..\..\..\LucyConfig\ConfigTransforms\WebLayerTest.app.config.Cloud.xml
+		..\..\..\LucyConfig\ConfigTransforms\WebLayerTest.app.config.Local.xml = ..\..\..\LucyConfig\ConfigTransforms\WebLayerTest.app.config.Local.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EnvironmentSettings", "EnvironmentSettings", "{A032E0D7-0606-4E46-AEF7-E868DBFB1B53}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\LucyConfig\EnvironmentSettings\EnvironmentSettings.ApnxAppProd.proj = ..\..\..\LucyConfig\EnvironmentSettings\EnvironmentSettings.ApnxAppProd.proj
+		..\..\..\LucyConfig\EnvironmentSettings\EnvironmentSettings.ApnxAppSand.proj = ..\..\..\LucyConfig\EnvironmentSettings\EnvironmentSettings.ApnxAppSand.proj
+		..\..\..\LucyConfig\EnvironmentSettings\EnvironmentSettings.Cloud.proj = ..\..\..\LucyConfig\EnvironmentSettings\EnvironmentSettings.Cloud.proj
+		..\..\..\LucyConfig\EnvironmentSettings\EnvironmentSettings.Local.proj = ..\..\..\LucyConfig\EnvironmentSettings\EnvironmentSettings.Local.proj
+		..\..\..\LucyConfig\EnvironmentSettings\EnvironmentSettings.Production.proj = ..\..\..\LucyConfig\EnvironmentSettings\EnvironmentSettings.Production.proj
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AzureDeploy", "AzureDeploy", "{4AE22FD5-9E9F-4345-8C2F-B0B9DBEE1370}"
+	ProjectSection(SolutionItems) = preProject
+		AzureDeploy\AzureDeleteDeployment.ps1 = AzureDeploy\AzureDeleteDeployment.ps1
+		AzureDeploy\AzureDeploy.ps1 = AzureDeploy\AzureDeploy.ps1
+		AzureDeploy\AzureStopDeployment.ps1 = AzureDeploy\AzureStopDeployment.ps1
+		AzureDeploy\AzureSwap.ps1 = AzureDeploy\AzureSwap.ps1
+		AzureDeploy\AzureWaitForDeployment.ps1 = AzureDeploy\AzureWaitForDeployment.ps1
+		AzureDeploy\ReadMe.txt = AzureDeploy\ReadMe.txt
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6C0918C9-95C1-473A-BB2B-C1F47DAA2807} = {B2411C64-18F6-4A4E-82C1-F49626FC01C7}
+		{404EAFAB-F66B-47CD-BD65-B4B35B6ABD56} = {B2411C64-18F6-4A4E-82C1-F49626FC01C7}
+		{FB7AFB2F-3DB9-432F-9CF3-74A5BC597F69} = {B2411C64-18F6-4A4E-82C1-F49626FC01C7}
+		{4AE22FD5-9E9F-4345-8C2F-B0B9DBEE1370} = {B2411C64-18F6-4A4E-82C1-F49626FC01C7}
+		{67428069-2240-439F-B5A5-0B0FD40DBACF} = {FB7AFB2F-3DB9-432F-9CF3-74A5BC597F69}
+		{A032E0D7-0606-4E46-AEF7-E868DBFB1B53} = {FB7AFB2F-3DB9-432F-9CF3-74A5BC597F69}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,46 @@
+#
+# List of solutions to build in order
+#
+
+# Global dependencies and utilities
+External\External.sln
+TestUtilities\TestUtilities.sln
+Common\Common.sln
+
+# External Feature
+DynamicAllocation\DynamicAllocation.sln
+
+# Core Components
+DataAccessCommon\DataAccessCommon.sln
+DataAccessLayer\DataAccessLayer.sln
+Queuing\Queuing.sln
+Scheduling\Scheduling.sln
+
+# Activities
+ActivitiesCommon\ActivitiesCommon.sln
+ScheduledActivityDispatchers\ScheduledActivityDispatchers.sln
+EntityActivities\EntityActivities.sln
+AppNexusActivities\AppNexusActivities.sln
+DynamicAllocationActivities\DynamicAllocationActivities.sln
+GoogleDfpActivities\GoogleDfpActivities.sln
+
+# AppNexus App Integration
+AppNexusApp\AppNexusApp.sln
+
+# Billing and Reporting (including activities)
+Reporting\Reporting.sln
+Billing\Billing.sln
+
+# Runtime Ioc
+RuntimeIoc\RuntimeIoc.sln
+
+# UX
+OAuthSecurity\OAuthSecurity.sln
+ApiLayer\ApiLayer.sln
+WebLayer\WebLayer.sln
+
+# Azure Packages
+Azure\Azure.sln
+
+# Utilities
+Utilities\Utilities.sln
